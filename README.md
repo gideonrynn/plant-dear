@@ -42,7 +42,7 @@ A user is able to enter the following data:
 - soil requirements
 - cycle (annual, perennial, biennial)
 - plant hardiness zone
-- (optional) photos for tracking plant 
+- (optional) photos for tracking plant growth
 
 -Weather API- includes forecast data so that a user may plan ahead for maintaining care for maintaining plants. User will receive email when forecast conditions appear to be unfavorable for outdoor plants to fit certain criteria.
 
