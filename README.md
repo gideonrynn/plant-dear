@@ -53,7 +53,6 @@ This project built using:
 
   - Node
   - [Express ^4.17.1](https://www.npmjs.com/package/express) --update version
-  - [Express-Handlebars ^3.1.0](https://www.npmjs.com/package/express-handlebars) --update version
   - [MySQL ^2.18.1](https://www.npmjs.com/package/mysql) --tbd, may use Mongo
   - [Weather API](https://weatherapi.com) --tbd
 
