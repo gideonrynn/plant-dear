@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
-// const routes = require("./routes");
+const routes = require("./routes");
 
 const path = require("path");
 const PORT = process.env.PORT || 3001;
@@ -40,11 +40,10 @@ const dbConnect = async () => {
       }
   }
   
-  console.log(process.env.MONGODB_URI);
   dbConnect();
 
 // API routes here
-// app.use(routes);
+app.use(routes);
 
 // Send every other request to the React app
 // Define any API routes before this runs
