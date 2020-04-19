@@ -44,7 +44,7 @@ A user is able to enter the following data:
 - plant hardiness zone
 - (optional) photos for tracking plant 
 
-- Weather API - includes forecast data so that a user may plan ahead for maintaining care for maintaining plants. User will receive email when forecast conditions appear to be unfavorable for outdoor plants to fit certain criteria.
+-Weather API- includes forecast data so that a user may plan ahead for maintaining care for maintaining plants. User will receive email when forecast conditions appear to be unfavorable for outdoor plants to fit certain criteria.
 
 
 # Technologies
