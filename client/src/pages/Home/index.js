@@ -2,6 +2,7 @@ import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
 import PlantAPI from "../../utils/PlantsAPI"
+import { Table } from "react-bootstrap"
 
 function Home () {
 
@@ -33,9 +34,24 @@ function Home () {
             <h1>Welcome to Plant Dear!</h1>
             <p>Here are all our plants!</p>
 
-            <table>
+            <Table striped bordered hover>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Temp High</th>
+                        <th>Temp Lo</th>
+                        <th>Tolerance</th>
+                        <th>Water</th>
+                        <th>Sunlight</th>
+                        <th>Plant Hardziness Zone</th>
+                    </tr>
+                </thead>
+
+
                 <tbody>
-                    
+
                     {plants.map(plant => (
 
                         <tr key={plant.id}>
@@ -50,7 +66,7 @@ function Home () {
                         </tr>))}
 
                 </tbody>
-            </table>
+            </Table>
             
         </div>
  
