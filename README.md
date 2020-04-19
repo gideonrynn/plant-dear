@@ -40,7 +40,7 @@ A user is able to enter the following data:
 - sunlight preferences
 - indoor or outdoor plant
 - soil requirements
-- cycle (annual or perennial)
+- cycle (annual, perennial, biennial)
 - plant hardiness zone
 - (optional) photos for tracking plant 
 
