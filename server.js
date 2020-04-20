@@ -4,6 +4,7 @@ const routes = require("./routes");
 
 const path = require("path");
 const PORT = process.env.PORT || 3001;
+const axios = require("axios")
 
 //required dotenv to enable environmental variables such as MONGO_URI
 require('dotenv').config({path:'.env'})
