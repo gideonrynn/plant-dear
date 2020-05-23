@@ -9,6 +9,7 @@ function Home () {
 
     // Setting our component's initial state
   const [plants, setPlants] = useState([])
+  const [plantsHardiness, setPlantsHardiness] = useState([])
   const [currentWeather, setCurrentWeather] = useState([])
   const [forecastWeather, setForecastWeather] = useState([])
 
@@ -18,6 +19,7 @@ function Home () {
     loadPlants()
     loadCurrentWeather()
     loadForecastWeather()
+    loadPlantsHardiness()
     
   }, [])
 
@@ -26,18 +28,50 @@ function Home () {
 
         PlantAPI.getAllPlants()
             .then(res => {
-            const plants = res.data;
-            setPlants(plants)
+                const plants = res.data;
+                setPlants(plants);
             })
             .catch(err => console.log(err));
+    };
+
+    // loads current weather and plants, and adds those with a hardiness temp below the current temp to a table
+    function loadPlantsHardiness() {
+
+        let currentWeatherL = ""
+
+        // get today's weather
+        WeatherAPI.getTodaysWeather()
+            .then(res => {
+                
+                currentWeatherL = res.data.temp;
+                // console.log("------")
+                // console.log(res.data.temp)
+
+                PlantAPI.getAllPlants()
+                    .then(res => {
+               
+                        let allPlants = res.data;
+                        // console.log(currentWeatherL)
+
+                        let hardyPlants = allPlants.filter(allPlants => { 
+                            return allPlants.tolerance > currentWeatherL && allPlants.tolerance > 0
+                        });
+                    
+                        // console.log(hardyPlants)
+                        const plantsHardiness = hardyPlants;
+                        setPlantsHardiness(plantsHardiness);
+
+                })
+            })
+            
     };
 
     function loadCurrentWeather() {
         WeatherAPI.getTodaysWeather()
             .then(res => {
-            const currentWeather = res.data;
-            console.log(currentWeather);
-            setCurrentWeather(currentWeather)
+                const currentWeather = res.data;
+                // console.log(currentWeather);
+                setCurrentWeather(currentWeather)
             })
             .catch(err => console.log(err));
     }
@@ -45,9 +79,9 @@ function Home () {
     function loadForecastWeather() {
         WeatherAPI.getForecastWeather()
             .then(res => {
-            const forecastWeather = res.data;
-            console.log(forecastWeather);
-            setForecastWeather(forecastWeather)
+                const forecastWeather = res.data;
+                // console.log(forecastWeather);
+                setForecastWeather(forecastWeather)
             })
             .catch(err => console.log(err));
     }
@@ -111,6 +145,44 @@ function Home () {
 
 
             <br></br>
+            <h3>Here are all our plants with a hardiness we should be concerned about!</h3>
+
+            <Table striped bordered hover>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Temp High</th>
+                        <th>Temp Low</th>
+                        <th>Hardiness</th>
+                        <th>Water</th>
+                        <th>Sunlight</th>
+                        <th>Plant Hardiness Zone</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    {plantsHardiness.map(plantsHardiness => (
+
+                        <tr key={plantsHardiness.id}>
+                            <th>{plantsHardiness.name} </th>
+                            <th>{plantsHardiness.location} </th>
+                            <th>{plantsHardiness.tempHigh} </th>
+                            <th>{plantsHardiness.tempLow} </th>
+                            <th>{plantsHardiness.hardiness} </th>
+                            <th>{plantsHardiness.water}</th>
+                            <th> {plantsHardiness.sunlight}</th>
+                            <th>{plantsHardiness.plantHardinessZone}</th>
+                        </tr>))}
+
+                </tbody>
+            </Table>
+
+
+            <br></br>
             <h3>Here are all our plants!</h3>
 
             <Table striped bordered hover>
@@ -120,11 +192,11 @@ function Home () {
                         <th>Name</th>
                         <th>Location</th>
                         <th>Temp High</th>
-                        <th>Temp Lo</th>
-                        <th>Tolerance</th>
+                        <th>Temp Low</th>
+                        <th>Hardiness</th>
                         <th>Water</th>
                         <th>Sunlight</th>
-                        <th>Plant Hardziness Zone</th>
+                        <th>Plant Hardiness Zone</th>
                     </tr>
                 </thead>
 
@@ -138,7 +210,7 @@ function Home () {
                             <th>{plant.location} </th>
                             <th>{plant.tempHigh} </th>
                             <th>{plant.tempLow} </th>
-                            <th>{plant.tolerance} </th>
+                            <th>{plant.hardiness} </th>
                             <th>{plant.water}</th>
                             <th> {plant.sunlight}</th>
                             <th>{plant.plantHardinessZone}</th>
