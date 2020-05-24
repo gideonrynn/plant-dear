@@ -10,13 +10,13 @@ function Home () {
     // Setting our component's initial state
   const [plantsHardiness, setPlantsHardiness] = useState([])
   const [currentWeather, setCurrentWeather] = useState([])
-  const [forecastWeather, setForecastWeather] = useState([])
+//   const [forecastWeather, setForecastWeather] = useState([])
 
   // Load all plants and store them within setPlants
   useEffect(() => {
 
     loadCurrentWeather()
-    loadForecastWeather()
+    // loadForecastWeather()
     loadPlantsHardiness()
     
   }, [])
@@ -40,9 +40,12 @@ function Home () {
                         let allPlants = res.data;
                         // console.log(currentWeatherL)
 
+                        // display all the plants with a hardiness less than or equal to the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.tolerance > currentWeatherL && allPlants.tolerance > 0
+                            return allPlants.tempHigh >= currentWeatherL
                         });
+
+                        // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
                     
                         // console.log(hardyPlants)
                         const plantsHardiness = hardyPlants;
@@ -63,15 +66,15 @@ function Home () {
             .catch(err => console.log(err));
     }
 
-    function loadForecastWeather() {
-        WeatherAPI.getForecastWeather()
-            .then(res => {
-                const forecastWeather = res.data;
-                // console.log(forecastWeather);
-                setForecastWeather(forecastWeather)
-            })
-            .catch(err => console.log(err));
-    }
+    // function loadForecastWeather() {
+    //     WeatherAPI.getForecastWeather()
+    //         .then(res => {
+    //             const forecastWeather = res.data;
+    //             // console.log(forecastWeather);
+    //             setForecastWeather(forecastWeather)
+    //         })
+    //         .catch(err => console.log(err));
+    // }
 
 
     return (
@@ -101,35 +104,7 @@ function Home () {
             </Table>
 
             <br></br>
-            <h3>Here's the forecast</h3>
-            <Table striped bordered hover>
 
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Low Temp</th>
-                        <th>High Temp</th>
-           
-                    </tr>
-                </thead>
-
-
-                <tbody>
-
-                {forecastWeather.map(forecast => (
-
-                    <tr key={forecast.id}>
-                        <th>{forecast.datetime} </th>
-                        <th>{forecast.low_temp} </th>
-                        <th>{forecast.high_temp} </th>
-                    </tr>))}
-
-                </tbody>
-            </Table>
-
-
-
-            <br></br>
             <h3>Here are all our plants with a hardiness we should be concerned about!</h3>
 
             <Table striped bordered hover>
@@ -166,6 +141,9 @@ function Home () {
                 </tbody>
             </Table>
 
+            <br/><br/>
+            
+            
 
             <br></br>
             

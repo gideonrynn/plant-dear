@@ -14,6 +14,7 @@ function Nav() {
                 <div className="navbar">
                     <Link className="nav-link" to="/">Home</Link> 
                     <Link className="nav-link" to="/plants">Plants</Link>
+                    <Link className="nav-link" to="/weather">Forecast</Link>
                 </div>
 
             </nav> 
