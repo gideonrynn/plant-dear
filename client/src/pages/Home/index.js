@@ -8,7 +8,6 @@ import { Table } from "react-bootstrap"
 function Home () {
 
     // Setting our component's initial state
-  const [plants, setPlants] = useState([])
   const [plantsHardiness, setPlantsHardiness] = useState([])
   const [currentWeather, setCurrentWeather] = useState([])
   const [forecastWeather, setForecastWeather] = useState([])
@@ -16,23 +15,11 @@ function Home () {
   // Load all plants and store them within setPlants
   useEffect(() => {
 
-    loadPlants()
     loadCurrentWeather()
     loadForecastWeather()
     loadPlantsHardiness()
     
   }, [])
-
-    // Loads all plants and sets them to plants state
-    function loadPlants() {
-
-        PlantAPI.getAllPlants()
-            .then(res => {
-                const plants = res.data;
-                setPlants(plants);
-            })
-            .catch(err => console.log(err));
-    };
 
     // loads current weather and plants, and adds those with a hardiness temp below the current temp to a table
     function loadPlantsHardiness() {
@@ -88,9 +75,7 @@ function Home () {
 
 
     return (
-        <div className="main-title"
-        >
-            <h1>Welcome to Plant Dear!</h1>
+        <div className="main-title">
 
             <h3>Here's the weather</h3>
             <Table striped bordered hover>
@@ -183,41 +168,6 @@ function Home () {
 
 
             <br></br>
-            <h3>Here are all our plants!</h3>
-
-            <Table striped bordered hover>
-
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Temp High</th>
-                        <th>Temp Low</th>
-                        <th>Hardiness</th>
-                        <th>Water</th>
-                        <th>Sunlight</th>
-                        <th>Plant Hardiness Zone</th>
-                    </tr>
-                </thead>
-
-
-                <tbody>
-
-                    {plants.map(plant => (
-
-                        <tr key={plant.id}>
-                            <th>{plant.name} </th>
-                            <th>{plant.location} </th>
-                            <th>{plant.tempHigh} </th>
-                            <th>{plant.tempLow} </th>
-                            <th>{plant.hardiness} </th>
-                            <th>{plant.water}</th>
-                            <th> {plant.sunlight}</th>
-                            <th>{plant.plantHardinessZone}</th>
-                        </tr>))}
-
-                </tbody>
-            </Table>
             
         </div>
  
