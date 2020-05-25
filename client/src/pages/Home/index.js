@@ -1,151 +1,55 @@
 import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
-import PlantAPI from "../../utils/PlantsAPI"
+// import PlantAPI from "../../utils/PlantsAPI"
+import Current from "../../components/Current/index"
 import WeatherAPI from "../../utils/WeatherAPI"
-import { Table } from "react-bootstrap"
+import { Container, Row } from "react-bootstrap"
+import Progress from "../../components/ProgressBar/index"
+import Hardiness from "../../components/Hardiness/index"
 
 function Home () {
 
     // Setting our component's initial state
-  const [plantsHardiness, setPlantsHardiness] = useState([])
-  const [currentWeather, setCurrentWeather] = useState([])
-//   const [forecastWeather, setForecastWeather] = useState([])
+    const [currentWeather, setCurrentWeather] = useState([])
+    let [renderComponent, setrenderComponent] = useState([<Progress/>])
 
-  // Load all plants and store them within setPlants
-  useEffect(() => {
 
-    loadCurrentWeather()
-    // loadForecastWeather()
-    loadPlantsHardiness()
+    // Load all plants and store them within setPlants
+    useEffect(() => {
+
+        loadCurrentWeather()
     
-  }, [])
+    }, [])
 
-    // loads current weather and plants, and adds those with a hardiness temp below the current temp to a table
-    function loadPlantsHardiness() {
-
-        let currentWeatherL = ""
-
-        // get today's weather
-        WeatherAPI.getTodaysWeather()
-            .then(res => {
-                
-                currentWeatherL = res.data.temp;
-                // console.log("------")
-                // console.log(res.data.temp)
-
-                PlantAPI.getAllPlants()
-                    .then(res => {
-               
-                        let allPlants = res.data;
-                        // console.log(currentWeatherL)
-
-                        // display all the plants with a hardiness less than or equal to the current weather
-                        let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.tempHigh >= currentWeatherL
-                        });
-
-                        // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
-                    
-                        // console.log(hardyPlants)
-                        const plantsHardiness = hardyPlants;
-                        setPlantsHardiness(plantsHardiness);
-
-                })
-            })
-            
-    };
 
     function loadCurrentWeather() {
+
         WeatherAPI.getTodaysWeather()
             .then(res => {
+
                 const currentWeather = res.data;
-                // console.log(currentWeather);
-                setCurrentWeather(currentWeather)
+                setCurrentWeather(currentWeather);
+                renderComponent = [<Current/>, <Hardiness/>];
+                setrenderComponent(renderComponent);
+
             })
             .catch(err => console.log(err));
     }
-
-    // function loadForecastWeather() {
-    //     WeatherAPI.getForecastWeather()
-    //         .then(res => {
-    //             const forecastWeather = res.data;
-    //             // console.log(forecastWeather);
-    //             setForecastWeather(forecastWeather)
-    //         })
-    //         .catch(err => console.log(err));
-    // }
 
 
     return (
         <div className="main-title">
 
-            <h3>Here's the weather</h3>
-            <Table striped bordered hover>
+            <Container fluid>
 
-                <thead>
-                    <tr>
-                        <th>City</th>
-                        <th>Current Temp</th>
-           
-                    </tr>
-                </thead>
+                <Row>
 
+                    {renderComponent}
 
-                <tbody>
+                </Row>
 
-                        <tr key={currentWeather.id}>
-                            <th>{currentWeather.city_name} </th>
-                            <th>{currentWeather.temp} </th>
-                        
-                        </tr>
-
-                </tbody>
-            </Table>
-
-            <br></br>
-
-            <h3>Here are all our plants with a hardiness we should be concerned about!</h3>
-
-            <Table striped bordered hover>
-
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Temp High</th>
-                        <th>Temp Low</th>
-                        <th>Hardiness</th>
-                        <th>Water</th>
-                        <th>Sunlight</th>
-                        <th>Plant Hardiness Zone</th>
-                    </tr>
-                </thead>
-
-
-                <tbody>
-
-                    {plantsHardiness.map(plantsHardiness => (
-
-                        <tr key={plantsHardiness.id}>
-                            <th>{plantsHardiness.name} </th>
-                            <th>{plantsHardiness.location} </th>
-                            <th>{plantsHardiness.tempHigh} </th>
-                            <th>{plantsHardiness.tempLow} </th>
-                            <th>{plantsHardiness.hardiness} </th>
-                            <th>{plantsHardiness.water}</th>
-                            <th> {plantsHardiness.sunlight}</th>
-                            <th>{plantsHardiness.plantHardinessZone}</th>
-                        </tr>))}
-
-                </tbody>
-            </Table>
-
-            <br/><br/>
-            
-            
-
-            <br></br>
+            </Container>     
             
         </div>
  

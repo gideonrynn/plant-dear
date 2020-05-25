@@ -40,10 +40,7 @@ let plantSeed = [
       name: "Coleus",
       location: "indoor",
       water: "moist",
-      sunlight: [
-        "part sun", 
-        "full sun"
-      ],
+      sunlight: "part sun, full sun",
       tempHigh: 90,
       tempLow: 60,
       hardiness: 50,

@@ -7,7 +7,7 @@ require('dotenv').config({path:'../env'})
 // returns all current weather from WeatherBit
 router.get('/current', (req, res) => {
     
-    const oldKey = "faa9f8bb779e4165b52c0af7edcdbf68";
+    // const oldKey = "faa9f8bb779e4165b52c0af7edcdbf68";
     const newKey = process.env.API_KEY;
     const queryCTWeather = "https://api.weatherbit.io/v2.0/current?" + "city=Chicago,IL" + "&units=I" + "&key=" + newKey;
 
@@ -23,7 +23,7 @@ router.get('/current', (req, res) => {
 // returns all forecast weather data from WeatherBit
 router.get('/forecast', (req, res) => {
     
-    const oldKey = "faa9f8bb779e4165b52c0af7edcdbf68";
+    // const oldKey = "faa9f8bb779e4165b52c0af7edcdbf68";
     const newKey = process.env.API_KEY;
     const queryFTWeather = "https://api.weatherbit.io/v2.0/forecast/daily?" + "city=Chicago,IL" + "&units=I" + "&key=" + newKey;
     

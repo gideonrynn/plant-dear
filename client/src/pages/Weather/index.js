@@ -53,8 +53,8 @@ function Weather () {
 
                     <tr key={forecast.id}>
                         <th>{forecast.datetime} </th>
-                        <th>{forecast.low_temp} </th>
-                        <th>{forecast.high_temp} </th>
+                        <th>{forecast.low_temp}&#176; </th>
+                        <th>{forecast.high_temp}&#176; </th>
                     </tr>))}
 
                 </tbody>
