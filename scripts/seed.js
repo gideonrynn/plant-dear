@@ -16,7 +16,7 @@ let plantSeed = [
       sunlight: "medium to bright light",
       tempHigh: 70,
       tempLow: 65,
-      hardiness: 50,
+      hardiness: 60,
       soil: "n/a",
       cycle: "n/a",
       plantHardinessZone: "10-12",
@@ -43,7 +43,7 @@ let plantSeed = [
     },
     {
       name: "Coleus",
-      location: "indoor",
+      location: "outdoor",
       water: "moist",
       sunlight: "part sun, full sun",
       tempHigh: 90,

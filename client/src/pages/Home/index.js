@@ -22,7 +22,7 @@ function Home () {
 
             loadCurrentWeather()
 
-        }, 3000);
+        }, 0);
         
     
     }, [])

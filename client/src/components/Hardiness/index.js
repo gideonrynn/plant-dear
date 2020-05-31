@@ -10,6 +10,8 @@ import WeatherAPI from "../../utils/WeatherAPI"
 function HardinessComp() {
 
     const [plantsHardiness, setPlantsHardiness] = useState([])
+    let [dangerZone, setdangerZone] = useState([])
+    const [currentWeather, setCurrentWeather] = useState([]);
 
     useEffect(() => {
 
@@ -28,21 +30,26 @@ function HardinessComp() {
                 currentWeatherL = res.data.temp;
                 // console.log("------")
                 // console.log(res.data)
+                console.log(currentWeatherL - 10)
 
                 PlantAPI.getAllPlants()
                     .then(res => {
                
                         let allPlants = res.data;
+                        console.log(allPlants);
 
                         // display all the plants with a hardiness less than or equal to the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness >= currentWeatherL && allPlants.location === "outdoor"
+                            return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
                         });
+
+                        
 
                         // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
                     
                         const plantsHardiness = hardyPlants;
-                        setPlantsHardiness(plantsHardiness);  
+                        setPlantsHardiness(plantsHardiness);
+                        setCurrentWeather(currentWeatherL);
 
                 })
             })
@@ -52,7 +59,7 @@ function HardinessComp() {
     return (
             <Col>
                     
-            <h3>Any plants need to come inside?</h3>
+            <h3>Plant Hardiness Watch</h3>
 
             <Table striped bordered hover>
 
@@ -74,7 +81,8 @@ function HardinessComp() {
 
                     {plantsHardiness.map(plantsHardiness => (
 
-                        <tr key={plantsHardiness.id}>
+                        <tr key={plantsHardiness._id} style={
+                            (plantsHardiness.hardiness <= (currentWeather - 5)) ? {background: 'yellow'} : {background: 'orange'}}>
                             <th>{plantsHardiness.name} </th>
                             <th>{plantsHardiness.location} </th>
                             <th>{plantsHardiness.tempHigh} </th>

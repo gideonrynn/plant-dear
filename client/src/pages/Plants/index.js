@@ -21,6 +21,7 @@ function Plants () {
 
         PlantAPI.getAllPlants()
             .then(res => {
+                console.log(res.data)
                 const plants = res.data;
                 setPlants(plants);
             })
@@ -56,7 +57,7 @@ function Plants () {
 
                     {plants.map(plant => (
 
-                        <tr key={plant.id} onClick={consoleHello}>
+                        <tr key={plant._id} onClick={consoleHello}>
                             <th>{plant.name} </th>
                             <th>{plant.location} </th>
                             <th>{plant.tempHigh} </th>
