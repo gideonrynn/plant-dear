@@ -1,30 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import { Link } from 'react-router-dom'
 import { Table, Col } from "react-bootstrap"
 import "./style.css";
-import WeatherAPI from "../../utils/WeatherAPI"
 
-function Current() {
+function Current(cw) {
 
-    const [currentWeather, setCurrentWeather] = useState([])
-
-    // Load all plants and store them within setPlants
-    useEffect(() => {
-
-        loadCurrentWeather()
-    
-    }, [])
-
-
-    function loadCurrentWeather() {
-
-        WeatherAPI.getTodaysWeather()
-            .then(res => {
-                const currentWeather = res.data;
-                setCurrentWeather(currentWeather);
-            })
-            .catch(err => console.log(err));
-    }
+    // console.log(cw);
 
     return (
         
@@ -46,11 +27,11 @@ function Current() {
 
                 <tbody>
 
-                        <tr key={currentWeather.id}>
+                        <tr key={cw.weather.id}>
                             {/* <th>{currentWeather.city_name} </th> */}
-                            <th>{currentWeather.temp}&#176;</th>
-                            <th>{currentWeather.app_temp}&#176;</th>
-                            <th>{currentWeather.wind_spd} mph</th>
+                            <th>{cw.weather.temp}&#176;</th>
+                            <th>{cw.weather.app_temp}&#176;</th>
+                            <th>{cw.weather.wind_spd} mph</th>
                         </tr>
 
                 </tbody>

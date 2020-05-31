@@ -19,6 +19,13 @@ function Home () {
     useEffect(() => {
 
         loadCurrentWeather()
+
+        // setTimeout(() => {
+
+            
+
+        // }, 3000);
+        
     
     }, [])
 
@@ -26,12 +33,15 @@ function Home () {
     function loadCurrentWeather() {
 
         WeatherAPI.getTodaysWeather()
+        
             .then(res => {
 
                 const currentWeather = res.data;
-                setCurrentWeather(currentWeather);
-                renderComponent = [<Current/>, <Hardiness/>];
-                setrenderComponent(renderComponent);
+                if (currentWeather.temp > 0) {
+                    setCurrentWeather(currentWeather);
+                    renderComponent = [<Current weather={currentWeather} />, <Hardiness/>];
+                    setrenderComponent(renderComponent);
+                }
 
             })
             .catch(err => console.log(err));
