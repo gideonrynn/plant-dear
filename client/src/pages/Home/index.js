@@ -18,13 +18,11 @@ function Home () {
     // Load all plants and store them within setPlants
     useEffect(() => {
 
-        loadCurrentWeather()
+        setTimeout(() => {
 
-        // setTimeout(() => {
+            loadCurrentWeather()
 
-            
-
-        // }, 3000);
+        }, 3000);
         
     
     }, [])
