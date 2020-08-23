@@ -10,7 +10,7 @@ import WeatherAPI from "../../utils/WeatherAPI"
 function HardinessComp() {
 
     const [plantsHardiness, setPlantsHardiness] = useState([])
-    let [dangerZone, setdangerZone] = useState([])
+    // let [dangerZone, setdangerZone] = useState([])
     const [currentWeather, setCurrentWeather] = useState([]);
 
     useEffect(() => {

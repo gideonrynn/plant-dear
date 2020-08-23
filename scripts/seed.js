@@ -325,7 +325,7 @@ let plantSeed = [
       plantHardinessZone: "11 - 12",
       potted: "",
       care: "",
-      links: "",
+      links: "https://www.gardeningknowhow.com/houseplants/pilea-plants/growing-artillery-plants.htm",
       notes: "pilea microphylla"
     },
     {
@@ -341,8 +341,9 @@ let plantSeed = [
       cycle: "",
       plantHardinessZone: "",
       potted: "",
+      repotted: "07/18/2020",
       care: "",
-      links: "https://greeneryunlimited.co/blogs/plant-care/pilea-peperomioides-care, https://bloomscape.com/plant-care-guide/pilea/#g1",
+      links: "https://greeneryunlimited.co/blogs/plant-care/pilea-peperomioides-care, https://bloomscape.com/plant-care-guide/pilea/#g1, https://savvygardening.com/pilea-peperomioides-care/",
       notes: "Pilea peperomioides"
     },
     {
@@ -399,7 +400,7 @@ let plantSeed = [
     {
       name: "Fiddleleaf fig plant",
       botanicalName: "ficus lyrata",
-      location: "indoor, outdoor",
+      location: "indoor",
       water: "moderate to moist",
       sunlight: "bright, filtered light",
       type: "",
@@ -416,7 +417,7 @@ let plantSeed = [
     },
     {
       name: "Bird of paradise",
-      location: "indoor or outdoor",
+      location: "outdoor",
       water: "moderate",
       sunlight: "very bright light, part sun",
       type: "",
@@ -487,23 +488,24 @@ let plantSeed = [
       links: "https://www.thespruce.com/grow-schefflera-plants-inside-1902771",
       notes: ""
     },
-    // {
-    //   name: "Dumb Cane",
-    //   location: "",
-    //   water: "",
-    //   sunlight: "",
-    //   type: "",
-    //   tempLow: "",
-    //   tempHigh: "",
-    //   hardiness: "",
-    //   soil: "",
-    //   cycle: "",
-    //   plantHardinessZone: "",
-    //   potted: "",
-    //   care: "",
-    //   links: "",
-    //   notes: ""
-    // },
+    {
+      name: "Bamboo plant",
+      botanicalName: "Dracaena sanderiana",
+      location: "indoor",
+      water: "moderate",
+      sunlight: "indirect light",
+      type: "",
+      tempLow: 65,
+      tempHigh: 95,
+      hardiness: "",
+      soil: "",
+      cycle: "",
+      plantHardinessZone: "10-11",
+      potted: "",
+      care: "",
+      links: "https://www.proflowers.com/blog/lucky-bamboo-care, https://bambooplantshq.com/lucky-bamboo-turning-white-or-pale/",
+      notes: ""
+    },
     // {
     //   name: "Dumb Cane",
     //   location: "",
