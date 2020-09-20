@@ -1,26 +1,25 @@
-const mongoose = require("mongoose");
+const { Sequelize } = require(".");
 
-const Schema = mongoose.Schema;
+module.exports = function(sequelize, DataTypes) {
 
-// overall plan for maintaining plants in each season
-const planSchema = new Schema(
-  {
-    name: {
-      type: String,
-      required: true
-    },
-    current: {
-        type: String
-    },
-    upcoming: {
-        type: String
-    }
-    
-  }
-  
-);
-
-
-const Plan = mongoose.model("Plan", planSchema);
-
-module.exports = Plan;
+    const Plan = sequelize.define('Plan', {
+        name: {
+            type: DataTypes.TEXT,
+        },
+        current: {
+            type: DataTypes.TEXT
+        },
+        upcoming: {
+            type: DataTypes.TEXT
+        },
+        createdAt: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,  
+        },
+        updatedAt: {
+            type: DataTypes.DATEONLY,
+            allowNull: true, 
+        }
+    })
+        return Plan;
+}

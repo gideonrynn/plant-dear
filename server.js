@@ -1,47 +1,23 @@
 const express = require("express");
-const mongoose = require('mongoose');
 const routes = require("./routes");
-
 const path = require("path");
 const PORT = process.env.PORT || 3001;
-const axios = require("axios")
 
 //required dotenv to enable environmental variables such as MONGO_URI
 require('dotenv').config({path:'.env'})
 
+// Define Expres middleware to handle data parsing
 const app = express();
-
-// Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Serve up static assets (usually on heroku)
+// requires models for syncing with db
+const db = require("./models");
+
+// Serve up static assets (for example on Heroku)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
-
-// set up connection to MongoDB/mlab
-const dbConnect = async () => {
-
-    // try to connect to the database and log connection
-    try {
-      const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/plant-dear", {
-              useNewUrlParser: true,
-              useCreateIndex: true,
-              useUnifiedTopology: true
-          });
-          
-          console.log(`MongoDB Connected: ${conn.connection.host}`)
-  
-        } catch (err) {
-  
-        //if connection fails, log the error message in the terminal and shut down process
-        console.log(`Error: ${err.message}`);
-        process.exit(1);
-      }
-  }
-  
-  dbConnect();
 
 // API routes here
 app.use(routes);
@@ -51,7 +27,13 @@ app.use(routes);
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
-  
-app.listen(PORT, () => {
-    console.log(`🌎 ==> API server now on port ${PORT}!`);
+
+// Sync our defined models to the database, clear database (force true)
+db.sequelize.sync({force:false})
+    .then(() => {
+
+        //start express app
+        app.listen(PORT, () => 
+            console.log(`🌎 ==> API server now on port ${PORT}!`))
+            
 });
