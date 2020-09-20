@@ -6,6 +6,10 @@ export default {
     
     getAllPlants: function() {
       return axios.get("/api/plants");
+    },
+
+    addPlant: function(newPlantData) {
+      return axios.post("/api/plants/", newPlantData)
     }
     
 }

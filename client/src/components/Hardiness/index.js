@@ -90,7 +90,7 @@ function HardinessComp() {
                             <th>{plantsHardiness.hardiness} </th>
                             <th>{plantsHardiness.water}</th>
                             <th>{plantsHardiness.sunlight}</th>
-                            <th>{plantsHardiness.plantHardinessZone}</th>
+                            <th>{plantsHardiness.hardinessZone}</th>
                         </tr>))}
 
                 </tbody>

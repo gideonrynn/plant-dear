@@ -65,7 +65,7 @@ function Plants () {
                             <th>{plant.hardiness} </th>
                             <th>{plant.water}</th>
                             <th>{plant.sunlight}</th>
-                            <th>{plant.plantHardinessZone}</th>
+                            <th>{plant.hardinessZone}</th>
                         </tr>))}
 
                 </tbody>
