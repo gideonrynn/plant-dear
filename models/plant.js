@@ -24,6 +24,12 @@ module.exports = function(sequelize, DataTypes) {
         humidity: {
             type: DataTypes.TEXT
         },
+        heightLow: {
+            type: DataTypes.TEXT
+        },
+        heightHigh: {
+            type: DataTypes.TEXT
+        },
         tempLow: {
             type: DataTypes.TEXT
         },
@@ -45,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
         cycle: {
             type: DataTypes.TEXT
         },
-        plantHardinessZone: {
+        hardinessZone: {
             type: DataTypes.TEXT
         },
         lastPotted: {
