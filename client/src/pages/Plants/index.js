@@ -28,8 +28,10 @@ function Plants () {
             .catch(err => console.log(err));
     };
 
-    function consoleHello(event) {
-        console.log("You clicked on the" + event.target.id + " row.")
+    function consoleHello(id) {
+        console.log("You clicked on the " + id + " row.")
+        // console.log(plants[0].id)
+     
     }
 
     return (
@@ -57,7 +59,7 @@ function Plants () {
 
                     {plants.map(plant => (
 
-                        <tr key={plant._id} onClick={consoleHello}>
+                        <tr key={plant.id} name={plant.name} onClick={() => consoleHello(plant.id)}>
                             <th>{plant.name} </th>
                             <th>{plant.location} </th>
                             <th>{plant.tempHigh} </th>

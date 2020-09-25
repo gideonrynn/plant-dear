@@ -22,7 +22,7 @@ function AddPlants() {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(newPlant)
+        // console.log(newPlant)
         AddPlantAPI.addPlant({
             name: newPlant.name,
             botanicalName: newPlant.botanicalName,
