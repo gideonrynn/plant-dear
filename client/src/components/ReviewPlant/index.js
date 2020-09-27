@@ -46,7 +46,7 @@ function ReviewPlant(props) {
             links: modPlant.links,
             notes: modPlant.notes
         })
-            .then(console.log('submitted'))
+            .then(window.location.reload(true))
             .catch(err => console.log(err))
     }
 
