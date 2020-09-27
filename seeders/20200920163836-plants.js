@@ -713,7 +713,29 @@ module.exports = {
       notes: "low growing",
       createdAt: new Date(),
       updatedAt: new Date(),
-    }
+    }, 
+    {
+      name: "Corn Plant",
+	    botanicalName: "Dracaena massangeana",
+      location: "indoor and outdoor",
+      water: "dry",
+      sunlight: "bright",
+      plantType: "houseplant",
+      humidity: "moderate",
+      heightLow: null,
+      heightHigh: null,
+      tempLow: "75",
+      tempHigh: "60",
+      hardiness: "50",
+      tolerance: null,
+      pH: null,
+      soilContent: null,
+      cycle: null,
+      hardinessZone: null,
+      lastPotted: null,
+      links: "https://www.ourhouseplants.com/plants/dracaena-fragrans",
+      notes: "Soil shouldn't be allowed to dry out completely. Does not like direct sunlight. Does prefer some humidity. Repot every two or three years. Avoid using soil mixes that contain a large amount of perlite or fertilizers containing superphosphate with these plants. That's because Dracaenas are very sensitive to fluoride, which perlite and superphosphate contain. Can water with distilled water."
+  }
   ]);
   
   },

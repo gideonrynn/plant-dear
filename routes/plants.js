@@ -9,6 +9,22 @@ router.get('/plants', (req, res) => {
 
 });
 
+// return specific plant by row id
+router.get('/plantsbyid/:id', (req, res) => {
+    
+  console.log(req.params.id)
+  let id = req.params.id
+  db.Plant.findOne({
+    where: {
+      id: id
+    }
+  })
+    .then(plantsbyid => res.json(plantsbyid))
+
+});
+
+
+
 // use body received from browser to create new plant entry in db
 router.post("/plants", ({body}, res) => {
 
@@ -21,6 +37,16 @@ router.post("/plants", ({body}, res) => {
     });
 
 });
+
+router.put("/plants/:id", (req, res) => {
+  // console.log(req.params.id)
+  let id = req.params.id
+  db.Plant.update(req.body,
+    {where: {id: id}})
+      .then(update => {
+        res.json(update);
+      })
+})
 
 
 module.exports = router;
