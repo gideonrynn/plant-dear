@@ -9,6 +9,8 @@ function Plants () {
 
     // Setting our component's initial state
     const [plants, setPlants] = useState([])
+    const [onePlant, setOnePlant] = useState([])
+    const [onePlantId, setOnePlantId] = useState([])
 
     // handle modal
     const [show, setShow] = useState(false);
@@ -45,16 +47,23 @@ function Plants () {
         setShow(true)
     }
 
-    function doTwoThings(id) {
+    function getPlant(id) {
+
+       setOnePlantId(id)
                 PlantAPI.getOnePlant(id)
                     .then(res => {
-                        console.log(res.data)
+                        console.log(onePlant)
+                        setOnePlant(res.data)
+                        
+                        handleShow()
+                            // .then(res => {
+                            //     
+                            // })
+                            
                     // const plants = res.data;
                     // setPlants(plants);
                 })
                 .catch(err => console.log(err))
-
-        // handleShow()
     }
 
     return (
@@ -82,7 +91,7 @@ function Plants () {
 
                     {plants.map(plant => (
 
-                        <tr key={plant.id} name={plant.name} onClick={() => doTwoThings(plant.id)}>
+                        <tr key={plant.id} name={plant.name} onClick={() => getPlant(plant.id)}>
                             <th>{plant.name} </th>
                             <th>{plant.location} </th>
                             <th>{plant.tempHigh} </th>
@@ -96,12 +105,12 @@ function Plants () {
                 </tbody>
             </Table>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New Plant</Modal.Title>
+                    <Modal.Title>{onePlant.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <ReviewPlant/>
+                    <ReviewPlant onePlant={onePlant} id={onePlantId}/>
                 </Modal.Body>
                 <Modal.Footer>
                 

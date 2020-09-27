@@ -40,7 +40,10 @@ router.post("/plants", ({body}, res) => {
 
 router.put("/plants/:id", (req, res) => {
   // console.log(req.params.id)
+  
   let id = req.params.id
+  console.log(id)
+  console.log(req.body)
   db.Plant.update(req.body,
     {where: {id: id}})
       .then(update => {
