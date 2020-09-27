@@ -30,7 +30,9 @@ function ReviewPlant(props) {
             {
             name: modPlant.name,
             botanicalName: modPlant.botanicalName,
+            status: modPlant.status,
             location: modPlant.location,
+            locationSec: modPlant.locationSec,
             water: modPlant.water,
             sunlight: modPlant.sunlight,
             plantType: modPlant.plantType,
@@ -62,6 +64,10 @@ function ReviewPlant(props) {
                     <Form.Label>Botanical Name</Form.Label>
                     <Form.Control type="text" name="botanicalName" defaultValue={thisPlant.botanicalName} onChange={handleInputChange}/>
                 </Form.Group>
+                <Form.Group controlId="formStatus" >
+                    <Form.Label>Status</Form.Label>
+                    <Form.Control type="text" name="status" defaultValue={thisPlant.status}  onChange={handleInputChange}/>
+                </Form.Group>
                 <Form.Group controlId="formLocation">
                     <Form.Label>Location</Form.Label>
                     <Form.Control as="select" name="location" defaultValue={{value: thisPlant.location}} onChange={handleInputChange}>
@@ -70,6 +76,10 @@ function ReviewPlant(props) {
                         <option>outdoor</option>
                         <option>indoor and outdoor</option>
                     </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="formLocationSecondary" >
+                    <Form.Label>Status</Form.Label>
+                    <Form.Control type="text" name="locationSec" defaultValue={thisPlant.status} onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formWater" >
                     <Form.Label>Water</Form.Label>

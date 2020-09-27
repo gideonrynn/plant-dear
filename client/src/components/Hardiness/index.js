@@ -30,13 +30,13 @@ function HardinessComp() {
                 currentWeatherL = res.data.temp;
                 // console.log("------")
                 // console.log(res.data)
-                console.log(currentWeatherL - 10)
+                // console.log(currentWeatherL - 10)
 
                 PlantAPI.getAllPlants()
                     .then(res => {
                
                         let allPlants = res.data;
-                        console.log(allPlants);
+                        // console.log(allPlants);
 
                         // display all the plants with a hardiness less than or equal to the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 
@@ -81,7 +81,7 @@ function HardinessComp() {
 
                     {plantsHardiness.map(plantsHardiness => (
 
-                        <tr key={plantsHardiness._id} style={
+                        <tr key={plantsHardiness.id} style={
                             (plantsHardiness.hardiness <= (currentWeather - 5)) ? {background: 'yellow'} : {background: 'orange'}}>
                             <th>{plantsHardiness.name} </th>
                             <th>{plantsHardiness.location} </th>

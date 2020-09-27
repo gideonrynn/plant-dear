@@ -16,7 +16,7 @@ function Plants () {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    // const handleShow = () => setShow(true);
+    const handleShow = () => setShow(true);
 
     // Load all plants and store them within setPlants
     useEffect(() => {
@@ -30,7 +30,7 @@ function Plants () {
 
         PlantAPI.getAllPlants()
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 const plants = res.data;
                 setPlants(plants);
             })
@@ -43,16 +43,12 @@ function Plants () {
      
     }
 
-    function handleShow() {
-        setShow(true)
-    }
-
     function getPlant(id) {
 
        setOnePlantId(id)
                 PlantAPI.getOnePlant(id)
                     .then(res => {
-                        console.log(onePlant)
+                        // console.log(onePlant)
                         setOnePlant(res.data)
                         
                         handleShow()

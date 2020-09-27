@@ -26,7 +26,9 @@ function AddPlants() {
         AddPlantAPI.addPlant({
             name: newPlant.name,
             botanicalName: newPlant.botanicalName,
+            status: newPlant.status,
             location: newPlant.location,
+            locationSec: newPlant.locationSec,
             water: newPlant.water,
             sunlight: newPlant.sunlight,
             plantType: newPlant.plantType,
@@ -58,6 +60,19 @@ function AddPlants() {
                     <Form.Label>Botanical Name</Form.Label>
                     <Form.Control type="text" placeholder="" name="botanicalName" onChange={handleInputChange}/>
                 </Form.Group>
+                {/* <Form.Group controlId="formStatus" >
+                    <Form.Label>Status</Form.Label>
+                    <Form.Control as="select" name="status" onChange={handleInputChange}>
+                        <option></option>
+                        <option>moving</option>
+                        <option>potting</option>
+                        <option>moist</option>
+                    </Form.Control>
+                </Form.Group> */}
+                <Form.Group controlId="formStatus" >
+                    <Form.Label>Status</Form.Label>
+                    <Form.Control type="text" placeholder="" name="status" onChange={handleInputChange}/>
+                </Form.Group>
                 <Form.Group controlId="formLocation">
                     <Form.Label>Location</Form.Label>
                     <Form.Control as="select" name="location" onChange={handleInputChange}>
@@ -66,6 +81,10 @@ function AddPlants() {
                         <option>outdoor</option>
                         <option>indoor and outdoor</option>
                     </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="formLocationSecondary" >
+                    <Form.Label>Status</Form.Label>
+                    <Form.Control type="text" placeholder="" name="locationSec" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formWater" >
                     <Form.Label>Water</Form.Label>

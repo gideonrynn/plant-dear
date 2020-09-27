@@ -3,6 +3,7 @@ import React, {useEffect, useState } from "react";
 import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 import Current from "../../components/Current/index"
+import ModPlants from "../../components/ModPlants/index"
 import WeatherAPI from "../../utils/WeatherAPI"
 import { Container, Row } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
@@ -22,7 +23,7 @@ function Home () {
 
             loadCurrentWeather()
 
-        }, 0);
+        }, 2000);
         
     
     }, [])
@@ -37,7 +38,10 @@ function Home () {
                 const currentWeather = res.data;
                 if (currentWeather.temp > 0) {
                     setCurrentWeather(currentWeather);
-                    renderComponent = [<Current weather={currentWeather} />, <Hardiness/>];
+                    renderComponent = [
+                        <Current weather={currentWeather} />, 
+                        <Hardiness/>, 
+                        <Row><ModPlants/></Row>];
                     setrenderComponent(renderComponent);
                 }
 

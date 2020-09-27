@@ -5,7 +5,7 @@ import "./style.css";
 
 function Current(cw) {
 
-    console.log(cw);
+    // console.log(cw);
 
     return (
         
@@ -27,7 +27,7 @@ function Current(cw) {
 
                 <tbody>
 
-                        <tr key={cw.weather._id}>
+                        <tr key={cw.weather.id}>
                             {/* <th>{currentWeather.city_name} </th> */}
                             <th>{cw.weather.temp}&#176;</th>
                             <th>{cw.weather.app_temp}&#176;</th>

@@ -9,7 +9,13 @@ module.exports = function(sequelize, DataTypes) {
         botanicalName: {
             type: DataTypes.TEXT,
         },
+        status: {
+            type: DataTypes.TEXT
+        },
         location: {
+            type: DataTypes.TEXT
+        },
+        locationSec: {
             type: DataTypes.TEXT
         },
         water: {

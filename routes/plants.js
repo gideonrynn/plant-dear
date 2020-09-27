@@ -23,7 +23,17 @@ router.get('/plantsbyid/:id', (req, res) => {
 
 });
 
+// return specific plant by a spectific row status
+router.get('/plantsbystatus', (req, res) => {
+    
+  db.Plant.findAll({
+    where: {
+      status: 'in progress'
+    }
+  })
+    .then(plantsbystatus => res.json(plantsbystatus))
 
+});
 
 // use body received from browser to create new plant entry in db
 router.post("/plants", ({body}, res) => {
