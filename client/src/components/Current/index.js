@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 // import { Link } from 'react-router-dom'
 import { Table, Col } from "react-bootstrap"
 import "./style.css";
 
 function Current(cw) {
 
-    // console.log(cw);
+    useEffect (() => {
+        console.log(cw);
+    })
+   
 
     return (
         

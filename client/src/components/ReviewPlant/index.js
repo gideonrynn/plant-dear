@@ -78,7 +78,7 @@ function ReviewPlant(props) {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLocationSecondary" >
-                    <Form.Label>Status</Form.Label>
+                    <Form.Label>Secondary Location</Form.Label>
                     <Form.Control type="text" name="locationSec" defaultValue={thisPlant.status} onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formWater" >

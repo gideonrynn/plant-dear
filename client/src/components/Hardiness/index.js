@@ -7,60 +7,55 @@ import PlantAPI from "../../utils/PlantsAPI"
 import WeatherAPI from "../../utils/WeatherAPI"
 
 
-function HardinessComp() {
+function HardinessComp(cw) {
 
     const [plantsHardiness, setPlantsHardiness] = useState([])
     // let [dangerZone, setdangerZone] = useState([])
-    const [currentWeather, setCurrentWeather] = useState([]);
+    const [currentTemp, setCurrentTemp] = useState([]);
+    
 
     useEffect(() => {
-
+        
         loadPlantsHardiness()
+        // console.log(cw.weather.temp)
+
     
     }, [])
 
     function loadPlantsHardiness() {
 
-        let currentWeatherL = ""
-
-        // get today's weather
-        WeatherAPI.getTodaysWeather()
-            .then(res => {
-                
-                currentWeatherL = res.data.temp;
-                // console.log("------")
-                // console.log(res.data)
-                // console.log(currentWeatherL - 10)
-
                 PlantAPI.getAllPlants()
                     .then(res => {
-               
+                        let incoming = ""
                         let allPlants = res.data;
                         // console.log(allPlants);
 
                         // display all the plants with a hardiness less than or equal to the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
+                            return allPlants.hardiness !== null && allPlants.location === "outdoor"
+                            // return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
                         });
 
                         
+                        incoming = cw.weather.temp;
+                        setCurrentTemp(incoming)
+                        console.log(currentTemp)
 
                         // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
                     
                         const plantsHardiness = hardyPlants;
                         setPlantsHardiness(plantsHardiness);
-                        setCurrentWeather(currentWeatherL);
+                   
 
                 })
-            })
             
     };
 
     return (
             <Col>
-                    
-            <h3>Plant Hardiness Watch</h3>
 
+            <h3>Plant Hardiness Watch</h3>
+            <p>Current temperature is 10 degrees or less from the plant's hardiness threshold </p>
             <Table striped bordered hover>
 
                 <thead>
@@ -82,7 +77,7 @@ function HardinessComp() {
                     {plantsHardiness.map(plantsHardiness => (
 
                         <tr key={plantsHardiness.id} style={
-                            (plantsHardiness.hardiness <= (currentWeather - 5)) ? {background: 'yellow'} : {background: 'orange'}}>
+                            ((currentTemp - 47) <= plantsHardiness.hardiness) ? {background: 'yellow'} : {background: 'white'}}>
                             <th>{plantsHardiness.name} </th>
                             <th>{plantsHardiness.location} </th>
                             <th>{plantsHardiness.tempHigh} </th>

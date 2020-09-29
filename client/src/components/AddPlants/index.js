@@ -83,7 +83,7 @@ function AddPlants() {
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLocationSecondary" >
-                    <Form.Label>Status</Form.Label>
+                    <Form.Label>Secondary Location</Form.Label>
                     <Form.Control type="text" placeholder="" name="locationSec" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formWater" >

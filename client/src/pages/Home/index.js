@@ -8,6 +8,7 @@ import WeatherAPI from "../../utils/WeatherAPI"
 import { Container, Row } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 import Hardiness from "../../components/Hardiness/index"
+import HomePage from "../../components/Home Page";
 
 function Home () {
 
@@ -30,6 +31,8 @@ function Home () {
 
 
     function loadCurrentWeather() {
+        
+        
 
         WeatherAPI.getTodaysWeather()
         
@@ -39,14 +42,17 @@ function Home () {
                 if (currentWeather.temp > 0) {
                     setCurrentWeather(currentWeather);
                     renderComponent = [
-                        <Current weather={currentWeather} />, 
-                        <Hardiness/>, 
-                        <Row><ModPlants/></Row>];
+                        <Container>
+                            <Row><Current weather={currentWeather} /></Row><br></br> 
+                            <Row><Hardiness weather={currentWeather}/></Row><br></br> 
+                            <Row><ModPlants/></Row>
+                        </Container>];
                     setrenderComponent(renderComponent);
                 }
 
             })
             .catch(err => console.log(err));
+            
     }
 
 

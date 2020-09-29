@@ -460,7 +460,7 @@ module.exports = {
       updatedAt: new Date()
     },
     {
-      name: "Haworthias",
+      name: "Haworthia",
       botanicalName: "",
       status: "",
       location: "indoor",
@@ -478,6 +478,29 @@ module.exports = {
       hardinessZone: "",
       lastPotted: null,
       links: "",
+      notes: "",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      name: "Haworthia (Zebra Wart)",
+      botanicalName: "Haworthia reinwardtii",
+      status: "",
+      location: "indoor",
+      locationSec: "",
+      water: "",
+      sunlight: "indirect",
+      plantType: "succulent",
+      humidity: "",
+      tempLow: "",
+      tempHigh: "",
+      hardiness: "",
+      pH: "",
+      soilContent: "",
+      cycle: "",
+      hardinessZone: "",
+      lastPotted: null,
+      links: "https://worldofsucculents.com/haworthia-reinwardtii-zebra-wart/",
       notes: "",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -530,7 +553,7 @@ module.exports = {
     },
     {
       name: "Bird of paradise",
-      botanicalName: "",
+      botanicalName: "Strelitzia reginae",
       status: "",
       location: "outdoor",
       locationSec: "",
@@ -540,7 +563,7 @@ module.exports = {
       humidity: "",
       tempLow: 50,
       tempHigh: 80,
-      hardiness: "",
+      hardiness: 30,
       pH: "",
       soilContent: "",
       cycle: "",
@@ -740,7 +763,7 @@ module.exports = {
       name: "Rabbit's Foot Fern",
       botanicalName: "Davallia Fejeensis",
       status: "",
-      location: "indoor",
+      location: "outdoor",
       locationSec: "",
       water: "moderate",
       sunlight: "medium",
@@ -829,7 +852,31 @@ module.exports = {
     lastPotted: null,
     links: "https://www.gardeningknowhow.com/houseplants/boston-fern/boston-fern-care.htm, https://www.thespruce.com/grow-nephrolepis-boston-ferns-1902723",
     notes: ""
-}
+  },  {
+    name: "Jade",
+    botanicalName: "Crassula argentea",
+    status: "",
+    location: "indoor",
+    locationSec: "living room",
+    water: "moderate",
+    sunlight: "bright indirect",
+    plantType: "succulent",
+    humidity: "",
+    heightLow: null,
+    heightHigh: null,
+    tempLow: "75",
+    tempHigh: "60",
+    hardiness: "50",
+    tolerance: null,
+    pH: 5.5,
+    soilContent: "potting mix, half perlite",
+    cycle: "",
+    hardinessZone: 10 - 12,
+    lastPotted: null,
+    links: "https://www.almanac.com/plant/jade-plants",
+    notes: "young plants need bright, indirect sunlight, older need direct sunlight for 4 hours. Water when mostly dried out, less in winter."
+  }
+
   ]);
   
   },
