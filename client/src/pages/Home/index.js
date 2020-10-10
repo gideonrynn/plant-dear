@@ -43,9 +43,15 @@ function Home () {
                     setCurrentWeather(currentWeather);
                     renderComponent = [
                         <Container>
-                            <Row><Current weather={currentWeather} /></Row><br></br> 
-                            <Row><Hardiness weather={currentWeather}/></Row><br></br> 
-                            <Row><ModPlants/></Row>
+                            <Row>
+                                <Hardiness weather={currentWeather}/>
+                            </Row>
+                            <br></br> 
+                            <Row>
+                            <Current weather={currentWeather} />
+                                <ModPlants/>
+                            </Row>
+                                <br></br> 
                         </Container>];
                     setrenderComponent(renderComponent);
                 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
 import { Table, Col } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
-// import "./style.css";
+import "./style.css";
 
 function ModPlants() {
 
@@ -38,7 +38,7 @@ function ModPlants() {
 
             <h3>Plants I'm Working On</h3>
 
-            <Table  striped bordered hover>
+            <Table striped bordered hover>
 
                 <thead >
                     <tr>
@@ -53,10 +53,10 @@ function ModPlants() {
 
                     {modStatusPlant.map(plant => (
 
-                        <tr key={plant.id} name={plant.name} onClick={() => getPlant(plant.id)}>
+                        <tr key={plant.id} onClick={() => getPlant(plant.id)}>
                             <th>{plant.name} </th>
                             <th>{plant.status} </th>
-                            <th >{plant.notes} </th>
+                            <th>{plant.notes} </th>
                         </tr>))}
 
                 </tbody>

@@ -43,7 +43,7 @@ function ReviewPlant(props) {
             pH: modPlant.pH,
             soilContent: modPlant.soilContent,
             cycle: modPlant.cycle,
-            plantHardinessZone: modPlant.hardiness,
+            hardinessZone: modPlant.hardinessZone,
             lastPotted: modPlant.lastPotted,
             links: modPlant.links,
             notes: modPlant.notes
@@ -156,7 +156,7 @@ function ReviewPlant(props) {
                 </Form.Group>
                 <Form.Group controlId="formHardyZone" >
                     <Form.Label>Hardiness Zone</Form.Label>
-                    <Form.Control type="text" name="plantHardinessZone" defaultValue={thisPlant.hardinessZone} onChange={handleInputChange}/>
+                    <Form.Control type="text" name="hardinessZone" defaultValue={thisPlant.hardinessZone} onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formLastPotted" >
                     <Form.Label>Last Potted</Form.Label>

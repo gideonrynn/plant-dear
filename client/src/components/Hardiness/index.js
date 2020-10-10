@@ -13,7 +13,6 @@ function HardinessComp(cw) {
     // let [dangerZone, setdangerZone] = useState([])
     const [currentTemp, setCurrentTemp] = useState([]);
     
-
     useEffect(() => {
         
         loadPlantsHardiness()
@@ -61,13 +60,12 @@ function HardinessComp(cw) {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Location</th>
-                        <th>Temp High</th>
-                        <th>Temp Low</th>
+                        {/* <th>Location</th> */}
+                        {/* <th>Average</th> */}
                         <th>Hardiness</th>
                         <th>Water</th>
                         <th>Sunlight</th>
-                        <th>PHZ</th>
+                        {/* <th>PHZ</th> */}
                     </tr>
                 </thead>
 
@@ -77,15 +75,16 @@ function HardinessComp(cw) {
                     {plantsHardiness.map(plantsHardiness => (
 
                         <tr key={plantsHardiness.id} style={
-                            ((currentTemp - 47) <= plantsHardiness.hardiness) ? {background: 'yellow'} : {background: 'white'}}>
+                            (currentTemp - 10) <= plantsHardiness.hardiness && currentTemp > plantsHardiness.hardiness ? {background: '#FFEC62'} 
+                            : currentTemp <= plantsHardiness.hardiness ? {background: '#FF6726'} 
+                            : {background: '#FFFFFF'}}>
                             <th>{plantsHardiness.name} </th>
-                            <th>{plantsHardiness.location} </th>
-                            <th>{plantsHardiness.tempHigh} </th>
-                            <th>{plantsHardiness.tempLow} </th>
+                            {/* <th>{plantsHardiness.location} </th> */}
+                            {/* <th>{plantsHardiness.tempLow} - {plantsHardiness.tempHigh} </th> */}
                             <th>{plantsHardiness.hardiness} </th>
                             <th>{plantsHardiness.water}</th>
                             <th>{plantsHardiness.sunlight}</th>
-                            <th>{plantsHardiness.hardinessZone}</th>
+                            {/* <th>{plantsHardiness.hardinessZone}</th> */}
                         </tr>))}
 
                 </tbody>
