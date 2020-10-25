@@ -6,6 +6,8 @@ import { Table, Col, Row } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
 import WeatherAPI from "../../utils/WeatherAPI"
 import { Link } from 'react-router-dom'
+import { Modal } from "react-bootstrap"
+import ReviewPlant from "../ReviewPlant";
 
 
 function HardinessSnip(cw) {
@@ -13,6 +15,15 @@ function HardinessSnip(cw) {
     const [plantsHardiness, setPlantsHardiness] = useState([])
     // let [dangerZone, setdangerZone] = useState([])
     const [currentTemp, setCurrentTemp] = useState([]);
+
+    const [onePlant, setOnePlant] = useState([])
+    const [onePlantId, setOnePlantId] = useState([])
+
+    // handle modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     
     useEffect(() => {
         
@@ -50,6 +61,25 @@ function HardinessSnip(cw) {
             
     };
 
+    function getPlant(id) {
+
+        setOnePlantId(id)
+                 PlantAPI.getOnePlant(id)
+                     .then(res => {
+                         // console.log(onePlant)
+                         setOnePlant(res.data)
+                         
+                         handleShow()
+                             // .then(res => {
+                             //     
+                             // })
+                             
+                     // const plants = res.data;
+                     // setPlants(plants);
+                 })
+                 .catch(err => console.log(err))
+     }
+
     return (
 
         
@@ -72,10 +102,14 @@ function HardinessSnip(cw) {
 
                     {plantsHardiness.map(plantsHardiness => (
 
-                        <tr key={plantsHardiness.id} style={
+                        <tr 
+                            key={plantsHardiness.id} 
+                            style={
                             (currentTemp - 10) <= plantsHardiness.hardiness && currentTemp > plantsHardiness.hardiness ? {background: '#FFEC62'} 
                             : currentTemp <= plantsHardiness.hardiness ? {background: '#FF6726'} 
-                            : {background: '#FFFFFF'}}>
+                            : {background: '#FFFFFF'}}
+                            onClick={() => getPlant(plantsHardiness.id)}
+                        >
                             <td>{plantsHardiness.name} </td>
                             <td>{plantsHardiness.location} </td>
                             <td>{plantsHardiness.hardiness} </td>
@@ -86,6 +120,18 @@ function HardinessSnip(cw) {
 
             </Table>
             <Link>See more</Link>
+
+            <Modal size="lg" show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{onePlant.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ReviewPlant onePlant={onePlant} id={onePlantId}/>
+                </Modal.Body>
+                <Modal.Footer>
+                
+                </Modal.Footer>
+            </Modal>   
 
             </Col>
             
