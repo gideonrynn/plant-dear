@@ -10,6 +10,7 @@ function Plants () {
 
     // Setting our component's initial state
     const [plants, setPlants] = useState([])
+    const [counter, setCounter] = useState()
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
 
@@ -34,6 +35,13 @@ function Plants () {
                 // console.log(res.data)
                 const plants = res.data;
                 setPlants(plants);
+
+                let counter = 0;
+                for (let i = 0; i < plants.length; i++) {
+                if (plants[i].status != "inactive") counter++;
+                }
+                setCounter(counter)
+                                
             })
             .catch(err => console.log(err));
     };
@@ -66,7 +74,7 @@ function Plants () {
     return (
         <div className="plantsdiv">
             
-            <h3>All plants ( )</h3>
+            <h3>All plants ({counter})</h3>
 
             {/* <Table striped bordered hover>
 

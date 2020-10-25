@@ -18,7 +18,7 @@ function Nav() {
 
     useEffect(() => {
 
-        loadCurrentWeather()
+        loadStaticWeather()
     
     }, [])
 
@@ -39,10 +39,22 @@ function Nav() {
             
     }
 
+    function loadStaticWeather() {
+
+        const currentWeather = {
+            temp: 45,
+            wind_spd: 45
+        }
+
+        if (currentWeather.temp > 0) {
+            setCurrentWeather(currentWeather);
+        }
+    }
+
     return (
         <div>
             
-            <nav className="navbar navbar-expand-lg navbar-dark bg-success justify-content-around" role="navigation">
+            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#2E8C43'}}>
             
             
 
@@ -67,17 +79,17 @@ function Nav() {
             </nav> 
 
             
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add New Plant</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <AddPlants/>
-        </Modal.Body>
-        <Modal.Footer>
-          
-        </Modal.Footer>
-      </Modal>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Add New Plant</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <AddPlants/>
+                </Modal.Body>
+                <Modal.Footer>
+                
+                </Modal.Footer>
+            </Modal>
 
             
         </div>

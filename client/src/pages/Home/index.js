@@ -4,10 +4,12 @@ import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 import Current from "../../components/Current/index"
 import ModPlants from "../../components/ModPlants/index"
+import ModPlantsSnip from "../../components/ModPlantsSnip/index"
 import WeatherAPI from "../../utils/WeatherAPI"
-import { Container, Row } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 import Hardiness from "../../components/Hardiness/index"
+import HardinessSnip from "../../components/HardinessSnip"
 
 // import HomePage from "../../components/Home Page";
 
@@ -24,7 +26,7 @@ function Home () {
 
         setTimeout(() => {
 
-            loadCurrentWeather()
+            loadStaticWeather()
 
         }, 2000);
         
@@ -41,20 +43,17 @@ function Home () {
             .then(res => {
 
                 const currentWeather = res.data;
+
+
                 if (currentWeather.temp > 0) {
                     setCurrentWeather(currentWeather);
                     renderComponent = [
                         <Container>
                             <Row>
-                                {/* <Current weather={currentWeather} /> */}
-                                <ModPlants/>
-                            </Row>
-                                <br></br> 
-                            <Row>
-                                <Hardiness weather={currentWeather}/>
-                            </Row>
-                            <br></br> 
-                            
+      
+                                <ModPlantsSnip/>
+                                <HardinessSnip weather={currentWeather}/>
+                            </Row> 
                         </Container>];
                     setrenderComponent(renderComponent);
                 }
@@ -62,6 +61,28 @@ function Home () {
             })
             .catch(err => console.log(err));
             
+    }
+
+    function loadStaticWeather() {
+
+        const currentWeather = {
+            temp: 45,
+            wind_spd: 45
+        }
+
+            if (currentWeather.temp > 0) {
+                setCurrentWeather(currentWeather);
+                renderComponent = [
+                    <Container>
+                        <Row>
+  
+                            <ModPlantsSnip/>
+                            <HardinessSnip weather={currentWeather}/>
+                        </Row> 
+                    </Container>];
+                setrenderComponent(renderComponent);
+            }
+
     }
 
 

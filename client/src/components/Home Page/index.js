@@ -5,8 +5,9 @@ import React from "react";
 import { Col } from "react-bootstrap"
 // import PlantAPI from "../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
-import Current from "../Current/index"
-import Hardiness from "../Hardiness/index"
+// import Current from "../Current/index"
+// import Hardiness from "../Hardiness/index"
+import HardinessSnip from "../HardinessSnip"
 import ModPlants from "../ModPlants/index"
 
 
@@ -15,16 +16,16 @@ function HomePage() {
 
     return (
         <>
- 
+        
 
             <Col>
-                    <Hardiness/>
+                    <HardinessSnip/>
 
             </Col>
 
             <Col>
             
-                    <ModPlants/>
+                    <ModPlantsSnip/>
 
             </Col>
 
