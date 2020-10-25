@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
-import { Table, Col, Container, Row } from "react-bootstrap"
+import { Table, Col, Container, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
 import "./style.css";
 import { Modal } from "react-bootstrap"
@@ -64,47 +64,38 @@ function ModPlantsSnip() {
     return (
     
             <Col>
+                <Card>
+                    {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
 
-            <h3>In Progress</h3>
-
-            <Table striped bordered hover responsive>
-
-                <thead >
-                    <tr>
-                        <th>Name</th>
-
-        
-                    </tr>
-                </thead>
-
-                <tbody>
-
+                    <Card.Body>
+                        <Card.Title>In Progress</Card.Title>
+                        {/* <Card.Text>
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.
+                        </Card.Text> */}
+                    </Card.Body>
                     {modStatusPlant.map(plant => (
-
-                        <tr key={plant.id} onClick={() => getPlant(plant.id)}>
-                            <td>{plant.name} </td>
-
-                        </tr>))}
-
-                </tbody>
-                
-            </Table>
-
+                        <ListGroup className="list-group-flush" >
+                            <ListGroupItem 
+                                key={plant.id} 
+                                onClick={() => getPlant(plant.id)}> {plant.name} </ListGroupItem>
+                            </ListGroup>))}
+                    {/* <Card.Body>
+                        <Card.Link href="#">See more</Card.Link>
+                    </Card.Body> */}
+                </Card>
         
-        <Link>See more</Link>
-
-        
-            <Modal size="lg" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{onePlant.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ReviewPlant onePlant={onePlant} id={onePlantId}/>
-                </Modal.Body>
-                <Modal.Footer>
-                
-                </Modal.Footer>
-            </Modal>   
+                <Modal size="lg" show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{onePlant.name}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ReviewPlant onePlant={onePlant} id={onePlantId}/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    
+                    </Modal.Footer>
+                </Modal>   
        
             </Col>
   
