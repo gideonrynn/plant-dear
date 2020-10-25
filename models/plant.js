@@ -18,8 +18,12 @@ module.exports = function(sequelize, DataTypes) {
         locationSec: {
             type: DataTypes.TEXT
         },
-        water: {
+        waterPref: {
             type: DataTypes.TEXT
+        },
+        lastWatered: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
         },
         sunlight: {
             type: DataTypes.TEXT
@@ -65,6 +69,12 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
         },
         links: {
+            type: DataTypes.TEXT
+        },
+        propogating: {
+            type: DataTypes.TEXT
+        },
+        watching: {
             type: DataTypes.TEXT
         },
         notes: {

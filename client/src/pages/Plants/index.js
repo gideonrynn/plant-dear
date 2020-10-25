@@ -3,6 +3,7 @@ import React, {useEffect, useState } from "react";
 import "./style.css";
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
+import PlantCard from "../../components/PlantCard"
 import { Table, Modal } from "react-bootstrap"
 
 function Plants () {
@@ -37,11 +38,11 @@ function Plants () {
             .catch(err => console.log(err));
     };
 
-    function openPlant(id) {
-        console.log("You clicked on the " + id + " row.")
-        // console.log(plants[0].id)
+    // function openPlant(id) {
+    //     console.log("You clicked on the " + id + " row.")
+    //     // console.log(plants[0].id)
      
-    }
+    // }
 
     function getPlant(id) {
 
@@ -65,9 +66,9 @@ function Plants () {
     return (
         <div className="plantsdiv">
             
-            <h3>Here are all our plants!</h3>
+            <h3>All plants ( )</h3>
 
-            <Table striped bordered hover>
+            {/* <Table striped bordered hover>
 
                 <thead>
                     <tr>
@@ -88,18 +89,18 @@ function Plants () {
                     {plants.map(plant => (
 
                         <tr key={plant.id} name={plant.name} onClick={() => getPlant(plant.id)}>
-                            <th>{plant.name} </th>
-                            <th>{plant.location} </th>
-                            <th>{plant.tempHigh} </th>
-                            <th>{plant.tempLow} </th>
-                            <th>{plant.hardiness} </th>
-                            <th>{plant.water}</th>
-                            <th>{plant.sunlight}</th>
-                            <th>{plant.hardinessZone}</th>
+                            <td>{plant.name} </td>
+                            <td>{plant.location} </td>
+                            <td>{plant.tempHigh} </td>
+                            <td>{plant.tempLow} </td>
+                            <td>{plant.hardiness} </td>
+                            <td>{plant.water}</td>
+                            <td>{plant.sunlight}</td>
+                            <td>{plant.hardinessZone}</td>
                         </tr>))}
 
                 </tbody>
-            </Table>
+            </Table> */}
 
             <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -112,6 +113,8 @@ function Plants () {
                 
                 </Modal.Footer>
             </Modal>
+
+            <PlantCard plants={plants}/>
         </div>
     )
 }

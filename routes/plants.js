@@ -48,6 +48,7 @@ router.post("/plants", ({body}, res) => {
 
 });
 
+//use id to update entry in db
 router.put("/plants/:id", (req, res) => {
   // console.log(req.params.id)
   

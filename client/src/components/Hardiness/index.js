@@ -41,8 +41,9 @@ function HardinessComp(cw) {
                         console.log(currentTemp)
 
                         // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
-                    
+
                         const plantsHardiness = hardyPlants;
+                        
                         setPlantsHardiness(plantsHardiness);
                    
 
@@ -78,12 +79,12 @@ function HardinessComp(cw) {
                             (currentTemp - 10) <= plantsHardiness.hardiness && currentTemp > plantsHardiness.hardiness ? {background: '#FFEC62'} 
                             : currentTemp <= plantsHardiness.hardiness ? {background: '#FF6726'} 
                             : {background: '#FFFFFF'}}>
-                            <th>{plantsHardiness.name} </th>
+                            <td>{plantsHardiness.name} </td>
                             {/* <th>{plantsHardiness.location} </th> */}
                             {/* <th>{plantsHardiness.tempLow} - {plantsHardiness.tempHigh} </th> */}
-                            <th>{plantsHardiness.hardiness} </th>
-                            <th>{plantsHardiness.water}</th>
-                            <th>{plantsHardiness.sunlight}</th>
+                            <td>{plantsHardiness.hardiness} </td>
+                            <td>{plantsHardiness.waterPref}</td>
+                            <td>{plantsHardiness.sunlight}</td>
                             {/* <th>{plantsHardiness.hardinessZone}</th> */}
                         </tr>))}
 
