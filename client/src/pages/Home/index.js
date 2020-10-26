@@ -10,6 +10,9 @@ import { Container, Row, Col } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 import Hardiness from "../../components/Hardiness/index"
 import HardinessSnip from "../../components/HardinessSnip"
+import HumiditySnip from "../../components/HumiditySnip";
+import WaterSnip from "../../components/WaterSnip";
+import PropaSnip from "../../components/PropaSnip";
 
 // import HomePage from "../../components/Home Page";
 
@@ -53,6 +56,10 @@ function Home () {
       
                                 <ModPlantsSnip/>
                                 <HardinessSnip weather={currentWeather}/>
+                                <HumiditySnip/>
+                                <WaterSnip/>
+                                <PropaSnip/>
+                                
                             </Row> 
                         </Container>];
                     setrenderComponent(renderComponent);
@@ -73,11 +80,14 @@ function Home () {
             if (currentWeather.temp > 0) {
                 setCurrentWeather(currentWeather);
                 renderComponent = [
-                    <Container>
+                    <Container fluid="lg">
                         <Row>
-  
+
                             <ModPlantsSnip/>
                             <HardinessSnip weather={currentWeather}/>
+                            <HumiditySnip/>
+                            <WaterSnip/>
+                            <PropaSnip/>
                         </Row> 
                     </Container>];
                 setrenderComponent(renderComponent);
@@ -89,15 +99,7 @@ function Home () {
     return (
         <div className="main-title">
 
-            <Container fluid>
-
-                <Row>
-
-                    {renderComponent}
-
-                </Row>
-
-            </Container>  
+            {renderComponent}
 
             
         </div>

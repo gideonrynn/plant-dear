@@ -34,7 +34,6 @@ function ReviewPlant(props) {
             location: modPlant.location,
             locationSec: modPlant.locationSec,
             waterPref: modPlant.waterPref,
-            lastWateredDate: modPlant.lastWateredDate,
             sunlight: modPlant.sunlight,
             plantType: modPlant.plantType,
             humidity: modPlant.humidity,
@@ -200,7 +199,7 @@ function ReviewPlant(props) {
                     </Form.Group>
                     <Form.Group as={Col} controlId="formLastWatered" >
                         <Form.Label>Last Watered</Form.Label>
-                        <Form.Control type="text" name="lastPotted" defaultValue={thisPlant.lastWatered} onChange={handleInputChange}/>
+                        <Form.Control type="text" name="lastWatered" defaultValue={thisPlant.lastWatered} onChange={handleInputChange}/>
                             <Form.Text className="text-muted">
                             YYYY-MM-DD.
                             </Form.Text>

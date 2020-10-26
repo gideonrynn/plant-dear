@@ -66,7 +66,7 @@ function ModPlantsSnip() {
             <Col>
                 <Card>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>In Progress</Card.Title></Card.Header>
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Watchlist</Card.Title></Card.Header>
                     {/* <Card.Body> */}
                         
                         {/* <Card.Text>
@@ -75,7 +75,7 @@ function ModPlantsSnip() {
                         </Card.Text> */}
                     {/* </Card.Body> */}
                     {modStatusPlant.map(plant => (
-                        <ListGroup className="list-group-flush">
+                        <ListGroup className="list-group-flush" key={plant.id} >
                             <ListGroupItem 
                                 key={plant.id} 
                                 onClick={() => getPlant(plant.id)}> {plant.name} </ListGroupItem>

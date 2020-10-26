@@ -70,7 +70,7 @@ function Nav() {
                 
              
                     <Link className="nav-link" to="/" >Home</Link>
-                    <Link className="nav-link" onClick={handleShow}>Add New Plant</Link> 
+                    <Link className="nav-link" to="#" onClick={handleShow}>Add New Plant</Link> 
                     {/* <Link className="nav-link" to="/addnewplants" onClick={handleShow}>Add New Plant</Link>  */}
                     <Link className="nav-link" to="/plants">Plants</Link>
                     <Link className="nav-link" to="/weather">Forecast</Link>

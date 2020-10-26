@@ -10,11 +10,9 @@ import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 
 
-function HardinessSnip(cw) {
+function HumiditySnip() {
 
-    const [plantsHardiness, setPlantsHardiness] = useState([])
-    // let [dangerZone, setdangerZone] = useState([])
-    const [currentTemp, setCurrentTemp] = useState([]);
+    const [humidPlants, setHumidPlants] = useState([])
 
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
@@ -27,34 +25,24 @@ function HardinessSnip(cw) {
     
     useEffect(() => {
         
-        loadPlantsHardiness()
+        loadPlants()
         // console.log(cw.weather.temp)
 
     
     }, [])
 
-    function loadPlantsHardiness() {
+    function loadPlants() {
 
                 PlantAPI.getAllPlants()
                     .then(res => {
-                        let incoming = ""
                         let allPlants = res.data;
 
-                        incoming = cw.weather.temp;
-                        setCurrentTemp(incoming)
-                        console.log(currentTemp)
-
                         // display all the plants with a hardiness less than or equal to the current weather
-                        let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness !== "" && allPlants.location === "outdoor" && incoming <= allPlants.hardiness
-                            // return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
+                        let humidPlants = allPlants.filter(allPlants => { 
+                            return allPlants.humidity !== "" && allPlants.humidity === "high" && allPlants.location === "indoor"
                         });
-
-                        // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
-
-                        const plantsHardiness = hardyPlants;
                         
-                        setPlantsHardiness(plantsHardiness);
+                        setHumidPlants(humidPlants);
                    
 
                 })
@@ -87,19 +75,26 @@ function HardinessSnip(cw) {
 
                 <Card>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Plant Hardiness Watch</Card.Title></Card.Header>
-                    {plantsHardiness.map(plantsHardiness => (
-                        <ListGroup className="list-group-flush" key={plantsHardiness.id} >
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Humidity Lovers</Card.Title></Card.Header>
+                    {/* <Card.Body>
+                        <Card.Title></Card.Title> */}
+                        {/* <Card.Text>
+                        Some quick example text to build on the card title and make up the bulk of
+                        the card's content.
+                        </Card.Text> */}
+                    {/* </Card.Body> */}
+                    {humidPlants.map(humidPlants => (
+                        <ListGroup className="list-group-flush" key={humidPlants.id}>
                             <ListGroupItem 
-                                key={plantsHardiness.id} 
-                                onClick={() => getPlant(plantsHardiness.id)}>{plantsHardiness.name} ({plantsHardiness.hardiness}&#176;) </ListGroupItem>
+                                key={humidPlants.id} 
+                                onClick={() => getPlant(humidPlants.id)}>{humidPlants.name} </ListGroupItem>
                         </ListGroup>))}
                     <Card.Body>
-                        <Card.Link href="#">See all outdoor plants</Card.Link>
+                        <Card.Link href="#">See all humidity-lovers</Card.Link>
                     </Card.Body>
                 </Card>
 
-                <Modal size="lg" show={show} onHide={handleClose}>
+                <Modal size="lg"  show={show} onHide={handleClose}>
                     <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
                         <Modal.Title>{onePlant.name}</Modal.Title>
                     </Modal.Header>
@@ -120,4 +115,4 @@ function HardinessSnip(cw) {
 
 }
 
-export default HardinessSnip;
+export default HumiditySnip;
