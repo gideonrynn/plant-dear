@@ -178,7 +178,7 @@ function AddPlants() {
                     <Form.Label>Notes</Form.Label>
                     <Form.Control type="text" placeholder="" name="notes" onChange={handleInputChange}/>
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={handleFormSubmit}>
+                <Button style={{backgroundColor: '#887FE5'}} type="submit" onClick={handleFormSubmit}>
                     Submit
                 </Button>
             </Form>

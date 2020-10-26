@@ -66,14 +66,14 @@ function ModPlantsSnip() {
             <Col>
                 <Card>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-
-                    <Card.Body>
-                        <Card.Title>In Progress</Card.Title>
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>In Progress</Card.Title></Card.Header>
+                    {/* <Card.Body> */}
+                        
                         {/* <Card.Text>
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                         </Card.Text> */}
-                    </Card.Body>
+                    {/* </Card.Body> */}
                     {modStatusPlant.map(plant => (
                         <ListGroup className="list-group-flush">
                             <ListGroupItem 
@@ -86,7 +86,7 @@ function ModPlantsSnip() {
                 </Card>
         
                 <Modal size="lg" show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+                    <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
                         <Modal.Title>{onePlant.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>

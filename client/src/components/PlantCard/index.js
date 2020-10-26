@@ -29,18 +29,20 @@ function PlantCard(p) {
     }
 
 
-    function updateWaterDate(id) {
-        let todaysDate = new Date()
-        console.log(todaysDate)
-        console.log(id)
+    function updateWaterDate(id, days) {
+        let date = new Date()
+        date.setDate(date.getDate() - days);
+        // console.log(date)
+        // console.log(id)
         PlantAPI.updatePlant(
             id,
             {
-            lastWatered: todaysDate,
-        })
+                lastWatered: date,
+            })
             .then(window.location.reload(true))
             .catch(err => console.log(err))
     }
+
 
     function getPlant(id) {
 
@@ -114,9 +116,18 @@ function PlantCard(p) {
 
                                     <Row>
                                         <Col>
-                                            <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant.id)}>Watered</Button>
-        
-                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant.id)}>Modify</Button>
+                                            <ListGroup className="list-group-flush">
+                                                <ListGroupItem>
+                                                    <Card.Text> <b>Watered</b></Card.Text>
+                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant.id, 0)}>Today</Button>
+                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plant.id, 1)}>Yesterday</Button>
+                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plant.id, 2)}>Two Days</Button>
+                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant.id, 3)}>Three Days</Button>
+                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant.id, 7)}>One Week</Button>
+                                                </ListGroupItem>
+                                                <ListGroupItem><Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant.id)}>Modify</Button></ListGroupItem>
+                                            </ListGroup>
+
                                         </Col>
                                     </Row>
                                 </Card.Body>
@@ -133,7 +144,7 @@ function PlantCard(p) {
             ))}
 
             <Modal size="lg" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
                     <Modal.Title>{onePlant.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

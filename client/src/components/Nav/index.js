@@ -54,7 +54,7 @@ function Nav() {
     return (
         <div>
             
-            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#2E8C43'}}>
+            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#196811'}}>
             
             
 
@@ -79,8 +79,8 @@ function Nav() {
             </nav> 
 
             
-            <Modal size="lg" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
+            <Modal size="lg"  show={show} onHide={handleClose}>
+                <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
                 <Modal.Title>Add New Plant</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>

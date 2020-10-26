@@ -233,7 +233,7 @@ function ReviewPlant(props) {
 
                 </Form.Row>
                 <Form.Row>     
-                    <Button as={Col} variant="primary" type="submit" onClick={handleFormSubmit}>
+                    <Button as={Col} style={{backgroundColor: '#887FE5'}} type="submit" onClick={handleFormSubmit}>
                         Submit
                     </Button>
 
