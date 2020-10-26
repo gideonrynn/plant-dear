@@ -75,7 +75,7 @@ function ModPlantsSnip() {
                         </Card.Text> */}
                     </Card.Body>
                     {modStatusPlant.map(plant => (
-                        <ListGroup className="list-group-flush" >
+                        <ListGroup className="list-group-flush">
                             <ListGroupItem 
                                 key={plant.id} 
                                 onClick={() => getPlant(plant.id)}> {plant.name} </ListGroupItem>

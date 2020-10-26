@@ -8,10 +8,11 @@ import Weather from './pages/Weather';
 import AddNewPlant from './pages/AddNewPlant'
 import Nav from "./components/Nav/index.js"
 
+
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" >
         <Nav/>
         <Switch>
           <Route exact path="/" component={Home}/>

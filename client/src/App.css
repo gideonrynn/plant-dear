@@ -1,3 +1,7 @@
+body, html {
+  background-image: url(./img/seigaiha.png);
+}
+
 .App {
   text-align: center;
 }

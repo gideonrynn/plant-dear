@@ -79,7 +79,7 @@ function Nav() {
             </nav> 
 
             
-            <Modal show={show} onHide={handleClose}>
+            <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                 <Modal.Title>Add New Plant</Modal.Title>
                 </Modal.Header>

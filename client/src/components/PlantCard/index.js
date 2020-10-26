@@ -1,17 +1,65 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container } from "react-bootstrap"
+import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
 import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
+import PlantAPI from "../../utils/PlantsAPI"
+import ReviewPlant from "../../components/ReviewPlant";
 
 function PlantCard(p) {
 
     const [thisPlant, setThisPlant] = useState([])
+    const [onePlant, setOnePlant] = useState([])
+    const [onePlantId, setOnePlantId] = useState([])
+
+    // handle modal
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
 
-        setThisPlant(p.plants)
+        loadSortedPlants()
 
     }, [p])
+
+    function loadSortedPlants () {
+        p.plants.sort((a,b) => a.name > b.name ? 1: -1)
+        setThisPlant(p.plants)
+    }
+
+
+    function updateWaterDate(id) {
+        let todaysDate = new Date()
+        console.log(todaysDate)
+        console.log(id)
+        PlantAPI.updatePlant(
+            id,
+            {
+            lastWatered: todaysDate,
+        })
+            .then(window.location.reload(true))
+            .catch(err => console.log(err))
+    }
+
+    function getPlant(id) {
+
+        setOnePlantId(id)
+                 PlantAPI.getOnePlant(id)
+                     .then(res => {
+                         // console.log(onePlant)
+                         setOnePlant(res.data)
+                         
+                         handleShow()
+                             // .then(res => {
+                             //     
+                             // })
+                             
+                     // const plants = res.data;
+                     // setPlants(plants);
+                 })
+                 .catch(err => console.log(err))
+     }
 
     return (
         <Container>
@@ -20,10 +68,15 @@ function PlantCard(p) {
                 <div>
                     <Row>
                         <Col xs={3}>
-                            <Image src={Plantling} height={100} width={100} rounded style={{
-                                    marginTop: 20,
-                                    marginBottom: 20
-                                }}/>
+                            <Image src={Plantling} 
+                                    height={100} 
+                                    width={100} 
+                                    rounded 
+                                    style={{
+                                        marginTop: 20,
+                                        marginBottom: 20
+                                        }}
+                                />
                         </Col>
                         <Col>
                             <Card 
@@ -61,16 +114,35 @@ function PlantCard(p) {
 
                                     <Row>
                                         <Col>
-                                            <Button variant="primary">Go somewhere</Button>
+                                            <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant.id)}>Watered</Button>
+        
+                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant.id)}>Modify</Button>
                                         </Col>
                                     </Row>
                                 </Card.Body>
                             </Card>
                         </Col>
+
+                        
                     </Row>
+
+                    
+                        
                 </div>
                 
             ))}
+
+            <Modal size="lg" show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{onePlant.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <ReviewPlant onePlant={onePlant} id={onePlantId}/>
+                </Modal.Body>
+                <Modal.Footer>
+                            
+                </Modal.Footer>
+                </Modal>   
             
         </Container>
     )
