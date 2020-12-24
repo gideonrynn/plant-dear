@@ -6,14 +6,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Plants from './pages/Plants';
 import Weather from './pages/Weather';
 import AddNewPlant from './pages/AddNewPlant'
-import Nav from "./components/Nav/index.js"
+import Navsite from "./components/Navsite/index.js"
 
 
 function App() {
   return (
     <Router>
       <div className="App" >
-        <Nav/>
+        <Navsite/>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/plants" component={Plants}/>

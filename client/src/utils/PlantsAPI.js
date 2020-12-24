@@ -7,8 +7,11 @@ export default {
     getAllPlants: function() {
       return axios.get("/api/plants");
     },
-    getSomePlants: function() {
-      return axios.get("/api/plantsbystatus");
+    getCurrentPlants: function() {
+      return axios.get("/api/plantscurrent");
+    },
+    getInProgressPlants: function() {
+      return axios.get("/api/plantsinprogress");
     },
     getOnePlant: function(id) {
       return axios.get("/api/plantsbyid/" + id);

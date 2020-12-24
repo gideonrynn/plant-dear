@@ -34,13 +34,13 @@ function WaterSnip() {
 
     function loadPlants() {
 
-                PlantAPI.getAllPlants()
+                PlantAPI.getCurrentPlants()
                     .then(res => {
-                        let allPlants = res.data;
+                        let currentPlants = res.data;
                         // let date = new Date()
                         // display all the plants with a hardiness less than or equal to the current weather
-                        let waterPlants = allPlants.filter(allPlants => { 
-                            return allPlants.waterPref === "moist" && allPlants.location === "indoor"
+                        let waterPlants = currentPlants.filter(currentPlants => { 
+                            return currentPlants.waterPref === "moist" && currentPlants.location === "indoor"
                         });
                         
                         setWaterPlants(waterPlants);
@@ -87,7 +87,7 @@ function WaterSnip() {
                                 onClick={() => getPlant(waterPlants.id)}>{waterPlants.name} </ListGroupItem>
                         </ListGroup>))}
                     <Card.Body>
-                        <Card.Link href="#">See all plants</Card.Link>
+                        <Card.Link href="/plants">See all plants</Card.Link>
                     </Card.Body>
                 </Card>
 

@@ -11,8 +11,11 @@ function Plants () {
     // Setting our component's initial state
     const [plants, setPlants] = useState([])
     const [counter, setCounter] = useState()
+    const [inactcounter, setInactCounter] = useState()
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
+    const [inactivePlants, setInactivePlants] = useState([])
+    console.log(inactivePlants)
 
     // handle modal
     const [show, setShow] = useState(false);
@@ -34,13 +37,24 @@ function Plants () {
             .then(res => {
                 // console.log(res.data)
                 const plants = res.data;
-                setPlants(plants);
+                let actPlants = plants.filter(actPlants => { 
+                    return actPlants.status !== "inactive"
+                });
+                let inPlants = plants.filter(inactPlants => { 
+                    return inactPlants.status === "inactive"
+                });
+                setPlants(actPlants);
+                setInactivePlants(inPlants);
 
-                let counter = 0;
+                let actcounter = 0;
+                let inactcounter = 0;
                 for (let i = 0; i < plants.length; i++) {
-                if (plants[i].status != "inactive") counter++;
+                if (plants[i].status !== "inactive") actcounter++;
+                if (plants[i].status === "inactive") inactcounter++;
                 }
-                setCounter(counter)
+                setCounter(actcounter);
+                setInactCounter(inactcounter);
+
                                 
             })
             .catch(err => console.log(err));
@@ -73,42 +87,6 @@ function Plants () {
 
     return (
         <div className="plantsdiv">
-            
-            <h3>All plants ({counter})</h3>
-
-            {/* <Table striped bordered hover>
-
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Temp High</th>
-                        <th>Temp Low</th>
-                        <th>Hardiness</th>
-                        <th>Water</th>
-                        <th>Sunlight</th>
-                        <th>Plant Hardiness Zone</th>
-                    </tr>
-                </thead>
-
-
-                <tbody>
-
-                    {plants.map(plant => (
-
-                        <tr key={plant.id} name={plant.name} onClick={() => getPlant(plant.id)}>
-                            <td>{plant.name} </td>
-                            <td>{plant.location} </td>
-                            <td>{plant.tempHigh} </td>
-                            <td>{plant.tempLow} </td>
-                            <td>{plant.hardiness} </td>
-                            <td>{plant.water}</td>
-                            <td>{plant.sunlight}</td>
-                            <td>{plant.hardinessZone}</td>
-                        </tr>))}
-
-                </tbody>
-            </Table> */}
 
             <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -122,7 +100,11 @@ function Plants () {
                 </Modal.Footer>
             </Modal>
 
-            <PlantCard plants={plants}/>
+            <PlantCard 
+                plants={plants} 
+                inactive={inactivePlants} 
+                actcounter={counter}
+                inactcounter={inactcounter}/>
         </div>
     )
 }

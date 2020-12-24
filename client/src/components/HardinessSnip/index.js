@@ -95,8 +95,9 @@ function HardinessSnip(cw) {
                                 key={plantsHardiness.id} 
                                 onClick={() => getPlant(plantsHardiness.id)}>{plantsHardiness.name} ({plantsHardiness.hardiness}&#176;) </ListGroupItem>
                         </ListGroup>))}
+                        
                     <Card.Body>
-                        <Card.Link href="#">See all outdoor plants</Card.Link>
+                        <Card.Link href="/plants">See all plants</Card.Link>
                     </Card.Body>
                 </Card>
 

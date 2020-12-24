@@ -34,13 +34,14 @@ function HumiditySnip() {
 
     function loadPlants() {
 
-                PlantAPI.getAllPlants()
+                PlantAPI.getCurrentPlants()
                     .then(res => {
-                        let allPlants = res.data;
+                        let currentPlants = res.data;
+                        console.log(res.data)
 
                         // display all the plants with a hardiness less than or equal to the current weather
-                        let humidPlants = allPlants.filter(allPlants => { 
-                            return allPlants.humidity !== "" && allPlants.humidity === "high" && allPlants.location === "indoor"
+                        let humidPlants = currentPlants.filter(currentPlants => { 
+                            return currentPlants.humidity !== "" && currentPlants.humidity === "high" && currentPlants.location === "indoor"
                         });
                         
                         setHumidPlants(humidPlants);
@@ -93,8 +94,9 @@ function HumiditySnip() {
                                 key={humidPlants.id} 
                                 onClick={() => getPlant(humidPlants.id)}>{humidPlants.name} </ListGroupItem>
                         </ListGroup>))}
+                        
                     <Card.Body>
-                        <Card.Link href="#">See all humidity-lovers</Card.Link>
+                        <Card.Link href="/plants">See all plants</Card.Link>
                     </Card.Body>
                 </Card>
 

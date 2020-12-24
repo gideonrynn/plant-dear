@@ -1,11 +1,26 @@
 const db = require("../models");
 const router = require("express").Router();
+const { Op } = require("sequelize");
 
 // returns all plant entries in  db
 router.get('/plants', (req, res) => {
     
     db.Plant.findAll()
       .then(plants => res.json(plants))
+
+});
+
+router.get('/plantscurrent', (req, res) => {
+    
+  db.Plant.findAll({
+        where: {
+          status: {
+            [Op.ne]: 'inactive'
+          }
+        },
+
+      })
+    .then(plantscurrent => res.json(plantscurrent))
 
 });
 
@@ -24,14 +39,14 @@ router.get('/plantsbyid/:id', (req, res) => {
 });
 
 // return specific plant by a spectific row status
-router.get('/plantsbystatus', (req, res) => {
+router.get('/plantsinprogress', (req, res) => {
     
   db.Plant.findAll({
     where: {
       status: 'in progress'
     }
   })
-    .then(plantsbystatus => res.json(plantsbystatus))
+    .then(plantsinprogress => res.json(plantsinprogress))
 
 });
 

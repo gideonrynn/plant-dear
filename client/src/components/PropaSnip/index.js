@@ -90,8 +90,9 @@ function PropaSnip() {
                                 key={propaPlants.id} 
                                 onClick={() => getPlant(propaPlants.id)}>{propaPlants.name} </ListGroupItem>
                         </ListGroup>))}
+                        
                     <Card.Body>
-                        <Card.Link href="#">See all plants</Card.Link>
+                        <Card.Link href="/plants">See all plants</Card.Link>
                     </Card.Body>
                 </Card>
 

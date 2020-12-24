@@ -4,15 +4,17 @@ import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 // import Current from "../../components/Current/index"
 // import ModPlants from "../../components/ModPlants/index"
-import WatchlistSnip from "../../components/WatchlistSnip/index"
+// import WatchlistSnip from "../../components/WatchlistSnip/index"
 import WeatherAPI from "../../utils/WeatherAPI"
-import { Container, Row, Col, CardColumns } from "react-bootstrap"
+// import { Container, Row, Col, CardColumns } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
-import HardinessSnip from "../../components/HardinessSnip"
-import HumiditySnip from "../../components/HumiditySnip";
-import WaterSnip from "../../components/WaterSnip";
-import PropaSnip from "../../components/PropaSnip";
+// import HardinessSnip from "../../components/HardinessSnip"
+// import HumiditySnip from "../../components/HumiditySnip";
+// import WaterSnip from "../../components/WaterSnip";
+// import PropaSnip from "../../components/PropaSnip";
+// import HomeComponent from "../../components/HomeComponents";
+import HomeComponents from "../../components/HomeComponents";
 
 // import HomePage from "../../components/Home Page";
 
@@ -50,26 +52,8 @@ function Home () {
                 if (currentWeather.temp > 0) {
                     setCurrentWeather(currentWeather);
                     renderComponent = [
-                        <Container>
-                            {/* to set number of columns, add sm={4} to rows */}
-                            <Row>
-                                <Col sm={3} >
-                                    <WatchlistSnip/>
-                                </Col>
-                                {/* <Col sm={3}>
-                                    <HardinessSnip weather={currentWeather}/>
-                                </Col> */}
-                                <Col sm={3}>
-                                    <HumiditySnip/>
-                                </Col>
-                                <Col sm={3}>
-                                    <WaterSnip/>
-                                </Col>
-                                <Col sm={3}>
-                                    <PropaSnip/>
-                                </Col>
-                            </Row> 
-                        </Container>];
+                        <HomeComponents/>
+                        ];
                     setrenderComponent(renderComponent);
                 }
 
@@ -88,34 +72,8 @@ function Home () {
             if (currentWeather.temp > 0) {
                 setCurrentWeather(currentWeather);
                 renderComponent = [
-                    <Container fluid="lg">
-                        {/* to set number of columns, add sm={4} to rows */}
-                        <Row>
-                            {/* <CardColumns> */}
-                            <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <WatchlistSnip/>
-                            </Col>
-                            {/* <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <HardinessSnip weather={currentWeather}/>
-                            </Col> */}
-                            <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <HumiditySnip/>
-                            </Col>
-                            <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <WaterSnip/>
-                            </Col>
-                            <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <PropaSnip/>
-                            </Col>
-                            {/* </CardColumns> */}
-                        </Row> 
-                        
-                    </Container>];
+                    <HomeComponents/>
+                    ];
                 setrenderComponent(renderComponent);
             }
 

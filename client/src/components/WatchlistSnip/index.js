@@ -32,7 +32,7 @@ function WatchlistSnip() {
     // Loads all plants and sets them to plants state
     function loadPlantsbyStatus() {
 
-        PlantAPI.getSomePlants()
+        PlantAPI.getInProgressPlants()
             .then(res => {
                 // console.log(res.data)
                 const plants = res.data;
@@ -79,9 +79,9 @@ function WatchlistSnip() {
                                 key={plant.id} 
                                 onClick={() => getPlant(plant.id)}> {plant.name} ({plant.locationSec}) </ListGroupItem>
                             </ListGroup>))}
-                    {/* <Card.Body>
-                        <Card.Link href="#">See more</Card.Link>
-                    </Card.Body> */}
+                    <Card.Body>
+                        <Card.Link href="/plants">See all plants</Card.Link>
+                    </Card.Body>
                 </Card>
         
                 <Modal size="lg" show={show} onHide={handleClose}>

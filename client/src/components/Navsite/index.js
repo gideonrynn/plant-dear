@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import { Modal } from "react-bootstrap"
-import AddPlants from "../../components/AddPlants";
+import { Modal, Nav, Navbar, NavDropdown, Form, FormControl, Button } from "react-bootstrap"
+import AddPlants from "../AddPlants";
 // import AddPlantsQuick from "../../components/AddPlantsQuick";
 import WeatherAPI from "../../utils/WeatherAPI"
 import './style.css'
 
-function Nav() {
+function Navsite() {
 
     const [currentWeather, setCurrentWeather] = useState([])
 
@@ -56,7 +56,7 @@ function Nav() {
     }
 
     return (
-        <div>
+        <>
             
             <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#196811'}}>
             
@@ -75,14 +75,14 @@ function Nav() {
              
                     <Link className="nav-link" to="/" >Home</Link>
                     <Link className="nav-link" to="#" onClick={handleShow}>Add New Plant</Link> 
-                    {/* <Link className="nav-link" to="/addnewplants" onClick={handleShow}>Add New Plant</Link>  */}
+                    {/* <Link className="nav-link" to="/addnewplants" onClick={handleShow}>Add New Plant</Link> */}
                     <Link className="nav-link" to="/plants">Plants</Link>
                     <Link className="nav-link" to="/weather">Forecast</Link>
                 </div>
 
             </nav> 
 
-            
+             
             <Modal size="lg"  show={show} onHide={handleClose}>
                 <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
                 <Modal.Title>Add New Plant</Modal.Title>
@@ -96,9 +96,9 @@ function Nav() {
             </Modal>
 
             
-        </div>
+        </>
      
     );
 }
 
-export default Nav;
+export default Navsite;
