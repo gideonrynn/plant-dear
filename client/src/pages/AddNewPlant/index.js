@@ -13,8 +13,9 @@ function AddNewPlant () {
     useEffect(() => {
 
         loadPlants()
+        // console.log(plants);
     
-    }, [])
+    }, [plants])
 
     // Loads all plants and sets them to plants state
     function loadPlants() {

@@ -2,10 +2,11 @@
 import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
-import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
+import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
+// import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
-import WeatherAPI from "../../utils/WeatherAPI"
-import { Link } from 'react-router-dom'
+// import WeatherAPI from "../../utils/WeatherAPI"
+// import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 
@@ -14,7 +15,7 @@ function HardinessSnip(cw) {
 
     const [plantsHardiness, setPlantsHardiness] = useState([])
     // let [dangerZone, setdangerZone] = useState([])
-    const [currentTemp, setCurrentTemp] = useState([]);
+    // const [currentTemp, setCurrentTemp] = useState([]);
 
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
@@ -31,18 +32,18 @@ function HardinessSnip(cw) {
         // console.log(cw.weather.temp)
 
     
-    }, [])
+    }, [cw])
 
     function loadPlantsHardiness() {
 
                 PlantAPI.getAllPlants()
                     .then(res => {
-                        let incoming = ""
+                        let incoming = cw.weather.temp;
                         let allPlants = res.data;
+                        console.log(incoming)
 
-                        incoming = cw.weather.temp;
-                        setCurrentTemp(incoming)
-                        console.log(currentTemp)
+                        // setCurrentTemp(incoming)
+                        // console.log(currentTemp)
 
                         // display all the plants with a hardiness less than or equal to the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 

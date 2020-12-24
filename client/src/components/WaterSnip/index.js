@@ -2,10 +2,11 @@
 import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
-import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
+import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
+// import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
-import WeatherAPI from "../../utils/WeatherAPI"
-import { Link } from 'react-router-dom'
+// import WeatherAPI from "../../utils/WeatherAPI"
+// import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 
@@ -39,7 +40,7 @@ function WaterSnip() {
                         // let date = new Date()
                         // display all the plants with a hardiness less than or equal to the current weather
                         let waterPlants = allPlants.filter(allPlants => { 
-                            return allPlants.waterPref == "moist" && allPlants.location === "indoor"
+                            return allPlants.waterPref === "moist" && allPlants.location === "indoor"
                         });
                         
                         setWaterPlants(waterPlants);

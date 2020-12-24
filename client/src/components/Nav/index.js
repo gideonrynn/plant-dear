@@ -18,32 +18,35 @@ function Nav() {
 
     useEffect(() => {
 
+        // loadCurrentWeather()
+
+        // use to prevent exceeding api calls to WeatherBit
         loadStaticWeather()
     
     }, [])
 
     
-    function loadCurrentWeather() {
+    // function loadCurrentWeather() {
 
-        WeatherAPI.getTodaysWeather()
+    //     WeatherAPI.getTodaysWeather()
         
-            .then(res => {
+    //         .then(res => {
 
-                const currentWeather = res.data;
-                if (currentWeather.temp > 0) {
-                    setCurrentWeather(currentWeather);
-                }
+    //             const currentWeather = res.data;
+    //             if (currentWeather.temp > 0) {
+    //                 setCurrentWeather(currentWeather);
+    //             }
 
-            })
-            .catch(err => console.log(err));
+    //         })
+    //         .catch(err => console.log(err));
             
-    }
+    // }
 
     function loadStaticWeather() {
 
         const currentWeather = {
-            temp: 45,
-            wind_spd: 45
+            temp: 12,
+            wind_spd: 1
         }
 
         if (currentWeather.temp > 0) {

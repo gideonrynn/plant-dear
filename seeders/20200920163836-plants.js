@@ -160,7 +160,7 @@ module.exports = {
       hardinessZone: "5-10",
       lastPotted: null,
       links: "https://bonnieplants.com/product/italian-oregano/, https://www.thespruce.com/growing-oregano-plants-1402818",
-      notes: "allow soil to dry out between waterPrefings",
+      notes: "allow soil to dry out between waterings",
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -183,7 +183,7 @@ module.exports = {
       hardinessZone: "4-8",
       lastPotted: null,
       links: "https://bonnieplants.com/product/greek-oregano/, https://www.thespruce.com/growing-oregano-plants-1402818",
-      notes: "allow soil to dry out between waterPrefings",
+      notes: "allow soil to dry out between waterings",
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -438,7 +438,7 @@ module.exports = {
       hardinessZone: "",
       lastPotted: "2020-07-18",
       links: "https://greeneryunlimited.co/blogs/plant-care/pilea-peperomioides-care, https://bloomscape.com/plant-care-guide/pilea/#g1, https://savvygardening.com/pilea-peperomioides-care/",
-      notes: "When overwaterPrefed, the Pilea's leaves will develop brown spotting and edging, and the leaves will begin to fall off the plant. If your plant is showing these symptoms, feel the soil. If it’s moist then hold off on waterPrefing until the soil dries all the way through the pot. Reference the care instructions for re-establishing a waterPrefing routine with your plant. Other causes for brown spotting are too much fertilizer, too much sun, or pests.",
+      notes: "When overwatered, the Pilea's leaves will develop brown spotting and edging, and the leaves will begin to fall off the plant. If your plant is showing these symptoms, feel the soil. If it’s moist then hold off watering until the soil dries all the way through the pot. Reference the care instructions for re-establishing a watering routine with your plant. Other causes for brown spotting are too much fertilizer, too much sun, or pests.",
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -701,7 +701,7 @@ module.exports = {
       hardinessZone: "9 - 11",
       lastPotted: null,
       links: "https://www.youtube.com/watch?v=Fl-3lpYXnYg, https://homeguides.sfgate.com/care-sensitive-plant-mimosa-pudica-67276.html",
-      notes: "allow to dry and wilt a little but watch closely. do not overwaterPref. yellow leaves appear when overwaterPrefed",
+      notes: "allow to dry and wilt a little but watch closely. do not overwater. yellow leaves appear when overwatered",
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -725,7 +725,7 @@ module.exports = {
       hardinessZone: "9 - 10",
       lastPotted: "2019-01-01",
       links: "http://pza.sanbi.org/stapelia, https://plantcaretoday.com/carrion-flower-stapelia.html",
-      notes: "waterPref once every 3-4 weeks in the winter, once every other week in the growing season. watch for mealy bugs, though they tend to appear from overwaterPrefing",
+      notes: "water once every 3-4 weeks in the winter, once every other week in the growing season. watch for mealy bugs, though they tend to appear from overwaterPrefing",
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -807,7 +807,7 @@ module.exports = {
     {
       name: "Purple Waffle Plant",
       botanicalName: "hemigraphis alternata",
-      status: "",
+      status: "inactive",
       location: "indoor",
       locationSec: "",
       waterPref: "moist",
@@ -823,7 +823,7 @@ module.exports = {
       hardinessZone: "10 - 11",
       lastPotted: null,
       links: "https://lunarly.com/blogs/plant-care/grow-a-vibrant-purple-waffle-plant",
-      notes: "low growing",
+      notes: "low growing. died because it wasn't kept moist enough",
       createdAt: new Date(),
       updatedAt: new Date(),
     }, 
@@ -992,7 +992,7 @@ module.exports = {
     hardinessZone: "",
     lastPotted: null,
     links: "https://dengarden.com/gardening/Euphorbia-Trigona-African-Milk-Tree, https://www.thespruce.com/african-milk-tree-profile-4846360",
-    notes: "Also known as Rubra or Royal Red. Can waterPref once a week. Drought tolerant. Can grow up to 2 feet a year."
+    notes: "Also known as Rubra or Royal Red. Can water once a week. Drought tolerant. Can grow up to 2 feet a year."
   }, {
     name: "Fluffy Ruffle Fern",
     botanicalName: "Nephrolepis exaltata",
@@ -1065,7 +1065,7 @@ module.exports = {
     hardinessZone: "",
     lastPotted: null,
     links: "",
-    notes: "Not sure what the plant is named. Found in Mariano's. waterPref."
+    notes: "Not sure what the plant is named. Found in Mariano's."
   }, {
     name: "Mini succulent",
     botanicalName: "",
@@ -1187,7 +1187,7 @@ module.exports = {
     hardinessZone: "11 - 12",
     lastPotted: null,
     links: "",
-    notes: "Drought tolerant. Wait until it droops a little to waterPref. When your plant’s roots show or your peace lily seems to be drinking up all its waterPref within a few days, re-pot into a larger container. Your plant may need to be gradually moved into larger and larger containers, but generally peace lilies won’t need to go into a pot larger than 10 inches."
+    notes: "Drought tolerant. Wait until it droops a little to water. When your plant’s roots show or your peace lily seems to be drinking up all its water within a few days, re-pot into a larger container. Your plant may need to be gradually moved into larger and larger containers, but generally peace lilies won’t need to go into a pot larger than 10 inches."
   }
  // , {
   //   name: "",

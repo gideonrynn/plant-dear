@@ -12,7 +12,7 @@ function ReviewPlant(props) {
         setThisPlant(props.onePlant)
         setThisPlantId(props.onePlant.id)
         
-    }, []);
+    }, [props.onePlant]);
 
     function handleInputChange(event) {
         // const { name, defaultValue } = event.target;

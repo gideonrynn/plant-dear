@@ -2,13 +2,13 @@ import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
-import Current from "../../components/Current/index"
-import ModPlants from "../../components/ModPlants/index"
-import ModPlantsSnip from "../../components/ModPlantsSnip/index"
+// import Current from "../../components/Current/index"
+// import ModPlants from "../../components/ModPlants/index"
+import ModPlantsSnip from "../../components/WatchlistSnip/index"
 import WeatherAPI from "../../utils/WeatherAPI"
 import { Container, Row, Col } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
-import Hardiness from "../../components/Hardiness/index"
+// import Hardiness from "../../components/Hardiness/index"
 import HardinessSnip from "../../components/HardinessSnip"
 import HumiditySnip from "../../components/HumiditySnip";
 import WaterSnip from "../../components/WaterSnip";
@@ -30,6 +30,7 @@ function Home () {
         setTimeout(() => {
 
             loadStaticWeather()
+            // loadCurrentWeather()
 
         }, 2000);
         
@@ -39,8 +40,6 @@ function Home () {
 
     function loadCurrentWeather() {
         
-        
-
         WeatherAPI.getTodaysWeather()
         
             .then(res => {
@@ -52,15 +51,24 @@ function Home () {
                     setCurrentWeather(currentWeather);
                     renderComponent = [
                         <Container>
-                            <Row>
-      
+                            {/* to set number of columns, add sm={4} to rows */}
+                        <Row>
+                            <Col sm={3}>
                                 <ModPlantsSnip/>
+                            </Col>
+                            <Col sm={3}>
                                 <HardinessSnip weather={currentWeather}/>
+                            </Col>
+                            <Col sm={3}>
                                 <HumiditySnip/>
+                            </Col>
+                            <Col sm={3}>
                                 <WaterSnip/>
+                            </Col>
+                            <Col sm={3}>
                                 <PropaSnip/>
-                                
-                            </Row> 
+                            </Col>
+                        </Row> 
                         </Container>];
                     setrenderComponent(renderComponent);
                 }
@@ -73,22 +81,33 @@ function Home () {
     function loadStaticWeather() {
 
         const currentWeather = {
-            temp: 45,
-            wind_spd: 45
+            temp: 12,
+            wind_spd: 1
         }
 
             if (currentWeather.temp > 0) {
                 setCurrentWeather(currentWeather);
                 renderComponent = [
                     <Container fluid="lg">
+                        {/* to set number of columns, add sm={4} to rows */}
                         <Row>
-
-                            <ModPlantsSnip/>
-                            <HardinessSnip weather={currentWeather}/>
-                            <HumiditySnip/>
-                            <WaterSnip/>
-                            <PropaSnip/>
+                            <Col sm={3}>
+                                <ModPlantsSnip/>
+                            </Col>
+                            <Col sm={3}>
+                                <HardinessSnip weather={currentWeather}/>
+                            </Col>
+                            <Col sm={3}>
+                                <HumiditySnip/>
+                            </Col>
+                            <Col sm={3}>
+                                <WaterSnip/>
+                            </Col>
+                            <Col sm={3}>
+                                <PropaSnip/>
+                            </Col>
                         </Row> 
+                        
                     </Container>];
                 setrenderComponent(renderComponent);
             }

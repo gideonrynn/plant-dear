@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
-import { Table, Col, Container, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
+import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
+// import { Table, Col, Container, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
 import "./style.css";
 import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 function ModPlantsSnip() {
 
@@ -78,7 +79,7 @@ function ModPlantsSnip() {
                         <ListGroup className="list-group-flush" key={plant.id} >
                             <ListGroupItem 
                                 key={plant.id} 
-                                onClick={() => getPlant(plant.id)}> {plant.name} </ListGroupItem>
+                                onClick={() => getPlant(plant.id)}> {plant.name} ({plant.locationSec}) </ListGroupItem>
                             </ListGroup>))}
                     {/* <Card.Body>
                         <Card.Link href="#">See more</Card.Link>
