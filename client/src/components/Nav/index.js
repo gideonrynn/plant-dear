@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
 import AddPlants from "../../components/AddPlants";
+// import AddPlantsQuick from "../../components/AddPlantsQuick";
 import WeatherAPI from "../../utils/WeatherAPI"
 import './style.css'
 

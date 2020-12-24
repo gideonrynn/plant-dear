@@ -4,9 +4,9 @@ import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 // import Current from "../../components/Current/index"
 // import ModPlants from "../../components/ModPlants/index"
-import ModPlantsSnip from "../../components/WatchlistSnip/index"
+import WatchlistSnip from "../../components/WatchlistSnip/index"
 import WeatherAPI from "../../utils/WeatherAPI"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, CardColumns } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
 import HardinessSnip from "../../components/HardinessSnip"
@@ -52,23 +52,23 @@ function Home () {
                     renderComponent = [
                         <Container>
                             {/* to set number of columns, add sm={4} to rows */}
-                        <Row>
-                            <Col sm={3}>
-                                <ModPlantsSnip/>
-                            </Col>
-                            <Col sm={3}>
-                                <HardinessSnip weather={currentWeather}/>
-                            </Col>
-                            <Col sm={3}>
-                                <HumiditySnip/>
-                            </Col>
-                            <Col sm={3}>
-                                <WaterSnip/>
-                            </Col>
-                            <Col sm={3}>
-                                <PropaSnip/>
-                            </Col>
-                        </Row> 
+                            <Row>
+                                <Col sm={3} >
+                                    <WatchlistSnip/>
+                                </Col>
+                                {/* <Col sm={3}>
+                                    <HardinessSnip weather={currentWeather}/>
+                                </Col> */}
+                                <Col sm={3}>
+                                    <HumiditySnip/>
+                                </Col>
+                                <Col sm={3}>
+                                    <WaterSnip/>
+                                </Col>
+                                <Col sm={3}>
+                                    <PropaSnip/>
+                                </Col>
+                            </Row> 
                         </Container>];
                     setrenderComponent(renderComponent);
                 }
@@ -91,21 +91,28 @@ function Home () {
                     <Container fluid="lg">
                         {/* to set number of columns, add sm={4} to rows */}
                         <Row>
-                            <Col sm={3}>
-                                <ModPlantsSnip/>
+                            {/* <CardColumns> */}
+                            <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
+                                <WatchlistSnip/>
                             </Col>
-                            <Col sm={3}>
+                            {/* <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
                                 <HardinessSnip weather={currentWeather}/>
-                            </Col>
-                            <Col sm={3}>
+                            </Col> */}
+                            <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
                                 <HumiditySnip/>
                             </Col>
-                            <Col sm={3}>
+                            <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
                                 <WaterSnip/>
                             </Col>
-                            <Col sm={3}>
+                            <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
                                 <PropaSnip/>
                             </Col>
+                            {/* </CardColumns> */}
                         </Row> 
                         
                     </Container>];

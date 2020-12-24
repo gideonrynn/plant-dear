@@ -74,9 +74,12 @@ function WaterSnip() {
         
             <Col>
 
-                <Card>
+                <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Love Water</Card.Title></Card.Header>
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}>
+                        <Card.Title>Love Water</Card.Title>
+                        <Card.Subtitle><i>Indoor plants with moist requirements</i></Card.Subtitle>
+                    </Card.Header>
                     {waterPlants.map(waterPlants => (
                         <ListGroup className="list-group-flush" key={waterPlants.id}  >
                             <ListGroupItem 

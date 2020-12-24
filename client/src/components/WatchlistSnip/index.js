@@ -8,7 +8,7 @@ import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 // import { Link } from 'react-router-dom'
 
-function ModPlantsSnip() {
+function WatchlistSnip() {
 
     // Setting our component's initial state
     const [modStatusPlant, setModStatusPlant] = useState([])
@@ -64,16 +64,14 @@ function ModPlantsSnip() {
 
     return (
     
-            <Col>
-                <Card>
+            <Col >
+                <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Watchlist</Card.Title></Card.Header>
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}>
+                        <Card.Title>Watchlist</Card.Title>
+                        <Card.Subtitle><i>Plant status = in progress</i></Card.Subtitle>
+                    </Card.Header>
                     {/* <Card.Body> */}
-                        
-                        {/* <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </Card.Text> */}
                     {/* </Card.Body> */}
                     {modStatusPlant.map(plant => (
                         <ListGroup className="list-group-flush" key={plant.id} >
@@ -106,4 +104,4 @@ function ModPlantsSnip() {
 
 }
 
-export default ModPlantsSnip;
+export default WatchlistSnip;

@@ -74,9 +74,12 @@ function HumiditySnip() {
         
             <Col>
 
-                <Card>
+                <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Humidity Lovers</Card.Title></Card.Header>
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}>
+                        <Card.Title>Humidity Lovers</Card.Title>
+                        <Card.Subtitle><i>Indoor plants with high humidity</i></Card.Subtitle>
+                    </Card.Header>
                     {/* <Card.Body>
                         <Card.Title></Card.Title> */}
                         {/* <Card.Text>

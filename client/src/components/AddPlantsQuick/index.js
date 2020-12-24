@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap"
 import AddPlantAPI from "../../utils/PlantsAPI"
 
-function AddPlants() {
+function AddPlantsQuick() {
 
     const [newPlant, setNewPlant] = useState({});
 
@@ -51,7 +51,6 @@ function AddPlants() {
     return (
 
         <>
-        
             <Form>
                 <Form.Group controlId="formName" onChange={handleInputChange}>
                     <Form.Label>Plant Name</Form.Label>
@@ -119,7 +118,7 @@ function AddPlants() {
                         <option>succulent</option>
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId="formHumidity">
+                {/* <Form.Group controlId="formHumidity">
                     <Form.Label>Humidity</Form.Label>
                     <Form.Control as="select" name="humidity" onChange={handleInputChange}>
                         <option></option>
@@ -163,7 +162,7 @@ function AddPlants() {
                 <Form.Group controlId="formHardyZone" >
                     <Form.Label>Hardiness Zone</Form.Label>
                     <Form.Control type="text" placeholder="" name="plantHardinessZone" onChange={handleInputChange}/>
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group controlId="formLastPotted" >
                     <Form.Label>Last Potted</Form.Label>
                     <Form.Control type="text" placeholder="" name="lastPotted" onChange={handleInputChange}/>
@@ -191,4 +190,4 @@ function AddPlants() {
 
 }
 
-export default AddPlants;
+export default AddPlantsQuick;

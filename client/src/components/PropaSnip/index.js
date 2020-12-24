@@ -1,7 +1,7 @@
 
 import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
-import "./style.css";
+
 import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 // import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
@@ -9,6 +9,7 @@ import PlantAPI from "../../utils/PlantsAPI"
 // import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
+import "./style.css";
 
 
 function PropaSnip() {
@@ -73,11 +74,16 @@ function PropaSnip() {
     return (
 
         
-            <Col>
+            <Col >
 
-                <Card>
+                <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}><Card.Title>Propogating</Card.Title></Card.Header>
+                    <Card.Header style={{backgroundColor: '#5FAE57'}}>
+                            <Card.Title>Propogating</Card.Title>
+                            <Card.Subtitle><i>Plants where propagating = Y</i></Card.Subtitle>
+                    </Card.Header>
+                    
+
                     {propaPlants.map(propaPlants => (
                         <ListGroup className="list-group-flush" key={propaPlants.id} >
                             <ListGroupItem 
