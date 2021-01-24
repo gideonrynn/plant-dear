@@ -15,17 +15,23 @@ function PlantCard(p) {
     // handle modal
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
     useEffect(() => {
 
         loadSortedPlants()
         
     }, [p])
 
-    function loadSortedPlants () {
+    function handleClose() {
+        setShow(false);
+    }
 
+    function handleShow() {
+        setShow(true)
+    }
+
+    function loadSortedPlants() {
+
+        // sort plants in alphabetical order
         p.plants.sort((a,b) => a.name > b.name ? 1: -1);
         setThisPlant(p.plants);
         console.log(p.plants);
@@ -84,8 +90,8 @@ function PlantCard(p) {
                     <Row>
                         <Col xs={12} sm={12} md={3} lg={3}>
                             <Image src={Plantling} 
-                                    height={100} 
-                                    width={100} 
+                                    height={130} 
+                                    width={130} 
                                     rounded 
                                     style={{
                                         marginTop: 20,

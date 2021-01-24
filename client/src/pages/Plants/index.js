@@ -4,24 +4,25 @@ import "./style.css";
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
 import PlantCard from "../../components/PlantCard"
-import { Table, Modal } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
 
 function Plants () {
 
     // Setting our component's initial state
-    const [plants, setPlants] = useState([])
+    const [updatedPlants, setUpdatedPlants] = useState([])
+    const [activePlants, setActivePlants] = useState([])
+    const [updatedInactivePlants, setUpdatedInactivePlants] = useState([])
+    const [inactivePlants, setInactivePlants] = useState([])
     const [counter, setCounter] = useState()
     const [inactcounter, setInactCounter] = useState()
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
-    const [inactivePlants, setInactivePlants] = useState([])
-    console.log(inactivePlants)
+
+    // for handling search bar and input
+    const [searchTerm, setSearchTerm] = useState('');
 
     // handle modal
     const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     // Load all plants and store them within setPlants
     useEffect(() => {
@@ -30,6 +31,14 @@ function Plants () {
     
     }, [])
 
+    function handleClose() {
+        setShow(false);
+    }
+
+    function handleShow() {
+        setShow(true)
+    }
+
     // Loads all plants and sets them to plants state
     function loadPlants() {
 
@@ -37,21 +46,35 @@ function Plants () {
             .then(res => {
                 // console.log(res.data)
                 const plants = res.data;
+
+                // filter to show active versus inactive plants
+                // set plant state to pass to Plant Card
+ 
                 let actPlants = plants.filter(actPlants => { 
                     return actPlants.status !== "inactive"
-                });
+                 });
+    
                 let inPlants = plants.filter(inactPlants => { 
-                    return inactPlants.status === "inactive"
-                });
-                setPlants(actPlants);
+                    return inactPlants.status == "inactive"
+                   });
+
+                // set state for active and inactive plants to be filtered based on search bar
+                setActivePlants(actPlants);
                 setInactivePlants(inPlants);
 
+                // by default, show all plants returned from api
+                setUpdatedPlants(actPlants);
+                setUpdatedInactivePlants(inPlants);
+
+   
+                // set counters at top of Active and Inactive sections
                 let actcounter = 0;
                 let inactcounter = 0;
                 for (let i = 0; i < plants.length; i++) {
                 if (plants[i].status !== "inactive") actcounter++;
                 if (plants[i].status === "inactive") inactcounter++;
                 }
+
                 setCounter(actcounter);
                 setInactCounter(inactcounter);
 
@@ -65,6 +88,23 @@ function Plants () {
     //     // console.log(plants[0].id)
      
     // }
+
+    // take text entered in the search and filter current list of plants
+    function sortPlants(input) {
+
+        const filtered = activePlants.filter(actPlants => {
+            return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+           })
+
+           const filteredInactive = inactivePlants.filter(inactPlants => {
+            return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+           })
+        
+           setSearchTerm(input);
+           setUpdatedPlants(filtered);
+           setUpdatedInactivePlants(filteredInactive);
+
+    }
 
     function getPlant(id) {
 
@@ -100,11 +140,28 @@ function Plants () {
                 </Modal.Footer>
             </Modal>
 
+            <input 
+                type="text"
+                style={
+                    {width:"350px",
+                    background:"#F2F1F9", 
+                    padding:"10px"}}
+                placeholder={"search plants"}
+                onChange={(event) => {
+                    sortPlants(event.target.value)
+                    }}
+            />
+
+            <br/>
+            <br/>
+
             <PlantCard 
-                plants={plants} 
-                inactive={inactivePlants} 
+                plants={updatedPlants} 
+                inactive={updatedInactivePlants} 
                 actcounter={counter}
-                inactcounter={inactcounter}/>
+                inactcounter={inactcounter}
+            />
+            
         </div>
     )
 }
