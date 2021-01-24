@@ -67,7 +67,7 @@ function WatchlistSnip() {
             <Col >
                 <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#5FAE57'}}>
+                    <Card.Header style={{backgroundColor: '#78A4CF'}}>
                         <Card.Title>Watchlist</Card.Title>
                         <Card.Subtitle><i>Plant status = in progress</i></Card.Subtitle>
                     </Card.Header>

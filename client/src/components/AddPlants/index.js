@@ -72,7 +72,12 @@ function AddPlants() {
                 </Form.Group> */}
                 <Form.Group controlId="formStatus" >
                     <Form.Label>Status</Form.Label>
-                    <Form.Control type="text" placeholder="" name="status" onChange={handleInputChange}/>
+                    <Form.Control as="select" placeholder="" name="status" onChange={handleInputChange}>
+                        <option></option>
+                        <option>inactive</option>
+                        <option>in progress</option>
+                        <option>indoor and outdoor</option>
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLocation">
                     <Form.Label>Location</Form.Label>
@@ -114,9 +119,11 @@ function AddPlants() {
                     <Form.Label>Type</Form.Label>
                     <Form.Control as="select" name="plantType" onChange={handleInputChange}>
                         <option></option>
+                        <option>air plant</option>
                         <option>herb</option>
                         <option>houseplant</option>
                         <option>succulent</option>
+                        
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formHumidity">

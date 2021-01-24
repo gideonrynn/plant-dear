@@ -31,6 +31,9 @@ module.exports = function(sequelize, DataTypes) {
         plantType: {
             type: DataTypes.TEXT
         },
+        trouble: {
+            type: DataTypes.STRING
+        },
         humidity: {
             type: DataTypes.TEXT
         },

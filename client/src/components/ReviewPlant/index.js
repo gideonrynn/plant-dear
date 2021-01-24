@@ -36,6 +36,7 @@ function ReviewPlant(props) {
             waterPref: modPlant.waterPref,
             sunlight: modPlant.sunlight,
             plantType: modPlant.plantType,
+            trouble: modPlant.trouble,
             humidity: modPlant.humidity,
             tempLow: modPlant.tempLow,
             tempHigh: modPlant.tempHigh,
@@ -211,6 +212,17 @@ function ReviewPlant(props) {
                         <Form.Label>Propogating?</Form.Label>
                         <Form.Control as="select" name="propogating" defaultValue={thisPlant.propogating} onChange={handleInputChange}>
                             <option>{thisPlant.propogating}</option>
+                            <option>Y</option>
+                            <option>N</option>
+                        </Form.Control>
+                    </Form.Group>
+
+                </Form.Row>
+                <Form.Row>                    
+                    <Form.Group as={Col} controlId="formTrouble" >
+                        <Form.Label>Trouble?</Form.Label>
+                        <Form.Control as="select" name="trouble" defaultValue={thisPlant.trouble} onChange={handleInputChange}>
+                            <option>{thisPlant.trouble}</option>
                             <option>Y</option>
                             <option>N</option>
                         </Form.Control>

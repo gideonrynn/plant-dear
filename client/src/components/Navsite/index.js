@@ -58,8 +58,9 @@ function Navsite() {
     return (
         <>
             
-            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#196811'}}>
+            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#3A6996'}}>
             
+            {/* #196811 */}
             
 
             <a className="navbar-brand" href="/"> PlantDear </a>
