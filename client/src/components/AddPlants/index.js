@@ -76,7 +76,6 @@ function AddPlants() {
                         <option></option>
                         <option>inactive</option>
                         <option>in progress</option>
-                        <option>indoor and outdoor</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLocation">

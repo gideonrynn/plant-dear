@@ -10,19 +10,25 @@ function Plants () {
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([])
-    const [activePlants, setActivePlants] = useState([])
     const [updatedInactivePlants, setUpdatedInactivePlants] = useState([])
+
+    // set states for sorting
+    const [activePlants, setActivePlants] = useState([])
     const [inactivePlants, setInactivePlants] = useState([])
+
     const [counter, setCounter] = useState()
     const [inactcounter, setInactCounter] = useState()
+
+    // set states for handling in modal
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
 
     // for handling search bar and input
+    //* consider whether or not this is needed rather than input param passed into function *//
     const [searchTerm, setSearchTerm] = useState('');
 
-    // handle modal
-    const [show, setShow] = useState(false);
+    // for handling modal
+    // const [show, setShow] = useState(false);
 
     // Load all plants and store them within setPlants
     useEffect(() => {
@@ -31,13 +37,13 @@ function Plants () {
     
     }, [])
 
-    function handleClose() {
-        setShow(false);
-    }
+    // function handleClose() {
+    //     setShow(false);
+    // }
 
-    function handleShow() {
-        setShow(true)
-    }
+    // function handleShow() {
+    //     setShow(true)
+    // }
 
     // Loads all plants and sets them to plants state
     function loadPlants() {
@@ -83,11 +89,6 @@ function Plants () {
             .catch(err => console.log(err));
     };
 
-    // function openPlant(id) {
-    //     console.log("You clicked on the " + id + " row.")
-    //     // console.log(plants[0].id)
-     
-    // }
 
     // take text entered in the search and filter current list of plants
     function sortPlants(input) {
@@ -106,29 +107,10 @@ function Plants () {
 
     }
 
-    function getPlant(id) {
-
-       setOnePlantId(id)
-                PlantAPI.getOnePlant(id)
-                    .then(res => {
-                        // console.log(onePlant)
-                        setOnePlant(res.data)
-                        
-                        handleShow()
-                            // .then(res => {
-                            //     
-                            // })
-                            
-                    // const plants = res.data;
-                    // setPlants(plants);
-                })
-                .catch(err => console.log(err))
-    }
-
     return (
         <div className="plantsdiv">
 
-            <Modal size="lg" show={show} onHide={handleClose}>
+            {/* <Modal size="lg" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{onePlant.name}</Modal.Title>
                 </Modal.Header>
@@ -138,7 +120,7 @@ function Plants () {
                 <Modal.Footer>
                 
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
 
             <input 
                 type="text"
@@ -161,7 +143,7 @@ function Plants () {
                 actcounter={counter}
                 inactcounter={inactcounter}
             />
-            
+
         </div>
     )
 }

@@ -55,8 +55,8 @@ function PlantCard(p) {
             {
                 lastWatered: date,
             })
-            .then(window.location.reload(true))
-            .catch(err => console.log(err))
+            // .then(window.location.reload(true))
+            // .catch(err => console.log(err))
     }
 
 
@@ -188,7 +188,7 @@ function PlantCard(p) {
                                     marginBottom: 20
                                 }}
                             >
-                                <Card.Header style={{backgroundColor: '#78A4CF'}}>
+                                <Card.Header style={{backgroundColor: '#da70d6'}}>
                                     <Card.Title>{plantinact.name} (<i>{plantinact.botanicalName}</i>)</Card.Title>
                                     
                                 </Card.Header>
