@@ -29,7 +29,7 @@ function HardinessSnip(cw) {
     useEffect(() => {
         
         loadPlantsHardiness()
-        // console.log(cw.weather.temp)
+        console.log(cw.weather.currentWeather.temp)
 
     
     }, [cw])
@@ -38,7 +38,7 @@ function HardinessSnip(cw) {
 
                 PlantAPI.getAllPlants()
                     .then(res => {
-                        let incoming = cw.weather.temp;
+                        let incoming = cw.weather.currentWeather.temp;
                         let allPlants = res.data;
                         console.log(incoming)
 
@@ -47,7 +47,7 @@ function HardinessSnip(cw) {
 
                         // display all the plants with a hardiness less than or equal to the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness !== "" && allPlants.location === "outdoor" && incoming <= allPlants.hardiness
+                            return allPlants.hardiness !== "" && incoming <= allPlants.hardiness
                             // return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
                         });
 

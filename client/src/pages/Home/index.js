@@ -47,12 +47,12 @@ function Home () {
             .then(res => {
 
                 const currentWeather = res.data;
-
+                console.log(res.data)
 
                 if (currentWeather.temp > 0) {
                     setCurrentWeather(currentWeather);
                     renderComponent = [
-                        <HomeComponents/>
+                        <HomeComponents currentWeather={currentWeather}/>
                         ];
                     setrenderComponent(renderComponent);
                 }
@@ -65,14 +65,14 @@ function Home () {
     function loadStaticWeather() {
 
         const currentWeather = {
-            temp: 12,
+            temp: 56,
             wind_spd: 1
         }
 
             if (currentWeather.temp > 0) {
                 setCurrentWeather(currentWeather);
                 renderComponent = [
-                    <HomeComponents/>
+                    <HomeComponents currentWeather={currentWeather}/>
                     ];
                 setrenderComponent(renderComponent);
             }

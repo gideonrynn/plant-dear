@@ -14,13 +14,13 @@ import WatchlistSnip from "../../components/WatchlistSnip/index"
 import { Container, Row, Col, CardColumns } from "react-bootstrap"
 // import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
-// import HardinessSnip from "../../components/HardinessSnip"
+import HardinessSnip from "../../components/HardinessSnip"
 import HumiditySnip from "../../components/HumiditySnip";
 import WaterSnip from "../../components/WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
 
 
-function HomeComponents() {
+function HomeComponents(currentWeather) {
 
     return (
         <Container fluid="lg">
@@ -31,10 +31,10 @@ function HomeComponents() {
                                 className='mt-2 mb-2'>
                                 <WatchlistSnip/>
                         </Col>
-                            {/* <Col xs={12} sm={6} md={4} lg={4} 
+                            <Col xs={12} sm={6} md={4} lg={4} 
                                 className='mt-2 mb-2'>
                                 <HardinessSnip weather={currentWeather}/>
-                            </Col> */}
+                            </Col>
                         <Col xs={12} sm={6} md={4} lg={4} 
                                 className='mt-2 mb-2'>
                                 <HumiditySnip/>

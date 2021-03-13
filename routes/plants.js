@@ -43,7 +43,10 @@ router.get('/plantsinprogress', (req, res) => {
     
   db.Plant.findAll({
     where: {
-      status: 'in progress'
+      [Op.or]: [
+        { status: 'in progress'},
+        { trouble: 'Y' }
+      ]
     }
   })
     .then(plantsinprogress => res.json(plantsinprogress))
