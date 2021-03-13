@@ -23,8 +23,8 @@ function ReviewPlant(props) {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(modPlant)
-        console.log(thisPlantId)
+        // console.log(modPlant)
+        // console.log(thisPlantId)
         PlantAPI.updatePlant(
             thisPlantId,
             {

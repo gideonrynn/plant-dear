@@ -59,6 +59,13 @@ function PlantCard(p) {
             // .catch(err => console.log(err))
     }
 
+    function deletePlant(id) {
+    
+        // console.log(id)
+        PlantAPI.deletePlant(id)
+
+    }
+
 
     function getPlant(id) {
 
@@ -144,7 +151,17 @@ function PlantCard(p) {
                                                     <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant.id, 3)}>Three Days</Button>
                                                     <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant.id, 7)}>One Week</Button>
                                                 </ListGroupItem>
-                                                <ListGroupItem><Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant.id)}>Modify</Button></ListGroupItem>
+                                                <ListGroupItem>
+                                                    <Row>
+                                                        <Col>
+                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant.id)}>Modify</Button>
+                                                        </Col>
+                                                        <Col>
+                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plant.id)}>Delete</Button>
+                                                        </Col>
+                                                    </Row>
+                                                    
+                                                    </ListGroupItem>
                                             </ListGroup>
 
                                         </Col>
@@ -224,7 +241,16 @@ function PlantCard(p) {
                                                     <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plantinact.id, 3)}>Three Days</Button>
                                                     <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plantinact.id, 7)}>One Week</Button>
                                                 </ListGroupItem>
-                                                <ListGroupItem><Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plantinact.id)}>Modify</Button></ListGroupItem>
+                                                <ListGroupItem>
+                                                    <Row>
+                                                        <Col>
+                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plantinact.id)}>Modify</Button>
+                                                        </Col>
+                                                        <Col>
+                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plantinact.id)}>Delete</Button>
+                                                        </Col>
+                                                    </Row>
+                                                </ListGroupItem>
                                             </ListGroup>
 
                                         </Col>

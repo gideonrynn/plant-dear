@@ -29,7 +29,7 @@ function HardinessSnip(cw) {
     useEffect(() => {
         
         loadPlantsHardiness()
-        console.log(cw.weather.currentWeather.temp)
+        // console.log(cw.weather.currentWeather.temp)
 
     
     }, [cw])
@@ -40,7 +40,7 @@ function HardinessSnip(cw) {
                     .then(res => {
                         let incoming = cw.weather.currentWeather.temp;
                         let allPlants = res.data;
-                        console.log(incoming)
+                        // console.log(incoming)
 
                         // setCurrentTemp(incoming)
                         // console.log(currentTemp)

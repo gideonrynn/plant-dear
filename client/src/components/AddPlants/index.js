@@ -29,7 +29,7 @@ function AddPlants() {
             status: newPlant.status,
             location: newPlant.location,
             locationSec: newPlant.locationSec,
-            water: newPlant.water,
+            waterPref: newPlant.waterPref,
             sunlight: newPlant.sunlight,
             plantType: newPlant.plantType,
             humidity: newPlant.humidity,
@@ -39,7 +39,7 @@ function AddPlants() {
             pH: newPlant.pH,
             soilContent: newPlant.soilContent,
             cycle: newPlant.cycle,
-            plantHardinessZone: newPlant.hardiness,
+            hardinessZone: newPlant.hardinessZone,
             lastPotted: newPlant.lastPotted,
             links: newPlant.links,
             notes: newPlant.notes

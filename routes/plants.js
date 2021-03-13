@@ -80,5 +80,16 @@ router.put("/plants/:id", (req, res) => {
       })
 })
 
+router.delete("/plants/delete/:id", (req, res) => {
+  let id = req.params.id
+  console.log(id)
+  console.log(req.body)
+  db.Plant.destroy({
+    where: {id: id}
+  })
+}
+
+)
+
 
 module.exports = router;

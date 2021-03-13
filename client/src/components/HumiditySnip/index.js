@@ -37,7 +37,7 @@ function HumiditySnip() {
                 PlantAPI.getCurrentPlants()
                     .then(res => {
                         let currentPlants = res.data;
-                        console.log(res.data)
+                        // console.log(res.data)
 
                         // display all the plants with a hardiness less than or equal to the current weather
                         let humidPlants = currentPlants.filter(currentPlants => { 

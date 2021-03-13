@@ -23,6 +23,9 @@ export default {
     updatePlant: function (id, updatedPlantData) {
       console.log(id)
       return axios.put("api/plants/" + id, updatedPlantData)
+    },
+    deletePlant: function (id) {
+      return axios.delete("api/plants/delete/" + id)
     }
 
 

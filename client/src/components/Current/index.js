@@ -6,7 +6,7 @@ import "./style.css";
 function Current(cw) {
 
     useEffect (() => {
-        console.log(cw);
+        // console.log(cw);
     })
    
 
