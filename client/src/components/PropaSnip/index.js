@@ -79,7 +79,7 @@ function PropaSnip() {
                 <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
                     <Card.Header style={{backgroundColor: '#78A4CF'}}>
-                            <Card.Title>Propogating</Card.Title>
+                            <Card.Title>Propagating</Card.Title>
                             <Card.Subtitle><i>Plants where propagating = Y</i></Card.Subtitle>
                     </Card.Header>
                     

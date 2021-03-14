@@ -197,17 +197,17 @@ function ReviewPlant(props) {
                  <Form.Row>    
                     <Form.Group as={Col} controlId="formLastPotted" >
                         <Form.Label>Last Potted</Form.Label>
-                        <Form.Control type="text" name="lastPotted" defaultValue={thisPlant.lastPotted} onChange={handleInputChange}/>
-                            <Form.Text className="text-muted">
+                        <Form.Control type="date" name="lastPotted" defaultValue={thisPlant.lastPotted} onChange={handleInputChange}/>
+                            {/* <Form.Text className="text-muted">
                             YYYY-MM-DD.
-                            </Form.Text>
+                            </Form.Text> */}
                     </Form.Group>
                     <Form.Group as={Col} controlId="formLastWatered" >
                         <Form.Label>Last Watered</Form.Label>
-                        <Form.Control type="text" name="lastWatered" defaultValue={thisPlant.lastWatered} onChange={handleInputChange}/>
-                            <Form.Text className="text-muted">
+                        <Form.Control type="date" name="lastWatered" defaultValue={thisPlant.lastWatered} onChange={handleInputChange}/>
+                            {/* <Form.Text className="text-muted">
                             YYYY-MM-DD.
-                            </Form.Text>
+                            </Form.Text> */}
                     </Form.Group>
 
                 </Form.Row>

@@ -2,9 +2,9 @@ import React, {useEffect, useState } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
 import PlantAPI from "../../utils/PlantsAPI"
-import ReviewPlant from "../../components/ReviewPlant";
+// import ReviewPlant from "../../components/ReviewPlant";
 import PlantCard from "../../components/PlantCard"
-import { Modal } from "react-bootstrap"
+// import { Modal } from "react-bootstrap"
 
 function Plants () {
 
@@ -20,8 +20,8 @@ function Plants () {
     const [inactcounter, setInactCounter] = useState()
 
     // set states for handling in modal
-    const [onePlant, setOnePlant] = useState([])
-    const [onePlantId, setOnePlantId] = useState([])
+    // const [onePlant, setOnePlant] = useState([])
+    // const [onePlantId, setOnePlantId] = useState([])
 
     // for handling search bar and input
     //* consider whether or not this is needed rather than input param passed into function *//
@@ -61,7 +61,7 @@ function Plants () {
                  });
     
                 let inPlants = plants.filter(inactPlants => { 
-                    return inactPlants.status == "inactive"
+                    return inactPlants.status === "inactive"
                    });
 
                 // set state for active and inactive plants to be filtered based on search bar

@@ -11,7 +11,7 @@ import React from "react";
 
 import WatchlistSnip from "../../components/WatchlistSnip/index"
 // import WeatherAPI from "../../utils/WeatherAPI"
-import { Container, Row, Col, CardColumns } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 // import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
 import HardinessSnip from "../../components/HardinessSnip"

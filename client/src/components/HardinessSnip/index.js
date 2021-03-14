@@ -14,8 +14,6 @@ import ReviewPlant from "../ReviewPlant";
 function HardinessSnip(cw) {
 
     const [plantsHardiness, setPlantsHardiness] = useState([])
-    // let [dangerZone, setdangerZone] = useState([])
-    // const [currentTemp, setCurrentTemp] = useState([]);
 
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
@@ -88,7 +86,10 @@ function HardinessSnip(cw) {
 
                 <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
-                    <Card.Header style={{backgroundColor: '#78A4CF'}}><Card.Title>Plant Hardiness Watch</Card.Title></Card.Header>
+                    <Card.Header style={{backgroundColor: '#78A4CF'}}>
+                        <Card.Title>Plant Hardiness Watch</Card.Title>
+                        <Card.Subtitle><i>Indoor plants with high humidity</i></Card.Subtitle>
+                    </Card.Header>
                     {plantsHardiness.map(plantsHardiness => (
                         <ListGroup className="list-group-flush" key={plantsHardiness.id} >
                             <ListGroupItem 

@@ -5,7 +5,7 @@ import "./style.css";
 // import Current from "../../components/Current/index"
 // import ModPlants from "../../components/ModPlants/index"
 // import WatchlistSnip from "../../components/WatchlistSnip/index"
-import WeatherAPI from "../../utils/WeatherAPI"
+// import WeatherAPI from "../../utils/WeatherAPI"
 // import { Container, Row, Col, CardColumns } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
@@ -21,7 +21,7 @@ import HomeComponents from "../../components/HomeComponents";
 function Home () {
 
     // Setting our component's initial state
-    const [currentWeather, setCurrentWeather] = useState([])
+    const [, setCurrentWeather] = useState([])
     let [renderComponent, setrenderComponent] = useState([<Progress/>])
  
 
@@ -40,27 +40,27 @@ function Home () {
     }, [])
 
 
-    function loadCurrentWeather() {
+    // function loadCurrentWeather() {
         
-        WeatherAPI.getTodaysWeather()
+    //     WeatherAPI.getTodaysWeather()
         
-            .then(res => {
+    //         .then(res => {
 
-                const currentWeather = res.data;
-                console.log(res.data)
+    //             const currentWeather = res.data;
+    //             console.log(res.data)
 
-                if (currentWeather.temp > 0) {
-                    setCurrentWeather(currentWeather);
-                    renderComponent = [
-                        <HomeComponents currentWeather={currentWeather}/>
-                        ];
-                    setrenderComponent(renderComponent);
-                }
+    //             if (currentWeather.temp > 0) {
+    //                 setCurrentWeather(currentWeather);
+    //                 renderComponent = [
+    //                     <HomeComponents currentWeather={currentWeather}/>
+    //                     ];
+    //                 setrenderComponent(renderComponent);
+    //             }
 
-            })
-            .catch(err => console.log(err));
+    //         })
+    //         .catch(err => console.log(err));
             
-    }
+    // }
 
     function loadStaticWeather() {
 

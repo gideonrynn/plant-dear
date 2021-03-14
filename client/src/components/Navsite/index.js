@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import { Modal, Nav, Navbar, NavDropdown, Form, FormControl, Button } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
+// import { Modal, Nav, Navbar, NavDropdown, Form, FormControl, Button } from "react-bootstrap"
 import AddPlants from "../AddPlants";
 // import AddPlantsQuick from "../../components/AddPlantsQuick";
-import WeatherAPI from "../../utils/WeatherAPI"
+// import WeatherAPI from "../../utils/WeatherAPI"
 import './style.css'
 
 function Navsite() {

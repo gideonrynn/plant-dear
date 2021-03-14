@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
-import Plants from '../../pages/Plants'
+// import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
@@ -34,13 +34,13 @@ function PlantCard(p) {
         // sort plants in alphabetical order
         p.plants.sort((a,b) => a.name > b.name ? 1: -1);
         setThisPlant(p.plants);
-        console.log(p.plants);
+        // console.log(p.plants);
 
         p.inactive.sort((a,b) => a.name > b.name ? 1: -1);
         setThisPlantInact(p.inactive);
-        console.log(p.inactive)
+        // console.log(p.inactive)
 
-        console.log(p)
+        // console.log(p)
 
     }
 
