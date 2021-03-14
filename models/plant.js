@@ -18,6 +18,9 @@ module.exports = function(sequelize, DataTypes) {
         locationSec: {
             type: DataTypes.TEXT
         },
+        locationPreferred: {
+            type: DataTypes.TEXT
+        },
         waterPref: {
             type: DataTypes.TEXT
         },

@@ -29,6 +29,7 @@ function AddPlants() {
             status: newPlant.status,
             location: newPlant.location,
             locationSec: newPlant.locationSec,
+            locationPreferred: newPlant.locationPreferred,
             waterPref: newPlant.waterPref,
             sunlight: newPlant.sunlight,
             plantType: newPlant.plantType,
@@ -90,6 +91,10 @@ function AddPlants() {
                 <Form.Group controlId="formLocationSecondary" >
                     <Form.Label>Secondary Location</Form.Label>
                     <Form.Control type="text" placeholder="" name="locationSec" onChange={handleInputChange}/>
+                </Form.Group>
+                <Form.Group controlId="formLocationPreferred" >
+                        <Form.Label>Preferred Location</Form.Label>
+                        <Form.Control type="text" name="locationPreferred" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formWater" >
                     <Form.Label>Water</Form.Label>

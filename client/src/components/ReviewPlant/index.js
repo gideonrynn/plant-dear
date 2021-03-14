@@ -33,6 +33,7 @@ function ReviewPlant(props) {
             status: modPlant.status,
             location: modPlant.location,
             locationSec: modPlant.locationSec,
+            locationPreferred: modPlant.locationPreferred,
             waterPref: modPlant.waterPref,
             sunlight: modPlant.sunlight,
             plantType: modPlant.plantType,
@@ -51,7 +52,7 @@ function ReviewPlant(props) {
             links: modPlant.links,
             notes: modPlant.notes
         })
-            .then(window.location.reload(true))
+            .then(console.log("updated"))
             .catch(err => console.log(err))
     }
 
@@ -94,6 +95,10 @@ function ReviewPlant(props) {
                     <Form.Group as={Col} controlId="formLocationSecondary" >
                         <Form.Label>Secondary Location</Form.Label>
                         <Form.Control type="text" name="locationSec" defaultValue={thisPlant.locationSec} onChange={handleInputChange}/>
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formLocationPreferred" >
+                        <Form.Label>Preferred Location</Form.Label>
+                        <Form.Control type="text" name="locationPreferred" defaultValue={thisPlant.locationPreferred} onChange={handleInputChange}/>
                     </Form.Group>
 
                 </Form.Row>

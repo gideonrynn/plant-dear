@@ -11,9 +11,9 @@ import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 
 
-function HardinessSnip(cw) {
+function PurchaseSnip(cw) {
 
-    const [plantsHardiness, setPlantsHardiness] = useState([])
+    const [toPurchase, setToPurchase] = useState([])
 
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
@@ -26,34 +26,29 @@ function HardinessSnip(cw) {
     
     useEffect(() => {
         
-        loadPlantsHardiness()
+        loadToPurchase()
         // console.log(cw.weather.currentWeather.temp)
 
     
     }, [cw])
 
-    function loadPlantsHardiness() {
+    function loadToPurchase() {
 
                 PlantAPI.getAllPlants()
                     .then(res => {
-                        let incoming = cw.weather.currentWeather.temp;
                         let allPlants = res.data;
-                        // console.log(incoming)
+                        let incoming = cw.weather.currentWeather.temp;
 
-                        // setCurrentTemp(incoming)
-                        // console.log(currentTemp)
-
-                        // display all the plants with a hardiness less than or equal to the current weather
-                        let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness !== "" && incoming <= allPlants.hardiness && allPlants.location === "outdoor"
-                            // return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
+                        // display all the plants marked inactive
+                        let inactivePlants = allPlants.filter(allPlants => { 
+                            return allPlants.hardiness !== "" && allPlants.status === "inactive" && incoming >= allPlants.hardiness
                         });
 
                         // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
 
-                        const plantsHardiness = hardyPlants;
+                        const plantsToPurchase = inactivePlants;
                         
-                        setPlantsHardiness(plantsHardiness);
+                        setToPurchase(plantsToPurchase);
                    
 
                 })
@@ -87,14 +82,14 @@ function HardinessSnip(cw) {
                 <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
                     <Card.Header style={{backgroundColor: '#78A4CF'}}>
-                        <Card.Title>Plant Hardiness Watch</Card.Title>
-                        <Card.Subtitle><i>Outdoor plants to watch with hardiness above current temperature</i></Card.Subtitle>
+                        <Card.Title>Time to Purchase</Card.Title>
+                        <Card.Subtitle><i>Inactive plants where the current temperature is above the hardiness</i></Card.Subtitle>
                     </Card.Header>
-                    {plantsHardiness.map(plantsHardiness => (
-                        <ListGroup className="list-group-flush" key={plantsHardiness.id} >
+                    {toPurchase.map(toPurchase => (
+                        <ListGroup className="list-group-flush" key={toPurchase.id} >
                             <ListGroupItem 
-                                key={plantsHardiness.id} 
-                                onClick={() => getPlant(plantsHardiness.id)}>{plantsHardiness.name} ({plantsHardiness.hardiness}&#176;) </ListGroupItem>
+                                key={toPurchase.id} 
+                                onClick={() => getPlant(toPurchase.id)}>{toPurchase.name} ({toPurchase.hardiness}&#176;) </ListGroupItem>
                         </ListGroup>))}
                         
                     <Card.Body>
@@ -123,4 +118,4 @@ function HardinessSnip(cw) {
 
 }
 
-export default HardinessSnip;
+export default PurchaseSnip;

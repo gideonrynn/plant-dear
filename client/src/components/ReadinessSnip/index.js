@@ -11,9 +11,9 @@ import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 
 
-function HardinessSnip(cw) {
+function ReadinessSnip(cw) {
 
-    const [plantsHardiness, setPlantsHardiness] = useState([])
+    const [plantReadiness, setPlantReadiness] = useState([])
 
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
@@ -26,13 +26,13 @@ function HardinessSnip(cw) {
     
     useEffect(() => {
         
-        loadPlantsHardiness()
+        loadPlantReadiness()
         // console.log(cw.weather.currentWeather.temp)
 
     
     }, [cw])
 
-    function loadPlantsHardiness() {
+    function loadPlantReadiness() {
 
                 PlantAPI.getAllPlants()
                     .then(res => {
@@ -43,17 +43,15 @@ function HardinessSnip(cw) {
                         // setCurrentTemp(incoming)
                         // console.log(currentTemp)
 
-                        // display all the plants with a hardiness less than or equal to the current weather
+                        // display all the plants with a hardiness greater than the current weather
                         let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness !== "" && incoming <= allPlants.hardiness && allPlants.location === "outdoor"
-                            // return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
+                            return allPlants.hardiness !== "" && allPlants.status !== "inactive" && allPlants.location !== "outdoor" && incoming >= allPlants.hardiness && allPlants.locationPreferred === "outdoor"
+                        
                         });
-
-                        // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
 
                         const plantsHardiness = hardyPlants;
                         
-                        setPlantsHardiness(plantsHardiness);
+                        setPlantReadiness(plantsHardiness);
                    
 
                 })
@@ -87,14 +85,14 @@ function HardinessSnip(cw) {
                 <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
                     <Card.Header style={{backgroundColor: '#78A4CF'}}>
-                        <Card.Title>Plant Hardiness Watch</Card.Title>
-                        <Card.Subtitle><i>Outdoor plants to watch with hardiness above current temperature</i></Card.Subtitle>
+                        <Card.Title>Ready For Outdoors</Card.Title>
+                        <Card.Subtitle><i>Preferred outdoor plants with hardiness below current temperature</i></Card.Subtitle>
                     </Card.Header>
-                    {plantsHardiness.map(plantsHardiness => (
-                        <ListGroup className="list-group-flush" key={plantsHardiness.id} >
+                    {plantReadiness.map(plantReadiness => (
+                        <ListGroup className="list-group-flush" key={plantReadiness.id} >
                             <ListGroupItem 
-                                key={plantsHardiness.id} 
-                                onClick={() => getPlant(plantsHardiness.id)}>{plantsHardiness.name} ({plantsHardiness.hardiness}&#176;) </ListGroupItem>
+                                key={plantReadiness.id} 
+                                onClick={() => getPlant(plantReadiness.id)}>{plantReadiness.name} ({plantReadiness.hardiness}&#176;) </ListGroupItem>
                         </ListGroup>))}
                         
                     <Card.Body>
@@ -123,4 +121,4 @@ function HardinessSnip(cw) {
 
 }
 
-export default HardinessSnip;
+export default ReadinessSnip;

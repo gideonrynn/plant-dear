@@ -15,9 +15,11 @@ import { Container, Row, Col } from "react-bootstrap"
 // import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
 import HardinessSnip from "../../components/HardinessSnip"
+import ReadinessSnip from "../../components/ReadinessSnip"
 import HumiditySnip from "../../components/HumiditySnip";
 import WaterSnip from "../../components/WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
+import PurchaseSnip from "../../components/PurchaseSnip";
 
 
 function HomeComponents(currentWeather) {
@@ -31,10 +33,14 @@ function HomeComponents(currentWeather) {
                                 className='mt-2 mb-2'>
                                 <WatchlistSnip/>
                         </Col>
-                            <Col xs={12} sm={6} md={4} lg={4} 
+                        <Col xs={12} sm={6} md={4} lg={4} 
                                 className='mt-2 mb-2'>
                                 <HardinessSnip weather={currentWeather}/>
-                            </Col>
+                        </Col>
+                        <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
+                                <ReadinessSnip weather={currentWeather}/>
+                        </Col>
                         <Col xs={12} sm={6} md={4} lg={4} 
                                 className='mt-2 mb-2'>
                                 <HumiditySnip/>
@@ -46,6 +52,10 @@ function HomeComponents(currentWeather) {
                         <Col xs={12} sm={6} md={4} lg={4} 
                                 className='mt-2 mb-2'>
                                 <PropaSnip/>
+                        </Col>
+                        <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'>
+                                <PurchaseSnip weather={currentWeather}/>
                         </Col>
                             {/* </CardColumns> */}
                 </Row> 
