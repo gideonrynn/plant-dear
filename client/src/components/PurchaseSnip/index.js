@@ -28,7 +28,7 @@ function PurchaseSnip(cw) {
         
         loadToPurchase()
         // console.log(cw.weather.currentWeather.temp)
-
+        console.log("PurchaseSnip render triggered")
     
     }, [cw])
 

@@ -11,7 +11,8 @@ function ReviewPlant(props) {
     useEffect(() => {
         setThisPlant(props.onePlant)
         setThisPlantId(props.onePlant.id)
-        
+        console.log("ReviewPlant render triggered")
+
     }, [props.onePlant]);
 
     function handleInputChange(event) {

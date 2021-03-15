@@ -28,7 +28,7 @@ function WaterSnip() {
         
         loadPlants()
         // console.log(cw.weather.temp)
-
+        console.log("WaterSnip render triggered")
     
     }, [])
 

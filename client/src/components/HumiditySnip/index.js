@@ -28,7 +28,7 @@ function HumiditySnip() {
         
         loadPlants()
         // console.log(cw.weather.temp)
-
+        console.log("HumiditySnip render triggered")
     
     }, [])
 

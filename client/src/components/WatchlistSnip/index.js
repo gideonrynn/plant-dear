@@ -26,6 +26,7 @@ function WatchlistSnip() {
     useEffect(() => {
 
         loadPlantsbyStatus()
+        console.log("WatchlistSnip render triggered")
     
     }, [])
 

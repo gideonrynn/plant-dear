@@ -18,6 +18,7 @@ function PlantCard(p) {
     useEffect(() => {
 
         loadSortedPlants()
+        console.log("PlantCard render triggered")
         
     }, [p])
 

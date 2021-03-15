@@ -34,6 +34,7 @@ function Plants () {
     useEffect(() => {
 
         loadPlants()
+        console.log("Plants page render triggered")
     
     }, [])
 

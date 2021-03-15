@@ -29,7 +29,7 @@ function PropaSnip() {
         
         loadPlants()
         // console.log(cw.weather.temp)
-
+        console.log("PropaSnip render triggered")
     
     }, [])
 

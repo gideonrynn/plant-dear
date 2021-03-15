@@ -28,7 +28,7 @@ function ReadinessSnip(cw) {
         
         loadPlantReadiness()
         // console.log(cw.weather.currentWeather.temp)
-
+        console.log("ReadinessSnip render triggered")
     
     }, [cw])
 

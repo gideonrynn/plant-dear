@@ -20,6 +20,7 @@ import HumiditySnip from "../../components/HumiditySnip";
 import WaterSnip from "../../components/WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
 import PurchaseSnip from "../../components/PurchaseSnip";
+import SliderSection from "../../components/SliderSection/SliderSection";
 
 
 function HomeComponents(currentWeather) {
@@ -28,7 +29,14 @@ function HomeComponents(currentWeather) {
         <Container fluid="lg">
                 {/* to set number of columns, add sm={4} to rows */}
                 <Row>
+                        {/* <Col xs={12} sm={6} md={4} lg={4} 
+                                className='mt-2 mb-2'> */}
+                                <SliderSection/>
+                        {/* </Col> */}
+                </Row>
+                <Row>
                  {/* <CardColumns> */}
+                        
                         <Col xs={12} sm={6} md={4} lg={4} 
                                 className='mt-2 mb-2'>
                                 <WatchlistSnip/>

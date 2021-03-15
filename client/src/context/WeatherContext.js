@@ -8,7 +8,7 @@ export const WeatherProvider = (props) => {
     const [currentWeather, setCurrentWeather] = useState([]);
     const [forecastWeather, setForecastWeather] = useState([])
 
-    useEffect(() => {}, []);
+    useEffect(() => {console.log("WeatherContext render triggered")}, []);
 
     function loadCurrentWeather() {
         

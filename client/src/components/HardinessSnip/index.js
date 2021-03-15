@@ -28,7 +28,7 @@ function HardinessSnip(cw) {
         
         loadPlantsHardiness()
         // console.log(cw.weather.currentWeather.temp)
-
+        console.log("HardinessSnip render triggered")
     
     }, [cw])
 
