@@ -8,6 +8,7 @@ function Weather () {
 
     // Setting our component's initial state
     const [forecastWeather, setForecastWeather] = useState([])
+    const date = new Date();
 
     // Load all plants and store them within setPlants
     useEffect(() => {
@@ -41,6 +42,7 @@ function Weather () {
                     <tr>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Average Temp</th>
                         <th>Low Temp</th>
                         <th>High Temp</th>
            
@@ -55,6 +57,7 @@ function Weather () {
                     <tr key={forecast.ts}>
                         <th>{forecast.weather.description} </th>
                         <th>{new Date(forecast.datetime).toLocaleDateString()} </th>
+                        <th>{forecast.temp}&#176; </th>
                         <th>{forecast.low_temp}&#176; </th>
                         <th>{forecast.high_temp}&#176; </th>
 

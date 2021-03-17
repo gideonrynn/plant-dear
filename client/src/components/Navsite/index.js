@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
-// import { Modal, Nav, Navbar, NavDropdown, Form, FormControl, Button } from "react-bootstrap"
+import grommet from 'grommet';
 import AddPlants from "../AddPlants";
 // import AddPlantsQuick from "../../components/AddPlantsQuick";
 // import WeatherAPI from "../../utils/WeatherAPI"
@@ -47,7 +47,7 @@ function Navsite() {
     function loadStaticWeather() {
 
         const currentWeather = {
-            temp: 12,
+            temp: 36,
             wind_spd: 1
         }
 
@@ -59,7 +59,7 @@ function Navsite() {
     return (
         <>
             
-            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#3A6996'}}>
+            <nav className="navbar navbar-expand-lg navbar-dark justify-content-between" role="navigation" style={{backgroundColor: '#5E635C'}}>
             
             {/* #196811 */}
             

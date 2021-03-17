@@ -8,7 +8,7 @@ import React from "react";
 // import Hardiness from "../Hardiness/index"
 // import HardinessSnip from "../HardinessSnip"
 // import ModPlants from "../ModPlants/index"
-
+import { Box, Button, Card, CardHeader, CardBody, CardFooter, Grid, Tabs, Tab } from 'grommet';
 import WatchlistSnip from "../../components/WatchlistSnip/index"
 // import WeatherAPI from "../../utils/WeatherAPI"
 import { Container, Row, Col } from "react-bootstrap"
@@ -21,54 +21,101 @@ import WaterSnip from "../../components/WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
 import PurchaseSnip from "../../components/PurchaseSnip";
 import SliderSection from "../../components/SliderSection/SliderSection";
+import StatsSection from "../../components/StatsSection/StatsSection"
+import './index.css'
 
 
 function HomeComponents(currentWeather) {
 
     return (
-        <Container fluid="lg">
-                {/* to set number of columns, add sm={4} to rows */}
-                <Row>
-                        {/* <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'> */}
-                                <SliderSection/>
-                        {/* </Col> */}
-                </Row>
-                <Row>
-                 {/* <CardColumns> */}
+        <Box>
+                
+                <Grid 
+                        rows={['auto', 'auto']}
+                        columns={['auto', 'auto']}
+                        gap="medium"
+                        // areas={[
+                        //         { name: 'section1', start: [0, 0], end: [1, 0] },
+                        //         { name: 'section2', start: [0, 1], end: [1, 1] }
+                        // ]}
+                        areas={[
+                                ['slider', 'stats'],
+                                ['snips', 'snips']
+                        ]}
+                        >
+
                         
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <WatchlistSnip/>
-                        </Col>
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <HardinessSnip weather={currentWeather}/>
-                        </Col>
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <ReadinessSnip weather={currentWeather}/>
-                        </Col>
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <HumiditySnip/>
-                        </Col>
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <WaterSnip/>
-                        </Col>
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <PropaSnip/>
-                        </Col>
-                        <Col xs={12} sm={6} md={4} lg={4} 
-                                className='mt-2 mb-2'>
-                                <PurchaseSnip weather={currentWeather}/>
-                        </Col>
-                            {/* </CardColumns> */}
-                </Row> 
+                                <Box gridArea="slider">
+                                        <SliderSection/>
+                                </Box>
+                                <Box gridArea="stats">
+                                        <StatsSection/>  
+                                </Box>
+
+                
+                                <Box 
+                                        gridArea="snips"
+                                        height="large"
+                                        // background="dark-3"
+                                        pad="medium">
+
+                                <Tabs>
+                                        <Tab title="Watchlist" color="status-critical">
+                                                <Box pad="medium">
+                                                        <WatchlistSnip/>
+                                                </Box>
+                                        </Tab>
+                                        <Tab title="Hardiness">
+                                                <Box pad="medium">
+                                                        <HardinessSnip weather={currentWeather}/>
+                                                </Box>
+                                        </Tab>
+                                        <Tab title="Readiness">
+                                                <Box pad="medium">
+                                                        <ReadinessSnip weather={currentWeather}/>
+                                                </Box>
+                                        </Tab>
+                                        <Tab title="Humidity Lovers">
+                                                <Box pad="medium">
+                                                        <HumiditySnip/>
+                                                </Box>
+                                        </Tab>
+                                        <Tab title="Water Lovers">
+                                                <Box pad="medium">
+                                                        <WaterSnip/>
+                                                </Box>
+                                        </Tab>
+                                        <Tab title="Propagating">
+                                                <Box pad="medium">
+                                                        <PropaSnip/>
+                                                </Box>
+                                        </Tab>
+                                        <Tab title="Purchase">
+                                                <Box pad="medium">
+                                                        <PurchaseSnip weather={currentWeather}/>
+                                                </Box>
+                                        </Tab>
+                                </Tabs>
+        
+                                        
+                                
+                                        
+                                
+                              
+                                        
                         
-        </Container>
+                
+                                        
+                                
+                                        
+                                
+                                        
+                                
+                                        
+                          
+                        </Box> 
+                </Grid>   
+        </Box>
 
         );
 

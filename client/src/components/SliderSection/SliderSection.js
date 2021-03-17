@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-// import AwesomeSlider from 'react-awesome-slider';
-// import 'react-awesome-slider/dist/styles.css';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import window from '../../img/listwindowplants.jpg';
@@ -13,12 +11,12 @@ const SliderSection = () => {
         infinite: true,
         autoplay: true,
         bullets: true,
-        interval: 5000,
+        interval: 7000,
         duration: 400,
         fullscreen: false,
-        playbutton: false,
+        playbutton: true,
         thumbnails: false,
-        index: true
+        index: false
     })
 
     const images = [
@@ -45,17 +43,18 @@ const SliderSection = () => {
 
     return (
        
-        <ImageGallery 
-            items={images}
-            showThumbnails={gallery.thumbnails}
-            showBullets={gallery.bullets}
-            showPlayButton={gallery.playbutton}
-            showFullscreenButton={gallery.fullscreen}
-            autoPlay={gallery.autoplay}
-            slideDuration={gallery.duration}
-            slideInterval={gallery.interval}
-            infinite={gallery.infinite}
-            showIndex={gallery.index} />
+      <ImageGallery 
+        items={images}
+        showThumbnails={gallery.thumbnails}
+        showBullets={gallery.bullets}
+        showPlayButton={gallery.playbutton}
+        showFullscreenButton={gallery.fullscreen}
+        autoPlay={gallery.autoplay}
+        slideDuration={gallery.duration}
+        slideInterval={gallery.interval}
+        infinite={gallery.infinite}
+        showIndex={gallery.index}></ImageGallery>
+
 
     )
 }

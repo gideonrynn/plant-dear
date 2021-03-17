@@ -22,19 +22,19 @@ function Home () {
 
     // Setting our component's initial state
     const [, setCurrentWeather] = useState([])
-    let [renderComponent, setrenderComponent] = useState([<Progress/>])
+    let [renderComponent, setrenderComponent] = useState([<Progress key="1" />])
  
 
 
     // Load all plants and store them within setPlants
     useEffect(() => {
 
-        setTimeout(() => {
+        // setTimeout(() => {
 
             loadStaticWeather()
             // loadCurrentWeather()
 
-        }, 2000);
+        // }, 2000);
         
     
     }, [])
@@ -65,14 +65,14 @@ function Home () {
     function loadStaticWeather() {
 
         const currentWeather = {
-            temp: 56,
+            temp: 36,
             wind_spd: 1
         }
 
             if (currentWeather.temp > 0) {
                 setCurrentWeather(currentWeather);
                 renderComponent = [
-                    <HomeComponents currentWeather={currentWeather}/>
+                    <HomeComponents key="2" currentWeather={currentWeather}/>
                     ];
                 setrenderComponent(renderComponent);
             }
