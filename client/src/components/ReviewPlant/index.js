@@ -99,7 +99,13 @@ function ReviewPlant(props) {
                     </Form.Group>
                     <Form.Group as={Col} controlId="formLocationPreferred" >
                         <Form.Label>Preferred Location</Form.Label>
-                        <Form.Control type="text" name="locationPreferred" defaultValue={thisPlant.locationPreferred} onChange={handleInputChange}/>
+                        <Form.Control as="select" name="locationPreferred" defaultValue={thisPlant.locationPreferred} onChange={handleInputChange}>
+                            <option>{thisPlant.locationPreferred}</option>
+                                <option>none</option>
+                                <option>indoor</option>
+                                <option>outdoor</option>
+                                <option>indoor and outdoor</option>
+                        </Form.Control>
                     </Form.Group>
 
                 </Form.Row>

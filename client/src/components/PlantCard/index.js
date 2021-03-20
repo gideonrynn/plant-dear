@@ -105,6 +105,7 @@ function PlantCard(p) {
                                         marginTop: 20,
                                         marginBottom: 20
                                         }}
+                                        key={plant.id}
                                 />
                         </Col>
                         <Col xs={12} sm={12} md={9} lg={9}>

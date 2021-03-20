@@ -28,25 +28,42 @@ function WaterSnip() {
         
         loadPlants()
         // console.log(cw.weather.temp)
-        console.log("WaterSnip render triggered")
+        console.log("Need a drink render triggered")
     
     }, [])
 
     function loadPlants() {
 
-                PlantAPI.getCurrentPlants()
-                    .then(res => {
-                        let currentPlants = res.data;
-                        // let date = new Date()
-                        // display all the plants with a hardiness less than or equal to the current weather
-                        let waterPlants = currentPlants.filter(currentPlants => { 
-                            return currentPlants.waterPref === "moist" && currentPlants.location === "indoor"
-                        });
-                        
-                        setWaterPlants(waterPlants);
-                   
+        let date = new Date();
+        let newDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() - 3);
+        console.log(newDate)
+        let days = '3';
+        // let dateRange = "";
+        let checkDate = newDate - days;
+        console.log("date: ", date);
+        console.log("date comparison: ", newDate);
+        console.log("check date: ", checkDate);
 
-                })
+        PlantAPI.getCurrentPlants()
+            .then(res => {
+                let currentPlants = res.data;
+                console.log(res.data);
+
+                
+                console.log(currentPlants[0].lastWatered)
+                // console.log(dateComparison > date)
+                
+                // display all the plants with a hardiness less than or equal to the current weather
+                let waterPlants = currentPlants.filter(currentPlants => { 
+                    return currentPlants.lastWatered >= checkDate;
+                });
+
+                // console.log(date);
+                
+                setWaterPlants(waterPlants);
+            
+
+        })
             
     };
 
@@ -92,7 +109,7 @@ function WaterSnip() {
                     </Card.Body>
                 </Card>
 
-                <Modal size="lg" show={show} onHide={handleClose}>
+                <Modal size="lg" show={show} onHide={handleClose} animation={false}>
                     <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
                         <Modal.Title>{onePlant.name}</Modal.Title>
                     </Modal.Header>

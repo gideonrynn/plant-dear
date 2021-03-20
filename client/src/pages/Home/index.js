@@ -1,11 +1,11 @@
-import React, {useEffect, useState } from "react";
+import React, {useEffect, useState, useContext } from "react";
 // import { Link } from 'react-router-dom'
 import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 // import Current from "../../components/Current/index"
 // import ModPlants from "../../components/ModPlants/index"
 // import WatchlistSnip from "../../components/WatchlistSnip/index"
-// import WeatherAPI from "../../utils/WeatherAPI"
+import WeatherAPI from "../../utils/WeatherAPI"
 // import { Container, Row, Col, CardColumns } from "react-bootstrap"
 import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
@@ -15,77 +15,45 @@ import Progress from "../../components/ProgressBar/index"
 // import PropaSnip from "../../components/PropaSnip";
 // import HomeComponent from "../../components/HomeComponents";
 import HomeComponents from "../../components/HomeComponents";
+import {WeatherContext} from "../../context/WeatherContext"
 
 // import HomePage from "../../components/Home Page";
 
 function Home () {
 
     // Setting our component's initial state
-    const [, setCurrentWeather] = useState([])
+    // const [currentWeather, setCurrentWeather] = useState([])
+    const currentWeather = useContext(WeatherContext)
+    const [forecastWeather, setForecastWeather] = useState([]);
     let [renderComponent, setrenderComponent] = useState([<Progress key="1" />])
  
-
+    console.log(forecastWeather)
 
     // Load all plants and store them within setPlants
     useEffect(() => {
 
         // setTimeout(() => {
 
-            loadStaticWeather()
+            // loadStaticWeather()
             // loadCurrentWeather()
+            // loadForecastWeather()
 
         // }, 2000);
         
     
     }, [])
 
+    console.log(currentWeather)
 
-    // function loadCurrentWeather() {
+    console.log(currentWeather[0].app_temp)
+    return (
         
-    //     WeatherAPI.getTodaysWeather()
-        
-    //         .then(res => {
-
-    //             const currentWeather = res.data;
-    //             console.log(res.data)
-
-    //             if (currentWeather.temp > 0) {
-    //                 setCurrentWeather(currentWeather);
-    //                 renderComponent = [
-    //                     <HomeComponents currentWeather={currentWeather}/>
-    //                     ];
-    //                 setrenderComponent(renderComponent);
-    //             }
-
-    //         })
-    //         .catch(err => console.log(err));
-            
-    // }
-
-    function loadStaticWeather() {
-
-        const currentWeather = {
-            temp: 36,
-            wind_spd: 1
-        }
-
-            if (currentWeather.temp > 0) {
-                setCurrentWeather(currentWeather);
-                renderComponent = [
-                    <HomeComponents key="2" currentWeather={currentWeather}/>
-                    ];
-                setrenderComponent(renderComponent);
+        <div className="main-title">
+            {currentWeather.length > 0
+                ? <HomeComponents key="2"/>
+                : <Progress key="1" />
             }
 
-    }
-
-
-    return (
-        <div className="main-title">
-
-            {renderComponent}
-
-            
         </div>
  
     );
