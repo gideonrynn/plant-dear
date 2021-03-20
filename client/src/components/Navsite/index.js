@@ -1,60 +1,21 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
 import grommet from 'grommet';
 import AddPlants from "../AddPlants";
 // import AddPlantsQuick from "../../components/AddPlantsQuick";
-// import WeatherAPI from "../../utils/WeatherAPI"
+import { WeatherContext } from "../../context/WeatherContext"
 import './style.css'
 
 function Navsite() {
 
-    const [currentWeather, setCurrentWeather] = useState([])
+    const weather = useContext(WeatherContext);
+    const currentWeather = weather.currentWeather;
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-
-
-    useEffect(() => {
-
-        // loadCurrentWeather()
-
-        // use to prevent exceeding api calls to WeatherBit
-        loadStaticWeather()
-    
-    }, [])
-
-    
-    // function loadCurrentWeather() {
-
-    //     WeatherAPI.getTodaysWeather()
-        
-    //         .then(res => {
-
-    //             const currentWeather = res.data;
-    //             if (currentWeather.temp > 0) {
-    //                 setCurrentWeather(currentWeather);
-    //             }
-
-    //         })
-    //         .catch(err => console.log(err));
-            
-    // }
-
-    function loadStaticWeather() {
-
-        const currentWeather = {
-            temp: 36,
-            wind_spd: 1
-        }
-
-        if (currentWeather.temp > 0) {
-            setCurrentWeather(currentWeather);
-        }
-    }
 
     return (
         <>
@@ -68,11 +29,10 @@ function Navsite() {
                 
 
                 <div className="navbar">
-
                 
-                    <Link className="nav-link" to="#">Temp: {currentWeather.temp}&#176;</Link>
+                    <Link className="nav-link" to="#">Temp: {currentWeather ? currentWeather.app_temp : 0}&#176;</Link>
                     {/* <p>{currentWeather.app_temp}&#176;</p><br/><br/> */}
-                    <Link className="nav-link" to="#">Wind: {currentWeather.wind_spd} mph&nbsp;&nbsp;&nbsp;</Link>
+                    <Link className="nav-link" to="#">Wind: {currentWeather ? currentWeather.wind_spd : 0} mph&nbsp;&nbsp;&nbsp;</Link>
                 
              
                     <Link className="nav-link" to="/" >Home</Link>

@@ -8,14 +8,14 @@ export const WeatherContext = createContext();
 export const WeatherProvider = ({children}) => {
 
     // add placeholders for testing
-    const [currentWeather, setCurrentWeather] = useState([
+    const [currentWeather, setCurrentWeather] = useState(
         {
             app_temp: 54.9,
             aqi: 35,
             city_name: "Chicago",
             clouds: 0,
             country_code: "US",
-            datetime: "2021-03-20:18",
+            datetime: "2021-03-20:18", // deprecated
             dewpt: 27,
             dhi: 114.49,
             dni: 899.43,
@@ -47,7 +47,7 @@ export const WeatherProvider = ({children}) => {
             wind_dir: 215,
             wind_spd: 9.2
         }
-    ]);
+    );
 
     // add placeholders for testing
     const [forecastWeather, setForecastWeather] = useState([
@@ -58,7 +58,7 @@ export const WeatherProvider = ({children}) => {
             clouds_hi: 0,
             clouds_low: 5,
             clouds_mid: 0,
-            datetime: "2021-03-20",
+            datetime: "2021-03-20", // deprecated
             dewpt: 31.2,
             high_temp: 53.4,
             low_temp: 30.7,
@@ -98,7 +98,7 @@ export const WeatherProvider = ({children}) => {
             clouds_hi: 23,
             clouds_low: 0,
             clouds_mid: 13,
-            datetime: "2021-03-21",
+            datetime: "2021-03-21", // deprecated
             dewpt: 34.2,
             high_temp: 59.7,
             low_temp: 36.5,
@@ -176,44 +176,35 @@ export const WeatherProvider = ({children}) => {
 
     console.log(currentWeather);
 
-    // useEffect(() => {
+    useEffect(() => {
             
-    //     WeatherAPI.getTodaysWeather()
+        WeatherAPI.getTodaysWeather()
         
-    //         .then(res => {
-
-    //             const currentWeather = res.data;
-    //             console.log(res.data)
-
-    //             if (currentWeather.temp) {
-    //                 setCurrentWeather(currentWeather);
-    //             }
-
-    //         })
-    //         .catch(err => console.log(err));
+            .then(res => {
+                const currentWeather = res.data;
+                console.log(currentWeather)
+                if (currentWeather.temp) {
+                    setCurrentWeather(currentWeather);
+                }
+            })
+            .catch(err => console.log(err));
         
-    // }, []);
+    }, []);
 
-    // useEffect(() => {
+    useEffect(() => {
             
-    //     WeatherAPI.getTodaysWeather()
+        WeatherAPI.getForecastWeather()
+            .then(res => {
+                const forecastWeather = res.data;
+                // console.log(forecastWeather);
+                setForecastWeather(forecastWeather)
+            })
+            .catch(err => console.log(err));
         
-    //         .then(res => {
-
-    //             const currentWeather = res.data;
-    //             console.log(res.data)
-
-    //             if (currentWeather.temp) {
-    //                 setCurrentWeather(currentWeather);
-    //             }
-
-    //         })
-    //         .catch(err => console.log(err));
-        
-    // }, []);
+    }, []);
 
   return(
-    <WeatherContext.Provider value={currentWeather}>
+    <WeatherContext.Provider value={{currentWeather, forecastWeather}}>
       {children}
     </WeatherContext.Provider>
   );
