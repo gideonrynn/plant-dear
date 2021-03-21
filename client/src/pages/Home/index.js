@@ -1,8 +1,8 @@
-import React, {useEffect, useContext } from "react";
-import "./style.css";
+import React, { useContext } from "react";
 import Progress from "../../components/ProgressBar/index"
 import HomeComponents from "../../components/HomeComponents";
 import { WeatherContext } from "../../context/WeatherContext"
+import "./style.css";
 
 const Home = () => {
 

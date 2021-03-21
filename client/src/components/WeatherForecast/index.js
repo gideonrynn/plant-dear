@@ -1,49 +1,57 @@
 
-import React, {useEffect, useState } from "react";
+import React from "react";
 import "./style.css";
-import PlantAPI from "../../utils/PlantsAPI"
+// import PlantAPI from "../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
 import { Box, DataChart, Grommet } from 'grommet';
 import { grommet } from 'grommet/themes';
 
 
-function WeatherForecast(forecastWeather) {
+function WeatherForecast(weather) {
 
+    const forecastWeather = weather.weather;
     console.log("Forecast weather for WeatherForecast component", forecastWeather)
+ 
     const data = [];
 
-    for (let i = 1; i < 8; i += 1) {
-        const v = Math.sin(i / 2.0);
-
+    for (let counter = 0; counter < forecastWeather.length; counter++) {
         data.push({
-            date: `2020-${((i % 12) + 1).toString().padStart(2, 0)}-01`,
-            percent: Math.round(Math.abs(v * 100)),
+          date: forecastWeather[counter].valid_date,
+          temp: forecastWeather[counter].temp,
         });
-    }
+      }
+
+    console.log("Data array", data);
 
     return (
        
-        <Grommet theme={grommet}>
-            <Box  width={{ min: 'small', max: 'large' }} justify="center" alignContent="center">
+        <>
+            <Box  width={{ min: 'small', max: 'large' }}>
+                <h1>Forecast</h1>
             <DataChart
                 data={data}
-                series={['date', 'percent']}
+                series={['date', 'temp']}
                 chart={[
-                { property: 'percent', thickness: 'xsmall', type: 'line' },
-                {
-                    property: 'percent',
-                    thickness: 'medium',
-                    type: 'point',
-                    point: 'diamond',
-                },
+                    { 
+                        property: 'temp', 
+                        thickness: 'xsmall', 
+                        type: 'line',
+                        color: 'graph-1'
+                    },
+                    {
+                        property: 'temp',
+                        thickness: 'medium',
+                        type: 'point',
+                        point: 'circle',
+                    },
                 ]}
                 guide={{ x: { granularity: 'fine' }, y: { granularity: 'medium' } }}
                 size={{ width: 'fill'}}
                 detail
-                jusify="center"
+                legend={true}
             />
             </Box>
-        </Grommet>
+        </>
 
     );
 

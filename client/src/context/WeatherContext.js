@@ -170,38 +170,117 @@ export const WeatherProvider = ({children}) => {
             wind_dir: 184,
             wind_gust_spd: 36.9,
             wind_spd: 9.6
+        },
+        {
+            app_max_temp: 61.3,
+            app_min_temp: 52.9,
+            clouds: 91,
+            clouds_hi: 67,
+            clouds_low: 84,
+            clouds_mid: 68,
+            datetime: "2021-03-23",
+            dewpt: 47.9,
+            high_temp: 61.3,
+            low_temp: 48.6,
+            max_dhi: null,
+            max_temp: 61.3,
+            min_temp: 52.8,
+            moon_phase: 0.769169,
+            moon_phase_lunation: 0.36,
+            moonrise_ts: 1616523204,
+            moonset_ts: 1616492930,
+            ozone: 323.74,
+            pop: 95,
+            precip: 0.551,
+            pres: 984.5,
+            rh: 75,
+            slp: 1007.35,
+            snow: 0,
+            snow_depth: 0,
+            sunrise_ts: 1616500041,
+            sunset_ts: 1616544375,
+            temp: 55.6,
+            ts: 1616475660,
+            uv: 1.95657,
+            valid_date: "2021-03-23",
+            vis: 11.6,
+            weather: {icon: "r02d", code: 501, description: "Moderate rain"},
+            wind_cdir: "SSE",
+            wind_cdir_full: "south-southeast",
+            wind_dir: 167,
+            wind_gust_spd: 37.2,
+            wind_spd: 12.2
+        },
+        {
+            app_max_temp: 55.4,
+            app_min_temp: 37.4,
+            clouds: 73,
+            clouds_hi: 42,
+            clouds_low: 34,
+            clouds_mid: 1,
+            datetime: "2021-03-24",
+            dewpt: 37.8,
+            high_temp: 55.4,
+            low_temp: 38.6,
+            max_dhi: null,
+            max_temp: 59.1,
+            min_temp: 42.5,
+            moon_phase: 0.855195,
+            moon_phase_lunation: 0.39,
+            moonrise_ts: 1616613584,
+            moonset_ts: 1616581601,
+            ozone: 354.552,
+            pop: 0,
+            precip: 0,
+            pres: 983.729,
+            rh: 62,
+            slp: 1006.98,
+            snow: 0,
+            snow_depth: 0,
+            sunrise_ts: 1616586338,
+            sunset_ts: 1616630842,
+            temp: 50.4,
+            ts: 1616562060,
+            uv: 3.28689,
+            valid_date: "2021-03-24",
+            vis: 15,
+            weather: {icon: "c04d", code: 804, description: "Overcast clouds"},
+            wind_cdir: "SW",
+            wind_cdir_full: "southwest",
+            wind_dir: 223,
+            wind_gust_spd: 31.1,
+            wind_spd: 13.5
         }
 
     ]);
 
-    console.log(currentWeather);
+    // useEffect(() => {
+    //     console.log("Current weather usecontext useEffect with api is active");
+    //     WeatherAPI.getTodaysWeather()
+    //         .then(res => {
+    //             const currentWeather = res.data;
+    //             console.log(currentWeather);
+    //             if (currentWeather.temp) {
+    //                 setCurrentWeather(currentWeather);
+    //             };
+    //         })
+    //         .catch(err => console.log(err));
+        
+    // }, []);
 
-    useEffect(() => {
-            
-        WeatherAPI.getTodaysWeather()
+    // useEffect(() => {
+    //     console.log("Forecast weather usecontext useEffect with api is active");
+    //     WeatherAPI.getForecastWeather()
+    //         .then(res => {
+    //             const forecastWeather = res.data;
+    //             // console.log(forecastWeather);
+    //             if (forecastWeather) {
+    //                 setForecastWeather(forecastWeather);
+    //             };
+    //         })
+    //         .catch(err => console.log(err));
         
-            .then(res => {
-                const currentWeather = res.data;
-                console.log(currentWeather)
-                if (currentWeather.temp) {
-                    setCurrentWeather(currentWeather);
-                }
-            })
-            .catch(err => console.log(err));
-        
-    }, []);
-
-    useEffect(() => {
-            
-        WeatherAPI.getForecastWeather()
-            .then(res => {
-                const forecastWeather = res.data;
-                // console.log(forecastWeather);
-                setForecastWeather(forecastWeather)
-            })
-            .catch(err => console.log(err));
-        
-    }, []);
+    // }, []);
 
   return(
     <WeatherContext.Provider value={{currentWeather, forecastWeather}}>

@@ -1,9 +1,9 @@
 
 import React, {useContext} from "react";
-import { Box, Button, Card, CardHeader, CardBody, CardFooter, Grid, Tabs, Tab } from 'grommet';
+import { Box, Grid, ResponsiveContext, Tabs, Tab, Grommet } from 'grommet';
+import { deepMerge } from 'grommet/utils';
 import WatchlistSnip from "../../components/WatchlistSnip/index"
 // import WeatherAPI from "../../utils/WeatherAPI"
-import { Container, Row, Col } from "react-bootstrap"
 // import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
 import HardinessSnip from "../../components/HardinessSnip"
@@ -20,51 +20,110 @@ import WeatherForecast from "../../components/WeatherForecast/"
 import {WeatherContext} from "../../context/WeatherContext"
 import './index.css'
 
+const theme  = deepMerge({
+        global: {
+          colors: {
+            brand: 'white',
+            dark: "blue",
+          },
+          font: {
+            size: '20px',
+            height: '20px',
+          },
+          breakpoints: {
+            xsmall: {
+              value: 500,
+            },
+            small: {
+              value: 900,
+            },
+            medium: { value:1500 },
+            middle: {
+              value: 3000,
+            },
+          },
+        },
+      });
+
+      const ResponsiveGrid = ({ children, areas, ...props }) => {
+        const size = React.useContext(ResponsiveContext);
+        return (
+          <Grid areas={areas[size]} {...props}>
+            {children}
+          </Grid>
+        );
+      };
 
 function HomeComponents() {
 
-        const currentWeather = useContext(WeatherContext)
-        console.log(currentWeather)
-        console.log("Home components weather", currentWeather)
+        const weather = useContext(WeatherContext)
+        const currentWeather = weather.currentWeather;
+        const forecastWeather = weather.forecastWeather;
+        console.log(weather)
+        console.log("Home components weather", weather)
 
     return (
-        <Box>
-                
-                <Grid 
-                        rows={['auto', 'auto']}
+
+        <Grommet theme={theme} full>
+      <ResponsiveContext.Consumer>
+        {size => (
+                <ResponsiveGrid
+                        responsive= {true}
+                        rows={['auto', 'auto', 'auto', 'auto', 'auto']}
                         columns={['auto', 'auto']}
                         gap="medium"
                         // areas={[
                         //         { name: 'section1', start: [0, 0], end: [1, 0] },
                         //         { name: 'section2', start: [0, 1], end: [1, 1] }
                         // ]}
-                        areas={[
-                                ['temp', 'temp'],
-                                ['slider', 'stats'],
-                                ['snips', 'snips'],
-                                ['watercalc', 'watercalc'],
-                                ['weatherforecast', 'weatherforecast']
-                        ]}
+                        areas={{
+                                xsmall: [
+                                        { name: 'slider', start: [0, 0], end: [0, 0] },
+                                        { name: 'stats', start: [0, 1], end: [0, 1] },
+                                        { name: 'snips', start: [0, 2], end: [0, 2] },
+                                        { name: 'watercalc', start: [0, 3], end: [0, 3] },
+                                        { name: 'weatherforecast', start: [0, 4], end: [0, 4] },
+                                ],
+                                small: [
+                                        { name: 'slider', start: [0, 0], end: [0, 0] },
+                                        { name: 'stats', start: [0, 1], end: [0, 1] },
+                                        { name: 'snips', start: [0, 2], end: [0, 2] },
+                                        { name: 'watercalc', start: [0, 3], end: [0, 3] },
+                                        { name: 'weatherforecast', start: [0, 4], end: [0, 4] },
+                                ],
+                                medium: [
+                                        { name: 'slider', start: [0, 0], end: [0, 0] },
+                                        { name: 'stats', start: [1, 0], end: [1, 0] },
+                                        { name: 'snips', start: [0, 1], end: [1, 1] },
+                                        { name: 'watercalc', start: [0, 2], end: [1, 2] },
+                                        { name: 'weatherforecast', start: [0, 3], end: [1, 3] },
+                                ],
+                                middle: [
+                                        { name: 'slider', start: [0, 0], end: [1, 0] },
+                                        { name: 'stats', start: [1, 0], end: [1, 0] },
+                                        { name: 'snips', start: [0, 1], end: [0, 1] },
+                                        { name: 'watercalc', start: [1, 1], end: [1, 1] },
+                                        { name: 'weatherforecast', start: [1, 1], end: [1, 1] },
+                                ]
+                              }}
                         
                         >
-                                <Box gridArea="temp"
+                                {/* <Box gridArea="temp"
                                         background="#FFFFFF"
                                         fill
                                         >
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
-                                </Box>
+                                </Box> */}
                         
                                 <Box gridArea="slider"
-                                        height={{min: "200px", max: "530px"}}
-                                        width={{min: "200px", max: "800px"}}
+                                        height={{min: "200px", max: "200px"}}
+                                        width={{min: "200px", max: "200px"}}
                                         >
                                         <SliderSection/>
                                 </Box>
-                                <Box gridArea="stats">
+                                <Box gridArea="stats" width="small">
                                         <StatsSection/>  
                                 </Box>
-
-                
                                 <Box 
                                         gridArea="snips"
                                         height="large"
@@ -72,8 +131,8 @@ function HomeComponents() {
                                         pad="medium"
                                         background="#FFFFFF">
 
-                                <Tabs>
-                                        <Tab title="Watchlist" color="status-critical">
+                                <Tabs >
+                                        <Tab title="Watchlist" className="tabTitle">
                                                 <Box pad="medium">
                                                         <WatchlistSnip/>
                                                 </Box>
@@ -134,11 +193,12 @@ function HomeComponents() {
                                         background="#FFFFFF">
 
 
-                                <WeatherForecast weather={currentWeather}/>
+                                <WeatherForecast weather={forecastWeather}/>
                         </Box>
-                </Grid>   
-        </Box>
-
+                        </ResponsiveGrid>
+)}
+      </ResponsiveContext.Consumer>
+</Grommet>
         );
 
 }

@@ -40,8 +40,8 @@ function Weather () {
 
                 <thead>
                     <tr>
-                        <th>Date</th>
                         <th>Description</th>
+                        <th>Date</th>
                         <th>Average Temp</th>
                         <th>Low Temp</th>
                         <th>High Temp</th>
@@ -56,7 +56,7 @@ function Weather () {
 
                     <tr key={forecast.ts}>
                         <th>{forecast.weather.description} </th>
-                        <th>{new Date(forecast.datetime).toLocaleDateString()} </th>
+                        <th>{forecast.valid_date} </th>
                         <th>{forecast.temp}&#176; </th>
                         <th>{forecast.low_temp}&#176; </th>
                         <th>{forecast.high_temp}&#176; </th>
