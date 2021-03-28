@@ -10,21 +10,24 @@ const StatsSection = () => {
     return (
       <Box animation="fadeIn" 
       // gap="small" 
-      width="small"
-      wrap>
+      // width="small"
+      wrap fill margin="small">
         <Grid
           rows={['auto', 'auto']}
-          columns={['small', 'small']} 
-          // gap="medium" 
+          columns={['auto', 'auto']} 
+          gap="medium" 
           align="center" 
           justify="center" alignContent="center">
       
         <Card 
           // height={{min: "200px", max: "200px"}}
           // width={{min: "200px", max: "300px"}}
+          height='small'
+          width='small'
           background="neutral-1"
           // align="center" 
           justify="center"
+          flex
           >
           {/* <CardHeader pad="medium">Header</CardHeader> */}
           
@@ -40,7 +43,9 @@ const StatsSection = () => {
 
         <Card 
         // height="small" width="small" 
-        background="neutral-2">
+        background="neutral-2"
+        height='small'
+          width='small'>
           {/* <CardHeader pad="medium">Header</CardHeader> */}
           <CardBody 
           // pad="medium"

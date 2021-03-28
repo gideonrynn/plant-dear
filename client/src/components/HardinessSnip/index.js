@@ -12,8 +12,9 @@ import ReviewPlant from "../ReviewPlant";
 
 
 function HardinessSnip(cw) {
-
-    const currentTemp = cw.weather[0].app_temp;
+    console.log(cw)
+    const currentTemp = cw.weather.app_temp;
+    
     const [plantsHardiness, setPlantsHardiness] = useState([])
 
     const [onePlant, setOnePlant] = useState([])
@@ -28,7 +29,7 @@ function HardinessSnip(cw) {
     useEffect(() => {
         
         loadPlantsHardiness()
-        console.log(cw.weather[0].app_temp)
+        console.log(cw.weather.app_temp)
         console.log("HardinessSnip render triggered")
     
     }, [cw])

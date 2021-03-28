@@ -15,4 +15,17 @@ use plantdear;
 -- select * from plants p
 -- where p.notes like '%waterPref%';
 
+-- select *
+-- from plantdear.Plants p
+-- where p.hardiness != ""
+-- and p.location = "outdoor"
+-- and p.hardiness >= 56;
+
+-- select *
+-- from plantdear.Plants p
+-- where p.propogating = 'Y';
+
+-- alter table plantdear.Plants
+-- add needsCare text;
+
 SELECT * FROM plantdear.plants;

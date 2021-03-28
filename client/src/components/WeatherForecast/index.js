@@ -31,21 +31,26 @@ function WeatherForecast(weather) {
             <DataChart
                 data={data}
                 series={['date', 'temp']}
+                axis={{
+                    x: { property: 'date', granularity: 'medium'},
+                    y: { property: 'temp', granularity: 'fine' },
+
+                  }}
                 chart={[
                     { 
                         property: 'temp', 
-                        thickness: 'xsmall', 
+                        thickness: 'xxsmall', 
                         type: 'line',
                         color: 'graph-1'
                     },
                     {
                         property: 'temp',
-                        thickness: 'medium',
+                        thickness: 'small',
                         type: 'point',
                         point: 'circle',
                     },
                 ]}
-                guide={{ x: { granularity: 'fine' }, y: { granularity: 'medium' } }}
+                guide={{ x: { property: 'date', granularity: 'fine'}, y: { property: 'temp', granularity: 'medium' } }}
                 size={{ width: 'fill'}}
                 detail
                 legend={true}

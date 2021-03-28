@@ -37,6 +37,9 @@ module.exports = function(sequelize, DataTypes) {
         trouble: {
             type: DataTypes.STRING
         },
+        needsCare: {
+            type: DataTypes.TEXT
+        },
         humidity: {
             type: DataTypes.TEXT
         },

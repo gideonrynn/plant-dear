@@ -36,7 +36,7 @@ function ReadinessSnip(cw) {
 
                 PlantAPI.getAllPlants()
                     .then(res => {
-                        let incoming = cw.weather.currentWeather.temp;
+                        let incoming = cw.weather.app_temp;
                         let allPlants = res.data;
                         // console.log(incoming)
 

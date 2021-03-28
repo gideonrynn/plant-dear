@@ -31,16 +31,10 @@ const theme  = deepMerge({
             height: '20px',
           },
           breakpoints: {
-            xsmall: {
-              value: 500,
-            },
-            small: {
-              value: 900,
-            },
-            medium: { value:1500 },
-            middle: {
-              value: 3000,
-            },
+            xsmall: { value: 500, },
+            small: {value: 900, },
+            medium: { value: 1500 },
+            middle: { value: 3000, },
           },
         },
       });
@@ -68,9 +62,9 @@ function HomeComponents() {
       <ResponsiveContext.Consumer>
         {size => (
                 <ResponsiveGrid
-                        responsive= {true}
+                        responsive= { true }
                         rows={['auto', 'auto', 'auto', 'auto', 'auto']}
-                        columns={['auto', 'auto']}
+                        columns={['medium', 'medium']}
                         gap="medium"
                         // areas={[
                         //         { name: 'section1', start: [0, 0], end: [1, 0] },
@@ -99,11 +93,11 @@ function HomeComponents() {
                                         { name: 'weatherforecast', start: [0, 3], end: [1, 3] },
                                 ],
                                 middle: [
-                                        { name: 'slider', start: [0, 0], end: [1, 0] },
+                                        { name: 'slider', start: [0, 0], end: [0, 0] },
                                         { name: 'stats', start: [1, 0], end: [1, 0] },
-                                        { name: 'snips', start: [0, 1], end: [0, 1] },
-                                        { name: 'watercalc', start: [1, 1], end: [1, 1] },
-                                        { name: 'weatherforecast', start: [1, 1], end: [1, 1] },
+                                        { name: 'snips', start: [0, 1], end: [1, 1] },
+                                        { name: 'watercalc', start: [0, 2], end: [1, 2] },
+                                        { name: 'weatherforecast', start: [0, 3], end: [1, 3] },
                                 ]
                               }}
                         
@@ -116,12 +110,16 @@ function HomeComponents() {
                                 </Box> */}
                         
                                 <Box gridArea="slider"
-                                        height={{min: "200px", max: "200px"}}
-                                        width={{min: "200px", max: "200px"}}
+                                        height={{min: "300px", max: "560px"}}
+                                        width={{min: "300px", max: "850px"}}
                                         >
                                         <SliderSection/>
                                 </Box>
-                                <Box gridArea="stats" width="small">
+                                <Box gridArea="stats" 
+                                height={{min: "200px", max: "400px"}}
+                                width={{min: "300px", max: "450px"}}
+                                // width="small"
+                                >
                                         <StatsSection/>  
                                 </Box>
                                 <Box 

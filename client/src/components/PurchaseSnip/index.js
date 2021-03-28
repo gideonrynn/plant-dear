@@ -37,7 +37,7 @@ function PurchaseSnip(cw) {
                 PlantAPI.getAllPlants()
                     .then(res => {
                         let allPlants = res.data;
-                        let incoming = cw.weather.currentWeather.temp;
+                        let incoming = cw.weather.app_temp;
 
                         // display all the plants marked inactive
                         let inactivePlants = allPlants.filter(allPlants => { 
