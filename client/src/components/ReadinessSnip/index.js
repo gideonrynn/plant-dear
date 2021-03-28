@@ -32,12 +32,22 @@ function ReadinessSnip(cw) {
     
     }, [cw])
 
+
     function loadPlantReadiness() {
+
+            const futureWeather = cw.forecastWeather;
+            // for(let i = 0; i < futureWeather.length; i++) {
+            //     console.log(futureWeather[i]);
+            // };
+
+            console.log(futureWeather);
 
                 PlantAPI.getAllPlants()
                     .then(res => {
                         let incoming = cw.weather.app_temp;
                         let allPlants = res.data;
+                        let margin = 5;
+                        const plantsGroup = [];
                         // console.log(incoming)
 
                         // setCurrentTemp(incoming)
@@ -49,7 +59,34 @@ function ReadinessSnip(cw) {
                         
                         });
 
-                        const plantsHardiness = hardyPlants;
+                        // determine which plants can ultimately go into the readiness category
+                        // compare plant hardiness against weather for the next two weeks
+                        // if the hardiness is at any point below the minimum temp in the weather forecast
+                        // the plant should not be pushed to the plantsGroup array
+                        for(let i = 0; i < hardyPlants.length; i++) {
+
+                            let add = true;
+                            console.log(hardyPlants[i].hardiness)
+
+                            for(let v = 0; v < futureWeather.length; v++) {
+
+                                console.log(futureWeather[v]);
+                                
+                                if((+hardyPlants[i].hardiness + margin) >= futureWeather[v].min_temp) {
+                                    add = false;
+                                }
+                                console.log("plant temp: " + (+hardyPlants[i].hardiness + margin) + " weather min temp: " + futureWeather[v].min_temp + " value of add: " + add);
+                            };
+
+                            if(add){
+                                plantsGroup.push(hardyPlants[i]);
+                                console.log("This plant is OK");
+                            }
+                        }
+
+                        console.log(plantsGroup)
+
+                        const plantsHardiness = plantsGroup;
                         
                         setPlantReadiness(plantsHardiness);
                    
@@ -57,6 +94,11 @@ function ReadinessSnip(cw) {
                 })
             
     };
+
+
+    function checkPlantReadiness() {
+
+    }
 
     function getPlant(id) {
 

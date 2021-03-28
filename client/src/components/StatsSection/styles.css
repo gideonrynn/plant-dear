@@ -1,3 +1,12 @@
+.stats-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-container {
+    width: 25vw;
+}
+
 .stats {
-    font-size: 6em;
+    font-size: 4em;
 }

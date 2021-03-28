@@ -23,7 +23,7 @@ import './index.css'
 const theme  = deepMerge({
         global: {
           colors: {
-            brand: 'white',
+            brand: 'black',
             dark: "blue",
           },
           font: {
@@ -64,8 +64,8 @@ function HomeComponents() {
                 <ResponsiveGrid
                         responsive= { true }
                         rows={['auto', 'auto', 'auto', 'auto', 'auto']}
-                        columns={['medium', 'medium']}
-                        gap="medium"
+                        columns={['large', 'large']}
+                        gap="small"
                         // areas={[
                         //         { name: 'section1', start: [0, 0], end: [1, 0] },
                         //         { name: 'section2', start: [0, 1], end: [1, 1] }
@@ -109,27 +109,21 @@ function HomeComponents() {
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
                                 </Box> */}
                         
-                                <Box gridArea="slider"
-                                        height={{min: "300px", max: "560px"}}
-                                        width={{min: "300px", max: "850px"}}
-                                        >
+                                <Box gridArea="slider">
                                         <SliderSection/>
                                 </Box>
-                                <Box gridArea="stats" 
-                                height={{min: "200px", max: "400px"}}
-                                width={{min: "300px", max: "450px"}}
-                                // width="small"
-                                >
+                                <Box gridArea="stats">
                                         <StatsSection/>  
                                 </Box>
                                 <Box 
                                         gridArea="snips"
                                         height="large"
                                         // background="dark-3"
+                                        textColor="dark-3"
                                         pad="medium"
                                         background="#FFFFFF">
 
-                                <Tabs >
+                                <Tabs>
                                         <Tab title="Watchlist" className="tabTitle">
                                                 <Box pad="medium">
                                                         <WatchlistSnip/>
@@ -142,7 +136,7 @@ function HomeComponents() {
                                         </Tab>
                                         <Tab title="Readiness">
                                                 <Box pad="medium">
-                                                        <ReadinessSnip weather={currentWeather}/>
+                                                        <ReadinessSnip weather={currentWeather} forecastWeather={forecastWeather}/>
                                                 </Box>
                                         </Tab>
                                         <Tab title="Humidity Lovers">

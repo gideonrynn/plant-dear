@@ -8,80 +8,48 @@ import './styles.css'
 const StatsSection = () => {
 
     return (
-      <Box animation="fadeIn" 
-      // gap="small" 
-      // width="small"
-      wrap fill margin="small">
-        <Grid
+      <Box animation="fadeIn" className="stats-container">
+        {/* <Grid
           rows={['auto', 'auto']}
           columns={['auto', 'auto']} 
           gap="medium" 
           align="center" 
-          justify="center" alignContent="center">
+          justify="center" alignContent="center"> */}
       
-        <Card 
-          // height={{min: "200px", max: "200px"}}
-          // width={{min: "200px", max: "300px"}}
-          height='small'
-          width='small'
-          background="neutral-1"
-          // align="center" 
-          justify="center"
-          flex
-          >
-          {/* <CardHeader pad="medium">Header</CardHeader> */}
-          
-          <CardBody 
-          // pad="medium" 
-          ><p className="stats">48</p></CardBody>
-          <CardFooter 
-          // pad={{horizontal: "small"}} 
-          background="light-3">   
-            <a href="/"><i>All plant dears</i></a>
-          </CardFooter>
+        <Card className="card-container"> 
+            <CardBody>
+              <p className="stats">48</p>
+            </CardBody>
+
+            <CardFooter background="light-3">   
+              <a href="/"><i>All plant dears</i></a>
+            </CardFooter>
         </Card>
 
-        <Card 
-        // height="small" width="small" 
-        background="neutral-2"
-        height='small'
-          width='small'>
-          {/* <CardHeader pad="medium">Header</CardHeader> */}
-          <CardBody 
-          // pad="medium"
-          ><p className="stats">4</p></CardBody>
-          <CardFooter pad={{horizontal: "small"}} background="light-3" href="#">   
+        <Card className="card-container">
+          <CardBody>
+            <p className="stats">4</p>
+          </CardBody>
+          <CardFooter background="light-3">   
             <a href="/"><i>Watchlist</i></a>
           </CardFooter>
         </Card>
 
-        <Card 
-        // height="small" width="small" 
-        background="neutral-4">
-          {/* <CardHeader pad="medium">Header</CardHeader> */}
-          <CardBody 
-          // pad="medium" 
-          className="stats">17</CardBody>
-          <CardFooter pad={{horizontal: "small"}} background="light-3" href="#">   
+        <Card className="card-container">
+          <CardBody className="stats">17</CardBody>
+          <CardFooter background="light-3">   
             <a href="/"><i>Hardiness watch</i></a>
           </CardFooter>
         </Card>
 
-        <Card 
-        // height="small" width="small" 
-        background="neutral-3">
-          {/* <CardHeader pad="medium">Header</CardHeader> */}
-          <CardBody 
-          // pad="medium" 
-          className="stats">12</CardBody>
-          <CardFooter 
-          // pad={{horizontal: "small"}} 
-          background="light-3" href="#">   
+        <Card className="card-container">
+          <CardBody className="stats">12</CardBody>
+          <CardFooter background="light-3">   
             <a href="/"><i>Need a drink</i></a>
           </CardFooter>
         </Card>
 
-        </Grid>
+        {/* </Grid> */}
       </Box>
 
     )

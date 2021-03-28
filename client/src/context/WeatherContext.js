@@ -254,19 +254,19 @@ export const WeatherProvider = ({children}) => {
 
     ]);
 
-    useEffect(() => {
-        console.log("Current weather usecontext useEffect with api is active");
-        WeatherAPI.getTodaysWeather()
-            .then(res => {
-                const currentWeather = res.data;
-                console.log(currentWeather);
-                if (currentWeather.temp) {
-                    setCurrentWeather(currentWeather);
-                };
-            })
-            .catch(err => console.log(err));
+    // useEffect(() => {
+    //     console.log("Current weather usecontext useEffect with api is active");
+    //     WeatherAPI.getTodaysWeather()
+    //         .then(res => {
+    //             const currentWeather = res.data;
+    //             console.log(currentWeather);
+    //             if (currentWeather.temp) {
+    //                 setCurrentWeather(currentWeather);
+    //             };
+    //         })
+    //         .catch(err => console.log(err));
         
-    }, []);
+    // }, []);
 
     useEffect(() => {
         console.log("Forecast weather usecontext useEffect with api is active");

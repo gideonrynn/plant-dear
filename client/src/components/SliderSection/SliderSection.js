@@ -59,6 +59,6 @@ const SliderSection = () => {
     )
 }
 
-export default SliderSection
+export default SliderSection;
 
 

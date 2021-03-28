@@ -3,10 +3,10 @@ const routes = require("./routes");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 
-//required dotenv to enable environmental variables such as MONGO_URI
+//required dotenv to enable environmental variables
 require('dotenv').config({path:'.env'})
 
-// Define Expres middleware to handle data parsing
+// Define Express middleware to handle data parsing
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
