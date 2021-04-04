@@ -5,6 +5,7 @@ import "./style.css";
 import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 // import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
+import HardinessAPI from "../../utils/HardinessAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
 // import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
@@ -28,7 +29,8 @@ function HardinessSnip(cw) {
     
     useEffect(() => {
         
-        loadPlantsHardiness()
+        loadPlantsHardiness();
+        loadHardinessZones();
         console.log(cw.weather.app_temp)
         console.log("HardinessSnip render triggered")
     
@@ -62,6 +64,11 @@ function HardinessSnip(cw) {
             
     };
 
+    function loadHardinessZones() {
+        HardinessAPI.getHardinessZones()
+            .then(res => { console.log(res.data) })
+    }
+    
     function getPlant(id) {
 
         setOnePlantId(id)

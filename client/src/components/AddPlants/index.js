@@ -127,13 +127,13 @@ function AddPlants() {
                         <option>herb</option>
                         <option>houseplant</option>
                         <option>succulent</option>
-                        
+                        <option>vegetable</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formHumidity">
                     <Form.Label>Humidity</Form.Label>
-                    <Form.Control as="select" name="humidity" onChange={handleInputChange}>
-                        <option></option>
+                    <Form.Control as="select" name="humidity" defaultValue="moderate" onChange={handleInputChange}>
+                        <option> </option>
                         <option>low</option>
                         <option>moderate</option>
                         <option>high</option>

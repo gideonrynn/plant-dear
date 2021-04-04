@@ -87,9 +87,7 @@ router.delete("/plants/delete/:id", (req, res) => {
   db.Plant.destroy({
     where: {id: id}
   })
-}
-
-)
+})
 
 
 module.exports = router;

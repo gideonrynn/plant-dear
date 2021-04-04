@@ -75,8 +75,9 @@ function ReviewPlant(props) {
                  <Form.Row>   
                     <Form.Group as={Col} controlId="formStatus" >
                         <Form.Label>Status</Form.Label>
-                        <Form.Control as="select" placeholder="" name="status" onChange={handleInputChange}>
-                            <option></option>
+                        <Form.Control as="select" defaultValue={thisPlant.status} name="status" onChange={handleInputChange}>
+                            <option>{thisPlant.status}</option>
+                            <option> </option>
                             <option>inactive</option>
                             <option>in progress</option>
                     </Form.Control>
@@ -86,7 +87,7 @@ function ReviewPlant(props) {
                  <Form.Row>
                     <Form.Group as={Col} controlId="formLocation">
                         <Form.Label>Location</Form.Label>
-                        <Form.Control as="select" name="location" defaultValue={{value: thisPlant.location}} onChange={handleInputChange}>
+                        <Form.Control as="select" name="location" defaultValue={thisPlant.location} onChange={handleInputChange}>
                             <option>{thisPlant.location}</option>
                             <option>none</option>
                             <option>indoor</option>
