@@ -1,3 +1,11 @@
 .forecast-div {
-    padding: 40px
+    padding: 40px;
+    background-color: whitesmoke;
+    /* color: whitesmoke; */
+    
+}
+
+tbody, thead {
+    /* color: whitesmoke; */
+    background-color: whitesmoke;
 }

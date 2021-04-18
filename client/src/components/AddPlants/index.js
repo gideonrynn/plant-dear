@@ -98,7 +98,7 @@ function AddPlants() {
                 </Form.Group>
                 <Form.Group controlId="formWater" >
                     <Form.Label>Water</Form.Label>
-                    <Form.Control as="select" name="water" onChange={handleInputChange}>
+                    <Form.Control as="select" name="waterPref" onChange={handleInputChange}>
                         <option></option>
                         <option>dry</option>
                         <option>moderate</option>
@@ -173,7 +173,7 @@ function AddPlants() {
                 </Form.Group>
                 <Form.Group controlId="formHardyZone" >
                     <Form.Label>Hardiness Zone</Form.Label>
-                    <Form.Control type="text" placeholder="" name="plantHardinessZone" onChange={handleInputChange}/>
+                    <Form.Control type="text" placeholder="" name="hardinessZone" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formLastPotted" >
                     <Form.Label>Last Potted</Form.Label>
