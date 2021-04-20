@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Box, Button, Card, CardHeader, CardBody, CardFooter, Grid } from 'grommet';
-import window from '../../img/listwindowplants.jpg';
-import propagation from '../../img/propagating.jpg';
-import soil from '../../img/soily.jpg';
+// import window from '../../img/listwindowplants.jpg';
+// import propagation from '../../img/propagating.jpg';
+// import soil from '../../img/soily.jpg';
 import './styles.css'
 
 const StatsSection = () => {

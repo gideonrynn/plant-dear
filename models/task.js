@@ -2,15 +2,21 @@ const { Sequelize } = require(".");
 
 module.exports = function(sequelize, DataTypes) {
 
-    const Plan = sequelize.define('Plan', {
-        name: {
+    const Task = sequelize.define('Task', {
+        taskName: {
             type: DataTypes.TEXT,
         },
-        current: {
+        taskDetail: {
+            type: DataTypes.TEXT,
+        },
+        taskNotes: {
             type: DataTypes.TEXT
         },
-        upcoming: {
-            type: DataTypes.TEXT
+        dateDue: {
+            type: DataTypes.DATEONLY,
+        },
+        taskStatus: {
+            type: DataTypes.STRING
         },
         createdAt: {
             type: DataTypes.DATEONLY,
@@ -21,5 +27,5 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true, 
         }
     })
-        return Plan;
+        return Task;
 }

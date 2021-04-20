@@ -14,3 +14,12 @@ span.image-gallery-description {
     font-size: x-large;
     background: rgba(0, 0, 0, 1);
 }
+
+.slider-section {
+    padding: 20px 10px;
+}
+
+.weather-forecast-section {
+    /* place-items: stretch; */
+    text-align: center;
+}

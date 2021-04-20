@@ -1,0 +1,7 @@
+.tasks-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: fit-content(1em);
+    min-height: 100%;
+    background-color: whitesmoke;
+}

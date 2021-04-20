@@ -26,7 +26,7 @@ function WeatherForecast(weather) {
     return (
        
         <>
-            <Box  width={{ min: 'small', max: 'large' }}>
+            <Box  width={{ min: 'small', max: 'large' }} className="weather-forecast-section2">
                 <h1>Forecast</h1>
             <DataChart
                 data={data}

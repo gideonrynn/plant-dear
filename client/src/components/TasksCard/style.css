@@ -1,0 +1,37 @@
+.tasks-div {
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+}
+
+.task-item {
+  padding: 10px;
+  margin: 10px;
+}
+
+.task-footer {
+  font-style: italic;
+  border-top: 1px solid lightgray;
+}
+
+.input-due-date {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 3px;
+}
+
+span.task-date {
+  font-size: small;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.fa-edit {
+  cursor: pointer;
+}
+
+textarea.input-task-detail, input.input-due-date {
+  display: none;
+}

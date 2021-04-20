@@ -1,10 +1,13 @@
 .stats-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .card-container {
-    width: 25vw;
+    width: 200px;
+    height: 200px;
+    /* width: 25vw;
+    height: 25vw; */
 }
 
 .stats {

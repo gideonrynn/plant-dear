@@ -15,38 +15,12 @@ import PropaSnip from "../../components/PropaSnip";
 import PurchaseSnip from "../../components/PurchaseSnip";
 import SliderSection from "../../components/SliderSection/SliderSection";
 import StatsSection from "../../components/StatsSection/StatsSection"
-import WaterCalculator from "../../components/WaterCalculator/"
+// import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
 import {WeatherContext} from "../../context/WeatherContext"
 import './index.css'
 
-const theme  = deepMerge({
-        global: {
-          colors: {
-            brand: 'black',
-            dark: "blue",
-          },
-          font: {
-            size: '20px',
-            height: '20px',
-          },
-          breakpoints: {
-            xsmall: { value: 500, },
-            small: {value: 900, },
-            medium: { value: 1500 },
-            middle: { value: 3000, },
-          },
-        },
-      });
 
-      const ResponsiveGrid = ({ children, areas, ...props }) => {
-        const size = React.useContext(ResponsiveContext);
-        return (
-          <Grid areas={areas[size]} {...props}>
-            {children}
-          </Grid>
-        );
-      };
 
 function HomeComponents() {
 
@@ -56,65 +30,21 @@ function HomeComponents() {
         console.log(weather)
         console.log("Home components weather", weather)
 
-    return (
-
-        <Grommet theme={theme} full>
-      <ResponsiveContext.Consumer>
-        {size => (
-                <ResponsiveGrid
-                        responsive= { true }
-                        rows={['auto', 'auto', 'auto', 'auto', 'auto']}
-                        columns={['large', 'large']}
-                        gap="small"
-                        // areas={[
-                        //         { name: 'section1', start: [0, 0], end: [1, 0] },
-                        //         { name: 'section2', start: [0, 1], end: [1, 1] }
-                        // ]}
-                        areas={{
-                                xsmall: [
-                                        { name: 'slider', start: [0, 0], end: [0, 0] },
-                                        { name: 'stats', start: [0, 1], end: [0, 1] },
-                                        { name: 'snips', start: [0, 2], end: [0, 2] },
-                                        { name: 'watercalc', start: [0, 3], end: [0, 3] },
-                                        { name: 'weatherforecast', start: [0, 4], end: [0, 4] },
-                                ],
-                                small: [
-                                        { name: 'slider', start: [0, 0], end: [0, 0] },
-                                        { name: 'stats', start: [0, 1], end: [0, 1] },
-                                        { name: 'snips', start: [0, 2], end: [0, 2] },
-                                        { name: 'watercalc', start: [0, 3], end: [0, 3] },
-                                        { name: 'weatherforecast', start: [0, 4], end: [0, 4] },
-                                ],
-                                medium: [
-                                        { name: 'slider', start: [0, 0], end: [0, 0] },
-                                        { name: 'stats', start: [1, 0], end: [1, 0] },
-                                        { name: 'snips', start: [0, 1], end: [1, 1] },
-                                        { name: 'watercalc', start: [0, 2], end: [1, 2] },
-                                        { name: 'weatherforecast', start: [0, 3], end: [1, 3] },
-                                ],
-                                middle: [
-                                        { name: 'slider', start: [0, 0], end: [0, 0] },
-                                        { name: 'stats', start: [1, 0], end: [1, 0] },
-                                        { name: 'snips', start: [0, 1], end: [1, 1] },
-                                        { name: 'watercalc', start: [0, 2], end: [1, 2] },
-                                        { name: 'weatherforecast', start: [0, 3], end: [1, 3] },
-                                ]
-                              }}
-                        
-                        >
-                                {/* <Box gridArea="temp"
+        return (
+                                /* <Box gridArea="temp"
                                         background="#FFFFFF"
                                         fill
                                         >
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
-                                </Box> */}
+                                </Box> */
+                        <Box>
                         
-                                <Box gridArea="slider">
+                                <Box gridArea="slider" className="slider-section">
                                         <SliderSection/>
                                 </Box>
-                                <Box gridArea="stats">
+                                {/* <Box gridArea="stats" className="stats">
                                         <StatsSection/>  
-                                </Box>
+                                </Box> */}
                                 <Box 
                                         gridArea="snips"
                                         height="large"
@@ -168,7 +98,7 @@ function HomeComponents() {
                        
                         </Box> 
 
-                        <Box gridArea="watercalc"
+                        {/* <Box gridArea="watercalc"
                                         height="large"
                                         // background="dark-3"
                                         pad="medium"
@@ -176,21 +106,20 @@ function HomeComponents() {
 
 
                                 <WaterCalculator/>
-                        </Box>
+                        </Box>  */}
 
                         <Box gridArea="weatherforecast"
                                         height="large"
                                         // background="dark-3"
                                         pad="medium"
-                                        background="#FFFFFF">
+                                        background="#FFFFFF"
+                                        className="weather-forecast-section">
 
 
                                 <WeatherForecast weather={forecastWeather}/>
                         </Box>
-                        </ResponsiveGrid>
-)}
-      </ResponsiveContext.Consumer>
-</Grommet>
+                </Box>
+                 
         );
 
 }
