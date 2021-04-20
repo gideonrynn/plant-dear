@@ -4,13 +4,15 @@ import './style.css'
 // plant data
 // condition that checks the hardiness
 
-const ForecastPlantHardiness = (weather) => {
+const ForecastPlantHardiness = (data) => {
 
-    const forecastWeather = weather.weather;
+    const forecastWeather = data.weather;
     console.log("Forecast weather for ForecastPlantHardiness component", forecastWeather);
+    const plants = data.plants;
+    console.log("Active plants for ForecastPlantHardiness component", plants);
 
     // get all the plants that are outdoors
-    
+
     return (
         <div className="forecast-plant-hardiness-section">
             <p>Test</p>

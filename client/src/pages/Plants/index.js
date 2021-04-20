@@ -1,94 +1,37 @@
-import React, {useEffect, useState } from "react";
-// import { Link } from 'react-router-dom'
+import React, {useEffect, useState, useContext } from "react";
 import "./style.css";
-import PlantAPI from "../../utils/PlantsAPI"
-// import ReviewPlant from "../../components/ReviewPlant";
 import PlantCard from "../../components/PlantCard"
-// import { Modal } from "react-bootstrap"
+// import { WeatherContext } from "../../context/WeatherContext"
+import { PlantContext } from "../../context/PlantContext"
 
 function Plants () {
+
+    const plant = useContext(PlantContext);
+    const activePlants = plant.activePlants;
+    const inactivePlants = plant.inactivePlants;
+    const counter = plant.counter;
+    const inactcounter = plant.inactcounter;
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([])
     const [updatedInactivePlants, setUpdatedInactivePlants] = useState([])
 
-    // set states for sorting
-    const [activePlants, setActivePlants] = useState([])
-    const [inactivePlants, setInactivePlants] = useState([])
-
-    const [counter, setCounter] = useState()
-    const [inactcounter, setInactCounter] = useState()
-
-    // set states for handling in modal
-    // const [onePlant, setOnePlant] = useState([])
-    // const [onePlantId, setOnePlantId] = useState([])
-
     // for handling search bar and input
     //* consider whether or not this is needed rather than input param passed into function *//
     const [searchTerm, setSearchTerm] = useState('');
 
-    // for handling modal
-    // const [show, setShow] = useState(false);
-
     // Load all plants and store them within setPlants
     useEffect(() => {
-
-        loadPlants()
+        loadPlants();
         console.log("Plants page render triggered")
     
     }, [])
 
-    // function handleClose() {
-    //     setShow(false);
-    // }
-
-    // function handleShow() {
-    //     setShow(true)
-    // }
-
-    // Loads all plants and sets them to plants state
     function loadPlants() {
-
-        PlantAPI.getAllPlants()
-            .then(res => {
-                // console.log(res.data)
-                const plants = res.data;
-
-                // filter to show active versus inactive plants
-                // set plant state to pass to Plant Card
- 
-                let actPlants = plants.filter(actPlants => { 
-                    return actPlants.status !== "inactive"
-                 });
-    
-                let inPlants = plants.filter(inactPlants => { 
-                    return inactPlants.status === "inactive"
-                   });
-
-                // set state for active and inactive plants to be filtered based on search bar
-                setActivePlants(actPlants);
-                setInactivePlants(inPlants);
-
-                // by default, show all plants returned from api
-                setUpdatedPlants(actPlants);
-                setUpdatedInactivePlants(inPlants);
-
-   
-                // set counters at top of Active and Inactive sections
-                let actcounter = 0;
-                let inactcounter = 0;
-                for (let i = 0; i < plants.length; i++) {
-                if (plants[i].status !== "inactive") actcounter++;
-                if (plants[i].status === "inactive") inactcounter++;
-                }
-
-                setCounter(actcounter);
-                setInactCounter(inactcounter);
-
-                                
-            })
-            .catch(err => console.log(err));
-    };
+        // by default, show all plants returned from api
+                setUpdatedPlants(activePlants);
+                setUpdatedInactivePlants(inactivePlants);
+    }
 
 
     // take text entered in the search and filter current list of plants
@@ -110,18 +53,6 @@ function Plants () {
 
     return (
         <div className="plantsdiv">
-
-            {/* <Modal size="lg" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{onePlant.name}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ReviewPlant onePlant={onePlant} id={onePlantId}/>
-                </Modal.Body>
-                <Modal.Footer>
-                
-                </Modal.Footer>
-            </Modal> */}
 
             <input 
                 type="text"

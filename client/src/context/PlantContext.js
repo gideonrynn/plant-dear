@@ -65,7 +65,7 @@ export const PlantProvider = ({children}) => {
 
 
   return(
-    <PlantContext.Provider value={{activePlants, inactivePlants}}>
+    <PlantContext.Provider value={{activePlants, inactivePlants, counter, inactcounter}}>
       {children}
     </PlantContext.Provider>
   );

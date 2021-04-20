@@ -19,6 +19,7 @@ import SliderSection from "../../components/SliderSection/SliderSection";
 import WeatherForecast from "../../components/WeatherForecast/"
 import ForecastPlantHardiness from "../../components/ForecastPlantHardiness/"
 import {WeatherContext} from "../../context/WeatherContext"
+import {PlantContext} from "../../context/PlantContext"
 import './index.css'
 
 
@@ -28,8 +29,11 @@ function HomeComponents() {
         const weather = useContext(WeatherContext)
         const currentWeather = weather.currentWeather;
         const forecastWeather = weather.forecastWeather;
-        console.log(weather)
-        console.log("Home components weather", weather)
+        const plant = useContext(PlantContext);
+        const activePlants = plant.activePlants;
+        const inactivePlants = plant.inactivePlants;
+        // console.log(weather)
+        // console.log("Home components weather", weather)
 
         return (
                                 /* <Box gridArea="temp"
@@ -44,7 +48,7 @@ function HomeComponents() {
                                         <SliderSection/>
                                 </Box>
                                 <Box gridArea="forecastplants" className="forecastplants-section">
-                                        <ForecastPlantHardiness weather={forecastWeather}/>
+                                        <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
                                 </Box>
                                 {/* <Box gridArea="stats" className="stats">
                                         <StatsSection/>  
