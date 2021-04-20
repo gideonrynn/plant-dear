@@ -2,4 +2,15 @@
     background-color: whitesmoke;
     padding: 8px;
     margin-bottom: 10px;
+    display: grid;
+
+}
+
+.weather-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.low-temp {
+    color: gray;
 }

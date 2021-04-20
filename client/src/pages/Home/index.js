@@ -10,9 +10,9 @@ const Home = () => {
     const weather = useContext(WeatherContext);
     const currentWeather = weather.currentWeather;
     const forecastWeather = weather.forecastWeather;
-    const plant = useContext(PlantContext);
-    const activePlants = plant.activePlants;
-    const inactivePlants = plant.inactivePlants;
+    // const plant = useContext(PlantContext);
+    // const activePlants = plant.activePlants;
+    // const inactivePlants = plant.inactivePlants;
     // let [renderComponent, setrenderComponent] = useState([<Progress key="1" />])
  
     // console.log("Home forecastWeather: ", forecastWeather);

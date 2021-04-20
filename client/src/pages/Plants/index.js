@@ -33,7 +33,6 @@ function Plants () {
                 setUpdatedInactivePlants(inactivePlants);
     }
 
-
     // take text entered in the search and filter current list of plants
     function sortPlants(input) {
 
@@ -41,13 +40,13 @@ function Plants () {
             return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
            })
 
-           const filteredInactive = inactivePlants.filter(inactPlants => {
+        const filteredInactive = inactivePlants.filter(inactPlants => {
             return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
            })
         
-           setSearchTerm(input);
-           setUpdatedPlants(filtered);
-           setUpdatedInactivePlants(filteredInactive);
+        setSearchTerm(input);
+        setUpdatedPlants(filtered);
+        setUpdatedInactivePlants(filteredInactive);
 
     }
 
