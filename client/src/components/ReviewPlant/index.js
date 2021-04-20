@@ -147,6 +147,7 @@ function ReviewPlant(props) {
                             <option>herb</option>
                             <option>houseplant</option>
                             <option>succulent</option>
+                            <option>vegetable</option>
                             <option>tbd</option>
                         </Form.Control>
                     </Form.Group>

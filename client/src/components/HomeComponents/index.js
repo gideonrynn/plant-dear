@@ -1,7 +1,7 @@
 
 import React, {useContext} from "react";
 import { Box, Grid, ResponsiveContext, Tabs, Tab, Grommet } from 'grommet';
-import { deepMerge } from 'grommet/utils';
+// import { deepMerge } from 'grommet/utils';
 import WatchlistSnip from "../../components/WatchlistSnip/index"
 // import WeatherAPI from "../../utils/WeatherAPI"
 // import Progress from "../../components/ProgressBar/index"
@@ -14,7 +14,7 @@ import WaterSnip from "../WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
 import PurchaseSnip from "../../components/PurchaseSnip";
 import SliderSection from "../../components/SliderSection/SliderSection";
-import StatsSection from "../../components/StatsSection/StatsSection"
+// import StatsSection from "../../components/StatsSection/StatsSection"
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
 import {WeatherContext} from "../../context/WeatherContext"

@@ -17,6 +17,7 @@ function Tasks () {
     useEffect(() => {
 
         loadTasks()
+        loadOne()
         console.log("Tasks page render triggered")
     
     }, [])
@@ -29,6 +30,17 @@ function Tasks () {
                 const currentTasks = res.data;
 
                 setTasks(currentTasks);
+             
+            })
+            .catch(err => console.log(err));
+    };
+
+    const loadOne = () => {
+        console.log("Load one has been loaded")
+
+        TasksAPI.getOneTask()
+            .then(res => {
+                console.log("This is from the one to many relationship", res.data);
              
             })
             .catch(err => console.log(err));

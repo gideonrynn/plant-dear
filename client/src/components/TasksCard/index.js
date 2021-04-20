@@ -33,7 +33,7 @@ function TasksCard(t) {
                     <span> {tasks.dateDue || 'No due date'}</span>
                     
                     <textarea defaultValue={tasks.taskDetail} className="input-task-detail" readOnly></textarea>
-                    {/* <p>{tasks.taskNotes}</p> */}
+                    <p>{tasks.taskNotes}</p>
                     
                     
                     <div className="task-footer">

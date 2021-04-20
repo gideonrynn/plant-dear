@@ -94,7 +94,13 @@ function AddPlants() {
                 </Form.Group>
                 <Form.Group controlId="formLocationPreferred" >
                         <Form.Label>Preferred Location</Form.Label>
-                        <Form.Control type="text" name="locationPreferred" onChange={handleInputChange}/>
+                        <Form.Control as="select"  type="text" name="locationPreferred" onChange={handleInputChange}>
+                        <option></option>
+                                <option>none</option>
+                                <option>indoor</option>
+                                <option>outdoor</option>
+                                <option>indoor and outdoor</option>
+                        </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formWater" >
                     <Form.Label>Water</Form.Label>

@@ -98,5 +98,13 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
         }
     })
+
+    Plant.associate = (models) => {
+        Plant.belongsToMany(models.Task, {
+          through: 'PlantTask',
+          as: 'Task',
+          foreignKey: 'plantId'
+        });
+      };
         return Plant;
 }

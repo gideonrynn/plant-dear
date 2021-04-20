@@ -5,6 +5,9 @@ export default {
     
   getAllTasks: function() {
     return axios.get("/api/tasks/all");
+  },
+  getOneTask: function() {
+    return axios.get("/api/tasks/onetask");
   }
 
     
