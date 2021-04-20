@@ -2,8 +2,9 @@
     background-color: whitesmoke;
     padding: 8px;
     margin-bottom: 10px;
-    display: grid;
-
+    border: 3px solid grey;
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+    /* border-radius: 30px; */
 }
 
 .weather-icon {
@@ -14,3 +15,20 @@
 .low-temp {
     color: gray;
 }
+
+.forecast-options {
+    grid-area: sort;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-weather {
+    margin: 10px;
+}
+
+.forecast-alloutdoor {
+    display: flex;
+    justify-content: space-between;
+}
+
+

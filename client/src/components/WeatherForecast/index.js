@@ -10,7 +10,7 @@ import { grommet } from 'grommet/themes';
 function WeatherForecast(weather) {
 
     const forecastWeather = weather.weather;
-    console.log("Forecast weather for WeatherForecast component", forecastWeather)
+    // console.log("Forecast weather for WeatherForecast component", forecastWeather)
  
     const data = [];
 
@@ -21,13 +21,15 @@ function WeatherForecast(weather) {
         });
       }
 
-    console.log("Data array", data);
+    // console.log("Data array", data);
 
     return (
        
         <>
-            <Box  width={{ min: 'small', max: 'large' }} className="weather-forecast-section2">
-                <h1>Forecast</h1>
+            <Box  
+                // width={{ min: 'small', max: 'large' }} 
+                className="weather-forecast-section2">
+                {/* <h1>Forecast</h1> */}
             <DataChart
                 data={data}
                 series={['date', 'temp']}

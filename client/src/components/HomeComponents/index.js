@@ -45,7 +45,7 @@ function HomeComponents() {
                         <Box>
                         
                                 <Box gridArea="slider" className="slider-section">
-                                        <SliderSection/>
+                                        <SliderSection plants={activePlants}/>
                                 </Box>
                                 <Box gridArea="forecastplants" className="forecastplants-section">
                                         <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
@@ -53,7 +53,7 @@ function HomeComponents() {
                                 {/* <Box gridArea="stats" className="stats">
                                         <StatsSection/>  
                                 </Box> */}
-                                <Box 
+                                {/* <Box 
                                         gridArea="snips"
                                         height="large"
                                         // background="dark-3"
@@ -104,7 +104,7 @@ function HomeComponents() {
                                         </Tab>
                                 </Tabs>
                        
-                        </Box> 
+                        </Box>  */}
 
                         {/* <Box gridArea="watercalc"
                                         height="large"
@@ -117,7 +117,7 @@ function HomeComponents() {
                         </Box>  */}
 
                         <Box gridArea="weatherforecast"
-                                        height="large"
+                                        // height="large"
                                         // background="dark-3"
                                         pad="medium"
                                         background="#FFFFFF"

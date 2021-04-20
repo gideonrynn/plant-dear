@@ -20,7 +20,7 @@ export const PlantProvider = ({children}) => {
     const [inactcounter, setInactCounter] = useState()
     
     useEffect(() => {
-        console.log("plant usecontext useEffect is active");
+        // console.log("plant usecontext useEffect is active");
         PlantAPI.getAllPlants()
             .then(res => {
                 // console.log(res.data)
