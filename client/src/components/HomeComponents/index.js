@@ -17,6 +17,7 @@ import SliderSection from "../../components/SliderSection/SliderSection";
 // import StatsSection from "../../components/StatsSection/StatsSection"
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
+import ForecastPlantHardiness from "../../components/ForecastPlantHardiness/"
 import {WeatherContext} from "../../context/WeatherContext"
 import './index.css'
 
@@ -41,6 +42,9 @@ function HomeComponents() {
                         
                                 <Box gridArea="slider" className="slider-section">
                                         <SliderSection/>
+                                </Box>
+                                <Box gridArea="forecastplants" className="forecastplants-section">
+                                        <ForecastPlantHardiness weather={forecastWeather}/>
                                 </Box>
                                 {/* <Box gridArea="stats" className="stats">
                                         <StatsSection/>  

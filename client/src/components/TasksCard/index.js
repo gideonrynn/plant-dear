@@ -16,7 +16,7 @@ function TasksCard(t) {
     const makeEdits = () => {
         console.log("this was clicked");
     }
-
+        
     if(tasks.length === 0) return <p>Loading...</p>
 
     return (

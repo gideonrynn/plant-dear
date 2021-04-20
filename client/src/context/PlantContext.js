@@ -1,10 +1,10 @@
 import React, {useState, useEffect, createContext} from 'react';
-import PlantAPI from "../utils/PlantAPI"
+import PlantAPI from "../utils/PlantsAPI"
 
 // so it can be used in different components as needed
 export const PlantContext = createContext();
 
-// holds project info and passes it to the children
+// holds data and passes it to the children
 export const PlantProvider = ({children}) => {
 
     const [allPlants, setAllPlants] = useState([]);
@@ -65,7 +65,7 @@ export const PlantProvider = ({children}) => {
 
 
   return(
-    <PlantContext.Provider value={[allPlants]}>
+    <PlantContext.Provider value={{activePlants, inactivePlants}}>
       {children}
     </PlantContext.Provider>
   );

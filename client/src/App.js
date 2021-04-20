@@ -8,6 +8,7 @@ import Weather from './pages/Weather';
 import AddNewPlant from './pages/AddNewPlant'
 import Navsite from "./components/Navsite/index.js"
 import { WeatherProvider } from '../src/context/WeatherContext';
+import { PlantProvider } from '../src/context/PlantContext';
 import Tasks from './pages/Tasks';
 
 
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <div className="App" >
         <WeatherProvider>
+        <PlantProvider>
         <Navsite/>
         <Switch>
           <Route exact path="/" component={Home}/>
@@ -25,6 +27,7 @@ function App() {
           <Route exact path="/tasks" component={Tasks}/>
           {/* <Route exact path="/dashboard" component={Dashboard}/> */}
         </Switch>
+        </PlantProvider>
         </WeatherProvider>
       </div>
     </Router>

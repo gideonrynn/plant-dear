@@ -4,13 +4,13 @@ import WeatherAPI from "../utils/WeatherAPI"
 // so it can be used in different components as needed
 export const WeatherContext = createContext();
 
-// holds project info and passes it to the children
+// holds data and passes it to the children
 export const WeatherProvider = ({children}) => {
 
     // add placeholders for testing
     const [currentWeather, setCurrentWeather] = useState(
         {
-            app_temp: 54.9,
+            app_temp: 32,
             aqi: 35,
             city_name: "Chicago",
             clouds: 0,
@@ -254,33 +254,33 @@ export const WeatherProvider = ({children}) => {
 
     ]);
 
-    useEffect(() => {
-        console.log("Current weather usecontext useEffect with api is active");
-        WeatherAPI.getTodaysWeather()
-            .then(res => {
-                const currentWeather = res.data;
-                console.log(currentWeather);
-                if (currentWeather.temp) {
-                    setCurrentWeather(currentWeather);
-                };
-            })
-            .catch(err => console.log(err));
+    // useEffect(() => {
+    //     console.log("Current weather usecontext useEffect with api is active");
+    //     WeatherAPI.getTodaysWeather()
+    //         .then(res => {
+    //             const currentWeather = res.data;
+    //             console.log(currentWeather);
+    //             if (currentWeather.temp) {
+    //                 setCurrentWeather(currentWeather);
+    //             };
+    //         })
+    //         .catch(err => console.log(err));
         
-    }, []);
+    // }, []);
 
-    useEffect(() => {
-        console.log("Forecast weather usecontext useEffect with api is active");
-        WeatherAPI.getForecastWeather()
-            .then(res => {
-                const forecastWeather = res.data;
-                // console.log(forecastWeather);
-                if (forecastWeather) {
-                    setForecastWeather(forecastWeather);
-                };
-            })
-            .catch(err => console.log(err));
+    // useEffect(() => {
+    //     console.log("Forecast weather usecontext useEffect with api is active");
+    //     WeatherAPI.getForecastWeather()
+    //         .then(res => {
+    //             const forecastWeather = res.data;
+    //             // console.log(forecastWeather);
+    //             if (forecastWeather) {
+    //                 setForecastWeather(forecastWeather);
+    //             };
+    //         })
+    //         .catch(err => console.log(err));
         
-    }, []);
+    // }, []);
 
   return(
     <WeatherContext.Provider value={{currentWeather, forecastWeather}}>
