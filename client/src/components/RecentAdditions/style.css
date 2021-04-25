@@ -1,0 +1,24 @@
+.new-plant-section {
+    background-color: whitesmoke;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 3px solid grey;
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "mostrecent nextrecent";
+    /* border-radius: 30px; */
+}
+
+.recent-plant-header {
+    grid-area: header;
+}
+
+.most-recent-plant {
+    grid-area: mostrecent;
+}
+
+.next-recent-plants {
+    grid-area: nextrecent;
+}

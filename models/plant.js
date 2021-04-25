@@ -77,6 +77,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATEONLY,
             allowNull: true,
         },
+        imgURL: {
+            type: DataTypes.STRING
+        },
         links: {
             type: DataTypes.TEXT
         },

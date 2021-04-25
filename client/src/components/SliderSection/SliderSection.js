@@ -24,7 +24,7 @@ const SliderSection = (data) => {
     //   return plants.propogating === "Y" 
     // });
 
-    console.log(watchlist);
+    // console.log(watchlist);
 
     const [gallery] = useState({
         infinite: true,

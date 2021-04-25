@@ -21,6 +21,7 @@ import ForecastPlantHardiness from "../../components/ForecastPlantHardiness/"
 import {WeatherContext} from "../../context/WeatherContext"
 import {PlantContext} from "../../context/PlantContext"
 import './index.css'
+import RecentAdditions from "../RecentAdditions/RecentAdditions";
 
 
 
@@ -44,10 +45,13 @@ function HomeComponents() {
                                 </Box> */
                         <Box>
                         
-                                <Box gridArea="slider" className="slider-section">
+                                <Box className="slider-section">
                                         <SliderSection plants={activePlants}/>
                                 </Box>
-                                <Box gridArea="forecastplants" className="forecastplants-section">
+                                <Box className="newplant-section">
+                                        <RecentAdditions plants={activePlants}/>
+                                </Box>
+                                <Box  className="forecastplants-section">
                                         <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
                                 </Box>
                                 {/* <Box gridArea="stats" className="stats">
