@@ -20,11 +20,12 @@ function ReviewPlant(props) {
         let fieldName = event.target.name
         let fielddefaultValue = event.target.value
         setModPlant({...modPlant, [fieldName]: fielddefaultValue})
+        console.log(fieldName, fielddefaultValue)
     };
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        // console.log(modPlant)
+        console.log(modPlant)
         // console.log(thisPlantId)
         PlantAPI.updatePlant(
             thisPlantId,
@@ -51,6 +52,7 @@ function ReviewPlant(props) {
             lastPotted: modPlant.lastPotted,
             lastWatered: modPlant.lastWatered,
             propogating: modPlant.propogating,
+            imgURL: modPlant.imgurl,
             links: modPlant.links,
             notes: modPlant.notes
         })
@@ -256,6 +258,13 @@ function ReviewPlant(props) {
                             <option>Y</option>
                             <option>N</option>
                         </Form.Control>
+                    </Form.Group>
+
+                </Form.Row>
+                <Form.Row>    
+                    <Form.Group as={Col} controlId="formImgUrl" >
+                        <Form.Label>Image URL</Form.Label>
+                        <Form.Control type="text" name="imgurl" defaultValue={thisPlant.imgURL}  onChange={handleInputChange}/>
                     </Form.Group>
 
                 </Form.Row>

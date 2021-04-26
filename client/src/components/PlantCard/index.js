@@ -33,12 +33,12 @@ function PlantCard(p) {
     function loadSortedPlants() {
 
         // sort plants in alphabetical order
-        p.plants.sort((a,b) => a.name > b.name ? 1: -1);
-        setThisPlant(p.plants);
+        let activeSorted = p.plants.sort((a,b) => a.name > b.name ? 1: -1);
+        setThisPlant(activeSorted);
         // console.log(p.plants);
 
-        p.inactive.sort((a,b) => a.name > b.name ? 1: -1);
-        setThisPlantInact(p.inactive);
+        let inactiveSorted = p.inactive.sort((a,b) => a.name > b.name ? 1: -1);
+        setThisPlantInact(inactiveSorted);
         // console.log(p.inactive)
 
         // console.log(p)
@@ -94,7 +94,7 @@ function PlantCard(p) {
             <hr/>
 
             {thisPlant.map(plant => (
-                <div>
+                <div key={plant.id} >
                     <Row>
                         <Col xs={12} sm={12} md={3} lg={3}>
                             <Image src={Plantling} 
@@ -125,22 +125,49 @@ function PlantCard(p) {
                                     <Row>
                                         <Col>
                                             <ListGroup className="list-group-flush">
+                                                <ListGroupItem><b>Plant Type</b>: {plant.plantType}</ListGroupItem>
                                                 <ListGroupItem><b>Watering preference</b>: {plant.waterPref}</ListGroupItem>
                                                 <ListGroupItem><b>Last Watered</b>: {plant.lastWatered}</ListGroupItem>
                                                 <ListGroupItem><b>Sunlight</b>: {plant.sunlight}</ListGroupItem>
+                                                <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"} </ListGroupItem>
                                             </ListGroup>
                                         </Col>
                                         <Col>
                                             <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Humidity</b>: {plant.humidity}</ListGroupItem>
+                                                <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"}</ListGroupItem>
                                                 <ListGroupItem><b>Location</b>: {plant.location}</ListGroupItem>
                                                 <ListGroupItem><b>Location secondary</b>: {plant.locationSec}</ListGroupItem>
+                                                <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</ListGroupItem>
+                                                <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred}</ListGroupItem>
+                                                {/* <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem> */}
+                                            </ListGroup>
+                                            {/* <Card.Text>
+                                            </Card.Text> */}
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <ListGroup className="list-group-flush">
+                                                <ListGroupItem><b>Trouble?</b> {plant.trouble || "N"}</ListGroupItem>
+                                            </ListGroup>
+                                        </Col>
+                                        <Col>
+                                            <ListGroup className="list-group-flush">
+                                                <ListGroupItem><b>Needs Care?</b> {plant.needsCare || "N"}</ListGroupItem>
+                                            </ListGroup>
+                                        </Col>
+    
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <ListGroup className="list-group-flush">
                                                 <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem>
                                             </ListGroup>
                                             {/* <Card.Text>
                                             </Card.Text> */}
                                         </Col>
                                     </Row>
+
 
                                     <Row>
                                         <Col>
@@ -185,7 +212,7 @@ function PlantCard(p) {
             <hr/>
 
             {thisPlantInact.map(plantinact => (
-                <div>
+                <div key={plantinact.id}>
                     <Row>
                         <Col xs={12} sm={12} md={3} lg={3}>
                             <Image src={Plantling} 
@@ -215,9 +242,13 @@ function PlantCard(p) {
                                     <Row>
                                         <Col>
                                             <ListGroup className="list-group-flush">
+                                                <ListGroupItem><b>Plant Type</b>: {plantinact.plantType}</ListGroupItem>
                                                 <ListGroupItem><b>Watering preference</b>: {plantinact.waterPref}</ListGroupItem>
                                                 <ListGroupItem><b>Last Watered</b>: {plantinact.lastWatered}</ListGroupItem>
                                                 <ListGroupItem><b>Sunlight</b>: {plantinact.sunlight}</ListGroupItem>
+                                                <ListGroupItem><b>Humidity</b>: {plantinact.humidity}</ListGroupItem>
+                                                <ListGroupItem><b>Trouble?</b>: {plantinact.trouble}</ListGroupItem>
+                                                <ListGroupItem><b>Needs Care?</b>: {plantinact.needsCare}</ListGroupItem>
                                             </ListGroup>
                                         </Col>
                                         <Col>
@@ -225,6 +256,8 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Humidity</b>: {plantinact.humidity}</ListGroupItem>
                                                 <ListGroupItem><b>Location</b>: {plantinact.location}</ListGroupItem>
                                                 <ListGroupItem><b>Location secondary</b>: {plantinact.locationSec}</ListGroupItem>
+                                                <ListGroupItem><b>Location preferred</b>: {plantinact.locationPreferred}</ListGroupItem>
+                                                <ListGroupItem><b>Location preferred</b>: {plantinact.locationPreferred}</ListGroupItem>
                                                 <ListGroupItem><b>Notes</b>: {plantinact.notes}</ListGroupItem>
                                             </ListGroup>
                                             {/* <Card.Text>

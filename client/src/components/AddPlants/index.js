@@ -42,6 +42,7 @@ function AddPlants() {
             cycle: newPlant.cycle,
             hardinessZone: newPlant.hardinessZone,
             lastPotted: newPlant.lastPotted,
+            imgURL: newPlant.imgurl,
             links: newPlant.links,
             notes: newPlant.notes
         })
@@ -188,13 +189,17 @@ function AddPlants() {
                         YYYY-MM-DD.
                         </Form.Text>
                 </Form.Group>
+                <Form.Group controlId="formImgUrl" >
+                    <Form.Label>Image URL</Form.Label>
+                    <Form.Control type="text" placeholder="" name="imgurl" onChange={handleInputChange}/>
+                </Form.Group>
                 <Form.Group controlId="formLinks" >
                     <Form.Label>Links</Form.Label>
                     <Form.Control type="text" placeholder="" name="links" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formNotes" >
                     <Form.Label>Notes</Form.Label>
-                    <Form.Control type="text" placeholder="" name="notes" onChange={handleInputChange}/>
+                    <Form.Control as="textarea" placeholder="" name="notes" rows="3" onChange={handleInputChange}/>
                 </Form.Group>
                 <Button style={{backgroundColor: '#887FE5'}} type="submit" onClick={handleFormSubmit}>
                     Submit
