@@ -8,7 +8,10 @@ export default {
   },
   getOneTask: function() {
     return axios.get("/api/tasks/onetask");
-  }
+  },
+  addTask: function(newTasks) {
+    return axios.post("/api/tasks/", newTasks)
+  },
 
     
 }

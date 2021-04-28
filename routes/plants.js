@@ -5,7 +5,9 @@ const { Op } = require("sequelize");
 // returns all plant entries in  db
 router.get('/plants', (req, res) => {
     
-    db.Plant.findAll()
+    db.Plant.findAll({
+      include: { model: db.Task, as: 'Task' }
+    })
       .then(plants => res.json(plants))
 
 });
@@ -38,7 +40,7 @@ router.get('/plantsbyid/:id', (req, res) => {
 
 });
 
-// return specific plant by a spectific row status
+// return specific plant by a specific row status
 router.get('/plantsinprogress', (req, res) => {
     
   db.Plant.findAll({

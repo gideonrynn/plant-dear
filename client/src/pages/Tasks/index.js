@@ -26,7 +26,7 @@ function Tasks () {
 
         TasksAPI.getAllTasks()
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 const currentTasks = res.data;
 
                 setTasks(currentTasks);

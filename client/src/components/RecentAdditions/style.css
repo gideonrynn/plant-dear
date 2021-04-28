@@ -21,4 +21,5 @@
 
 .next-recent-plants {
     grid-area: nextrecent;
+    text-align: left;
 }

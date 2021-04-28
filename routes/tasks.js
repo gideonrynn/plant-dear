@@ -21,4 +21,17 @@ router.get('/onetask', (req, res) => {
 
 });
 
+router.post("/tasks", ({body}, res) => {
+
+  db.Task.create(body)
+    .then(newtask => {
+      res.json(newtask);
+    })
+    .catch(err => {
+      res.status(404).json(err);
+    });
+
+});
+
+
 module.exports = router;

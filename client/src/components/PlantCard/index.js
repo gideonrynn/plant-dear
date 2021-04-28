@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
+import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
@@ -12,7 +13,7 @@ function PlantCard(p) {
     const [thisPlantInact, setThisPlantInact] = useState([])
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
-
+    
     // handle modal
     const [show, setShow] = useState(false);
 
@@ -22,6 +23,7 @@ function PlantCard(p) {
         console.log("PlantCard render triggered")
         
     }, [p])
+
 
     function handleClose() {
         setShow(false);
@@ -166,6 +168,17 @@ function PlantCard(p) {
                                                     <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plant.id, 2)}>Two Days</Button>
                                                     <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant.id, 3)}>Three Days</Button>
                                                     <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant.id, 7)}>One Week</Button>
+                                                </ListGroupItem>
+                                                <ListGroupItem>
+                                                    <Card.Text> <b>Tasks</b></Card.Text>
+                                                    {plant.Task.map(tasks => (
+                                                        <div className="plantcard-task"
+                                                        key={tasks.id}>
+                                                            <p>
+                                                                {/* <FaPlus className="fa-plus"/> */}
+                                                                {tasks.taskDetail || "all caught up!"}</p>
+                                                        </div>
+                                                    ))}
                                                 </ListGroupItem>
                                                 <ListGroupItem>
                                                     <Row>
