@@ -44,7 +44,7 @@ const ForecastPlantHardiness = (data) => {
     
             <div className="forecast-options">
                 {forecastWeather.map(weather => (
-                    <div key={weather.id} className="forecast-weather">
+                    <div key={weather.uv} className="forecast-weather">
                         <p>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'})}</p> { }
                         <span>H: {weather.high_temp}</span> { }
                         <span className="low-temp">L: {weather.low_temp}</span> { }

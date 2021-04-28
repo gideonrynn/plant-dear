@@ -4,6 +4,7 @@ import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Mod
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
+import './style.css'
 
 function PlantCard(p) {
 
@@ -97,15 +98,11 @@ function PlantCard(p) {
                 <div key={plant.id} >
                     <Row>
                         <Col xs={12} sm={12} md={3} lg={3}>
-                            <Image src={Plantling} 
-                                    height={130} 
-                                    width={130} 
-                                    rounded 
-                                    style={{
-                                        marginTop: 20,
-                                        marginBottom: 20
-                                        }}
-                                        key={plant.id}
+                            <img src={plant.imgURL ? `/img/${plant.imgURL}` : Plantling} 
+                                    alt="plant"
+                                    height="130px" 
+                                    width="130px"
+                                    className="plant-imgurl"
                                 />
                         </Col>
                         <Col xs={12} sm={12} md={9} lg={9}>
@@ -130,6 +127,7 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Last Watered</b>: {plant.lastWatered}</ListGroupItem>
                                                 <ListGroupItem><b>Sunlight</b>: {plant.sunlight}</ListGroupItem>
                                                 <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"} </ListGroupItem>
+                                                <ListGroupItem><b>Trouble?</b> {plant.trouble || "N"}</ListGroupItem>
                                             </ListGroup>
                                         </Col>
                                         <Col>
@@ -139,25 +137,14 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Location secondary</b>: {plant.locationSec}</ListGroupItem>
                                                 <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</ListGroupItem>
                                                 <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred}</ListGroupItem>
+                                                <ListGroupItem><b>Needs Care?</b> {plant.needsCare || "N"}</ListGroupItem>
                                                 {/* <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem> */}
                                             </ListGroup>
                                             {/* <Card.Text>
                                             </Card.Text> */}
                                         </Col>
                                     </Row>
-                                    <Row>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Trouble?</b> {plant.trouble || "N"}</ListGroupItem>
-                                            </ListGroup>
-                                        </Col>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Needs Care?</b> {plant.needsCare || "N"}</ListGroupItem>
-                                            </ListGroup>
-                                        </Col>
-    
-                                    </Row>
+
                                     <Row>
                                         <Col>
                                             <ListGroup className="list-group-flush">

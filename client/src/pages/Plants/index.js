@@ -29,24 +29,30 @@ function Plants () {
 
     function loadPlants() {
         // by default, show all plants returned from api
-                setUpdatedPlants(activePlants);
-                setUpdatedInactivePlants(inactivePlants);
+        setUpdatedPlants(activePlants);
+        setUpdatedInactivePlants(inactivePlants);
     }
 
     // take text entered in the search and filter current list of plants
     function sortPlants(input) {
 
-        const filtered = activePlants.filter(actPlants => {
-            return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-           })
+        if(input) {
+            const filtered = activePlants.filter(actPlants => {
+                return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+               })
+    
+            const filteredInactive = inactivePlants.filter(inactPlants => {
+                return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+               })
+            
+            setSearchTerm(input);
+            setUpdatedPlants(filtered);
+            setUpdatedInactivePlants(filteredInactive);
+        } else {
 
-        const filteredInactive = inactivePlants.filter(inactPlants => {
-            return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-           })
+            loadPlants();
+        }
         
-        setSearchTerm(input);
-        setUpdatedPlants(filtered);
-        setUpdatedInactivePlants(filteredInactive);
 
     }
 
