@@ -282,6 +282,20 @@ function ReviewPlant(props) {
                     </Form.Group>
 
                 </Form.Row>
+                <Form.Group as={Col} controlId="formCreated" >
+                        <Form.Label>Created</Form.Label>
+                        <Form.Control type="date" name="created" defaultValue={thisPlant.createdAt} onChange={handleInputChange}/>
+                            {/* <Form.Text className="text-muted">
+                            YYYY-MM-DD.
+                            </Form.Text> */}
+                    </Form.Group>
+                    <Form.Group as={Col} controlId="formLastUpdated" >
+                        <Form.Label>Last Updated</Form.Label>
+                        <Form.Control type="date" name="lastUpdated" defaultValue={thisPlant.updatedAt} onChange={handleInputChange}/>
+                            {/* <Form.Text className="text-muted">
+                            YYYY-MM-DD.
+                            </Form.Text> */}
+                    </Form.Group>
                 <Form.Row>     
                     <Button as={Col} style={{backgroundColor: '#887FE5'}} type="submit" onClick={handleFormSubmit}>
                         Submit

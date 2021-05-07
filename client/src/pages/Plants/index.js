@@ -23,7 +23,7 @@ function Plants () {
 
     // Load all plants and store them within setPlants
     useEffect(() => {
-        loadPlants();
+        // loadPlants();
         console.log("Plants page render triggered")
     
     }, [])
