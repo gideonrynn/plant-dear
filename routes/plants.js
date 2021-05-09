@@ -1,12 +1,11 @@
 const db = require("../models");
 const router = require("express").Router();
-const { Op } = require("sequelize");
 
 // returns all plant entries in  db
 router.get('/plants', (req, res) => {
     
-    db.Plant.findAll({
-      include: { model: db.Task, as: 'Task' }
+    db.Plant.find({
+      // include: { model: db.Task, as: 'Task' }
     })
       .then(plants => res.json(plants))
 
@@ -14,14 +13,7 @@ router.get('/plants', (req, res) => {
 
 router.get('/plantscurrent', (req, res) => {
     
-  db.Plant.findAll({
-        where: {
-          status: {
-            [Op.ne]: 'inactive'
-          }
-        },
-
-      })
+  db.Plant.find({$or:[{ status: 'active'}, {status: '' }, {status: null }]})
     .then(plantscurrent => res.json(plantscurrent))
 
 });
@@ -31,11 +23,7 @@ router.get('/plantsbyid/:id', (req, res) => {
     
   console.log(req.params.id)
   let id = req.params.id
-  db.Plant.findOne({
-    where: {
-      id: id
-    }
-  })
+  db.Plant.findById(id)
     .then(plantsbyid => res.json(plantsbyid))
 
 });
@@ -43,14 +31,7 @@ router.get('/plantsbyid/:id', (req, res) => {
 // return specific plant by a specific row status
 router.get('/plantsinprogress', (req, res) => {
     
-  db.Plant.findAll({
-    where: {
-      [Op.or]: [
-        { status: 'in progress'},
-        { trouble: 'Y' }
-      ]
-    }
-  })
+  db.Plant.find({$or:[{ status: 'in progress'}, {trouble: 'Y' }]})
     .then(plantsinprogress => res.json(plantsinprogress))
 
 });
@@ -73,22 +54,28 @@ router.put("/plants/:id", (req, res) => {
   // console.log(req.params.id)
   
   let id = req.params.id
-  console.log(id)
-  console.log(req.body)
-  db.Plant.update(req.body,
-    {where: {id: id}})
-      .then(update => {
-        res.json(update);
-      })
+  console.log("id",id)
+  console.log("req body", req.body)
+  db.Plant.updateOne({_id: id}, req.body)
+  .then(updated => {
+    res.json(updated);
+  })
+  .catch(err => {
+    res.status(404).json(err);
+  });
 })
 
 router.delete("/plants/delete/:id", (req, res) => {
   let id = req.params.id
   console.log(id)
   console.log(req.body)
-  db.Plant.destroy({
-    where: {id: id}
+  db.Plant.deleteOne({_id: id})
+  .then(deleted => {
+    res.json(deleted);
   })
+  .catch(err => {
+    res.status(404).json(err);
+  });
 })
 
 

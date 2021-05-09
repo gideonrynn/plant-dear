@@ -1,27 +1,26 @@
-const { Sequelize } = require(".");
+const mongoose = require("mongoose");
 
-module.exports = function(sequelize, DataTypes) {
+const Schema = mongoose.Schema;
 
-    const HardinessZone = sequelize.define('HardinessZone', {
-        zone: {
-            type: DataTypes.STRING
-        },
-        rangeLow: {
-            type: DataTypes.DECIMAL
-        },
-        rangeHigh: {
-            type: DataTypes.DECIMAL
-        },
-        createdAt: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,  
-        },
-        updatedAt: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,
-        }
-    })
-        return HardinessZone;
-
+const hardinessZoneSchema = new Schema({
+    zone: {
+        type: String
+    },
+    rangeLow: {
+        type: Number
+    },
+    rangeHigh: {
+        type: Number
+    },
+    createdAt: {
+        type: Date
+    },
+    updatedAt: {
+        type: Date
+    }
+})
+        
    
-}
+const HardinessZone = mongoose.model("HardinessZone", hardinessZoneSchema);
+
+module.exports = HardinessZone;

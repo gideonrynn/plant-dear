@@ -11,7 +11,7 @@ function Plants () {
     const inactivePlants = plant.inactivePlants;
     const counter = plant.counter;
     const inactcounter = plant.inactcounter;
-    // console.log(activePlants);
+    console.log(activePlants);
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([])
@@ -23,7 +23,7 @@ function Plants () {
 
     // Load all plants and store them within setPlants
     useEffect(() => {
-        // loadPlants();
+        loadPlants();
         console.log("Plants page render triggered")
     
     }, [])

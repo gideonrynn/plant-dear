@@ -40,7 +40,8 @@ function AddPlants() {
             pH: newPlant.pH,
             soilContent: newPlant.soilContent,
             cycle: newPlant.cycle,
-            hardinessZone: newPlant.hardinessZone,
+            hardinessZoneMin: newPlant.hardinessZoneMin,
+            hardinessZoneMax: newPlant.hardinessZoneMax,
             lastPotted: newPlant.lastPotted,
             imgURL: newPlant.imgurl,
             links: newPlant.links,
@@ -178,9 +179,17 @@ function AddPlants() {
                             Annuals die yearly, biennial two year lifecycle, perennials regrow every spring.
                         </Form.Text>
                 </Form.Group>
-                <Form.Group controlId="formHardyZone" >
+                {/* <Form.Group controlId="formHardyZone" >
                     <Form.Label>Hardiness Zone</Form.Label>
                     <Form.Control type="text" placeholder="" name="hardinessZone" onChange={handleInputChange}/>
+                </Form.Group> */}
+                <Form.Group controlId="formHardyZoneMin" >
+                    <Form.Label>Hardiness Zone (Range Min)</Form.Label>
+                    <Form.Control type="text" placeholder="" name="hardinessZoneMin" onChange={handleInputChange}/>
+                </Form.Group>
+                <Form.Group controlId="formHardyZoneMax" >
+                    <Form.Label>Hardiness Zone (Range Max)</Form.Label>
+                    <Form.Control type="text" placeholder="" name="hardinessZoneMax" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formLastPotted" >
                     <Form.Label>Last Potted</Form.Label>

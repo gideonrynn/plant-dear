@@ -18,7 +18,7 @@ function PlantCard(p) {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-
+        // right now, none of the sorted 
         loadSortedPlants()
         console.log("PlantCard render triggered")
         
@@ -34,7 +34,7 @@ function PlantCard(p) {
     }
 
     function loadSortedPlants() {
-
+        console.log(p)
         // sort plants in alphabetical order
         let activeSorted = p.plants.sort((a,b) => a.name > b.name ? 1: -1);
         setThisPlant(activeSorted);
@@ -97,7 +97,7 @@ function PlantCard(p) {
             <hr/>
 
             {thisPlant.map(plant => (
-                <div key={plant.id} >
+                <div key={plant._id} >
                     <Row>
                         <Col xs={12} sm={12} md={3} lg={3}>
                             <img src={plant.imgURL ? `/img/${plant.imgURL}` : Plantling} 
@@ -110,7 +110,7 @@ function PlantCard(p) {
                         <Col xs={12} sm={12} md={9} lg={9}>
                             <Card 
                                 className="text-left" 
-                                key={plant.id} 
+                                key={plant._id} 
                                 style={{
                                     marginTop: 20,
                                     marginBottom: 20
@@ -125,11 +125,13 @@ function PlantCard(p) {
                                         <Col>
                                             <ListGroup className="list-group-flush">
                                                 <ListGroupItem><b>Plant Type</b>: {plant.plantType}</ListGroupItem>
+                                                <ListGroupItem><b>Plant ID</b>: {plant._id}</ListGroupItem>
                                                 <ListGroupItem><b>Watering preference</b>: {plant.waterPref}</ListGroupItem>
-                                                <ListGroupItem><b>Last Watered</b>: {plant.lastWatered}</ListGroupItem>
-                                                <ListGroupItem><b>Sunlight</b>: {plant.sunlight}</ListGroupItem>
+                                                <ListGroupItem><b>Last Watered</b>: {plant.lastWatered ? plant.lastWatered.split('T')[0] : plant.lastWatered}</ListGroupItem>
+                                                <ListGroupItem><b>Sunlight</b>: {plant.sunlight.map(option => (<p>{option}</p>))}</ListGroupItem>
                                                 <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"} </ListGroupItem>
                                                 <ListGroupItem><b>Trouble?</b> {plant.trouble || "N"}</ListGroupItem>
+                                                
                                             </ListGroup>
                                         </Col>
                                         <Col>
@@ -138,8 +140,9 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Location</b>: {plant.location}</ListGroupItem>
                                                 <ListGroupItem><b>Location secondary</b>: {plant.locationSec}</ListGroupItem>
                                                 <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</ListGroupItem>
-                                                <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred}</ListGroupItem>
                                                 <ListGroupItem><b>Needs Care?</b> {plant.needsCare || "N"}</ListGroupItem>
+                                                <ListGroupItem><b>Created At</b>: {plant.createdAt.split('T')[0]}</ListGroupItem>
+                                                <ListGroupItem><b>Updated At</b>: {plant.updatedAt.split('T')[0]}</ListGroupItem>
                                                 {/* <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem> */}
                                             </ListGroup>
                                             {/* <Card.Text>
@@ -151,6 +154,7 @@ function PlantCard(p) {
                                         <Col>
                                             <ListGroup className="list-group-flush">
                                                 <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem>
+                                                <ListGroupItem><b>Links</b>: {plant.links.map(option => (<p><a href={option} target="_blank" rel="noopener noreferrer">{option}</a></p>))}</ListGroupItem>
                                             </ListGroup>
                                             {/* <Card.Text>
                                             </Card.Text> */}
@@ -163,30 +167,30 @@ function PlantCard(p) {
                                             <ListGroup className="list-group-flush">
                                                 <ListGroupItem>
                                                     <Card.Text> <b>Watered</b></Card.Text>
-                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant.id, 0)}>Today</Button>
-                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plant.id, 1)}>Yesterday</Button>
-                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plant.id, 2)}>Two Days</Button>
-                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant.id, 3)}>Three Days</Button>
-                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant.id, 7)}>One Week</Button>
+                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant._id, 0)}>Today</Button>
+                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plant._id, 1)}>Yesterday</Button>
+                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plant._id, 2)}>Two Days</Button>
+                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant._id, 3)}>Three Days</Button>
+                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant._id, 7)}>One Week</Button>
                                                 </ListGroupItem>
-                                                <ListGroupItem>
+                                                {/* <ListGroupItem>
                                                     <Card.Text> <b>Tasks</b></Card.Text>
                                                     {plant.Task.map(tasks => (
                                                         <div className="plantcard-task"
-                                                        key={tasks.id}>
+                                                        key={tasks._id}>
                                                             <p>
-                                                                {/* <FaPlus className="fa-plus"/> */}
+                                                                <FaPlus className="fa-plus"/>
                                                                 {tasks.taskDetail || "all caught up!"}</p>
                                                         </div>
                                                     ))}
-                                                </ListGroupItem>
+                                                </ListGroupItem> */}
                                                 <ListGroupItem>
                                                     <Row>
                                                         <Col>
-                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant.id)}>Modify</Button>
+                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant._id)}>Modify</Button>
                                                         </Col>
                                                         <Col>
-                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plant.id)}>Delete</Button>
+                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plant._id)}>Delete</Button>
                                                         </Col>
                                                     </Row>
                                                     
@@ -212,7 +216,7 @@ function PlantCard(p) {
             <hr/>
 
             {thisPlantInact.map(plantinact => (
-                <div key={plantinact.id}>
+                <div key={plantinact._id}>
                     <Row>
                         <Col xs={12} sm={12} md={3} lg={3}>
                             <Image src={Plantling} 
@@ -228,7 +232,7 @@ function PlantCard(p) {
                         <Col xs={12} sm={12} md={9} lg={9}>
                             <Card 
                                 className="text-left" 
-                                key={plantinact.id} 
+                                key={plantinact._id} 
                                 style={{
                                     marginTop: 20,
                                     marginBottom: 20
@@ -270,19 +274,19 @@ function PlantCard(p) {
                                             <ListGroup className="list-group-flush">
                                                 <ListGroupItem>
                                                     <Card.Text> <b>Watered</b></Card.Text>
-                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plantinact.id, 0)}>Today</Button>
-                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plantinact.id, 1)}>Yesterday</Button>
-                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plantinact.id, 2)}>Two Days</Button>
-                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plantinact.id, 3)}>Three Days</Button>
-                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plantinact.id, 7)}>One Week</Button>
+                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plantinact._id, 0)}>Today</Button>
+                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plantinact._id, 1)}>Yesterday</Button>
+                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plantinact._id, 2)}>Two Days</Button>
+                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plantinact._id, 3)}>Three Days</Button>
+                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plantinact._id, 7)}>One Week</Button>
                                                 </ListGroupItem>
                                                 <ListGroupItem>
                                                     <Row>
                                                         <Col>
-                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plantinact.id)}>Modify</Button>
+                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plantinact._id)}>Modify</Button>
                                                         </Col>
                                                         <Col>
-                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plantinact.id)}>Delete</Button>
+                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plantinact._id)}>Delete</Button>
                                                         </Col>
                                                     </Row>
                                                 </ListGroupItem>

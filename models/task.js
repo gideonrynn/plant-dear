@@ -1,39 +1,29 @@
-const { Sequelize } = require(".");
+const mongoose = require("mongoose");
 
-module.exports = function(sequelize, DataTypes) {
+const Schema = mongoose.Schema;
 
-    const Task = sequelize.define('Task', {
-        taskName: {
-            type: DataTypes.TEXT,
-        },
-        taskDetail: {
-            type: DataTypes.TEXT,
-        },
-        taskNotes: {
-            type: DataTypes.TEXT
-        },
-        dateDue: {
-            type: DataTypes.DATEONLY,
-        },
-        taskStatus: {
-            type: DataTypes.STRING
-        },
-        createdAt: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,  
-        },
-        updatedAt: {
-            type: DataTypes.DATEONLY,
-            allowNull: true, 
-        }
-    })
+const taskSchema = new Schema({
+    taskName: {
+        type: String,
+    },
+    taskDetail: {
+        type: String,
+    },
+    taskNotes: {
+        type: String
+    },
+    dateDue: {
+        type: Date,
+    },
+    taskStatus: {
+        type: String
+    },
+    createdAt: {
+        type: Date
+    },
+    updatedAt: {
+        type: Date
+    }
+})
 
-    Task.associate = (models) => {
-        Task.belongsToMany(models.Plant, {
-          through: 'PlantTask',
-          as: 'Plant',
-          foreignKey: 'taskId'
-        });
-      };
-        return Task;
-}
+const Task = mongoose.model("Task", taskSchema);

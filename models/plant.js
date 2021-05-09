@@ -1,113 +1,106 @@
-const { Sequelize } = require(".");
+const mongoose = require("mongoose");
 
-module.exports = function(sequelize, DataTypes) {
+const Schema = mongoose.Schema;
 
-    const Plant = sequelize.define('Plant', {
-        name: {
-            type: DataTypes.TEXT,
-        },
-        botanicalName: {
-            type: DataTypes.TEXT,
-        },
-        status: {
-            type: DataTypes.TEXT
-        },
-        location: {
-            type: DataTypes.TEXT
-        },
-        locationSec: {
-            type: DataTypes.TEXT
-        },
-        locationPreferred: {
-            type: DataTypes.TEXT
-        },
-        waterPref: {
-            type: DataTypes.TEXT
-        },
-        lastWatered: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,
-        },
-        sunlight: {
-            type: DataTypes.TEXT
-        },
-        plantType: {
-            type: DataTypes.TEXT
-        },
-        trouble: {
-            type: DataTypes.STRING
-        },
-        needsCare: {
-            type: DataTypes.TEXT
-        },
-        humidity: {
-            type: DataTypes.TEXT
-        },
-        heightLow: {
-            type: DataTypes.TEXT
-        },
-        heightHigh: {
-            type: DataTypes.TEXT
-        },
-        tempLow: {
-            type: DataTypes.TEXT
-        },
-        tempHigh: {
-            type: DataTypes.TEXT
-        },
-        hardiness: {
-            type: DataTypes.TEXT
-        },
-        tolerance: {
-            type: DataTypes.TEXT
-        },
-        pH: {
-            type: DataTypes.TEXT
-        },
-        soilContent: {
-            type: DataTypes.TEXT
-        },
-        cycle: {
-            type: DataTypes.TEXT
-        },
-        hardinessZone: {
-            type: DataTypes.TEXT
-        },
-        lastPotted: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,
-        },
-        imgURL: {
-            type: DataTypes.STRING
-        },
-        links: {
-            type: DataTypes.TEXT
-        },
-        propogating: {
-            type: DataTypes.TEXT
-        },
-        watching: {
-            type: DataTypes.TEXT
-        },
-        notes: {
-            type: DataTypes.TEXT
-        },
-        createdAt: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,  
-        },
-        updatedAt: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,
-        }
-    })
+const plantSchema = new Schema({
+    name: {
+        type: String,
+    },
+    botanicalName: {
+        type: String,
+    },
+    status: {
+        type: String
+    },
+    location: {
+        type: String
+    },
+    locationSec: {
+        type: String
+    },
+    locationPreferred: {
+        type: String
+    },
+    waterPref: {
+        type: Array
+    },
+    lastWatered: {
+        type: Date
+    },
+    sunlight: {
+        type: Array
+    },
+    plantType: {
+        type: String
+    },
+    trouble: {
+        type: String
+    },
+    needsCare: {
+        type: String
+    },
+    humidity: {
+        type: String
+    },
+    heightLow: {
+        type: String
+    },
+    heightHigh: {
+        type: String
+    },
+    tempLow: {
+        type: String
+    },
+    tempHigh: {
+        type: String
+    },
+    hardiness: {
+        type: String
+    },
+    tolerance: {
+        type: String
+    },
+    pH: {
+        type: String
+    },
+    soilContent: {
+        type: String
+    },
+    cycle: {
+        type: String
+    },
+    hardinessZoneMin: {
+        type: String
+    },
+    hardinessZoneMax: {
+        type: String
+    },
+    lastPotted: {
+        type: Date
+    },
+    imgURL: {
+        type: String
+    },
+    links: {
+        type: Array
+    },
+    propogating: {
+        type: String
+    },
+    watching: {
+        type: String
+    },
+    notes: {
+        type: String
+    },
+    createdAt: {
+        type: Date
+    },
+    updatedAt: {
+        type: Date,
+    },
+}, {timestamps: true})
 
-    Plant.associate = (models) => {
-        Plant.belongsToMany(models.Task, {
-          through: 'PlantTask',
-          as: 'Task',
-          foreignKey: 'plantId'
-        });
-      };
-        return Plant;
-}
+const Plant = mongoose.model("Plant", plantSchema);
+
+module.exports = Plant;

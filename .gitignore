@@ -106,3 +106,6 @@ dist
 # Notes
 pseudocode.txt
 plan.txt
+
+# Backups for MySQL-Sequelize
+pd-temporary-backups/

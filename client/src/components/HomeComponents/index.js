@@ -35,7 +35,7 @@ function HomeComponents() {
         const inactivePlants = plant.inactivePlants;
         // console.log(weather)
         // console.log("Home components weather", weather)
-        // console.log(activePlants);
+        console.log(activePlants);
 
         return (
                                 /* <Box gridArea="temp"

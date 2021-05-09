@@ -10,7 +10,7 @@ function ReviewPlant(props) {
 
     useEffect(() => {
         setThisPlant(props.onePlant)
-        setThisPlantId(props.onePlant.id)
+        setThisPlantId(props.onePlant._id)
         console.log("ReviewPlant render triggered")
 
     }, [props.onePlant]);
@@ -48,7 +48,8 @@ function ReviewPlant(props) {
             pH: modPlant.pH,
             soilContent: modPlant.soilContent,
             cycle: modPlant.cycle,
-            hardinessZone: modPlant.hardinessZone,
+            hardinessZoneMin: modPlant.hardinessZoneMin,
+            hardinessZoneMax: modPlant.hardinessZoneMax,
             lastPotted: modPlant.lastPotted,
             lastWatered: modPlant.lastWatered,
             propogating: modPlant.propogating,
@@ -205,11 +206,18 @@ function ReviewPlant(props) {
                                 Annuals die yearly, biennial two year lifecycle, perennials regrow every spring.
                             </Form.Text>
                     </Form.Group>
-                    <Form.Group as={Col} controlId="formHardyZone" >
+                    {/* <Form.Group as={Col} controlId="formHardyZone" >
                         <Form.Label>Hardiness Zone</Form.Label>
                         <Form.Control type="text" name="hardinessZone" defaultValue={thisPlant.hardinessZone} onChange={handleInputChange}/>
+                    </Form.Group> */}
+                    <Form.Group controlId="formHardyZoneMin" >
+                    <Form.Label>Hardiness Zone (Range Min)</Form.Label>
+                    <Form.Control type="text" name="hardinessZoneMin" defaultValue={thisPlant.hardinessZoneMin} onChange={handleInputChange}/>
                     </Form.Group>
-
+                    <Form.Group controlId="formHardyZoneMax" >
+                        <Form.Label>Hardiness Zone (Range Max)</Form.Label>
+                        <Form.Control type="text" placeholder="" name="hardinessZoneMax" defaultValue={thisPlant.hardinessZoneMax} onChange={handleInputChange}/>
+                    </Form.Group>
                 </Form.Row>
                  <Form.Row>    
                     <Form.Group as={Col} controlId="formLastPotted" >
@@ -221,7 +229,7 @@ function ReviewPlant(props) {
                     </Form.Group>
                     <Form.Group as={Col} controlId="formLastWatered" >
                         <Form.Label>Last Watered</Form.Label>
-                        <Form.Control type="date" name="lastWatered" defaultValue={thisPlant.lastWatered} onChange={handleInputChange}/>
+                        <Form.Control type="date" name="lastWatered" defaultValue={thisPlant.lastWatered ? thisPlant.lastWatered.split('T')[0] : thisPlant.lastWatered} onChange={handleInputChange}/>
                             {/* <Form.Text className="text-muted">
                             YYYY-MM-DD.
                             </Form.Text> */}

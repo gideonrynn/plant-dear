@@ -1,11 +1,10 @@
 
 const db = require("../models");
 const router = require("express").Router();
-const { Op } = require("sequelize");
 
 router.get('/data', (req, res) => {
     
-    db.HardinessZone.findAll()
+    db.HardinessZone.find({})
         .then(hardinesszones => res.json(hardinesszones))
       
 });
