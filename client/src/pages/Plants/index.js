@@ -3,6 +3,7 @@ import "./style.css";
 import PlantCard from "../../components/PlantCard"
 // import { WeatherContext } from "../../context/WeatherContext"
 import { PlantContext } from "../../context/PlantContext"
+import AddHeader from "../../components/AddHeader/AddHeader";
 
 function Plants () {
 

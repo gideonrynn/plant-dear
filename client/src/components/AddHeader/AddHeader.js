@@ -1,111 +1,70 @@
 import React, { useEffect, useState } from 'react'
-import ImageGallery from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
+import { FaImages } from 'react-icons/fa';
+import { useLocation, withRouter } from "react-router-dom";
 import window from '../../img/listwindowplants.jpg';
 import propagation from '../../img/propagating.jpg';
 import soil from '../../img/soily.jpg';
+import wist from '../../img/wistful.jpg';
 import './style.css'
 
 const AddHeader = (data) => {
 
     const plants = data.plants;
+    let location = useLocation();
+    let pathname = location.pathname.slice(1);
+    let images = [window, soil, propagation];
+    const [preferredBackground, setPreferredBackground] = useState(window);
+  console.log(pathname)
+    useEffect(() => {
+      console.log("AddHeader rendered")
 
-    // console.log(plants[0].name);
+      if(pathname === null || pathname === "") {
+        // setPreferredBackground(window)
+        const interval = setInterval(() => {
+          changeImage()
+          // console.log("Change should trigger")
+        }, 8000);
+        return () => clearInterval(interval);
+      } else {
+        otherBackgrounds()
+      }
 
-    const watchlist = plants.filter(plants => { 
-      return plants.status === "in progress" || plants.trouble === "Y"
-    });
+    },[preferredBackground, pathname])
 
-    const propogating = plants.filter(plants => { 
-      return plants.propogating === "Y" 
-    });
+    const changeImage = () => {
+      if(preferredBackground === window) {
+        setPreferredBackground(propagation);
+      } else if(preferredBackground === propagation) {
+        setPreferredBackground(soil)
+      } else {
+        setPreferredBackground(window)
+      }
+    }
 
-    // const repotted = plants.filter(plants => { 
-    //   return plants.propogating === "Y" 
-    // });
+    const otherBackgrounds = () => {
+      if(pathname === 'plants') {
+        setPreferredBackground(propagation)
+      }
 
-    // console.log(watchlist);
+      if(pathname === 'weather') {
+        setPreferredBackground(soil)
+      }
 
-    // const [gallery] = useState({
-    //     infinite: false,
-    //     autoplay: true,
-    //     bullets: true,
-    //     interval: 7000,
-    //     duration: 400,
-    //     fullscreen: false,
-    //     playbutton: true,
-    //     thumbnails: false,
-    //     index: false
-    // })
+      if(pathname === 'tasks') {
+        setPreferredBackground(wist)
+      }
 
-    // const images = [
-    //     {
-    //       original: window,
-    //     //   thumbnail: window,
-    //       originalTitle: "What's on the watchlist?",
-    //       description: `What's on the watchlist?\n
-    //                 ${watchlist.map(watchlist => (
-    //                   watchlist.name
-    //                 ))}`,
-    //       embedUrl: "https://www.pexels.com/search/plants/"
-    //     },
-    //     {
-    //       original: propagation,
-    //     //   thumbnail: propagation,
-    //         description: `Propogating on the shelf
-    //             ${propogating.map(propa => (
-    //               propa.name
-    //             ))}`,
-    //         embedUrl: "https://sequelize.org/master/manual/model-querying-basics.html#simple-delete-queries"
-    //     },
-    //     {
-    //       original: soil,
-    //     //   thumbnail: soil,
-    //         description: "Repotted plant dears",
-    //         embedUrl: "https://blog.logrocket.com/guide-to-react-useeffect-hook/"
-    //     },
-    //   ];
-
-
-    const [newStyle, setNewStyle] = useState(soil)
-
-    function handleClick() {
-      console.log("it was clicked")
-      setNewStyle(window);
+      if(pathname === '') {
+        setPreferredBackground(window)
+      }
 
     }
 
-    
-
-    // useEffect(() => {
-    //   console.log("AddHeader rendered")
-    //   const interval = setInterval(() => {
-    //     console.log('This will run every 8 seconds!');
-    //   }, 8000);
-    //   return () => clearInterval(interval);
-    // },[])
-
     return (
        
-      <div className="header-thing">
-        {/* <p>Welcome</p> */}
-        {/* <img src={newStyle} 
-            alt="plant"
-            className="plant-imgurl-0"
-            onClick={handleClick}
-        /> */}
-
-        {/* <img src={window} 
-            alt="plant"
-            className="plant-imgurl-1"
-            // onClick={handleClick}
-        />
-          
-        <img src={propagation} 
-            alt="plant"
-            className="plant-imgurl-2"
-            // onClick={handleClick}
-        /> */}
+      <div className="header-thing"
+        style={{backgroundImage: `url(${preferredBackground})`}}>
+        <p className="page-header">{pathname}</p>
       </div>
      
     )

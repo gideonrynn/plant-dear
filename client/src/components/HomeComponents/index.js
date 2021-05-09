@@ -46,9 +46,6 @@ function HomeComponents() {
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
                                 </Box> */
                         <Box>
-                                <Box className="plant-header">
-                                        <AddHeader plants={activePlants}/>
-                                </Box>
                         
                                 {/* <Box className="slider-section">
                                         <SliderSection plants={activePlants}/>
