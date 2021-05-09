@@ -23,7 +23,7 @@ function TasksCard(t) {
         <>
 
             {tasks.map(tasks => (
-                <div key={tasks.id} className="task-item">
+                <div key={tasks._id} className="task-item">
                     
                     <h3>{tasks.taskName} <FaEdit className="fa-edit" onClick={makeEdits}/></h3>
                     <p>{tasks.taskDetail}</p>

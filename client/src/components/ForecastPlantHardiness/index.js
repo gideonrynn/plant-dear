@@ -30,7 +30,7 @@ const ForecastPlantHardiness = (data) => {
 
                 <div className="forecast-alloutdoor">
                     {outdoorPlants.map(plants => (
-                        <div key={plants.id}>
+                        <div key={plants._id}>
                             <span>{plants.name}</span> { }
                             <span>({plants.hardiness}&#176;)</span> { }
                             {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}

@@ -11,7 +11,7 @@ function Plants () {
     const inactivePlants = plant.inactivePlants;
     const counter = plant.counter;
     const inactcounter = plant.inactcounter;
-    console.log(activePlants);
+    console.log("number of active plants returned", activePlants.length);
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([])

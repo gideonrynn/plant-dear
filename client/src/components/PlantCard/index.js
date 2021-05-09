@@ -128,7 +128,7 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Plant ID</b>: {plant._id}</ListGroupItem>
                                                 <ListGroupItem><b>Watering preference</b>: {plant.waterPref}</ListGroupItem>
                                                 <ListGroupItem><b>Last Watered</b>: {plant.lastWatered ? plant.lastWatered.split('T')[0] : plant.lastWatered}</ListGroupItem>
-                                                <ListGroupItem><b>Sunlight</b>: {plant.sunlight.map(option => (<p>{option}</p>))}</ListGroupItem>
+                                                <ListGroupItem><b>Sunlight</b>: {plant.sunlight.map(option => (<p key={option._id}>{option}</p>))}</ListGroupItem>
                                                 <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"} </ListGroupItem>
                                                 <ListGroupItem><b>Trouble?</b> {plant.trouble || "N"}</ListGroupItem>
                                                 
@@ -141,8 +141,8 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Location secondary</b>: {plant.locationSec}</ListGroupItem>
                                                 <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</ListGroupItem>
                                                 <ListGroupItem><b>Needs Care?</b> {plant.needsCare || "N"}</ListGroupItem>
-                                                <ListGroupItem><b>Created At</b>: {plant.createdAt.split('T')[0]}</ListGroupItem>
-                                                <ListGroupItem><b>Updated At</b>: {plant.updatedAt.split('T')[0]}</ListGroupItem>
+                                                <ListGroupItem><b>Created At</b>: {plant.createdAt ? plant.createdAt.split('T')[0] : plant.createdAt}</ListGroupItem>
+                                                <ListGroupItem><b>Updated At</b>: {plant.updatedAt ? plant.updatedAt.split('T')[0] : plant.updatedAt}</ListGroupItem>
                                                 {/* <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem> */}
                                             </ListGroup>
                                             {/* <Card.Text>

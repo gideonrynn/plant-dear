@@ -1,0 +1,14 @@
+.header-thing {
+    box-sizing: border-box;
+    background: url('../../img/listwindowplants.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    background-color: rgb(192, 45, 26);
+    color: #fff;
+}

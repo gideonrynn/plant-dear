@@ -27,6 +27,12 @@ const plantSchema = new Schema({
     lastWatered: {
         type: Date
     },
+    nextWater: {
+        type: Date
+    },
+    waterRate: {
+        type: Number
+    },
     sunlight: {
         type: Array
     },

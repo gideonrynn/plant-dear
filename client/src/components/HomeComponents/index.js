@@ -14,6 +14,7 @@ import WaterSnip from "../WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
 import PurchaseSnip from "../../components/PurchaseSnip";
 import SliderSection from "../../components/SliderSection/SliderSection";
+import AddHeader from "../../components/AddHeader/AddHeader";
 // import StatsSection from "../../components/StatsSection/StatsSection"
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
@@ -35,7 +36,7 @@ function HomeComponents() {
         const inactivePlants = plant.inactivePlants;
         // console.log(weather)
         // console.log("Home components weather", weather)
-        console.log(activePlants);
+        // console.log(activePlants);
 
         return (
                                 /* <Box gridArea="temp"
@@ -45,10 +46,13 @@ function HomeComponents() {
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
                                 </Box> */
                         <Box>
-                        
-                                <Box className="slider-section">
-                                        <SliderSection plants={activePlants}/>
+                                <Box className="plant-header">
+                                        <AddHeader plants={activePlants}/>
                                 </Box>
+                        
+                                {/* <Box className="slider-section">
+                                        <SliderSection plants={activePlants}/>
+                                </Box> */}
                                 <Box className="newplant-section">
                                         <RecentAdditions plants={activePlants}/>
                                 </Box>
