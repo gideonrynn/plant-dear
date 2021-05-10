@@ -11,34 +11,43 @@ const RecentAdditions = (data) => {
         return 0;
     })
 
+    // const uniquePlants = [...new Set(plantsByDate.map(data => data.name))]
     
-    const mostRecent = plantsByDate.slice(0, 1);
+    // console.log(uniquePlants);
+    const mostRecent = plantsByDate.slice(0, 4);
     const nextRecentFive = plantsByDate.slice(1, 14);
     console.log(mostRecent, nextRecentFive);
 
     return (
+    
         <div className="new-plant-section">
-            <h3 className="recent-plant-header">Recent additions</h3>
+            {/* <h3 className="recent-plant-header">Recent additions</h3> */}
 
             <div className="most-recent-plant">
                 {mostRecent.map(plants => (
-                    <div key={plants._id}>
-                        <img src={`/img/${plants.imgURL}`} alt="Most recent plant" width="300px" height="300px"/>
-                        <p>{plants.name}</p>
-                    </div>
-                ))}
-            </div>
-            <div className="next-recent-plants">
-                {nextRecentFive.map(plants => (
-                    <div key={plants._id}>
-                        <span>{plants.name}</span> { }
-                        {/* <span>({plants.hardiness}&#176;)</span> { } */}
-                    </div>
+                    <>
+                    <figure>
+                        <div key={plants._id} className="plant-card">
+                            <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
+                        </div>
+                        {/* <figcaption className="plant-caption">{plants.name}</figcaption> */}
+                    </figure>
+                    </>
                 ))}
                 
             </div>
+            {/* <div className="next-recent-plants">
+                {nextRecentFive.map(plants => (
+                    <div key={plants._id}>
+                        <span>{plants.name}</span> { } */}
+                        {/* <span>({plants.hardiness}&#176;)</span> { } */}
+                    {/* </div>
+                ))}
+                
+            </div> */}
             
         </div>
+        
     )
 };
 

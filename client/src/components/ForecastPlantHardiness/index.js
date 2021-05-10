@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import { useLocation, withRouter } from "react-router-dom";
 import './style.css'
 // weather context
 // plant data
@@ -8,6 +9,8 @@ const ForecastPlantHardiness = (data) => {
     
     const forecastWeather = data.weather;
     const plants = data.plants;
+    let location = useLocation();
+    let pathname = location.pathname.slice(1);
 
     useEffect(() => {
         console.log("ForecastPlantHardiness component rendered");
@@ -28,6 +31,8 @@ const ForecastPlantHardiness = (data) => {
 
             <header className="forecast-allplants-header"><h2>All Outdoor Plants</h2></header>
 
+            {pathname === "" ? 
+                <>
                 <div className="forecast-alloutdoor">
                     {outdoorPlants.map(plants => (
                         <div key={plants._id}>
@@ -64,7 +69,8 @@ const ForecastPlantHardiness = (data) => {
                 ))}
                 
             </div>
-
+            </>: <p>This is not the home page</p>
+            }
             
         </div>
     )

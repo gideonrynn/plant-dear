@@ -4,27 +4,31 @@ import { useLocation, withRouter } from "react-router-dom";
 import window from '../../img/listwindowplants.jpg';
 import propagation from '../../img/propagating.jpg';
 import soil from '../../img/soily.jpg';
-import wist from '../../img/wistful.jpg';
+import weat from '../../img/html-css-animated-weather-icons.gif';
+import deskplants from '../../img/deskplants.jpeg';
 import './style.css'
 
-const AddHeader = (data) => {
 
-    const plants = data.plants;
+
+const HeaderAll = (data) => {
+
+    // const plants = data.plants;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
-    let images = [window, soil, propagation];
+    // let images = [window, soil, propagation];
     const [preferredBackground, setPreferredBackground] = useState(window);
-  console.log(pathname)
+
     useEffect(() => {
-      console.log("AddHeader rendered")
+      console.log("Header rendered")
 
       if(pathname === null || pathname === "") {
-        // setPreferredBackground(window)
+
         const interval = setInterval(() => {
           changeImage()
           // console.log("Change should trigger")
         }, 8000);
         return () => clearInterval(interval);
+
       } else {
         otherBackgrounds()
       }
@@ -47,11 +51,11 @@ const AddHeader = (data) => {
       }
 
       if(pathname === 'weather') {
-        setPreferredBackground(soil)
+        setPreferredBackground(weat)
       }
 
       if(pathname === 'tasks') {
-        setPreferredBackground(wist)
+        setPreferredBackground(deskplants)
       }
 
       if(pathname === '') {
@@ -70,6 +74,6 @@ const AddHeader = (data) => {
     )
 }
 
-export default AddHeader;
+export default HeaderAll;
 
 

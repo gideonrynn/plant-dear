@@ -10,7 +10,7 @@ import Navsite from "./components/Navsite/index.js"
 import { WeatherProvider } from '../src/context/WeatherContext';
 import { PlantProvider } from '../src/context/PlantContext';
 import Tasks from './pages/Tasks';
-import AddHeader from './components/AddHeader/AddHeader';
+import HeaderAll from './components/HeaderAll/HeaderAll';
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <WeatherProvider>
         <PlantProvider>
         <Navsite/>
-        <AddHeader/>
+        <HeaderAll/>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/plants" component={Plants}/>

@@ -14,7 +14,6 @@ import WaterSnip from "../WaterSnip";
 import PropaSnip from "../../components/PropaSnip";
 import PurchaseSnip from "../../components/PurchaseSnip";
 import SliderSection from "../../components/SliderSection/SliderSection";
-import AddHeader from "../../components/AddHeader/AddHeader";
 // import StatsSection from "../../components/StatsSection/StatsSection"
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
@@ -44,18 +43,15 @@ function HomeComponents() {
                                         fill
                                         >
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
-                                </Box> */
-                        <Box>
-                        
-                                {/* <Box className="slider-section">
-                                        <SliderSection plants={activePlants}/>
-                                </Box> */}
-                                <Box className="newplant-section">
+                                </div> */
+                        <div>
+
+                                <div className="newplant-section">
                                         <RecentAdditions plants={activePlants}/>
-                                </Box>
-                                <Box  className="forecastplants-section">
+                                </div>
+                                <div  className="forecastplants-section">
                                         <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
-                                </Box>
+                                </div>
                                 {/* <Box gridArea="stats" className="stats">
                                         <StatsSection/>  
                                 </Box> */}
@@ -125,14 +121,14 @@ function HomeComponents() {
                         <Box gridArea="weatherforecast"
                                         // height="large"
                                         // background="dark-3"
-                                        pad="medium"
+                                        // pad="medium"
                                         background="#FFFFFF"
                                         className="weather-forecast-section">
 
 
                                 <WeatherForecast weather={forecastWeather}/>
                         </Box>
-                </Box>
+                </div>
                  
         );
 

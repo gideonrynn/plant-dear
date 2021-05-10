@@ -1,11 +1,19 @@
 .forecast-div {
     padding: 40px;
-    background-color: whitesmoke;
+    background-color: #000e21;
     /* color: whitesmoke; */
+    font-size: 18px;
     
 }
 
 tbody, thead {
     /* color: whitesmoke; */
     background-color: whitesmoke;
+    width: 100%;
+}
+
+table {
+    border: 3px solid grey;
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+    width: 100%;
 }

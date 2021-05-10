@@ -11,7 +11,7 @@ function Tasks () {
     useEffect(() => {
 
         loadTasks()
-        loadOne()
+        // loadOne()
         console.log("Tasks page render triggered")
     
     }, [])
