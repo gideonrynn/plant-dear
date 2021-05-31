@@ -14,7 +14,7 @@ const RecentAdditions = (data) => {
     // const uniquePlants = [...new Set(plantsByDate.map(data => data.name))]
     
     // console.log(uniquePlants);
-    const mostRecent = plantsByDate.slice(0, 4);
+    const mostRecent = plantsByDate.slice(0, 12);
     const nextRecentFive = plantsByDate.slice(1, 14);
     console.log(mostRecent, nextRecentFive);
 
@@ -26,7 +26,7 @@ const RecentAdditions = (data) => {
             <div className="most-recent-plant">
                 {mostRecent.map(plants => (
                     <>
-                    <figure>
+                    <figure key={plants._id}>
                         <div key={plants._id} className="plant-card">
                             <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
                         </div>

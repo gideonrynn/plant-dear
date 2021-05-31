@@ -18,3 +18,10 @@ span.image-gallery-description {
 .slider-section {
     padding: 20px 10px;
 }
+
+.newplant-section, .forecastplants-section, .watersnip-section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

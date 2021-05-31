@@ -33,6 +33,7 @@ function Navsite() {
                     <Link className="nav-link" to="#">Temp: {currentWeather ? currentWeather.app_temp : 0}&#176;</Link>
                     {/* <p>{currentWeather.app_temp}&#176;</p><br/><br/> */}
                     <Link className="nav-link" to="#">Wind: {currentWeather ? currentWeather.wind_spd : 0} mph&nbsp;&nbsp;&nbsp;</Link>
+                    <Link className="nav-link" to="#">Hardiness Zone: 5&nbsp;&nbsp;&nbsp;</Link>
                 
              
                     <Link className="nav-link" to="/" >Home</Link>

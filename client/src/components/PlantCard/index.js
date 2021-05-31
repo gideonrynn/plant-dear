@@ -140,7 +140,9 @@ function PlantCard(p) {
                                                 <ListGroupItem><b>Location</b>: {plant.location}</ListGroupItem>
                                                 <ListGroupItem><b>Location secondary</b>: {plant.locationSec}</ListGroupItem>
                                                 <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</ListGroupItem>
-                                                <ListGroupItem><b>Needs Care?</b> {plant.needsCare || "N"}</ListGroupItem>
+                                                <ListGroupItem><b>Hardiness Min</b> {plant.hardinessZoneMin || "none listed"}</ListGroupItem>
+                                                <ListGroupItem><b>Hardiness Max</b> {plant.hardinessZoneMax || "none listed"}</ListGroupItem>
+                                                <ListGroupItem><b>Cycle</b> {plant.cycle || "none listed"}</ListGroupItem>
                                                 <ListGroupItem><b>Created At</b>: {plant.createdAt ? plant.createdAt.split('T')[0] : plant.createdAt}</ListGroupItem>
                                                 <ListGroupItem><b>Updated At</b>: {plant.updatedAt ? plant.updatedAt.split('T')[0] : plant.updatedAt}</ListGroupItem>
                                                 {/* <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem> */}

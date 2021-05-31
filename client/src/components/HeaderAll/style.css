@@ -15,6 +15,7 @@
     transition: background-image 1s ease-in-out;
     -moz-transition: background-image 1s ease-in-out;
     -webkit-transition: background-image 1s ease-in-out;
+    /* padding: 10px; */
 }
 
 p.page-header::first-letter {

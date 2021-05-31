@@ -52,6 +52,10 @@ function HomeComponents() {
                                 <div  className="forecastplants-section">
                                         <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
                                 </div>
+                                <div className="watersnip-section">
+                                        {/* <WaterLoverSnip plants={activePlants}/> */}
+                                        <WaterSnip plants={activePlants}/>
+                                </div>
                                 {/* <Box gridArea="stats" className="stats">
                                         <StatsSection/>  
                                 </Box> */}

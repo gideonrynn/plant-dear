@@ -11,8 +11,10 @@ import { Modal } from "react-bootstrap"
 import ReviewPlant from "../ReviewPlant";
 
 
-function WaterSnip() {
+function WaterSnip(data) {
 
+    const plants = data.plants;
+    
     const [waterPlants, setWaterPlants] = useState([])
 
     const [onePlant, setOnePlant] = useState([])
@@ -28,43 +30,44 @@ function WaterSnip() {
         
         loadPlants()
         // console.log(cw.weather.temp)
-        console.log("Need a drink render triggered")
+        console.log("Water snip render triggered")
     
-    }, [])
+    }, [data])
 
     function loadPlants() {
 
+        if(plants[0]) {
         let date = new Date();
-        let newDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() - 3);
-        console.log(newDate)
+        console.log(plants[0])
+        let wateredConverted = new Date(plants[0].lastWatered);
         let days = '3';
+        let newDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + (date.getDate() - days);
+        console.log("New date: " + newDate)
+        console.log("Watered converted: " + wateredConverted.valueOf())
+        // console.log("plants watered with iso: ", new Date(plants[0].lastWatered).toISOString() )
+
+        let plantsLastWatered = wateredConverted.getFullYear() + "-" + (wateredConverted.getMonth() + 1) + "-" + (wateredConverted.getDate());
+        console.log("Date this is supposed to be watered: " + newDate)
+        console.log("plants watered: " + plantsLastWatered)
+        console.log(plantsLastWatered.valueOf() > newDate.valueOf());
+
+        
         // let dateRange = "";
         let checkDate = newDate - days;
         console.log("date: ", date);
         console.log("date comparison: ", newDate);
         console.log("check date: ", checkDate);
-
-        PlantAPI.getCurrentPlants()
-            .then(res => {
-                let currentPlants = res.data;
-                console.log(res.data);
-
-                
-                console.log(currentPlants[0].lastWatered)
-                // console.log(dateComparison > date)
-                
-                // display all the plants with a hardiness less than or equal to the current weather
-                let waterPlants = currentPlants.filter(currentPlants => { 
-                    return currentPlants.lastWatered >= checkDate;
-                });
-
-                // console.log(date);
-                
-                setWaterPlants(waterPlants);
-            
-
-        })
-            
+            // .split('T')[0]
+        let waterPlants = plants.filter(currentPlants => {
+                return currentPlants.lastWatered >= newDate;
+        });
+        console.log("waterplants", waterPlants);
+        console.log(plants);
+        console.log("last watered:" + new Date(plants[0].lastWatered).toLocaleDateString())
+        console.log("today's date:" + date)
+        console.log(wateredConverted.valueOf() === date.valueOf())
+        setWaterPlants(waterPlants);
+    }
     };
 
     function getPlant(id) {
@@ -102,7 +105,8 @@ function WaterSnip() {
                         <ListGroup className="list-group-flush" key={waterPlants.id}  >
                             <ListGroupItem 
                                 key={waterPlants.id} 
-                                onClick={() => getPlant(waterPlants.id)}>{waterPlants.name} </ListGroupItem>
+                                onClick={() => getPlant(waterPlants.id)}>{waterPlants.name}{  }{waterPlants.lastWatered} </ListGroupItem>
+                                
                         </ListGroup>))}
                     <Card.Body>
                         <Card.Link href="/plants">See all plants</Card.Link>
