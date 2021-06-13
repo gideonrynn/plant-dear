@@ -31,14 +31,12 @@ function Navsite() {
                 <div className="navbar">
                 
                     <Link className="nav-link" to="#">Temp: {currentWeather ? currentWeather.app_temp : 0}&#176;</Link>
-                    {/* <p>{currentWeather.app_temp}&#176;</p><br/><br/> */}
                     <Link className="nav-link" to="#">Wind: {currentWeather ? currentWeather.wind_spd : 0} mph&nbsp;&nbsp;&nbsp;</Link>
-                    <Link className="nav-link" to="#">Hardiness Zone: 5&nbsp;&nbsp;&nbsp;</Link>
+                    <Link className="nav-link" to="#">Hardiness Zone: 5 (-20 to -15) &nbsp;&nbsp;&nbsp;</Link>
                 
              
                     <Link className="nav-link" to="/" >Home</Link>
                     <Link className="nav-link" to="#" onClick={handleShow}>Add New Plant</Link> 
-                    {/* <Link className="nav-link" to="/addnewplants" onClick={handleShow}>Add New Plant</Link> */}
                     <Link className="nav-link" to="/plants">Plants</Link>
                     <Link className="nav-link" to="/weather">Forecast</Link>
                     <Link className="nav-link" to="/tasks">Tasks</Link>

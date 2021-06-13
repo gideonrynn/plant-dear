@@ -102,8 +102,8 @@ function PlantCard(p) {
                         <Col xs={12} sm={12} md={3} lg={3}>
                             <img src={plant.imgURL ? `/img/${plant.imgURL}` : Plantling} 
                                     alt="plant"
-                                    height="130px" 
-                                    width="130px"
+                                    height="150px" 
+                                    width="150px"
                                     className="plant-imgurl"
                                 />
                         </Col>

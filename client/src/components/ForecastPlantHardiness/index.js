@@ -26,6 +26,11 @@ const ForecastPlantHardiness = (data) => {
         return plants.hardiness !== "" && plants.location === "outdoor"
     });
 
+    let outdoorWinterSafe = plants.filter(plants => { 
+        return plants.hardiness !== "" && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness > 0) && plants.cycle === "perennial"
+    });
+    console.log("Winter safe plants: ", outdoorWinterSafe);
+
     return (
         <div className="forecast-plant-hardiness-section">
 
@@ -67,6 +72,23 @@ const ForecastPlantHardiness = (data) => {
                         </div>
                     </div>
                 ))}
+                
+            </div>
+
+            <hr></hr>
+
+            <header className="forecast-wintersafe-header"><h2>Winter Safe</h2></header>
+
+            <div className="winter-safe">
+                {outdoorWinterSafe.map(plants => (
+                        <div key={plants._id}>
+                            <span>{plants.name}</span> { }
+                            <span>({plants.hardiness}&#176;)</span> { }
+                            <span>Zone {plants.hardinessZoneMin || "not listed"}</span> { }
+                            <span>{plants.cycle}</span> { }
+                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
+                        </div>
+                    ))}
                 
             </div>
             </>: <p>This is not the home page</p>
