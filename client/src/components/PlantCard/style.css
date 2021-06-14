@@ -2,8 +2,93 @@
     margin: 8px;
 } */
 
-.plant-imgurl {
+/* .plant-imgurl {
     margin-top: 20px;
     margin-bottom: 20px;
+} */
 
+.row {
+    /* width: 100%; */
+    display: flex;
+    
+}
+
+
+/* *, ::after, ::before {
+    box-sizing: border-box;
+} */
+.plant-details-sec {
+    
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-wrap: nowrap;
+    /* width: 100%; */
+    /* flex-direction: row;
+    justify-content: space-between; */
+    /* align-items: baseline; */
+    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
+    padding: 10px;
+    margin: 10px;
+}
+
+.plant-img-left {
+    /* padding: 10px; */
+    margin-right: 20px;
+    margin-left: 20px;
+    
+}
+
+.plant-card-x {
+    /* max-width: 600px; */
+    min-width: 500px;
+    background-color: white;
+    width: 100%;
+    
+    
+}
+
+.plant-card-header {
+    background-color: #5F9EA0;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+    /* width: 100%; */
+}
+
+.plant-card-details-group, .button-section-header {
+    text-align: left;
+}
+
+.plant-card-details {
+    list-style-type: none;
+    border-bottom: 0.03em solid lightgrey;
+    padding: 10px;
+    /* word-wrap: break-word; */
+    /* border-style: inset; */
+    /* opacity: 0.5; */
+}
+
+button.always {
+    /* display: none; Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 100px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  background-color: grey; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */   
+}
+
+button.always:hover {
+    background-color: lightgrey;
+}
+
+.water-button {
+    border-radius: 4px; 
+    padding: 5px;
 }

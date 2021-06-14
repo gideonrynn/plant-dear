@@ -20,34 +20,31 @@ const RecentAdditions = (data) => {
 
     return (
         <>
-        <div className="new-plant-section">
-            {/* <h3 className="recent-plant-header">Recent additions</h3> */}
+            <div className="new-plant-section">
+                {/* <h3 className="recent-plant-header">Recent additions</h3> */}
 
-            <div className="most-recent-plant">
-                {mostRecent.map(plants => (
-                    <>
-                    <figure key={plants._id}>
-                        <div key={plants._id} className="plant-card">
-                            <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
-                            <p className="name-img">{plants.name}</p>
-                        </div>
-                        {/* <figcaption className="plant-caption">{plants.name}</figcaption> */}
-                    </figure>
-                    </>
-                ))}
+                <div className="most-recent-plant">
+                    {mostRecent.map(plants => (
+                        <>
+                            <div key={plants._id} className="plant-card">
+                                <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
+                                <p className="name-img">{plants.name}</p>
+                            </div>
+                        </>
+                    ))}
+                    
+                </div>
+                {/* <div className="next-recent-plants">
+                    {nextRecentFive.map(plants => (
+                        <div key={plants._id}>
+                            <span>{plants.name}</span> { } */}
+                            {/* <span>({plants.hardiness}&#176;)</span> { } */}
+                        {/* </div>
+                    ))}
+                    
+                </div> */}
                 
             </div>
-            {/* <div className="next-recent-plants">
-                {nextRecentFive.map(plants => (
-                    <div key={plants._id}>
-                        <span>{plants.name}</span> { } */}
-                        {/* <span>({plants.hardiness}&#176;)</span> { } */}
-                    {/* </div>
-                ))}
-                
-            </div> */}
-            
-        </div>
         </>
     )
 };

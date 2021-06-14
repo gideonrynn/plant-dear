@@ -98,121 +98,93 @@ function PlantCard(p) {
 
             {thisPlant.map(plant => (
                 <div key={plant._id} >
-                    <Row>
-                        <Col xs={12} sm={12} md={3} lg={3}>
+                    <div class="row plant-details-sec">
+                        <div class="column plant-img-left">
                             <img src={plant.imgURL ? `/img/${plant.imgURL}` : Plantling} 
                                     alt="plant"
                                     height="150px" 
                                     width="150px"
                                     className="plant-imgurl"
                                 />
-                        </Col>
-                        <Col xs={12} sm={12} md={9} lg={9}>
-                            <Card 
-                                className="text-left" 
-                                key={plant._id} 
-                                style={{
-                                    marginTop: 20,
-                                    marginBottom: 20
-                                }}
-                            >
-                                <Card.Header style={{backgroundColor: '#78A4CF'}}>
-                                    <Card.Title>{plant.name} (<i>{plant.botanicalName}</i>)</Card.Title>
-                                    
-                                </Card.Header>
-                                <Card.Body>
-                                    <Row>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Plant Type</b>: {plant.plantType}</ListGroupItem>
-                                                <ListGroupItem><b>Plant ID</b>: {plant._id}</ListGroupItem>
-                                                <ListGroupItem><b>Watering preference</b>: {plant.waterPref}</ListGroupItem>
-                                                <ListGroupItem><b>Last Watered</b>: {plant.lastWatered ? plant.lastWatered.split('T')[0] : plant.lastWatered}</ListGroupItem>
-                                                <ListGroupItem><b>Sunlight</b>: {plant.sunlight.map(option => (<p key={option._id}>{option}</p>))}</ListGroupItem>
-                                                <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"} </ListGroupItem>
-                                                <ListGroupItem><b>Trouble?</b> {plant.trouble || "N"}</ListGroupItem>
-                                                
-                                            </ListGroup>
-                                        </Col>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Humidity</b>: {plant.humidity || "none listed"}</ListGroupItem>
-                                                <ListGroupItem><b>Location</b>: {plant.location}</ListGroupItem>
-                                                <ListGroupItem><b>Location secondary</b>: {plant.locationSec}</ListGroupItem>
-                                                <ListGroupItem><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</ListGroupItem>
-                                                <ListGroupItem><b>Hardiness Min</b> {plant.hardinessZoneMin || "none listed"}</ListGroupItem>
-                                                <ListGroupItem><b>Hardiness Max</b> {plant.hardinessZoneMax || "none listed"}</ListGroupItem>
-                                                <ListGroupItem><b>Cycle</b> {plant.cycle || "none listed"}</ListGroupItem>
-                                                <ListGroupItem><b>Created At</b>: {plant.createdAt ? plant.createdAt.split('T')[0] : plant.createdAt}</ListGroupItem>
-                                                <ListGroupItem><b>Updated At</b>: {plant.updatedAt ? plant.updatedAt.split('T')[0] : plant.updatedAt}</ListGroupItem>
-                                                {/* <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem> */}
-                                            </ListGroup>
-                                            {/* <Card.Text>
-                                            </Card.Text> */}
-                                        </Col>
-                                    </Row>
+                        </div>
+                        <div class="column plant-card-x">
+                            <p className="plant-card-header">{plant.name} (<i>{plant.botanicalName}</i>)</p>
+                            
+                            <div class="row">
+                                <div class="column plant-details-left">
+                                    <ul className="plant-card-details-group">
+                                        <li className="plant-card-details"><b>Plant Type</b>: {plant.plantType}</li>
+                                        <li className="plant-card-details"><b>Plant ID</b>: {plant._id}</li>
+                                        <li className="plant-card-details"><b>Watering preference</b>: {plant.waterPref}</li>
+                                        <li className="plant-card-details"><b>Last Watered</b>: {plant.lastWatered ? plant.lastWatered.split('T')[0] : plant.lastWatered}</li>
+                                        <li className="plant-card-details"><b>Sunlight</b>: {plant.sunlight.map(option => (<p key={option._id}>{option}</p>))}</li>
+                                        <li className="plant-card-details"><b>Humidity</b>: {plant.humidity || "none listed"} </li>
+                                        <li className="plant-card-details"><b>Trouble?</b> {plant.trouble || "N"}</li>
+                                    </ul>
+                                </div>
+                                <div class="column plant-details-right">
+                                    <ul className="plant-card-details-group">
+                                        <li className="plant-card-details"><b>Location</b>: {plant.location}</li>
+                                        <li className="plant-card-details"><b>Location secondary</b>: {plant.locationSec}</li>
+                                        <li className="plant-card-details"><b>Location preferred</b>: {plant.locationPreferred || "No preference"}</li>
+                                        <li className="plant-card-details"><b>Hardiness Min</b> {plant.hardinessZoneMin || "none listed"}</li>
+                                        <li className="plant-card-details"><b>Hardiness Max</b> {plant.hardinessZoneMax || "none listed"}</li>
+                                        <li className="plant-card-details"><b>Cycle</b> {plant.cycle || "none listed"}</li>
+                                        <li className="plant-card-details"><b>Created At</b>: {plant.createdAt ? plant.createdAt.split('T')[0] : plant.createdAt}</li>
+                                        <li className="plant-card-details"><b>Updated At</b>: {plant.updatedAt ? plant.updatedAt.split('T')[0] : plant.updatedAt}</li>
+                                        
+                                    </ul>
+                                </div> 
+                            </div>
+                            <div class="row bottom-section">
+                                <div class="column plant-details-bottom">
+                                    <ul className="plant-card-details-group">
+                                        <li className="plant-card-details"><b>Notes</b>: {plant.notes}</li>
+                                        <li className="plant-card-details"><b>Links</b>: {plant.links.map(option => (<p><a href={option} target="_blank" rel="noopener noreferrer">{option}</a></p>))}</li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                                    <Row>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Notes</b>: {plant.notes}</ListGroupItem>
-                                                <ListGroupItem><b>Links</b>: {plant.links.map(option => (<p><a href={option} target="_blank" rel="noopener noreferrer">{option}</a></p>))}</ListGroupItem>
-                                            </ListGroup>
-                                            {/* <Card.Text>
-                                            </Card.Text> */}
-                                        </Col>
-                                    </Row>
+                            <div class="row button-section">
+                                <div class="column">
+                                    <ul>
+                                        {/* <li className="plant-card-details"> */}
+                                        <p className="button-section-header"><b>Watered</b></p>
+                                        <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant._id, 0)} className="water-button">Today</button>
+                                        <button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plant._id, 1)} className="water-button">Yesterday</button>
+                                        <button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plant._id, 2)} className="water-button">Two Days</button>
+                                        <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant._id, 3)} className="water-button">Three Days</button>
+                                        <button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant._id, 7)} className="water-button">One Week</button>
+                                    {/* </li> */}
+                                    </ul>
+                                </div>
+                            
+                            </div>
 
+                            <div class="row button-section">
+                                
+                                    <div class="column">
+                                        <ul>
+                                            <button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant._id)} className="water-button">Modify</button>
+                                        </ul>
+                                    </div>
+                                    {/* <hr></hr> */}
+                                    <div class="column">
+                                        <ul>
+                                            <button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plant._id)} className="water-button">Delete</button>
+                                        </ul>
+                                    </div>
+                               
+                            </div>
+                            
+                        </div>
 
-                                    <Row>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem>
-                                                    <Card.Text> <b>Watered</b></Card.Text>
-                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plant._id, 0)}>Today</Button>
-                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plant._id, 1)}>Yesterday</Button>
-                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plant._id, 2)}>Two Days</Button>
-                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plant._id, 3)}>Three Days</Button>
-                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plant._id, 7)}>One Week</Button>
-                                                </ListGroupItem>
-                                                {/* <ListGroupItem>
-                                                    <Card.Text> <b>Tasks</b></Card.Text>
-                                                    {plant.Task.map(tasks => (
-                                                        <div className="plantcard-task"
-                                                        key={tasks._id}>
-                                                            <p>
-                                                                <FaPlus className="fa-plus"/>
-                                                                {tasks.taskDetail || "all caught up!"}</p>
-                                                        </div>
-                                                    ))}
-                                                </ListGroupItem> */}
-                                                <ListGroupItem>
-                                                    <Row>
-                                                        <Col>
-                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant._id)}>Modify</Button>
-                                                        </Col>
-                                                        <Col>
-                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plant._id)}>Delete</Button>
-                                                        </Col>
-                                                    </Row>
-                                                    
-                                                    </ListGroupItem>
-                                            </ListGroup>
-
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-
-                        
-                    </Row>
-
-                    
+                    </div>
                         
                 </div>
                 
             ))}
+            <button className="always">Jump to top</button>
 
             <h3>Inactive plant dears ({p.inactcounter})</h3>
             <hr/>
