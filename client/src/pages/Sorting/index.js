@@ -60,7 +60,8 @@ function Sorting () {
 
     return (
         <div className="plantsdiv">
-
+            <h1> Plants By Location</h1>
+{/* 
             <input 
                 type="text"
                 style={
@@ -71,7 +72,7 @@ function Sorting () {
                 onChange={(event) => {
                     sortPlants(event.target.value)
                     }}
-            />
+            /> */}
 
             {/* <select>
                 <option value="a-z">A-Z</option>

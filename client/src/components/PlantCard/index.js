@@ -98,8 +98,8 @@ function PlantCard(p) {
 
             {thisPlant.map(plant => (
                 <div key={plant._id} >
-                    <div class="row plant-details-sec">
-                        <div class="column plant-img-left">
+                    <div className="row plant-details-sec">
+                        <div className="column plant-img-left">
                             <img src={plant.imgURL ? `/img/${plant.imgURL}` : Plantling} 
                                     alt="plant"
                                     height="150px" 
@@ -107,11 +107,11 @@ function PlantCard(p) {
                                     className="plant-imgurl"
                                 />
                         </div>
-                        <div class="column plant-card-x">
+                        <div className="column plant-card-x">
                             <p className="plant-card-header">{plant.name} (<i>{plant.botanicalName}</i>)</p>
                             
-                            <div class="row">
-                                <div class="column plant-details-left">
+                            <div className="row">
+                                <div className="column plant-details-left">
                                     <ul className="plant-card-details-group">
                                         <li className="plant-card-details"><b>Plant Type</b>: {plant.plantType}</li>
                                         <li className="plant-card-details"><b>Plant ID</b>: {plant._id}</li>
@@ -122,7 +122,7 @@ function PlantCard(p) {
                                         <li className="plant-card-details"><b>Trouble?</b> {plant.trouble || "N"}</li>
                                     </ul>
                                 </div>
-                                <div class="column plant-details-right">
+                                <div className="column plant-details-right">
                                     <ul className="plant-card-details-group">
                                         <li className="plant-card-details"><b>Location</b>: {plant.location}</li>
                                         <li className="plant-card-details"><b>Location secondary</b>: {plant.locationSec}</li>
@@ -136,8 +136,8 @@ function PlantCard(p) {
                                     </ul>
                                 </div> 
                             </div>
-                            <div class="row bottom-section">
-                                <div class="column plant-details-bottom">
+                            <div className="row bottom-section">
+                                <div className="column plant-details-bottom">
                                     <ul className="plant-card-details-group">
                                         <li className="plant-card-details"><b>Notes</b>: {plant.notes}</li>
                                         <li className="plant-card-details"><b>Links</b>: {plant.links.map(option => (<p><a href={option} target="_blank" rel="noopener noreferrer">{option}</a></p>))}</li>
@@ -145,8 +145,8 @@ function PlantCard(p) {
                                 </div>
                             </div>
 
-                            <div class="row button-section">
-                                <div class="column">
+                            <div className="row button-section">
+                                <div className="column">
                                     <ul>
                                         {/* <li className="plant-card-details"> */}
                                         <p className="button-section-header"><b>Watered</b></p>
@@ -161,15 +161,15 @@ function PlantCard(p) {
                             
                             </div>
 
-                            <div class="row button-section">
+                            <div className="row button-section">
                                 
-                                    <div class="column">
+                                    <div className="column">
                                         <ul>
                                             <button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plant._id)} className="water-button">Modify</button>
                                         </ul>
                                     </div>
                                     {/* <hr></hr> */}
-                                    <div class="column">
+                                    <div className="column">
                                         <ul>
                                             <button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plant._id)} className="water-button">Delete</button>
                                         </ul>
@@ -190,94 +190,91 @@ function PlantCard(p) {
             <hr/>
 
             {thisPlantInact.map(plantinact => (
-                <div key={plantinact._id}>
-                    <Row>
-                        <Col xs={12} sm={12} md={3} lg={3}>
-                            <Image src={Plantling} 
-                                    height={100} 
-                                    width={100} 
-                                    rounded 
-                                    style={{
-                                        marginTop: 20,
-                                        marginBottom: 20
-                                        }}
-                                />
-                        </Col>
-                        <Col xs={12} sm={12} md={9} lg={9}>
-                            <Card 
-                                className="text-left" 
-                                key={plantinact._id} 
-                                style={{
-                                    marginTop: 20,
-                                    marginBottom: 20
-                                }}
-                            >
-                                <Card.Header style={{backgroundColor: '#da70d6'}}>
-                                    <Card.Title>{plantinact.name} (<i>{plantinact.botanicalName}</i>)</Card.Title>
+                <div key={plantinact._id} >
+                <div className="row plant-details-sec">
+                    <div className="column plant-img-left">
+                        <img src={plantinact.imgURL ? `/img/${plantinact.imgURL}` : Plantling} 
+                                alt="plant"
+                                height="150px" 
+                                width="150px"
+                                className="plant-imgurl"
+                            />
+                    </div>
+                    <div className="column plant-card-x">
+                        <p className="plant-card-header">{plantinact.name} (<i>{plantinact.botanicalName}</i>)</p>
+                        
+                        <div className="row">
+                            <div className="column plant-details-left">
+                                <ul className="plant-card-details-group">
+                                    <li className="plant-card-details"><b>Plant Type</b>: {plantinact.plantType}</li>
+                                    <li className="plant-card-details"><b>Plant ID</b>: {plantinact._id}</li>
+                                    <li className="plant-card-details"><b>Watering preference</b>: {plantinact.waterPref}</li>
+                                    <li className="plant-card-details"><b>Last Watered</b>: {plantinact.lastWatered ? plantinact.lastWatered.split('T')[0] : plantinact.lastWatered}</li>
+                                    <li className="plant-card-details"><b>Sunlight</b>: {plantinact.sunlight.map(option => (<p key={option._id}>{option}</p>))}</li>
+                                    <li className="plant-card-details"><b>Humidity</b>: {plantinact.humidity || "none listed"} </li>
+                                    <li className="plant-card-details"><b>Trouble?</b> {plantinact.trouble || "N"}</li>
+                                </ul>
+                            </div>
+                            <div className="column plant-details-right">
+                                <ul className="plant-card-details-group">
+                                    <li className="plant-card-details"><b>Location</b>: {plantinact.location}</li>
+                                    <li className="plant-card-details"><b>Location secondary</b>: {plantinact.locationSec}</li>
+                                    <li className="plant-card-details"><b>Location preferred</b>: {plantinact.locationPreferred || "No preference"}</li>
+                                    <li className="plant-card-details"><b>Hardiness Min</b> {plantinact.hardinessZoneMin || "none listed"}</li>
+                                    <li className="plant-card-details"><b>Hardiness Max</b> {plantinact.hardinessZoneMax || "none listed"}</li>
+                                    <li className="plant-card-details"><b>Cycle</b> {plantinact.cycle || "none listed"}</li>
+                                    <li className="plant-card-details"><b>Created At</b>: {plantinact.createdAt ? plantinact.createdAt.split('T')[0] : plantinact.createdAt}</li>
+                                    <li className="plant-card-details"><b>Updated At</b>: {plantinact.updatedAt ? plantinact.updatedAt.split('T')[0] : plantinact.updatedAt}</li>
                                     
-                                </Card.Header>
-                                <Card.Body>
-                                    <Row>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Plant Type</b>: {plantinact.plantType}</ListGroupItem>
-                                                <ListGroupItem><b>Watering preference</b>: {plantinact.waterPref}</ListGroupItem>
-                                                <ListGroupItem><b>Last Watered</b>: {plantinact.lastWatered}</ListGroupItem>
-                                                <ListGroupItem><b>Sunlight</b>: {plantinact.sunlight}</ListGroupItem>
-                                                <ListGroupItem><b>Humidity</b>: {plantinact.humidity}</ListGroupItem>
-                                                <ListGroupItem><b>Trouble?</b>: {plantinact.trouble}</ListGroupItem>
-                                                <ListGroupItem><b>Needs Care?</b>: {plantinact.needsCare}</ListGroupItem>
-                                            </ListGroup>
-                                        </Col>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem><b>Humidity</b>: {plantinact.humidity}</ListGroupItem>
-                                                <ListGroupItem><b>Location</b>: {plantinact.location}</ListGroupItem>
-                                                <ListGroupItem><b>Location secondary</b>: {plantinact.locationSec}</ListGroupItem>
-                                                <ListGroupItem><b>Location preferred</b>: {plantinact.locationPreferred}</ListGroupItem>
-                                                <ListGroupItem><b>Location preferred</b>: {plantinact.locationPreferred}</ListGroupItem>
-                                                <ListGroupItem><b>Notes</b>: {plantinact.notes}</ListGroupItem>
-                                            </ListGroup>
-                                            {/* <Card.Text>
-                                            </Card.Text> */}
-                                        </Col>
-                                    </Row>
+                                </ul>
+                            </div> 
+                        </div>
+                        <div className="row bottom-section">
+                            <div className="column plant-details-bottom">
+                                <ul className="plant-card-details-group">
+                                    <li className="plant-card-details"><b>Notes</b>: {plantinact.notes}</li>
+                                    <li className="plant-card-details"><b>Links</b>: {plantinact.links.map(option => (<p><a href={option} target="_blank" rel="noopener noreferrer">{option}</a></p>))}</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                    <Row>
-                                        <Col>
-                                            <ListGroup className="list-group-flush">
-                                                <ListGroupItem>
-                                                    <Card.Text> <b>Watered</b></Card.Text>
-                                                    <Button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plantinact._id, 0)}>Today</Button>
-                                                    <Button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plantinact._id, 1)}>Yesterday</Button>
-                                                    <Button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plantinact._id, 2)}>Two Days</Button>
-                                                    <Button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plantinact._id, 3)}>Three Days</Button>
-                                                    <Button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plantinact._id, 7)}>One Week</Button>
-                                                </ListGroupItem>
-                                                <ListGroupItem>
-                                                    <Row>
-                                                        <Col>
-                                                            <Button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plantinact._id)}>Modify</Button>
-                                                        </Col>
-                                                        <Col>
-                                                            <Button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plantinact._id)}>Delete</Button>
-                                                        </Col>
-                                                    </Row>
-                                                </ListGroupItem>
-                                            </ListGroup>
-
-                                        </Col>
-                                    </Row>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-
+                        <div className="row button-section">
+                            <div className="column">
+                                <ul>
+                                    {/* <li className="plant-card-details"> */}
+                                    <p className="button-section-header"><b>Watered</b></p>
+                                    <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(plantinact._id, 0)} className="water-button">Today</button>
+                                    <button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(plantinact._id, 1)} className="water-button">Yesterday</button>
+                                    <button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(plantinact._id, 2)} className="water-button">Two Days</button>
+                                    <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(plantinact._id, 3)} className="water-button">Three Days</button>
+                                    <button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(plantinact._id, 7)} className="water-button">One Week</button>
+                                {/* </li> */}
+                                </ul>
+                            </div>
                         
-                    </Row>
+                        </div>
 
-                    
+                        <div className="row button-section">
+                            
+                                <div className="column">
+                                    <ul>
+                                        <button style={{backgroundColor: '#3A6996'}} onClick={() => getPlant(plantinact._id)} className="water-button">Modify</button>
+                                    </ul>
+                                </div>
+                                {/* <hr></hr> */}
+                                <div className="column">
+                                    <ul>
+                                        <button style={{backgroundColor: '#990000'}} onClick={() => deletePlant(plantinact._id)} className="water-button">Delete</button>
+                                    </ul>
+                                </div>
+                           
+                        </div>
                         
+                    </div>
+
                 </div>
+                    
+            </div>
                 
             ))}
 
