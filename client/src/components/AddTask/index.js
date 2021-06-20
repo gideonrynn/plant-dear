@@ -37,6 +37,8 @@ function AddTask() {
             taskNotes: newTask.taskNotes,
             dateDue: newTask.dateDue,
             taskStatus: newTask.taskStatus,
+            createdAt: newTask.createdAt,
+            updateAt: newTask.updatedAt,
         })
             .then(window.location.reload(true))
             .catch(err => console.log(err))

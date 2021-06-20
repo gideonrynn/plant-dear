@@ -17,14 +17,11 @@ const taskSchema = new Schema({
     },
     taskStatus: {
         type: String
-    },
-    createdAt: {
-        type: Date
-    },
-    updatedAt: {
-        type: Date
     }
-})
+},
+    {
+        timestamps: true
+    })
 
 const Task = mongoose.model("Task", taskSchema);
 
