@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from "react";
 import TasksAPI from "../../utils/TasksAPI"
 import TasksCard from "../../components/TasksCard"
+import AddTask from "../../components/AddTask"
 import "./style.css";
 
 function Tasks () {
@@ -44,9 +45,13 @@ function Tasks () {
     return (
         <>
             <div className="tasks-container">
+                <div className="tasks-add-div">
+                    <AddTask/>
+                    <hr/>
+                </div>
                 
                 <div className="tasks-div">
-
+                
                     <TasksCard 
                         tasks={tasks} 
                     />

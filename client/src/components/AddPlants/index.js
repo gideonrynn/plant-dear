@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap"
 import AddPlantAPI from "../../utils/PlantsAPI"
+import './style.css'
 
 function AddPlants() {
 

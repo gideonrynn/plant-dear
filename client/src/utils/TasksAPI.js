@@ -10,7 +10,7 @@ export default {
     return axios.get("/api/tasks/onetask");
   },
   addTask: function(newTasks) {
-    return axios.post("/api/tasks/", newTasks)
+    return axios.post("/api/tasks/add", newTasks)
   },
 
     

@@ -20,8 +20,9 @@ router.get('/all', (req, res) => {
 
 // });
 
-router.post("/tasks", ({body}, res) => {
+router.post("/add", ({body}, res) => {
 
+  console.log(body)
   db.Task.create(body)
     .then(newtask => {
       res.json(newtask);

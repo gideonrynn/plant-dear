@@ -76,4 +76,5 @@ img.recent-image {
   /* background-size: cover;
   background-position:bottom; */
   /* transform: scale(1, 1); */
+  /* max-width: 100%; */
 }

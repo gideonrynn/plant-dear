@@ -1,0 +1,18 @@
+/* .add-task-form {
+    
+} */
+
+.new-task-label {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.new-task-input {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+

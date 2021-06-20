@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
+import FormModal from "../../components/FormModal/FormModal"
 import './style.css';
 
 const PlantBlock = (data) => {
@@ -9,19 +10,16 @@ const PlantBlock = (data) => {
     const [onePlant, setOnePlant] = useState([])
     // handle modal
     const [show, setShow] = useState(false);
-    function handleClose() {
-        setShow(false);
-    }
-    function handleShow() {
-        setShow(true)
-    }
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     function getPlant(id) {
 
+        console.log("this was clicked")
         setOnePlantId(id)
                  PlantAPI.getOnePlant(id)
                      .then(res => {
-                         // console.log(onePlant)
+                         console.log(onePlant)
                          setOnePlant(res.data)
                          
                          handleShow()
@@ -76,17 +74,17 @@ const PlantBlock = (data) => {
 
 
 
-            <Modal size="lg" show={show} onHide={handleClose}>
-                <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton>
-                    <Modal.Title>{onePlant.name}</Modal.Title>
+            <FormModal show={show}>
+                {/* <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton> */}
+                    {/* <Modal.Title>{onePlant.name}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body> */}
                     <ReviewPlant onePlant={onePlant} id={onePlantId}/>
-                </Modal.Body>
+                {/* </Modal.Body>
                 <Modal.Footer>
                             
-                </Modal.Footer>
-                </Modal>   
+                </Modal.Footer> */}
+            </FormModal>   
         </>
     )
 };

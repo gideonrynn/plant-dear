@@ -1,7 +1,16 @@
 .tasks-container {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: fit-content(1em);
     min-height: 100%;
     background-color: whitesmoke;
+}
+
+.tasks-add-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
 }
