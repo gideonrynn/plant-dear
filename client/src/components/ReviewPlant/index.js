@@ -55,7 +55,9 @@ function ReviewPlant(props) {
             propogating: modPlant.propogating,
             imgURL: modPlant.imgurl,
             links: modPlant.links,
-            notes: modPlant.notes
+            notes: modPlant.notes,
+            created: modPlant.createdAt,
+
         })
             .then(console.log("updated"))
             .catch(err => console.log(err))
