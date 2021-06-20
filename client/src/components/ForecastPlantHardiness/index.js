@@ -26,10 +26,15 @@ const ForecastPlantHardiness = (data) => {
         return plants.hardiness !== "" && plants.location === "outdoor"
     });
 
+    /*Winter safe qualifies as plants with a hardiness equal to or less than Chicago's (-20)
+    Exclude records where the hardinessZoneMin does not exist*/
     let outdoorWinterSafe = plants.filter(plants => { 
-        return plants.hardiness !== "" && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness > 0) && plants.cycle === "perennial"
+        return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
     });
     console.log("Winter safe plants: ", outdoorWinterSafe);
+    // let outdoorWinterSafeMaybe = plants.filter(plants => { 
+    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 7 || plants.hardiness <= 0) && plants.cycle === "perennial"
+    // });
 
     return (
         <div className="forecast-plant-hardiness-section">
@@ -40,7 +45,7 @@ const ForecastPlantHardiness = (data) => {
                 <>
                 <div className="forecast-alloutdoor">
                     {outdoorPlants.map(plants => (
-                        <div key={plants._id}>
+                        <div className="plant-outdoor" key={plants._id}>
                             <span>{plants.name}</span> { }
                             <span>({plants.hardiness}&#176;)</span> { }
                             {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
@@ -91,6 +96,20 @@ const ForecastPlantHardiness = (data) => {
                     ))}
                 
             </div>
+{/* 
+            <header className="forecast-wintersafe-header"><h2>Maybe Winter Safe</h2></header>
+            <div className="winter-safe-maybe">
+                {outdoorWinterSafeMaybe.map(plants => (
+                        <div key={plants._id}>
+                            <span>{plants.name}</span> { }
+                            <span>({plants.hardiness}&#176;)</span> { }
+                            <span>Zone {plants.hardinessZoneMin || "not listed"}</span> { }
+                            <span>{plants.cycle}</span> { }
+                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img>}
+                        </div>
+                    ))}
+                
+            </div> */}
             </>: <p>This is not the home page</p>
             }
             

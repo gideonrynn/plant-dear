@@ -56,7 +56,7 @@ function ReviewPlant(props) {
             imgURL: modPlant.imgurl,
             links: modPlant.links,
             notes: modPlant.notes,
-            created: modPlant.createdAt,
+            createdAt: modPlant.createdAt,
 
         })
             .then(console.log("updated"))
@@ -294,7 +294,7 @@ function ReviewPlant(props) {
                 </Form.Row>
                 <Form.Group as={Col} controlId="formCreated" >
                         <Form.Label>Created</Form.Label>
-                        <Form.Control type="date" name="created" defaultValue={thisPlant.createdAt} onChange={handleInputChange}/>
+                        <Form.Control type="date" name="createdAt" defaultValue={thisPlant.createdAt} onChange={handleInputChange}/>
                             {/* <Form.Text className="text-muted">
                             YYYY-MM-DD.
                             </Form.Text> */}
