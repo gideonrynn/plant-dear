@@ -38,7 +38,7 @@ const RecentAdditions = (data) => {
                                 <div key={plants._id+1} className="plant-card-2">
                                     <p>{plants.name}</p>
                                     <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p>{plants.lastWatered ? "last watered on " + plants.lastWatered.split('T')[0] : "not watered yet"}</p>
+                                    <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
                                     <p>{plants.waterPref} watering conditions</p>
                                     {/* <button className="plant-card-2-btn">Open plant</button> */}
                                 </div>

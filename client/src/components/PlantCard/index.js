@@ -54,7 +54,7 @@ function PlantCard(p) {
         date.setDate(date.getDate() - days);
         // console.log(date)
         // console.log(id)
-        PlantAPI.updatePlant(
+        PlantAPI.updatePlantWaterDate(
             id,
             {
                 lastWatered: date,
@@ -116,7 +116,7 @@ function PlantCard(p) {
                                         <li className="plant-card-details"><b>Plant Type</b>: {plant.plantType}</li>
                                         <li className="plant-card-details"><b>Plant ID</b>: {plant._id}</li>
                                         <li className="plant-card-details"><b>Watering preference</b>: {plant.waterPref}</li>
-                                        <li className="plant-card-details"><b>Last Watered</b>: {plant.lastWatered ? plant.lastWatered.split('T')[0] : plant.lastWatered}</li>
+                                        <li className="plant-card-details"><b>Last Watered</b>: {plant.lastWatered.length > 0 ? plant.lastWatered[plant.lastWatered.length - 1].split('T')[0] : plant.lastWatered}</li>
                                         <li className="plant-card-details"><b>Sunlight</b>: {plant.sunlight.map(option => (<p key={option._id}>{option}</p>))}</li>
                                         <li className="plant-card-details"><b>Humidity</b>: {plant.humidity || "none listed"} </li>
                                         <li className="plant-card-details"><b>Trouble?</b> {plant.trouble || "N"}</li>
@@ -209,7 +209,7 @@ function PlantCard(p) {
                                     <li className="plant-card-details"><b>Plant Type</b>: {plantinact.plantType}</li>
                                     <li className="plant-card-details"><b>Plant ID</b>: {plantinact._id}</li>
                                     <li className="plant-card-details"><b>Watering preference</b>: {plantinact.waterPref}</li>
-                                    <li className="plant-card-details"><b>Last Watered</b>: {plantinact.lastWatered ? plantinact.lastWatered.split('T')[0] : plantinact.lastWatered}</li>
+                                    <li className="plant-card-details"><b>Last Watered</b>: {plantinact.lastWatered.lastIndexOf() > 0 ? plantinact.lastWatered.split('T')[plantinact.lastWatered.lastIndexOf()] : plantinact.lastWatered}</li>
                                     <li className="plant-card-details"><b>Sunlight</b>: {plantinact.sunlight.map(option => (<p key={option._id}>{option}</p>))}</li>
                                     <li className="plant-card-details"><b>Humidity</b>: {plantinact.humidity || "none listed"} </li>
                                     <li className="plant-card-details"><b>Trouble?</b> {plantinact.trouble || "N"}</li>

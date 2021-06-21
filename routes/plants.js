@@ -65,6 +65,22 @@ router.put("/plants/:id", (req, res) => {
   });
 })
 
+//use id to update entry in db
+router.put("/plants/watering/:id", (req, res) => {
+  // console.log(req.params.id)
+  
+  let id = req.params.id
+  console.log("id",id)
+  console.log("req body", req.body)
+  db.Plant.updateOne({_id: id}, {$addToSet: req.body})
+  .then(updated => {
+    res.json(updated);
+  })
+  .catch(err => {
+    res.status(404).json(err);
+  });
+})
+
 router.delete("/plants/delete/:id", (req, res) => {
   let id = req.params.id
   console.log(id)
