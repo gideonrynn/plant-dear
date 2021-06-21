@@ -63,6 +63,9 @@ const OutdoorPlants = (data) => {
 
                 
                 <div className="current-deets">
+                    <div>
+                        <h1>Blah Blah</h1>
+                    </div>
                     <div className="outdoor-plant-stats">
                         <p className="outdoor-plant-stat"><b>{outdoorPlantsVol} </b>dears enjoying the great outdoors</p>
                         <p className="outdoor-plant-stat"><b>{outdoorRepotVol}</b> may need repotting</p>
@@ -70,6 +73,9 @@ const OutdoorPlants = (data) => {
                         <p className="outdoor-plant-stat"><b>{outdoorModerateVol}</b> like it moderate</p>
                         <p className="outdoor-plant-stat"><b>{outdoorWetVol}</b> like it wet</p>
 
+                    </div>
+                    <div className="onward ">
+                        <p className="outdoor-plant-stat">See all outdoor plants &gt;</p>
                     </div>
                 </div>
                 <div className="outdoor-plant-images">

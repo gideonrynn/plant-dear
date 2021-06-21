@@ -12,6 +12,8 @@ const ForecastPlantHardiness = (data) => {
     const plants = data.plants;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
+    const dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    const d = new Date();
 
     useEffect(() => {
         console.log("ForecastPlantHardiness component rendered");
@@ -42,55 +44,37 @@ const ForecastPlantHardiness = (data) => {
     return (
         <div className="forecast-plant-hardiness-section">
 
-            <header className="forecast-allplants-header"><h2>All Outdoor Plants</h2></header>
-
-            <p className="outdoor-plants-number">{outdoorPlantsVol}</p>
-
             {pathname === "" ? 
                 <>
-                    {/* <div className="forecast-alloutdoor">
-                        {outdoorPlants.map(plants => (
-                            <div className="plant-outdoor" key={plants._id}>
-                                <span>{plants.name}</span> { }
-                                <span>({plants.hardiness}&#176;)</span> { }
-                                {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> }
+        
+                    <div className="forecast-options">
+                        {forecastWeather.map(weather => (
+                            <div key={weather.uv} className="forecast-weather">
+                                <span>{dayOfWeek[new Date(weather.valid_date).getDay()]} </span>
+                                <span>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'}).slice(0,4)}</span> { }
+                                <p>H: {weather.high_temp}</p> { }
+                                <p className="low-temp">L: {weather.low_temp}</p> { }
+                                {/* <span>{weather.weather.description}</span> { } */}
+                                <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`} className="weather-icon"></img>
+                                <div className="forecast-plants">
+                                    {outdoorPlants.map(plants => (
+                                        plants.hardiness > weather.low_temp ?
+                                        <div key={plants.id}>
+                                            <span>{plants.name}</span> { }
+                                            <span>({plants.hardiness}&#176;)</span> { }
+                                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
+                                        </div> : null
+                                    ))}
+                                </div>
                             </div>
                         ))}
+                        
                     </div>
 
-                    <PlantBlockAll plants={outdoorPlants}/>
+            {/* <hr></hr> */}
 
-                    <hr></hr> */}
-
-                <header className="forecast-plant-header"><h2>Outdoor Plants versus Low Temp</h2></header>
-        
-                <div className="forecast-options">
-                    {forecastWeather.map(weather => (
-                        <div key={weather.uv} className="forecast-weather">
-                            <p>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'})}</p> { }
-                            <span>H: {weather.high_temp}</span> { }
-                            <span className="low-temp">L: {weather.low_temp}</span> { }
-                            {/* <span>{weather.weather.description}</span> { } */}
-                            <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`} className="weather-icon"></img>
-                            <div className="forecast-plants">
-                                {outdoorPlants.map(plants => (
-                                    plants.hardiness > weather.low_temp ?
-                                    <div key={plants.id}>
-                                        <span>{plants.name}</span> { }
-                                        <span>({plants.hardiness}&#176;)</span> { }
-                                        {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
-                                    </div> : null
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                    
-                </div>
-
-            <hr></hr>
-
-            <header className="forecast-wintersafe-header"><h2>Winter Safe</h2></header>
-
+            {/* <header className="forecast-wintersafe-header"><h2>Winter Safe</h2></header> */}
+{/* 
             <div className="winter-safe">
                 {outdoorWinterSafe.map(plants => (
                         <div key={plants._id}>
@@ -98,13 +82,12 @@ const ForecastPlantHardiness = (data) => {
                             <span>({plants.hardiness}&#176;)</span> { }
                             <span>Zone {plants.hardinessZoneMin || "not listed"}</span> { }
                             <span>{plants.cycle}</span> { }
-                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
                         </div>
                     ))}
 
                 <PlantBlockAll plants={outdoorWinterSafe}/>
                 
-            </div>
+            </div> */}
 {/* 
             <header className="forecast-wintersafe-header"><h2>Maybe Winter Safe</h2></header>
             <div className="winter-safe-maybe">

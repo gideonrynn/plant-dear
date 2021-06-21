@@ -47,7 +47,7 @@ const RecentAdditions = (data) => {
                         ))}
                         <div className="see-more">
                             <div className="plant-card-see-more">
-                                <p>See all new plant dears >> </p>
+                                <p>See all new plant dears <span className="g-t">&gt;</span></p>
                             </div>
                             <div className="plant-card-see-more-2">
                                 <img src={MorePlants} alt="See all plants" className=""/>

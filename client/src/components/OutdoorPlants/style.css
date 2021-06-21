@@ -1,19 +1,12 @@
 .outdoor-plant-section {
     background-color: whitesmoke;
-    /* padding-top: 80px; */
-    /* padding-bottom: 80px; */
-    /* padding-left: 8px; */
-    /* padding-right: 8px; */
-    /* margin: 10px; */
-    /* border-top: 3px solid grey; */
-    /* border-bottom: 3px solid grey; */
     box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
-    /* border-radius: 30px; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* height: 700px; */
+
     overflow: hidden;
-    max-height: 800px;
+    max-height: 700px;
+    margin-bottom: 0px;
 }
 
 .outdoor-plant-images {
@@ -79,4 +72,9 @@
 
 .outdoor-plant-stat:hover {
     background-color: darkgrey;
+}
+
+.onward {
+    font-size: 25px;
+    margin-top: 10px;
 }
