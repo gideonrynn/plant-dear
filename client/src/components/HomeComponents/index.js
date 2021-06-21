@@ -18,6 +18,7 @@ import SliderSection from "../../components/SliderSection/SliderSection";
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
 import ForecastPlantHardiness from "../../components/ForecastPlantHardiness/"
+import OutdoorPlants from "../../components/OutdoorPlants/"
 import {WeatherContext} from "../../context/WeatherContext"
 import {PlantContext} from "../../context/PlantContext"
 import './index.css'
@@ -50,7 +51,12 @@ function HomeComponents() {
                                         <RecentAdditions plants={activePlants}/>
                                 </div>
                                 <div  className="forecastplants-section">
+
+                                        <OutdoorPlants weather={forecastWeather} plants={activePlants}/>
+
                                         <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
+
+                                        
                                 </div>
                                 {/* <div className="watersnip-section"> */}
                                         {/* <WaterLoverSnip plants={activePlants}/> */}

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
 import PlantAPI from "../../utils/PlantsAPI"
-import ReviewPlant from "../../components/ReviewPlant";
-import FormModal from "../../components/FormModal/FormModal"
+import ReviewPlant from "../ReviewPlant";
+import FormModal from "../FormModal/FormModal"
 import './style.css';
 
-const PlantBlock = (data) => {
+const PlantBlockAll = (data) => {
     const [onePlantId, setOnePlantId] = useState([])
     const [onePlant, setOnePlant] = useState([])
     // handle modal
@@ -98,4 +98,4 @@ const PlantBlock = (data) => {
     )
 };
 
-export default PlantBlock;
+export default PlantBlockAll;

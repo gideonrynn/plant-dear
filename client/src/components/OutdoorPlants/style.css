@@ -1,0 +1,82 @@
+.outdoor-plant-section {
+    background-color: whitesmoke;
+    /* padding-top: 80px; */
+    /* padding-bottom: 80px; */
+    /* padding-left: 8px; */
+    /* padding-right: 8px; */
+    /* margin: 10px; */
+    /* border-top: 3px solid grey; */
+    /* border-bottom: 3px solid grey; */
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+    /* border-radius: 30px; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* height: 700px; */
+    overflow: hidden;
+    max-height: 800px;
+}
+
+.outdoor-plant-images {
+    display: flex;
+    flex-direction: column;
+}
+
+.outdoor-thumbnails {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ width: 125px;
+}
+
+.outdoor-img-main {
+    /* display: flex; */
+    /* float: left; */
+    margin: 0;
+    padding:0;
+    height: 100%;
+    width: 100%;
+    /* border-radius: 30px; */
+}
+
+/* .outdoor-img-thumb {
+    height: 125px;
+    width: 125px;
+}
+
+.outdoor-img-thumb:hover {
+
+} */
+
+.weather-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.low-temp {
+    color: gray;
+}
+
+.current-deets {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.outdoor-plant-stats {
+    
+    width: 100%;
+    font-size: 25px;
+    
+}
+
+.outdoor-plant-stat {
+    margin: 0;
+    /* border-bottom: 1px solid lightgray; */
+    /* width: 125px; */
+    justify-content: center;
+    text-align: center;
+}
+
+.outdoor-plant-stat:hover {
+    background-color: darkgrey;
+}

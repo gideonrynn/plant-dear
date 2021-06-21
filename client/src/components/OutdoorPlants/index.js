@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react'
 import { useLocation, withRouter } from "react-router-dom";
 import PlantBlockAll from "../PlantBlockAll/PlantBlock"
+import Outdoor from "../../img/outdoor-1.jpg"
 import './style.css'
 // weather context
 // plant data
 // condition that checks the hardiness
 
-const ForecastPlantHardiness = (data) => {
+const OutdoorPlants = (data) => {
     
     const forecastWeather = data.weather;
     const plants = data.plants;
@@ -17,37 +18,77 @@ const ForecastPlantHardiness = (data) => {
         console.log("ForecastPlantHardiness component rendered");
     }, [])
 
-    // let d = new Date(forecastWeather[0].valid_date);
-    // console.log(d.toLocaleDateString('en-US', {timeZone: 'UTC'}));
-    // console.log("Forecast weather for ForecastPlantHardiness component", forecastWeather);
-    // console.log("Active plants for ForecastPlantHardiness component", plants);
-
     // get all the plants that are outdoors and have an existing hardiness
     let outdoorPlants = plants.filter(plants => { 
         return plants.hardiness !== "" && plants.location === "outdoor"
     });
+    let outdoorPlantsFirst = outdoorPlants[0];
+    let outdoorPlantsThumbs = outdoorPlants.slice(2, 5);
     let outdoorPlantsVol = outdoorPlants.length;
-    console.log("Outdoor plants", outdoorPlants)
+    let outdoorRepot = plants.filter(plants => { 
+        return plants.location === "outdoor" && (plants.lastPotted === null || plants.lastPotted === undefined || plants.lastPotted === "")
+    });
+    let outdoorRepotVol = outdoorRepot.length;
+    let outdoorDry = plants.filter(plants => { 
+        return plants.location === "outdoor" && plants.waterPref.includes("dry")
+    });
+    let outdoorDryVol = outdoorDry.length;
+    let outdoorModerate = plants.filter(plants => { 
+        return plants.location === "outdoor" && plants.waterPref.includes("moderate")
+    });
+    let outdoorModerateVol = outdoorModerate.length;
+    let outdoorWet = plants.filter(plants => { 
+        return plants.location === "outdoor" && plants.waterPref.includes("moist")
+    });
+    let outdoorWetVol = outdoorWet.length;
+
+    // console.log("First", outdoorPlantsFirst)
+    // console.log("Outdoor plants", outdoorPlants)
 
     /*Winter safe qualifies as plants with a hardiness equal to or less than Chicago's (-20)
     Exclude records where the hardinessZoneMin does not exist*/
-    let outdoorWinterSafe = plants.filter(plants => { 
-        return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
-    });
-    console.log("Winter safe plants: ", outdoorWinterSafe);
-    // let outdoorWinterSafeMaybe = plants.filter(plants => { 
-    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 7 || plants.hardiness <= 0) && plants.cycle === "perennial"
+    // let outdoorWinterSafe = plants.filter(plants => { 
+    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
     // });
+    // console.log("Winter safe plants: ", outdoorWinterSafe);
+
 
     return (
-        <div className="forecast-plant-hardiness-section">
+        <div className="outdoor-plant-section">
 
-            <header className="forecast-allplants-header"><h2>All Outdoor Plants</h2></header>
-
-            <p className="outdoor-plants-number">{outdoorPlantsVol}</p>
+            {/* <header className="outdoor-plant-header"><h2>Outdoor</h2></header> */}
 
             {pathname === "" ? 
                 <>
+
+                
+                <div className="current-deets">
+                    <div className="outdoor-plant-stats">
+                        <p className="outdoor-plant-stat"><b>{outdoorPlantsVol} </b>dears enjoying the great outdoors</p>
+                        <p className="outdoor-plant-stat"><b>{outdoorRepotVol}</b> may need repotting</p>
+                        <p className="outdoor-plant-stat"><b>{outdoorDryVol}</b> like it dry</p>
+                        <p className="outdoor-plant-stat"><b>{outdoorModerateVol}</b> like it moderate</p>
+                        <p className="outdoor-plant-stat"><b>{outdoorWetVol}</b> like it wet</p>
+
+                    </div>
+                </div>
+                <div className="outdoor-plant-images">
+                    
+                    {/* <div className="outdoor-thumbnails">
+                        {outdoorPlantsThumbs.map(plants => (
+                            <img src={`/img/${plants.imgURL}`} alt="Outdoor plant thumb" className="outdoor-img-thumb"/>
+                        ))}
+                        
+                    </div> */}
+                    <div className="outdoor-main">
+                        {
+                            // outdoorPlantsFirst ? <img src={`/img/${outdoorPlantsFirst.imgURL}`} alt="Outdoor plant" className="outdoor-img-main"/> : ""
+                            <img src={Outdoor} alt="Outdoor plant" className="outdoor-img-main"/>
+
+                        }
+                    </div>
+                    
+                </div>
                     {/* <div className="forecast-alloutdoor">
                         {outdoorPlants.map(plants => (
                             <div className="plant-outdoor" key={plants._id}>
@@ -62,15 +103,14 @@ const ForecastPlantHardiness = (data) => {
 
                     <hr></hr> */}
 
-                <header className="forecast-plant-header"><h2>Outdoor Plants versus Low Temp</h2></header>
+                {/* <header className="forecast-plant-header"><h2>Outdoor Plants versus Low Temp</h2></header> */}
         
-                <div className="forecast-options">
+                {/* <div className="forecast-options">
                     {forecastWeather.map(weather => (
                         <div key={weather.uv} className="forecast-weather">
                             <p>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'})}</p> { }
                             <span>H: {weather.high_temp}</span> { }
                             <span className="low-temp">L: {weather.low_temp}</span> { }
-                            {/* <span>{weather.weather.description}</span> { } */}
                             <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`} className="weather-icon"></img>
                             <div className="forecast-plants">
                                 {outdoorPlants.map(plants => (
@@ -78,33 +118,30 @@ const ForecastPlantHardiness = (data) => {
                                     <div key={plants.id}>
                                         <span>{plants.name}</span> { }
                                         <span>({plants.hardiness}&#176;)</span> { }
-                                        {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
                                     </div> : null
                                 ))}
                             </div>
                         </div>
                     ))}
                     
-                </div>
+                </div> */}
 
-            <hr></hr>
+            {/* <hr></hr> */}
 
-            <header className="forecast-wintersafe-header"><h2>Winter Safe</h2></header>
+            {/* <header className="forecast-wintersafe-header"><h2>Winter Safe</h2></header> */}
 
-            <div className="winter-safe">
+            {/* <div className="winter-safe">
                 {outdoorWinterSafe.map(plants => (
                         <div key={plants._id}>
                             <span>{plants.name}</span> { }
                             <span>({plants.hardiness}&#176;)</span> { }
                             <span>Zone {plants.hardinessZoneMin || "not listed"}</span> { }
                             <span>{plants.cycle}</span> { }
-                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
+                            <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img>
                         </div>
                     ))}
-
-                <PlantBlockAll plants={outdoorWinterSafe}/>
                 
-            </div>
+            </div> */}
 {/* 
             <header className="forecast-wintersafe-header"><h2>Maybe Winter Safe</h2></header>
             <div className="winter-safe-maybe">
@@ -126,4 +163,4 @@ const ForecastPlantHardiness = (data) => {
     )
 };
 
-export default ForecastPlantHardiness;
+export default OutdoorPlants;
