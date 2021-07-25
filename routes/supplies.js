@@ -9,17 +9,6 @@ router.get('/all', (req, res) => {
 });
 
 
-// router.get('/onetask', (req, res) => {
-    
-//   db.Task.findOne({
-//     where: {id: 5},
-//     include: { model: db.Plant, as: 'Plant' }
-//   })
-//     .then(tasks => res.json(tasks))
-//     .catch(err => {console.log(err)})
-
-// });
-
 router.post("/supplies", ({body}, res) => {
 
   db.Supplies.create(body)

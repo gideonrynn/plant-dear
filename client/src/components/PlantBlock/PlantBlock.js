@@ -8,6 +8,21 @@ import './style.css';
 const PlantBlock = (data) => {
     const [onePlantId, setOnePlantId] = useState([])
     const [onePlant, setOnePlant] = useState([])
+
+    const plants = data.plants;
+
+    // const plantsByDate = plants.sort((a,b) => {
+    //     if (a.createdAt > b.createdAt) return -1;
+    //     if (a.createdAt < b.createdAt) return 1;
+    //     return 0;
+    // })
+
+    const plantsByName = plants.sort((a,b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+    })
+
     // handle modal
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -34,19 +49,7 @@ const PlantBlock = (data) => {
      }
 
 
-    const plants = data.plants;
-
-    // const plantsByDate = plants.sort((a,b) => {
-    //     if (a.createdAt > b.createdAt) return -1;
-    //     if (a.createdAt < b.createdAt) return 1;
-    //     return 0;
-    // })
-
-    const plantsByName = plants.sort((a,b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-    })
+    
     // const uniquePlants = [...new Set(plantsByDate.map(data => data.name))]
     
     // console.log(uniquePlants);
@@ -66,10 +69,10 @@ const PlantBlock = (data) => {
                                 <img src={`/img/${plants.imgURL}`} alt="plant dear" className="plant-img-block" onClick={() => getPlant(plants._id)} />
                                 <p className="plant-title-img">{plants.name}</p>
                             </div>
-                            <div key={plants._id+1} className="plant-block-2">
+                            <div key={plants._id+1} className="plant-block-2" onClick={() => getPlant(plants._id)}>
                                 <p>{plants.name}</p>
                                 <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                <p>{plants.lastWatered ? "last watered on " + plants.lastWatered.split('T')[0] : "not watered yet"}</p>
+                                <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
                                 <p>{plants.waterPref} watering conditions</p>
                                 {/* <button className="plant-card-2-btn">Open plant</button> */}
                             </div>

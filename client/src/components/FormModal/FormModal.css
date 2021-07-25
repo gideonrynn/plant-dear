@@ -1,57 +1,85 @@
 
-/* .modal {
-    position: fixed;
+.modal-plant {
+  position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 1;
   transition: all 0.3s ease-in-out;
-  pointer-events: none;
-  
-} */
+  z-index: 990;
+  /* position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 990;
+  transition: all 0.3s ease-in-out; */
 
+}
 
-.modal.enter-done {
-    opacity: 1;
-    pointer-events: visible;
-  }
+.modal-plant .modal-plant-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 995;
+  background: rgba(0,0,0,0.8);
+}
+
   
-  .modal.exit {
-    opacity: 0;
-  }
+.modal-plant .modal-plant-content {
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 90%;
+  overflow: auto;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 20px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.7);
+  border-radius: 4px;
+  width: 520px; /* This just a default width */
+  /* width: 500px;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+  transform: translateY(-200px); */
+} 
   
-   /* .modal-content {
-    width: 500px;
-    background-color: #fff;
-    transition: all 0.3s ease-in-out;
-    transform: translateY(-200px);
-  } 
-   */
-  .modal.enter-done .modal-content {
+  /* .modal.enter-done1 .modal-content1 {
     transform: translateY(0);
   }
   
-  .modal.exit .modal-content {
+  .modal.exit .modal-content1 {
     transform: translateY(-200px);
-  }
+  } */
   
-  .modal-header,
-  .modal-footer {
+  .modal-plant-header,
+  .modal-plant-footer {
     padding: 10px;
   }
   
-  .modal-title {
+  .modal-plant-title {
     margin: 0;
   }
   
-  /* .modal-body {
+  .modal-plant-body {
     padding: 10px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
+    z-index: 995;
   } 
+  
+  /* .modal-plant .modal-plant-close {
+    position: absolute;
+    font-size: 18px;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+  }
    */

@@ -5,22 +5,47 @@ import './FormModal.css'
 
 function FormModal(props) {
 
+    const [show, setShow] = useState(false);
+
     console.log(props.show);
+
+    useEffect(() => {
+
+        if (props.show === true) {
+            handleShow();
+        }
+        // right now, none of the sorted 
+        // loadSortedPlants()
+        console.log("Modal triggered")
+        
+    }, [props])
+
+
+    function handleClose() {
+        console.log("Modal close clicked")
+        setShow(false);
+    };
+
+    function handleShow() {
+        setShow(true)
+    };
 
     return (
 
         <>
-        {!props.show ? null 
-            : <div className="modal">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h4 className="modal-title">Modal Thing</h4>
-                    </div>
-                    <div className="modal-body">
-                        Here's a modal thing
-                    </div>
-                    <div className="modal-footer">
-                        <button className="button">Close</button>
+        {!show ? null 
+            : <div className="modal-plant">
+                <div className="modal-plant-wrapper">
+                    <div className="modal-plant-content">
+                        <div className="modal-plant-header">
+                            <h4 className="modal-plant-title">Modal Thing</h4>
+                        </div>
+                        <div className="modal-plant-body">
+                            Here's a modal thing
+                        </div>
+                        <div className="modal-plant-footer">
+                            <button className="button modal-plant-close" onClick={handleClose}>Close</button>
+                        </div>
                     </div>
                 </div>
             </div>

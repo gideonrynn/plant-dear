@@ -79,7 +79,9 @@ function AddPlants() {
                     <Form.Control as="select" placeholder="" name="status" onChange={handleInputChange}>
                         <option></option>
                         <option>inactive</option>
+                        <option>incoming</option>
                         <option>in progress</option>
+                        <option>wishlist</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLocation">

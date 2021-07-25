@@ -231,7 +231,9 @@ function ReviewPlant(props) {
                     </Form.Group>
                     <Form.Group as={Col} controlId="formLastWatered" >
                         <Form.Label>Last Watered</Form.Label>
-                        <Form.Control type="date" name="lastWatered" defaultValue={thisPlant.lastWatered ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : thisPlant.lastWatered} onChange={handleInputChange}/>
+                        {/* <Form.Control type="date" name="lastWatered" defaultValue={thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : thisPlant.lastWatered} onChange={handleInputChange}/> */}
+                        <Form.Control type="date" name="lastWatered" defaultValue={thisPlant.lastWatered} onChange={handleInputChange}/>
+                            {/* <Form.Text className="text-muted">
                             {/* <Form.Text className="text-muted">
                             YYYY-MM-DD.
                             </Form.Text> */}
