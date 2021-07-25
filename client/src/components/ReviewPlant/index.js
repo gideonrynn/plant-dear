@@ -56,6 +56,7 @@ function ReviewPlant(props) {
             imgURL: modPlant.imgurl,
             links: modPlant.links,
             notes: modPlant.notes,
+            description: modPlant.description,
             createdAt: modPlant.createdAt,
 
         })
@@ -284,6 +285,13 @@ function ReviewPlant(props) {
                     <Form.Group as={Col} controlId="formLinks" >
                         <Form.Label>Links</Form.Label>
                         <Form.Control type="text" name="links" defaultValue={thisPlant.links}  onChange={handleInputChange}/>
+                    </Form.Group>
+
+                </Form.Row>
+                <Form.Row>  
+                    <Form.Group as={Col} controlId="formDescription" >
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control as="textarea" name="description" rows="5" defaultValue={thisPlant.description} onChange={handleInputChange}/>
                     </Form.Group>
 
                 </Form.Row>

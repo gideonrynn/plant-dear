@@ -46,7 +46,8 @@ function AddPlants() {
             lastPotted: newPlant.lastPotted,
             imgURL: newPlant.imgurl,
             links: newPlant.links,
-            notes: newPlant.notes
+            notes: newPlant.notes,
+            description: newPlant.description
         })
             .then(window.location.reload(true))
             .catch(err => console.log(err))
@@ -208,6 +209,10 @@ function AddPlants() {
                 <Form.Group controlId="formLinks" >
                     <Form.Label>Links</Form.Label>
                     <Form.Control type="text" placeholder="" name="links" onChange={handleInputChange}/>
+                </Form.Group>
+                <Form.Group controlId="formDescription" >
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control as="textarea" placeholder="" name="description" rows="3" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formNotes" >
                     <Form.Label>Notes</Form.Label>

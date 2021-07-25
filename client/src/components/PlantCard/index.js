@@ -91,7 +91,7 @@ function PlantCard(p) {
      }
 
     return (
-        <Container>
+        <>
             
             <h3>All growing plant dears ({p.actcounter})</h3>
             <hr/>
@@ -184,7 +184,7 @@ function PlantCard(p) {
                 </div>
                 
             ))}
-            <button className="always">Jump to top</button>
+            {/* <button className="always">Jump to top</button> */}
 
             <h3>Inactive plant dears ({p.inactcounter})</h3>
             <hr/>
@@ -290,7 +290,7 @@ function PlantCard(p) {
                 </Modal.Footer>
                 </Modal>   
             
-        </Container>
+        </>
     )
 } 
 

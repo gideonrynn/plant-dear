@@ -12,6 +12,7 @@ import { WeatherProvider } from '../src/context/WeatherContext';
 import { PlantProvider } from '../src/context/PlantContext';
 import Tasks from './pages/Tasks';
 import HeaderAll from './components/HeaderAll/HeaderAll';
+import PlantOnly_Render from './pages/PlantOnly_Render';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/" component={Home}/>
           <Route exact path="/plants" component={Plants}/>
           <Route exact path="/sorting" component={Sorting}/>
+          <Route exact path="/plantonly" component={PlantOnly_Render}/>
           <Route exact path="/weather" component={Weather}/>
           <Route exact path="/addnewplants" component={AddNewPlant}/>
           <Route exact path="/tasks" component={Tasks}/>

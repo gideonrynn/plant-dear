@@ -60,7 +60,7 @@ function Sorting () {
 
     return (
         <div className="plantsdiv">
-            <h1> Plants By Location</h1>
+            {/* <h1> Plants By Location</h1> */}
 {/* 
             <input 
                 type="text"

@@ -96,6 +96,9 @@ const plantSchema = new Schema({
     watching: {
         type: String
     },
+    description: {
+        type: String
+    },
     notes: {
         type: String
     },

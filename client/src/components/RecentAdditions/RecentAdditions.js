@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import './style.css';
 import MorePlants from '../../img/deskplants.jpeg';
+import { FaExternalLinkAlt } from "react-icons/fa"
 
 const RecentAdditions = (data) => {
 
@@ -85,7 +86,7 @@ const RecentAdditions = (data) => {
             </div> */}
 
             <div className="new-plant-section">
-                <h3 className="recent-plant-header">Indoor</h3>
+                <h3 className="recent-plant-header">In</h3>
 
                 <div className="most-recent-indoor">
                     <>
@@ -98,6 +99,7 @@ const RecentAdditions = (data) => {
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
                                 <div key={plants._id+1} className="plant-card-2">
+                                    <FaExternalLinkAlt className="fa-exl"/>
                                     <p>{plants.name}</p>
                                     <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
                                     <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
@@ -124,7 +126,7 @@ const RecentAdditions = (data) => {
             </div>
 
             <div className="new-plant-section">
-                <h3 className="recent-plant-header">Outdoor</h3>
+                <h3 className="recent-plant-header">Out</h3>
 
                 <div className="most-recent-outdoor">
                     <>
