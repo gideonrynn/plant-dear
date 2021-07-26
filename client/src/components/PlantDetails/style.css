@@ -1,26 +1,19 @@
-/* img.plant-details-imgurl {
-} */
-
-.row {
-    /* width: 100%; */
-    display: flex;
-    
-}
-
-
 /* *, ::after, ::before {
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
 } */
-.plant-details-sec {
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
+.row {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    width: 100%;
+    margin: 20px;
 }
 
-.description-plant {
-    white-space: pre-wrap;
-}
-
-.plant-details-card {
+.plant-details-card-y {
     /* max-width: 600px; */
     min-width: 500px;
     background-color: white;
@@ -29,8 +22,9 @@
     margin: 2px;
 }
 
-.plant-details-header {
-    padding: 20px;
+
+img.plant-details-imgurl {
+    margin-left: 20px;
 }
 
 .plant-details-name, .plant-details-botanical {
@@ -41,10 +35,13 @@
 
 .plant-details-botanical {
     font-size: 40px;
+    font-style: italic;
+    border: none;
 }
 
 .plant-details-name {
     font-size: 50px;
+    border: none;
 }
 
 .plant-card-details-group, .button-section-header {
@@ -54,7 +51,6 @@
 .plant-card-details {
     list-style-type: none;
     border-bottom: 0.03em solid lightgrey;
-    padding: 10px;
     /* word-wrap: break-word; */
     /* border-style: inset; */
     /* opacity: 0.5; */
@@ -83,3 +79,73 @@ button.always:hover {
     background-color: lightgrey;
 }
 
+.plant-details-label {
+    /* width: 100%; */
+    text-align: left;
+    margin-left: 20px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+textarea.plant-textarea {
+    width: 80vw;
+    height: 150px;
+    /* resize: none; */
+    border: none;
+    margin-left: 20px;
+    margin-right: 0;
+    padding: 0px;
+    border-bottom: 0.03em solid lightgrey;
+}
+
+input.plant-details {
+    margin-left: 20px;
+    border: none;
+    width: 250px;
+}
+
+input.plants-details-name {
+    margin-left: 20px;
+    border: none;
+    width: 500px;
+}
+
+select.plant-details {
+    margin-left: 20px;
+    border: none;
+}
+/* 
+//need this if rendering in-line
+//commented out now that I'm using a textarea
+.plant-description {
+    white-space: pre-wrap;
+} */
+
+/* .plant-details-section {
+    margin-left: 20px;
+    text-align: left;
+} */
+
+.plant-details-group {
+    display:grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap:5px;
+    padding-bottom: 20px;
+}
+
+.plant-details-label {
+    text-align: right;
+}
+
+.plant-details-label:after {
+    content: ":";
+}
+.plant-details-left {
+    width: 40vw;
+    margin-right: 50px;
+}
+
+.plants-details-right {
+    width: 40vw;
+}

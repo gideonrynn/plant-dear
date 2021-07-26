@@ -8,7 +8,7 @@ import PlantDetails from "../../components/PlantDetails";
 function PlantOnly_Render () {
 
     const plant = useContext(PlantContext);
-    let onePlantOnly = plant.activePlants[132];
+    let onePlantOnly = plant.activePlants[133];
 
     console.log(onePlantOnly);
     return (
