@@ -2,10 +2,21 @@ import React, {useEffect} from 'react';
 import './style.css';
 import MorePlants from '../../img/deskplants.jpeg';
 import { FaExternalLinkAlt } from "react-icons/fa"
+import { useHistory } from 'react-router-dom';
 
 const RecentAdditions = (data) => {
 
     const plants = data.plants;
+    const history = useHistory();
+
+    function handleClick(event, id) {
+        console.log("clicked", event.target.id);
+        
+        console.log(id);
+        history.push({
+            pathname: "plantonly",
+            state: { detail: event.target.id }});
+    }
 
     const plantsByDate = plants.sort((a,b) => {
         if (a.createdAt > b.createdAt) return -1;
@@ -94,16 +105,16 @@ const RecentAdditions = (data) => {
                         {mostRecentIndoor.map(plants => (
                             
                             <div className="plant-card-wrapper">
-                                <div key={plants._id} className="plant-card">
+                                <div key={plants._id+1} className="plant-card">
                                     <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
-                                <div key={plants._id+1} className="plant-card-2">
-                                    <FaExternalLinkAlt className="fa-exl"/>
-                                    <p>{plants.name}</p>
-                                    <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
-                                    <p>{plants.waterPref} watering conditions</p>
+                                <div key={plants._id} id={plants._id} className="plant-card-2" onClick={handleClick}>
+                                    <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
+                                    <p id={plants._id}>{plants.name}</p>
+                                    <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
+                                    <p id={plants._id}>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
+                                    <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                     {/* <button className="plant-card-2-btn">Open plant</button> */}
                                 </div>
                             </div>
@@ -137,7 +148,7 @@ const RecentAdditions = (data) => {
                                     <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
-                                <div key={plants._id+1} className="plant-card-2">
+                                <div key={plants._id+1} className="plant-card-2" onClick={handleClick}>
                                     <p>{plants.name}</p>
                                     <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
                                     <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>

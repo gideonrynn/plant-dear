@@ -3,6 +3,7 @@ import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Mod
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
 import FormModal from "../../components/FormModal/FormModal"
+import { useHistory } from 'react-router-dom';
 import './style.css';
 
 const PlantBlock = (data) => {
@@ -10,6 +11,16 @@ const PlantBlock = (data) => {
     const [onePlant, setOnePlant] = useState([])
 
     const plants = data.plants;
+    const history = useHistory();
+
+    function handleClick(event, id) {
+        console.log("clicked", event.target.id);
+        
+        console.log(id);
+        history.push({
+            pathname: "plantonly",
+            state: { detail: event.target.id }});
+    }
 
     // const plantsByDate = plants.sort((a,b) => {
     //     if (a.createdAt > b.createdAt) return -1;
@@ -66,10 +77,10 @@ const PlantBlock = (data) => {
                         <>
                         <div className="plant-block-wrapper">
                             <div key={plants._id} className="plant-block">
-                                <img src={`/img/${plants.imgURL}`} alt="plant dear" className="plant-img-block" onClick={() => getPlant(plants._id)} />
+                                <img src={`/img/${plants.imgURL}`} alt="plant dear" className="plant-img-block"  />
                                 <p className="plant-title-img">{plants.name}</p>
                             </div>
-                            <div key={plants._id+1} className="plant-block-2" onClick={() => getPlant(plants._id)}>
+                            <div key={plants._id+1} id={plants._id} className="plant-block-2" onClick={handleClick}>
                                 <p>{plants.name}</p>
                                 <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
                                 <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
@@ -86,17 +97,17 @@ const PlantBlock = (data) => {
 
 
 
-            <FormModal show={show}>
+            {/* <FormModal show={show}> */}
                 {/* <Modal.Header style={{backgroundColor: '#887FE5'}} closeButton> */}
                     {/* <Modal.Title>{onePlant.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body> */}
-                    <ReviewPlant onePlant={onePlant} id={onePlantId}/>
+                    {/* <ReviewPlant onePlant={onePlant} id={onePlantId}/> */}
                 {/* </Modal.Body>
                 <Modal.Footer>
                             
                 </Modal.Footer> */}
-            </FormModal>   
+            {/* </FormModal>    */}
         </>
     )
 };
