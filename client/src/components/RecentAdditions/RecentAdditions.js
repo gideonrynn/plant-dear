@@ -148,7 +148,8 @@ const RecentAdditions = (data) => {
                                     <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
-                                <div key={plants._id+1} className="plant-card-2" onClick={handleClick}>
+                                <div key={plants._id+1} id={plants._id} className="plant-card-2" onClick={handleClick}>
+                                    <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p>{plants.name}</p>
                                     <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
                                     <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
