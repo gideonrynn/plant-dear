@@ -13,6 +13,7 @@ function PlantDetails(p) {
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
     const [modPlant, setModPlant] = useState({});
+    // const [updated, setUpdated] = useState(false);
     // const [onePlant, setOnePlant] = useState([])
     // const [onePlantId, setOnePlantId] = useState([])
     
@@ -70,15 +71,20 @@ function PlantDetails(p) {
             lastPotted: modPlant.lastPotted,
             lastWatered: modPlant.lastWatered,
             propogating: modPlant.propogating,
-            imgURL: modPlant.imgurl,
+            imgURL: modPlant.imgURL,
             links: modPlant.links,
             notes: modPlant.notes,
             description: modPlant.description,
             createdAt: modPlant.createdAt,
 
         })
-            .then(console.log("updated"))
+            .then(window.location.reload()
+                // setUpdated(true)
+            )
             .catch(err => console.log(err))
+
+        
+
     }
 
     // probably will not need modal
@@ -115,8 +121,8 @@ function PlantDetails(p) {
             {
                 lastWatered: date,
             })
-            // .then(window.location.reload(true))
-            // .catch(err => console.log(err))
+            .then(window.location.reload())
+            .catch(err => console.log(err))
     }
 
     function deletePlant(id) {
@@ -143,15 +149,19 @@ function PlantDetails(p) {
                                     <div className="plant-details-group">
                                         <input 
                                             type="textarea"
+                                            name="name"
                                             defaultValue={thisPlant.name}
                                             className="plant-details-name"
+                                            onChange={handleInputChange}
                                             />
                                     </div>
                                     <div className="plant-details-group">
                                         <input 
                                             type="textarea"
+                                            name="botanicalName"
                                             defaultValue={thisPlant.botanicalName}
                                             className="plant-details-botanical"
+                                            onChange={handleInputChange}
                                             />    
                                     </div>
                                     <div className="plant-details-group">
@@ -247,11 +257,15 @@ function PlantDetails(p) {
                                             </select>
                                     </div>
                                     <div className="plant-details-group">
-                                        <p className="plant-details-label">Last Watered</p>
-                                        <input 
+                                        <p className="plant-details-label">Last Potted</p>
+                                        <input
+                                            type="date"
+                                            name="lastPotted"
                                             className="plant-details"
-                                            defaultValue={thisPlant.lastWatered ? thisPlant.lastWatered : null}/>
+                                            defaultValue={thisPlant.lastPotted ? thisPlant.lastPotted.split('T')[0] : null}
+                                            onChange={handleInputChange}/>
                                     </div>
+                                    {/* <p>Last Potted: {thisPlant.lastPotted}</p> */}
                                     <div className="plant-details-group">
                                         <p className="plant-details-label">Sunlight</p>
                                             <select
@@ -465,6 +479,7 @@ function PlantDetails(p) {
                                         <p className="plant-details-label">Image URL</p>
                                         <input 
                                             className="plant-details"
+                                            name="imgURL"
                                             defaultValue={thisPlant.imgURL}
                                             onChange={handleInputChange}/>
                                     </div>
@@ -499,9 +514,26 @@ function PlantDetails(p) {
                                     </div>        
                                 </div>
                             </div>
+                            <div className="row">
+                                <div className="column">
+                                    <div className="plant-details-group"> 
+                                        <p className="plant-details-label">Tasks</p>
+                                        <p>Here is where I will put tasks</p>
+                                    </div>
+                                    <div>
+                                        {/* add task */}
+                                    </div>
+                                </div>
+                            </div>
 
                             <div className="row button-section">
                                 <div className="column">
+                                    <div className="plant-details-group">
+                                        <p className="plant-details-label">Last Watered</p>
+                                        <input 
+                                            className="plant-details"
+                                            defaultValue={thisPlant.lastWatered ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1] : null}/>
+                                    </div>
                                     <ul>
                                         {/* <li className="plant-card-details"> */}
                                         <p className="button-section-header"><b>Watered</b></p>
@@ -509,6 +541,7 @@ function PlantDetails(p) {
                                         <button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(thisPlant._id, 1)} className="water-button">Yesterday</button>
                                         <button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(thisPlant._id, 2)} className="water-button">Two Days</button>
                                         <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(thisPlant._id, 3)} className="water-button">Three Days</button>
+                                        <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(thisPlant._id, 4)} className="water-button">Four Days</button>
                                         <button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(thisPlant._id, 7)} className="water-button">One Week</button>
                                     {/* </li> */}
                                     </ul>
@@ -532,7 +565,7 @@ function PlantDetails(p) {
                                     </div>
                                
                             </div>
-                            <button type="submit" onClick={handleFormSubmit}>Submit</button>
+                            <button type="submit" onClick={handleFormSubmit}>Submit</button><span className="last-submitted"></span>
                           
                         </div>
 

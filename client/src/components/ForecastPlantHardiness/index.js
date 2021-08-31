@@ -37,12 +37,13 @@ const ForecastPlantHardiness = (data) => {
         return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
     });
     console.log("Winter safe plants: ", outdoorWinterSafe);
-    // let outdoorWinterSafeMaybe = plants.filter(plants => { 
-    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 7 || plants.hardiness <= 0) && plants.cycle === "perennial"
-    // });
+    let outdoorWinterSafeMaybe = plants.filter(plants => { 
+        return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 7 || plants.hardiness <= 0) && plants.cycle === "perennial"
+    });
 
     return (
         <div className="forecast-plant-hardiness-section">
+            <h1>Upcoming weather with plants in danger</h1>
 
             {pathname === "" ? 
                 <>
@@ -88,7 +89,7 @@ const ForecastPlantHardiness = (data) => {
                 <PlantBlockAll plants={outdoorWinterSafe}/>
                 
             </div> */}
-{/* 
+
             <header className="forecast-wintersafe-header"><h2>Maybe Winter Safe</h2></header>
             <div className="winter-safe-maybe">
                 {outdoorWinterSafeMaybe.map(plants => (
@@ -97,11 +98,11 @@ const ForecastPlantHardiness = (data) => {
                             <span>({plants.hardiness}&#176;)</span> { }
                             <span>Zone {plants.hardinessZoneMin || "not listed"}</span> { }
                             <span>{plants.cycle}</span> { }
-                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img>}
+                            {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
                         </div>
                     ))}
                 
-            </div> */}
+            </div>
             </>: <p>This is not the home page</p>
             }
             
