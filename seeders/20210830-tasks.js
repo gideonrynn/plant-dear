@@ -1,4 +1,15 @@
-{
+let mongoose = require("mongoose");
+let db = require("../models");
+
+mongoose.connect("mongodb://localhost/plantdear", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+
+
+let taskSeed = [
+  {
     "_id" : ObjectId("60984447c2d36c65f49e8a21"),
     "taskName" : "Bring plants that are not cold hardy inside and move other plants to wall",
     "taskDetail" : "Check plants that are outdoors. Any of them that are not doing well and are specifically on the railing should be moved away from the ledge. Thyme should be ok. Take wire tables and move to back, put lettuce and other greens on there. Leave this task open until they are put back outside.",
@@ -170,3 +181,16 @@
     "updatedAt" : ISODate("2021-07-27T12:24:35.662-05:00"),
     "__v" : 0
 }
+  ];
+  
+  db.Task.deleteMany({})
+  .then(() => db.Task.collection.insertMany(taskSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+

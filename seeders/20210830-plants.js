@@ -1,4 +1,14 @@
-{
+let mongoose = require("mongoose");
+let db = require("../models");
+
+mongoose.connect("mongodb://localhost/plantdear", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+
+let plantsSeed = [
+  {
     "_id" : ObjectId("609826aeeb53ee6b3059ec6d"),
     "name" : "Dumb Cane",
     "botanicalName" : "Dieffenbachia",
@@ -5971,3 +5981,18 @@
     "imgURL" : "crassula-tiger-jade.jpg",
     "lastPotted" : ISODate("2021-08-13T19:00:00.000-05:00")
 }
+  //  {"name":"", "botanicalName":"", "status":"", "location":"", "locationSec":"", "locationPreferred":"", "waterPref":"", "lastWatered":"", "nextWater":"", "waterRate":"", "sunlight":[], "plantType":"", "trouble":"", "needsCare":"", "humidity":"", "heightLow":"", "heightHigh":"", "tempLow":"", "tempHigh":"", "hardiness":"", "tolerance":"", "pH":"", "soilContent":"", "cycle":"", "hardinessZoneMin":"", "hardinessZoneMax": "", "lastPotted":"", "imgURL":"", "links":[], "propogating":"", "watching":"", "notes":"", "createdAt":"", "updatedAt":""
+  //  },
+
+  ];
+  
+  db.Plant.deleteMany({})
+  .then(() => db.Plant.collection.insertMany(plantsSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });

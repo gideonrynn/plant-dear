@@ -1,4 +1,14 @@
-{
+let mongoose = require("mongoose");
+let db = require("../models");
+
+mongoose.connect("mongodb://localhost/plantdear", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+
+let hardinessZoneSeed = [
+  {
     "_id" : ObjectId("60975a30cd5c3d33d8272706"),
     "zone" : "1a",
     "rangeLow" : "-60.0",
@@ -206,3 +216,16 @@
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
 }
+
+];
+
+db.HardinessZone.deleteMany({})
+  .then(() => db.HardinessZone.collection.insertMany(hardinessZoneSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
