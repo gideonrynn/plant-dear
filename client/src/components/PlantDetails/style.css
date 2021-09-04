@@ -150,3 +150,13 @@ select.plant-details {
     width: 40vw;
     margin-right: 50px;
 }
+
+.color-coding {
+    text-align: left;
+    margin-bottom: 10px;
+    /* justify-content: start; */
+}
+
+.color-coding-details {
+    margin: 0;
+}

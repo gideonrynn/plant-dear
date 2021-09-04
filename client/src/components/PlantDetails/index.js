@@ -528,6 +528,16 @@ function PlantDetails(p) {
 
                             <div className="row button-section">
                                 <div className="column">
+                                    <div className="color-coding">
+                                        <p className="button-section-header"><b>Color Coding</b></p>
+                                        <p style={{backgroundColor: 'yellow'}} className="color-coding-details">Monday = yellow</p>
+                                        <p style={{backgroundColor: 'green'}} className="color-coding-details">Tuesday = green</p>
+                                        <p style={{backgroundColor: 'blue'}} className="color-coding-details">Wednesday = blue</p>
+                                        <p style={{backgroundColor: 'purple'}} className="color-coding-details">Thursday = purple</p>
+                                        <p style={{backgroundColor: 'pink'}} className="color-coding-details">Friday = pink</p>
+                                        <p style={{backgroundColor: 'red'}} className="color-coding-details">Saturday = red</p>
+                                        <p style={{backgroundColor: 'orange'}} className="color-coding-details">Sunday = orange</p>
+                                    </div>
                                     <div className="plant-details-group">
                                         <p className="plant-details-label">Last Watered</p>
                                         <input 
@@ -544,6 +554,7 @@ function PlantDetails(p) {
                                         <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(thisPlant._id, 4)} className="water-button">Four Days</button>
                                         <button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(thisPlant._id, 7)} className="water-button">One Week</button>
                                     {/* </li> */}
+                                    
                                     </ul>
                                 </div>
                             
