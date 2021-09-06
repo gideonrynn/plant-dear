@@ -1,0 +1,36 @@
+.by-location-section {
+    background-color: lightgrey;
+    /* margin-top: 80px; */
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+    /* border-radius: 30px; */
+}
+
+.weather-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.low-temp {
+    color: gray;
+}
+
+.forecast-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 150px);
+  grid-template-rows: fit-content(1em);
+
+}
+
+.forecast-weather {
+    margin: 10px;
+}
+
+.forecast-alloutdoor {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.outdoor-plants-number {
+    font-size: 25px;
+}

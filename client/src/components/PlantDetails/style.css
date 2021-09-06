@@ -59,6 +59,8 @@ img.plant-details-imgurl {
 .water-button {
     border-radius: 4px; 
     padding: 5px;
+    width: 135px;
+    height: 40px;
 }
 
 button.always {
@@ -86,6 +88,14 @@ button.always:hover {
     padding-bottom: 0;
     margin-bottom: 0;
     font-weight: bold;
+}
+
+.plant-details-comment {
+    /* width: 100%; */
+    text-align: left;
+    /* margin-left: 20px; */
+    padding-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 textarea.plant-textarea {
@@ -159,4 +169,9 @@ select.plant-details {
 
 .color-coding-details {
     margin: 0;
+}
+
+.button-section {
+    margin-left: 20px;
+    text-align: left;
 }

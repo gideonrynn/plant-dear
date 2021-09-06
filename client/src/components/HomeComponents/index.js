@@ -23,6 +23,7 @@ import {WeatherContext} from "../../context/WeatherContext"
 import {PlantContext} from "../../context/PlantContext"
 import './index.css'
 import RecentAdditions from "../RecentAdditions/RecentAdditions";
+import ByLocation from "../ByLocation";
 
 
 
@@ -46,7 +47,10 @@ function HomeComponents() {
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
                                 </div> */
                         <div>
-
+                                <div>
+                                        <p>By Location</p>
+                                        <ByLocation plants={activePlants}/>
+                                </div>
                                 <div className="newplant-section">
                                         <RecentAdditions plants={activePlants}/>
 
