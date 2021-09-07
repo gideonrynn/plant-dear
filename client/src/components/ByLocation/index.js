@@ -122,8 +122,8 @@ const ByLocation = (data) => {
 
                             {plantsByLocation.map(plants => (
 
-                                <tr key={plants._id} onClick={handleClick} >
-                                    <th className="plant-table-row" id={plants._id}>{plants.name}</th>
+                                <tr key={plants._id}  >
+                                    <th className="plant-table-row" id={plants._id} onClick={handleClick}>{plants.name}</th>
                                     <th id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"} </th>
                                     <th><input type="checkbox" name="today" id={plants._id} onChange={handleInputChange}/></th>
 
