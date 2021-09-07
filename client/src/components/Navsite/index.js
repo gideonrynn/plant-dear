@@ -39,6 +39,7 @@ function Navsite() {
                     <Link className="nav-link" to="#" onClick={handleShow}>Add New Plant</Link> 
                     <Link className="nav-link" to="/plants">Plants</Link>
                     <Link className="nav-link" to="/sorting">Sorting</Link>
+                    <Link className="nav-link" to="/watering">Watering</Link>
                     {/* <Link className="nav-link" to="/plantonly">PlantOnly</Link> */}
                     <Link className="nav-link" to="/weather">Forecast</Link>
                     <Link className="nav-link" to="/tasks">Tasks</Link>

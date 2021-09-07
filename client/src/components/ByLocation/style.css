@@ -34,3 +34,9 @@
 .outdoor-plants-number {
     font-size: 25px;
 }
+
+.plant-table-row {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}

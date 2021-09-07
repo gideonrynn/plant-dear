@@ -205,14 +205,15 @@ function PlantDetails(p) {
     //}
 
     function updateWaterDate(id, days) {
-        let date = new Date()
+        let date = new Date();
         date.setDate(date.getDate() - days);
-        // console.log(date)
-        // console.log(id)
+        let newISODate = date.toISOString();
+        let newDate = newISODate.split('T')[0];
+        console.log(newDate);
         PlantAPI.updatePlantWaterDate(
-            id,
             {
-                lastWatered: date,
+                ids: [id],
+                lastWatered: newDate,
             })
             .then(window.location.reload())
             .catch(err => console.log(err))
@@ -455,13 +456,24 @@ function PlantDetails(p) {
                                             className="plant-details"
                                             onChange={handleInputChange}>
                                                 <option>{thisPlant.locationSec}</option>
+                                                <option></option>
                                                 <option>none</option>
                                                 <option>bathroom</option>
                                                 <option>bedroom</option>
                                                 <option>dining room</option>
+                                                <option>dining room east case</option>
+                                                <option>dining room south case</option>
+                                                <option>dining room windowsill</option>
+                                                <option>terrarium large</option>
                                                 <option>kitchen</option>
+                                                <option>kitchen windowsill</option>
                                                 <option>living room</option>
-                                                <option>windowsill</option>
+                                                <option>living room aquarium shelf</option>
+                                                <option>living room east case</option>
+                                                <option>living room east case short</option>
+                                                <option>living room north case</option>
+                                                <option>living room west case</option>
+                                                <option>living room windowsill</option>
                                             </select>
                                     </div>
                                     <div className="plant-details-group">
@@ -665,7 +677,7 @@ function PlantDetails(p) {
                                     </ul> */}
                                     <div className="button-section">
                                         <p className="button-section-header"><b>Watered</b></p>
-                                        <p className="plant-details-comment">Last Watered {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago on " : "not yet watered"} {thisPlant.lastWatered ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : null}</p>
+                                        <p className="plant-details-comment">Last Watered {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago on " : "not yet watered"} {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : null}</p>
                                         <div>{constructedDates.length > 0 ? 
                                             constructedDates.map(dateDetails => (
                                                 <button 

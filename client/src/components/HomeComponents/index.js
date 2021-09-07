@@ -47,10 +47,10 @@ function HomeComponents() {
                                       <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
                                 </div> */
                         <div>
-                                <div>
+                                {/* <div>
                                         <p>By Location</p>
                                         <ByLocation plants={activePlants}/>
-                                </div>
+                                </div> */}
                                 <div className="newplant-section">
                                         <RecentAdditions plants={activePlants}/>
 

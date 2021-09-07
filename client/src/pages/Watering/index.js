@@ -1,11 +1,10 @@
 import React, {useEffect, useState, useContext } from "react";
 import "./style.css";
-// import PlantCard from "../../components/PlantCard"
-import PlantBlock from "../../components/PlantBlock/PlantBlock"
+import ByLocation from "../../components/ByLocation"
 // import { WeatherContext } from "../../context/WeatherContext"
 import { PlantContext } from "../../context/PlantContext"
 
-function Sorting () {
+function Watering () {
 
     const plant = useContext(PlantContext);
     const activePlants = plant.activePlants;
@@ -15,8 +14,9 @@ function Sorting () {
     console.log("number of active plants returned", activePlants.length);
 
     // Setting our component's initial state
-    const [updatedPlants, setUpdatedPlants] = useState([])
-    const [updatedInactivePlants, setUpdatedInactivePlants] = useState([])
+    const [updatedPlants, setUpdatedPlants] = useState([]);
+    const [updatedInactivePlants, setUpdatedInactivePlants] = useState([]);
+    const [locationSecondary, setLocationSecondary] = useState();
 
     // for handling search bar and input
     //* consider whether or not this is needed rather than input param passed into function *//
@@ -25,9 +25,9 @@ function Sorting () {
     // Load all plants and store them within setPlants
     useEffect(() => {
         loadPlants();
-        console.log("Sorting page render triggered")
+        console.log("Watering page render triggered")
     
-    })
+    }, [])
 
     function loadPlants() {
         // by default, show all plants returned from api
@@ -58,31 +58,37 @@ function Sorting () {
 
     }
 
+    console.log(locationSecondary);
+
     return (
         <div className="plantsdiv">
-            {/* <h1> Plants By Location</h1> */}
-{/* 
-            <input 
-                type="text"
-                style={
-                    {width:"350px",
-                    background:"#F2F1F9", 
-                    padding:"10px"}}
-                placeholder={"search plants"}
-                onChange={(event) => {
-                    sortPlants(event.target.value)
-                    }}
-            /> */}
+            <p className="plant-details-label">Select Location</p>
+            <select
+                name="locationSec"
+                className="plant-details"
+                onChange={(e) => setLocationSecondary(e.target.value)}
+                >
+                    <option>none</option>
+                    <option>bathroom</option>
+                    <option>bedroom</option>
+                    <option>dining room</option>
+                    <option>dining room east case</option>
+                    <option>dining room south case</option>
+                    <option>dining room windowsill</option>
+                    <option>terrarium large</option>
+                    <option>kitchen</option>
+                    <option>kitchen windowsill</option>
+                    <option>living room</option>
+                    <option>living room aquarium shelf</option>
+                    <option>living room east case</option>
+                    <option>living room east case short</option>
+                    <option>living room north case</option>
+                    <option>living room west case</option>
+                    <option>living room windowsill</option>
+                </select>
 
-            {/* <select>
-                <option value="a-z">A-Z</option>
-                <option value="rooms">Rooms</option>
-            </select> */}
-
-            <br/>
-            <br/>
-
-            <PlantBlock 
+            <ByLocation
+                locationSecondary={locationSecondary}
                 plants={updatedPlants} 
                 inactive={updatedInactivePlants} 
                 actcounter={counter}
@@ -93,4 +99,4 @@ function Sorting () {
     )
 }
 
-export default Sorting;
+export default Watering;
