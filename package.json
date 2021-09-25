@@ -20,7 +20,7 @@
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "moment": "^2.28.0",
-    "mongoose": "^5.12.7",
+    "mongoose": "^6.0.7",
     "react": "^16.13.1"
   },
   "devDependencies": {

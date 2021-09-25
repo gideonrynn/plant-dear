@@ -3,7 +3,7 @@ let db = require("../models");
 
 mongoose.connect("mongodb://localhost/plantdear", {
   useNewUrlParser: true,
-  useFindAndModify: false,
+//   useFindAndModify: false,
   useUnifiedTopology: true
 });
 

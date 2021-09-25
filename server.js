@@ -23,7 +23,7 @@ const dbConnect = async () => {
     try {
       const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/plantdear", {
               useNewUrlParser: true,
-              useCreateIndex: true,
+            //   useCreateIndex: true, -- no longer supported
               useUnifiedTopology: true
           });
           
