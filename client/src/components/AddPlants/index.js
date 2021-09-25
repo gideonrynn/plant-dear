@@ -96,7 +96,26 @@ function AddPlants() {
                 </Form.Group>
                 <Form.Group controlId="formLocationSecondary" >
                     <Form.Label>Secondary Location</Form.Label>
-                    <Form.Control type="text" placeholder="" name="locationSec" onChange={handleInputChange}/>
+                    <Form.Control as="select" name="locationSec" onChange={handleInputChange}>
+                        <option></option>
+                        <option>none</option>
+                        <option>bathroom</option>
+                        <option>bedroom</option>
+                        <option>dining room</option>
+                        <option>dining room east case</option>
+                        <option>dining room south case</option>
+                        <option>dining room windowsill</option>
+                        <option>terrarium large</option>
+                        <option>kitchen</option>
+                        <option>kitchen windowsill</option>
+                        <option>living room</option>
+                        <option>living room aquarium shelf</option>
+                        <option>living room east case</option>
+                        <option>living room east case short</option>
+                        <option>living room north case</option>
+                        <option>living room west case</option>
+                        <option>living room windowsill</option>
+                    </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="formLocationPreferred" >
                         <Form.Label>Preferred Location</Form.Label>

@@ -1,14 +1,21 @@
-/* 1 */
-{
+let mongoose = require("mongoose");
+let db = require("../models");
+
+mongoose.connect("mongodb://localhost/plantdear", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+
+let hardinessZoneSeed = [
+  {
     "_id" : ObjectId("60975a30cd5c3d33d8272706"),
     "zone" : "1a",
     "rangeLow" : "-60.0",
     "rangeHigh" : "-55.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 2 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272707"),
     "zone" : "1b",
@@ -16,9 +23,7 @@
     "rangeHigh" : "-50.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 3 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272708"),
     "zone" : "2a",
@@ -26,9 +31,7 @@
     "rangeHigh" : "-45.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 4 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272709"),
     "zone" : "2b",
@@ -36,9 +39,7 @@
     "rangeHigh" : "-40.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 5 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827270a"),
     "zone" : "3a",
@@ -46,9 +47,7 @@
     "rangeHigh" : "-35.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 6 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827270b"),
     "zone" : "3b",
@@ -56,9 +55,7 @@
     "rangeHigh" : "-30.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 7 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827270c"),
     "zone" : "4a",
@@ -66,9 +63,7 @@
     "rangeHigh" : "-25.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 8 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827270d"),
     "zone" : "4b",
@@ -76,9 +71,7 @@
     "rangeHigh" : "-20.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 9 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827270e"),
     "zone" : "5a",
@@ -86,9 +79,7 @@
     "rangeHigh" : "-15.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 10 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827270f"),
     "zone" : "5b",
@@ -96,9 +87,7 @@
     "rangeHigh" : "-10.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 11 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272710"),
     "zone" : "6a",
@@ -106,9 +95,7 @@
     "rangeHigh" : "-5.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 12 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272711"),
     "zone" : "6b",
@@ -116,9 +103,7 @@
     "rangeHigh" : "0.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 13 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272712"),
     "zone" : "7a",
@@ -126,9 +111,7 @@
     "rangeHigh" : "5.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 14 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272713"),
     "zone" : "7b",
@@ -136,9 +119,7 @@
     "rangeHigh" : "10.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 15 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272714"),
     "zone" : "8a",
@@ -146,9 +127,7 @@
     "rangeHigh" : "15.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 16 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272715"),
     "zone" : "8b",
@@ -156,9 +135,7 @@
     "rangeHigh" : "20.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 17 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272716"),
     "zone" : "9a",
@@ -166,9 +143,7 @@
     "rangeHigh" : "25.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 18 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272717"),
     "zone" : "9b",
@@ -176,9 +151,7 @@
     "rangeHigh" : "30.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 19 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272718"),
     "zone" : "10a",
@@ -186,9 +159,7 @@
     "rangeHigh" : "35.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 20 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d8272719"),
     "zone" : "10b",
@@ -196,9 +167,7 @@
     "rangeHigh" : "40.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 21 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827271a"),
     "zone" : "11a",
@@ -206,9 +175,7 @@
     "rangeHigh" : "45.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 22 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827271b"),
     "zone" : "11b",
@@ -216,9 +183,7 @@
     "rangeHigh" : "50.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 23 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827271c"),
     "zone" : "12a",
@@ -226,9 +191,7 @@
     "rangeHigh" : "55.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 24 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827271d"),
     "zone" : "12b",
@@ -236,9 +199,7 @@
     "rangeHigh" : "60.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 25 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827271e"),
     "zone" : "13a",
@@ -246,9 +207,7 @@
     "rangeHigh" : "65.0",
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
-}
-
-/* 26 */
+},
 {
     "_id" : ObjectId("60975a30cd5c3d33d827271f"),
     "zone" : "13b",
@@ -257,3 +216,16 @@
     "createdAt" : "2021-04-04",
     "updatedAt" : "2021-04-04"
 }
+
+];
+
+db.HardinessZone.deleteMany({})
+  .then(() => db.HardinessZone.collection.insertMany(hardinessZoneSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });

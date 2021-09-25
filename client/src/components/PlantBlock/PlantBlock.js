@@ -13,6 +13,11 @@ const PlantBlock = (data) => {
     const plants = data.plants;
     const history = useHistory();
 
+    let currentDate = new Date();
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
     function handleClick(event, id) {
         console.log("clicked", event.target.id);
         
@@ -83,7 +88,7 @@ const PlantBlock = (data) => {
                             <div key={plants._id+1} id={plants._id} className="plant-block-2" onClick={handleClick}>
                                 <p id={plants._id}>{plants.name}</p>
                                 <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                <p id={plants._id}>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
+                                <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"}</p>
                                 <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                 {/* <button className="plant-card-2-btn">Open plant</button> */}
                             </div>

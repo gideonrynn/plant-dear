@@ -13,12 +13,48 @@ function PlantDetails(p) {
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
     const [modPlant, setModPlant] = useState({});
+    const [constructedDates, setConstructedDates] = useState([]);
     // const [updated, setUpdated] = useState(false);
     // const [onePlant, setOnePlant] = useState([])
     // const [onePlantId, setOnePlantId] = useState([])
     
     // handle modal probably will not need a modal
     // const [show, setShow] = useState(false);
+
+    
+
+    let currentDate = new Date();
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
+
+    let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+    let today = weekday[currentDate.getDay()];
+    let yesterday = weekday[currentDate.getDay() - 1];
+    console.log("today is " + today);
+
+    
+
+    //mapping
+    // if todays date = Monday then button 1 = Monday, button 2 = Sunday, button 3
+    // can use a function that renders the days of the week and creates the array of objects
+
+    
+
+    let colorDate = [
+            {arrayValue: 0, dayOfWeek: "Sunday", color: "pink"},
+            {arrayValue: 1, dayOfWeek: "Monday", color: "red"},
+            {arrayValue: 2, dayOfWeek: "Tuesday", color: "orange"},
+            {arrayValue: 3, dayOfWeek: "Wednesday", color: "yellow"},
+            {arrayValue: 4, dayOfWeek: "Thursday", color: "green"},
+            {arrayValue: 5, dayOfWeek: "Friday", color: "blue"},
+            {arrayValue: 6, dayOfWeek: "Saturday", color: "purple"},
+        ];
+    
+    console.log(colorDate[0]);
+
+
 
     console.log(p.plant);
 
@@ -29,8 +65,63 @@ function PlantDetails(p) {
             setThisPlantId(p.plant._id)
         }
         console.log("Plant details render triggered")
+        createDateObjects();
         
-    }, [p])
+    }, [p]);
+
+    function createDateObjects() {
+        let numberInWeek = 7;
+        let prepConstructedDates = [];
+        let dayOfWeek = "";
+        let color = "";
+        let daysAgo = "";
+        
+        for(let i = 0; i < numberInWeek; i++) {
+            // console.log("this is the loop" + i);
+            // let constructedDate = weekday[currentDate.getDay() - i];
+            // console.log("this is the loop" + i + " and the constructedDate " + constructedDate);
+
+            let date = new Date()
+            date.setDate(date.getDate() - i);
+            let day = date.getDay();
+            console.log("the date " + date + " and the day is " + day);
+
+            switch (day) {
+                case 0:
+                  dayOfWeek = "Sunday";
+                  color = "pink";
+                  daysAgo = 0;
+                  break;
+                case 1:
+                  dayOfWeek = "Monday";
+                  color = "red";
+                  break;
+                case 2:
+                   dayOfWeek = "Tuesday";
+                   color = "orange";
+                  break;
+                case 3:
+                  dayOfWeek = "Wednesday";
+                  color = "yellow";
+                  break;
+                case 4:
+                  dayOfWeek = "Thursday";
+                  color = "green";
+                  break;
+                case 5:
+                  dayOfWeek = "Friday";
+                  color = "blue";
+                  break;
+                case 6:
+                  dayOfWeek = "Saturday";
+                  color = "purple";
+              }
+            prepConstructedDates.push({"arrayValue": date.getDay(), "dayOfWeek": dayOfWeek, "color": color, "daysAgo": i});
+            
+        };
+        console.log(prepConstructedDates);
+        setConstructedDates(prepConstructedDates);
+    };
 
     function handleInputChange(event) {
         // const { name, defaultValue } = event.target;
@@ -87,6 +178,16 @@ function PlantDetails(p) {
 
     }
 
+    // function handleDatesInput(event) {
+    //     // const { name, defaultValue } = event.target;
+    //     let fieldName = event.target.name
+    //     let fielddefaultValue = event.target.value
+    //     setModPlant({...modPlant, [fieldName]: fielddefaultValue})
+    //     console.log(fieldName, fielddefaultValue)
+    //     console.log(modPlant);
+    // };
+    
+
     // probably will not need modal
     // function handleClose() {
     //     setShow(false);
@@ -112,14 +213,15 @@ function PlantDetails(p) {
     //}
 
     function updateWaterDate(id, days) {
-        let date = new Date()
+        let date = new Date();
         date.setDate(date.getDate() - days);
-        // console.log(date)
-        // console.log(id)
+        let newISODate = date.toISOString();
+        let newDate = newISODate.split('T')[0];
+        console.log(newDate);
         PlantAPI.updatePlantWaterDate(
-            id,
             {
-                lastWatered: date,
+                ids: [id],
+                lastWatered: newDate,
             })
             .then(window.location.reload())
             .catch(err => console.log(err))
@@ -131,6 +233,22 @@ function PlantDetails(p) {
         PlantAPI.deletePlant(id)
 
     }
+
+    // function getNumberOfDays(start, end) {
+    //     const date1 = new Date(start);
+    //     const date2 = new Date(end);
+    
+    //     // One day in milliseconds
+    //     const oneDay = 1000 * 60 * 60 * 24;
+    
+    //     // Calculating the time difference between two dates
+    //     const diffInTime = date2.getTime() - date1.getTime();
+    
+    //     // Calculating the no. of days between two dates
+    //     const diffInDays = Math.round(diffInTime / oneDay);
+    
+    //     return diffInDays;
+    // }
 
     return (
         <>
@@ -247,7 +365,7 @@ function PlantDetails(p) {
                                         <p className="plant-details-label">Watering preference</p>
                                             
                                             <select
-                                            name="water"
+                                            name="waterPref"
                                             className="plant-details"
                                             onChange={handleInputChange}>
                                                 <option>{thisPlant.waterPref}</option>
@@ -346,13 +464,24 @@ function PlantDetails(p) {
                                             className="plant-details"
                                             onChange={handleInputChange}>
                                                 <option>{thisPlant.locationSec}</option>
+                                                <option></option>
                                                 <option>none</option>
                                                 <option>bathroom</option>
                                                 <option>bedroom</option>
                                                 <option>dining room</option>
+                                                <option>dining room east case</option>
+                                                <option>dining room south case</option>
+                                                <option>dining room windowsill</option>
+                                                <option>terrarium large</option>
                                                 <option>kitchen</option>
+                                                <option>kitchen windowsill</option>
                                                 <option>living room</option>
-                                                <option>windowsill</option>
+                                                <option>living room aquarium shelf</option>
+                                                <option>living room east case</option>
+                                                <option>living room east case short</option>
+                                                <option>living room north case</option>
+                                                <option>living room west case</option>
+                                                <option>living room windowsill</option>
                                             </select>
                                     </div>
                                     <div className="plant-details-group">
@@ -528,23 +657,59 @@ function PlantDetails(p) {
 
                             <div className="row button-section">
                                 <div className="column">
+                                    {/* <div className="color-coding">
+                                        <p className="button-section-header"><b>Color Coding</b></p>
+                                        <p style={{backgroundColor: 'yellow'}} className="color-coding-details">Monday = yellow</p>
+                                        <p style={{backgroundColor: 'green'}} className="color-coding-details">Tuesday = green</p>
+                                        <p style={{backgroundColor: 'blue'}} className="color-coding-details">Wednesday = blue</p>
+                                        <p style={{backgroundColor: 'purple'}} className="color-coding-details">Thursday = purple</p>
+                                        <p style={{backgroundColor: 'pink'}} className="color-coding-details">Friday = pink</p>
+                                        <p style={{backgroundColor: 'red'}} className="color-coding-details">Saturday = red</p>
+                                        <p style={{backgroundColor: 'orange'}} className="color-coding-details">Sunday = orange</p>
+                                    </div> */}
                                     <div className="plant-details-group">
-                                        <p className="plant-details-label">Last Watered</p>
-                                        <input 
-                                            className="plant-details"
-                                            defaultValue={thisPlant.lastWatered ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1] : null}/>
+                
+                                        
                                     </div>
-                                    <ul>
-                                        {/* <li className="plant-card-details"> */}
+                                    {/* <ul>
+                                        <li className="plant-card-details">
                                         <p className="button-section-header"><b>Watered</b></p>
-                                        <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(thisPlant._id, 0)} className="water-button">Today</button>
-                                        <button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(thisPlant._id, 1)} className="water-button">Yesterday</button>
+                                        <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(thisPlant._id, 0)} className="water-button">Today({today})</button>
+                                        <button style={{backgroundColor: '#91AFF5'}} onClick={() => updateWaterDate(thisPlant._id, 1)} className="water-button">{yesterday}</button>
                                         <button style={{backgroundColor: '#7A9AE3'}} onClick={() => updateWaterDate(thisPlant._id, 2)} className="water-button">Two Days</button>
                                         <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(thisPlant._id, 3)} className="water-button">Three Days</button>
                                         <button style={{backgroundColor: '#799EE2'}} onClick={() => updateWaterDate(thisPlant._id, 4)} className="water-button">Four Days</button>
                                         <button style={{backgroundColor: '#3D64BD'}} onClick={() => updateWaterDate(thisPlant._id, 7)} className="water-button">One Week</button>
-                                    {/* </li> */}
-                                    </ul>
+                                    </li>
+                                    
+                                    </ul> */}
+                                    <div className="button-section">
+                                        <p className="button-section-header"><b>Watered</b></p>
+                                        <p className="plant-details-comment">Last Watered {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago on " : "not yet watered"} {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : null}</p>
+                                        <div>{constructedDates.length > 0 ? 
+                                            constructedDates.map(dateDetails => (
+                                                <button 
+                                                    className="water-button" 
+                                                    style={thisPlant.lastWatered && thisPlant.lastWatered.length > 0 && Math.round((currentDate.getTime() - new Date(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]).getTime())/ oneDay) === dateDetails.daysAgo ?
+                                                        {backgroundColor: "lightgrey", fontStyle: "italic"} : {backgroundColor: dateDetails.color}} 
+                                                    onClick={() => updateWaterDate(thisPlant._id, dateDetails.daysAgo)}
+                                                    >
+                                                        {dateDetails.daysAgo === 0 ? "Today"
+                                                        : dateDetails.daysAgo === 1 ? "Yesterday"
+                                                        : dateDetails.dayOfWeek + " (-" + dateDetails.daysAgo + ")"}
+                                                </button>
+                                        )): "rendering"}
+                                        </div>
+                                        <div className="plant-details-group">
+                                            <p className="plant-details-comment">Specific date</p>
+                                            <input
+                                                type="date"
+                                                name="lastWatered"
+                                                className="plant-details"
+                                                onChange={handleInputChange}/>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             
                             </div>
@@ -565,7 +730,7 @@ function PlantDetails(p) {
                                     </div>
                                
                             </div>
-                            <button type="submit" onClick={handleFormSubmit}>Submit</button><span className="last-submitted"></span>
+                            <button type="submit" onClick={handleFormSubmit}>Save</button><span className="last-submitted"></span>
                           
                         </div>
 

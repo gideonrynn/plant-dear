@@ -1,5 +1,15 @@
-/* 1 */
-{
+let mongoose = require("mongoose");
+let db = require("../models");
+
+mongoose.connect("mongodb://localhost/plantdear", {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true
+});
+
+
+let taskSeed = [
+  {
     "_id" : ObjectId("60984447c2d36c65f49e8a21"),
     "taskName" : "Bring plants that are not cold hardy inside and move other plants to wall",
     "taskDetail" : "Check plants that are outdoors. Any of them that are not doing well and are specifically on the railing should be moved away from the ledge. Thyme should be ok. Take wire tables and move to back, put lettuce and other greens on there. Leave this task open until they are put back outside.",
@@ -8,9 +18,7 @@
     "taskNotes" : "brought in Gerbera, will put the others up against the wall but make sure to check that snow is not coming down that far back",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 2 */
+},
 {
     "_id" : ObjectId("60984447c2d36c65f49e8a22"),
     "taskName" : "Check all plants for fungus gnats",
@@ -20,9 +28,7 @@
     "taskNotes" : "",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 3 */
+},
 {
     "_id" : ObjectId("60984447c2d36c65f49e8a23"),
     "taskName" : "Add azalea to plants to buy",
@@ -32,9 +38,7 @@
     "taskNotes" : "",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 4 */
+},
 {
     "_id" : ObjectId("60984447c2d36c65f49e8a24"),
     "taskName" : "Repot red aglaonemas",
@@ -44,9 +48,7 @@
     "taskNotes" : "",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 5 */
+},
 {
     "_id" : ObjectId("60984447c2d36c65f49e8a25"),
     "taskName" : "Trim corn plant",
@@ -56,9 +58,7 @@
     "taskNotes" : "",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 6 */
+},
 {
     "_id" : ObjectId("60984447c2d36c65f49e8a26"),
     "taskName" : "Figure out what to do with pilea",
@@ -68,9 +68,7 @@
     "taskNotes" : "",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 7 */
+},
 {
     "_id" : ObjectId("60984447c2d36c65f49e8a27"),
     "taskName" : "Add lemon balm plant and decide what to do with it outside tomorrow",
@@ -80,9 +78,7 @@
     "taskNotes" : "",
     "createdAt" : "2021-04-19",
     "updatedAt" : "2021-04-19"
-}
-
-/* 8 */
+},
 {
     "_id" : ObjectId("60cf4d61d05b5a49948a9594"),
     "taskName" : "Move azaleas outside",
@@ -91,9 +87,7 @@
     "dateDue" : ISODate("2021-07-04T19:00:00.000-05:00"),
     "taskStatus" : "",
     "__v" : 0
-}
-
-/* 9 */
+},
 {
     "_id" : ObjectId("60cf4db97dd9e65d78e83bf8"),
     "taskName" : "Put string of dolphins in another location",
@@ -102,9 +96,7 @@
     "dateDue" : ISODate("2021-07-04T19:00:00.000-05:00"),
     "taskStatus" : "",
     "__v" : 0
-}
-
-/* 10 */
+},
 {
     "_id" : ObjectId("60cf4ee0aad8212850048b40"),
     "taskName" : "Research whether or not monstera needs bigger pot",
@@ -113,9 +105,7 @@
     "dateDue" : ISODate("2021-06-24T19:00:00.000-05:00"),
     "taskStatus" : "",
     "__v" : 0
-}
-
-/* 11 */
+},
 {
     "_id" : ObjectId("60cf5069aad8212850048b41"),
     "taskName" : "Research how to promote growth for sensitive plant",
@@ -124,9 +114,7 @@
     "dateDue" : ISODate("2021-06-24T19:00:00.000-05:00"),
     "taskStatus" : "",
     "__v" : 0
-}
-
-/* 12 */
+},
 {
     "_id" : ObjectId("60cf514bf7ff0c298cff8e11"),
     "taskName" : "Look up what to do with old leaves and old plants",
@@ -137,9 +125,7 @@
     "createdAt" : ISODate("2021-06-20T09:31:39.392-05:00"),
     "updatedAt" : ISODate("2021-06-20T09:31:39.392-05:00"),
     "__v" : 0
-}
-
-/* 13 */
+},
 {
     "_id" : ObjectId("60cf520af7ff0c298cff8e12"),
     "taskName" : "Display perennials and make sure they are in a state to survive winter",
@@ -150,9 +136,7 @@
     "createdAt" : ISODate("2021-06-20T09:34:50.684-05:00"),
     "updatedAt" : ISODate("2021-06-20T09:34:50.684-05:00"),
     "__v" : 0
-}
-
-/* 14 */
+},
 {
     "_id" : ObjectId("60cf54cdacae684c8411459c"),
     "taskName" : "Figure out where to put all the dormant orchids",
@@ -163,9 +147,7 @@
     "createdAt" : ISODate("2021-06-20T09:46:37.561-05:00"),
     "updatedAt" : ISODate("2021-06-20T09:46:37.561-05:00"),
     "__v" : 0
-}
-
-/* 15 */
+},
 {
     "_id" : ObjectId("60f4b87107f0b45e2004186f"),
     "taskName" : "Plant monstera in tall deep pot",
@@ -176,9 +158,7 @@
     "createdAt" : ISODate("2021-07-18T18:25:37.298-05:00"),
     "updatedAt" : ISODate("2021-07-18T18:25:37.298-05:00"),
     "__v" : 0
-}
-
-/* 16 */
+},
 {
     "_id" : ObjectId("60fd6ddd6d418d56c8a07585"),
     "taskName" : "Catalogue types and sizes of pots",
@@ -189,9 +169,7 @@
     "createdAt" : ISODate("2021-07-25T08:57:49.656-05:00"),
     "updatedAt" : ISODate("2021-07-25T08:57:49.656-05:00"),
     "__v" : 0
-}
-
-/* 17 */
+},
 {
     "_id" : ObjectId("61004153c313cd433415c7b0"),
     "taskName" : "Health check Rue",
@@ -203,3 +181,16 @@
     "updatedAt" : ISODate("2021-07-27T12:24:35.662-05:00"),
     "__v" : 0
 }
+  ];
+  
+  db.Task.deleteMany({})
+  .then(() => db.Task.collection.insertMany(taskSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+

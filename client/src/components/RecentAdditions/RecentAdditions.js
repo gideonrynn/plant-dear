@@ -42,6 +42,10 @@ const RecentAdditions = (data) => {
     const mostRecentOutdoor = recentOutdoor.slice(0, 10);
     const nextRecentFive = plantsByDate.slice(1, 14);
     console.log(mostRecent, nextRecentFive);
+    let currentDate = new Date();
+
+    // One day in milliseconds
+    const oneDay = 1000 * 60 * 60 * 24;
 
     // const d = new Date();
 
@@ -113,7 +117,7 @@ const RecentAdditions = (data) => {
                                     <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p id={plants._id}>{plants.name}</p>
                                     <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p id={plants._id}>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
+                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not watered yet"}</p>
                                     <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                     {/* <button className="plant-card-2-btn">Open plant</button> */}
                                 </div>
@@ -152,7 +156,7 @@ const RecentAdditions = (data) => {
                                     <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p id={plants._id}>{plants.name}</p>
                                     <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p id={plants._id}>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
+                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not watered yet"}</p>
                                     <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                     {/* <button className="plant-card-2-btn">Open plant</button> */}
                                 </div>
