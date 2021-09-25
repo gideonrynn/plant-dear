@@ -102,13 +102,13 @@ textarea.plant-textarea {
 input.plant-details {
     margin-left: 20px;
     border: none;
-    width: 250px;
+    /* width: 250px; */
 }
 
 input.plants-details-name {
     margin-left: 20px;
     border: none;
-    width: 500px;
+    /* width: 500px; */
 }
 
 select.plant-details {
@@ -148,4 +148,5 @@ select.plant-details {
 
 .plants-details-right {
     width: 40vw;
+    margin-right: 50px;
 }

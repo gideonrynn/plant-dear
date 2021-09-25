@@ -18,7 +18,7 @@ const PlantBlock = (data) => {
         
         console.log(id);
         history.push({
-            pathname: "plantonly",
+            pathname: "plantdetails",
             state: { detail: event.target.id }});
     }
 
@@ -81,10 +81,10 @@ const PlantBlock = (data) => {
                                 <p className="plant-title-img">{plants.name}</p>
                             </div>
                             <div key={plants._id+1} id={plants._id} className="plant-block-2" onClick={handleClick}>
-                                <p>{plants.name}</p>
-                                <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
-                                <p>{plants.waterPref} watering conditions</p>
+                                <p id={plants._id}>{plants.name}</p>
+                                <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
+                                <p id={plants._id}>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
+                                <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                 {/* <button className="plant-card-2-btn">Open plant</button> */}
                             </div>
                         </div>

@@ -136,6 +136,7 @@ function AddPlants() {
                     <Form.Control as="select" name="plantType" onChange={handleInputChange}>
                         <option></option>
                         <option>air plant</option>
+                        <option>epiphyte</option>
                         <option>herb</option>
                         <option>houseplant</option>
                         <option>succulent</option>

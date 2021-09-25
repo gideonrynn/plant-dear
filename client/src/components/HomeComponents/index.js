@@ -49,10 +49,13 @@ function HomeComponents() {
 
                                 <div className="newplant-section">
                                         <RecentAdditions plants={activePlants}/>
+
+                                        {/* to keep an eye on */}
+
                                 </div>
                                 <div  className="forecastplants-section">
 
-                                        <OutdoorPlants weather={forecastWeather} plants={activePlants}/>
+                                        {/* <OutdoorPlants weather={forecastWeather} plants={activePlants}/> */}
 
                                         <ForecastPlantHardiness weather={forecastWeather} plants={activePlants}/>
 

@@ -27,7 +27,7 @@ function App() {
           <Route exact path="/" component={Home}/>
           <Route exact path="/plants" component={Plants}/>
           <Route exact path="/sorting" component={Sorting}/>
-          <Route exact path="/plantonly" component={PlantOnly_Render}/>
+          <Route exact path="/plantdetails" component={PlantOnly_Render}/>
           <Route exact path="/weather" component={Weather}/>
           <Route exact path="/addnewplants" component={AddNewPlant}/>
           <Route exact path="/tasks" component={Tasks}/>

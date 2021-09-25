@@ -4,7 +4,10 @@ import MorePlants from '../../img/deskplants.jpeg';
 import { FaExternalLinkAlt } from "react-icons/fa"
 import { useHistory } from 'react-router-dom';
 
-const RecentAdditions = (data) => {
+const RecentlyUpdated = (data) => {
+
+    // want this component to log when something on the plant has been updated
+    // repot is a big one, watered may go in another place
 
     const plants = data.plants;
     const history = useHistory();
@@ -14,7 +17,7 @@ const RecentAdditions = (data) => {
         
         console.log(id);
         history.push({
-            pathname: "plantdetails",
+            pathname: "plantonly",
             state: { detail: event.target.id }});
     }
 
@@ -47,55 +50,8 @@ const RecentAdditions = (data) => {
 
     return (
         <>
-        {/* <h1>Newest plant dears</h1> */}
-            {/* commenting out to get a feel for having indoor and outdoor separated. during the winter this won't matter as much */}
-            {/* <div className="new-plant-section"> */}
-                {/* <h3 className="recent-plant-header">Recent additions</h3> */}
-
-                {/* <div className="most-recent-plants">
-                    <>
-                        {mostRecent.map(plants => (
-                            
-                            <div className="plant-card-wrapper">
-                                <div key={plants._id} className="plant-card">
-                                    <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
-                                </div>
-                                <div key={plants._id+1} className="plant-card-2">
-                                    <p>{plants.name}</p>
-                                    <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
-                                    <p>{plants.waterPref} watering conditions</p> */}
-                                    {/* <button className="plant-card-2-btn">Open plant</button> */}
-                                {/* </div>
-                            </div>
-                            
-                        ))}
-                        <div className="see-more">
-                            <div className="plant-card-see-more">
-                                <p>See all new plant dears <span className="g-t">&gt;</span></p>
-                            </div>
-                            <div className="plant-card-see-more-2">
-                                <img src={MorePlants} alt="See all plants" className=""/>
-                            </div>
-
-                        </div>
-
-                    </>
-                </div> */}
-
-                
-                {/* <div className="next-recent-plants">
-                    {nextRecentFive.map(plants => (
-                        <div key={plants._id}>
-                            <span>{plants.name}</span> { } */}
-                            {/* <span>({plants.hardiness}&#176;)</span> { } */}
-                        {/* </div>
-                    ))}
-                    
-                </div> */}
-{/*                 
-            </div> */}
-
+        <h1>Recently updated</h1>
+    
             <div className="new-plant-section">
                 <h3 className="recent-plant-header">In</h3>
 
@@ -177,4 +133,4 @@ const RecentAdditions = (data) => {
     )
 };
 
-export default RecentAdditions;
+export default RecentlyUpdated;

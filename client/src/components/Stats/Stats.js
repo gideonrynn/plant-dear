@@ -4,7 +4,9 @@ import MorePlants from '../../img/deskplants.jpeg';
 import { FaExternalLinkAlt } from "react-icons/fa"
 import { useHistory } from 'react-router-dom';
 
-const RecentAdditions = (data) => {
+const Stats = (data) => {
+
+    //want to add here what likes a lot of water, what surives the winter, etc
 
     const plants = data.plants;
     const history = useHistory();
@@ -14,7 +16,7 @@ const RecentAdditions = (data) => {
         
         console.log(id);
         history.push({
-            pathname: "plantdetails",
+            pathname: "plantonly",
             state: { detail: event.target.id }});
     }
 
@@ -177,4 +179,4 @@ const RecentAdditions = (data) => {
     )
 };
 
-export default RecentAdditions;
+export default Stats;
