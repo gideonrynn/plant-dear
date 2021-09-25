@@ -178,6 +178,14 @@ function PlantDetails(p) {
 
     }
 
+    // function handleDatesInput(event) {
+    //     // const { name, defaultValue } = event.target;
+    //     let fieldName = event.target.name
+    //     let fielddefaultValue = event.target.value
+    //     setModPlant({...modPlant, [fieldName]: fielddefaultValue})
+    //     console.log(fieldName, fielddefaultValue)
+    //     console.log(modPlant);
+    // };
     
 
     // probably will not need modal
@@ -691,6 +699,14 @@ function PlantDetails(p) {
                                                         : dateDetails.dayOfWeek + " (-" + dateDetails.daysAgo + ")"}
                                                 </button>
                                         )): "rendering"}
+                                        </div>
+                                        <div className="plant-details-group">
+                                            <p className="plant-details-comment">Specific date</p>
+                                            <input
+                                                type="date"
+                                                name="lastWatered"
+                                                className="plant-details"
+                                                onChange={handleInputChange}/>
                                         </div>
                                     </div>
                                     

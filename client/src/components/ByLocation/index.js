@@ -42,15 +42,15 @@ const ByLocation = (data) => {
 
     useEffect(() => {
         console.log("ByLocation component rendered");
-        if (data.plants) {
+        // if (data.plants) {
             // setThesePlants(data.plants);
             // sortThesePlants();
             if(data.locationSecondary) {
                 setNewLocation(data.locationSecondary);
             }
-        }
+        // }
         
-    }, [data])
+    }, [data.locationSecondary])
 
 
         let plantsByLocation = plants.filter(plantsAll => { 
@@ -63,8 +63,15 @@ const ByLocation = (data) => {
         // const { name, defaultValue } = event.target;
         let fieldName = event.target.name
         let fielddefaultValue = event.target.id
-        setIds([...ids, fielddefaultValue]);
-        console.log(fieldName, fielddefaultValue)
+        let fieldCheckedValue = event.target.checked
+
+        console.log("This is the info I need right now", event.target, "and this is the value", fieldCheckedValue);
+        
+        if (fieldCheckedValue === true) {
+            setIds([...ids, fielddefaultValue]);
+            console.log(fieldName, fielddefaultValue)
+        }
+        
         console.log(ids);
     };
 

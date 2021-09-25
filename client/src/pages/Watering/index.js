@@ -27,7 +27,7 @@ function Watering () {
         loadPlants();
         console.log("Watering page render triggered")
     
-    }, [])
+    }, [activePlants])
 
     function loadPlants() {
         // by default, show all plants returned from api
