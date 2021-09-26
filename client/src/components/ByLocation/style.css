@@ -2,6 +2,8 @@
     background-color: lightgrey;
     /* margin-top: 80px; */
     box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+    font-weight: 300;
+    font-size: 17px;
     /* border-radius: 30px; */
 }
 
@@ -17,7 +19,7 @@
 .forecast-options {
     display: grid;
     grid-template-columns: repeat(auto-fit, 150px);
-  grid-template-rows: fit-content(1em);
+    grid-template-rows: fit-content(1em);
 
 }
 
@@ -37,6 +39,53 @@
 
 .plant-table-row {
     cursor: pointer;
-    text-decoration: underline;
     color: blue;
+    font-weight: 600;
+}
+
+.plant-table-row:hover {
+    text-decoration: underline;
+}
+
+/* .water-metrics {
+    border: 1mm black;
+    box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+} */
+
+tbody.water-metrics {
+    outline: thin solid black;
+}
+
+
+table.watering-table {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+th.watering-col-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 21px;
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-left:2px solid rgba(0, 0, 0, 0.2);
+}
+
+th.watering-details {
+    font-weight: 350;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-left:2px solid rgba(0, 0, 0, 0.2);
+}
+
+.plant-details-selected-date {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.water-button-all {
+    margin-top: 25px;
+    margin-bottom: 25px;
 }

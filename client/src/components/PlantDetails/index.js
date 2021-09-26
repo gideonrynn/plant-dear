@@ -115,6 +115,10 @@ function PlantDetails(p) {
                 case 6:
                   dayOfWeek = "Saturday";
                   color = "purple";
+                  break;
+                default:
+                    dayOfWeek = "Saturday";
+                    color = "purple";
               }
             prepConstructedDates.push({"arrayValue": date.getDay(), "dayOfWeek": dayOfWeek, "color": color, "daysAgo": i});
             

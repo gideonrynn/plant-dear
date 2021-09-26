@@ -1,35 +1,49 @@
 import React, {useState, useEffect} from 'react'
-import { useLocation, withRouter } from "react-router-dom";
-import PlantBlockAll from "../PlantBlockAll/PlantBlock"
+import { useLocation } from "react-router-dom";
+// import PlantBlockAll from "../PlantBlockAll/PlantBlock"
 import PlantAPI from "../../utils/PlantsAPI"
 import { useHistory } from 'react-router-dom';
 import './style.css'
-// weather context
-// plant data
-// condition that checks the hardiness
+// import { set } from 'mongoose';
+
 
 const ByLocation = (data) => {
 
-    // const forecastWeather = data.weather;
-    const plants = data.plants;
-    // const dataLocation = data;
-    console.log(data);
-    console.log("bylocation component", data.plants);
-    let location = useLocation();
-    let pathname = location.pathname.slice(1);
-    const dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    const d = new Date();
-    // const [thesePlants, setThesePlants] = useState([]);
-    const [ids, setIds] = useState([]);
-    const [newLocation, setNewLocation] = useState("");
-    // const [plantsByLocation, setPlantsByLocation] = useState();
-    let currentDate = new Date();
+    /*To do:
+        *consider calendar view with plant name on calendar
+        *calculated value for next water date 
+        *show next water date here and allow submission of selected value versus
+        *on hover of name, show photo of plant or other relevant details
+        *may wrap this into "rooms" or sections of the apartment that have plants
+    */
 
+    const [plants, setPlants] = useState([]);
+
+    let location = useLocation();
+    const history = useHistory();
+    let pathname = location.pathname.slice(1);
+
+    // set date variables
+    let date = new Date();
+    date.setDate(date.getDate());
+    let newISODate = date.toISOString();
+    let todaysDate = newISODate.split('T')[0];
     // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
-    const history = useHistory();
+    const [ids, setIds] = useState([]);
+    const [selectedDate, setSelectedDate] = useState("");
+    const [newLocation, setNewLocation] = useState("none");
+    const [updated, setUpdated] = useState(false);
 
+    useEffect(() => {
+        console.log("ByLocation component rendered");
+
+        setPlants(data.plants);
+        
+    }, [data.plants, updated])
+
+    
     function handleClick(event, id) {
         console.log("clicked", event.target.id);
         
@@ -38,26 +52,6 @@ const ByLocation = (data) => {
             pathname: "plantdetails",
             state: { detail: event.target.id }});
     }
-    
-
-    useEffect(() => {
-        console.log("ByLocation component rendered");
-        // if (data.plants) {
-            // setThesePlants(data.plants);
-            // sortThesePlants();
-            if(data.locationSecondary) {
-                setNewLocation(data.locationSecondary);
-            }
-        // }
-        
-    }, [data.locationSecondary])
-
-
-        let plantsByLocation = plants.filter(plantsAll => { 
-            return plantsAll.locationSec !== "" && plantsAll.locationSec === newLocation;
-        });
-        console.log("the value of the new location is: " + newLocation + "and here are the plants: ", plantsByLocation)
-    
 
     function handleInputChange(event) {
         // const { name, defaultValue } = event.target;
@@ -75,69 +69,108 @@ const ByLocation = (data) => {
         console.log(ids);
     };
 
-    // let outdoorPlantsVol = outdoorPlants.length;
-    // console.log("Outdoor plants", outdoorPlants)
-
-    /*Winter safe qualifies as plants with a hardiness equal to or less than Chicago's (-20)
-    Exclude records where the hardinessZoneMin does not exist*/
-    // let outdoorWinterSafe = plants.filter(plants => { 
-    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
-    // });
-    // console.log("Winter safe plants: ", outdoorWinterSafe);
-    // let outdoorWinterSafeMaybe = plants.filter(plants => { 
-    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 7 || plants.hardiness <= 0) && plants.cycle === "perennial"
-    // });
-
     function updateWaterDate() {
-        let date = new Date();
-        date.setDate(date.getDate());
-        let newISODate = date.toISOString();
-        let newDate = newISODate.split('T')[0];
-        console.log(newDate);
+
+        let wateredDate = "";
+
+        if (selectedDate === null || selectedDate === "") {
+            
+            wateredDate = todaysDate;
+            console.log(wateredDate);
+        } else {
+            wateredDate = selectedDate;
+        }
 
         PlantAPI.updatePlantWaterDate(
             {
                 ids: ids,
-                lastWatered: newDate,
+                lastWatered: wateredDate,
             })
-            .then(window.location.reload())
+            .then(setUpdated("true"))
             .catch(err => console.log(err))
+
+        // console.log(newDate);
+        // console.log(selectedDate);
+        // console.log(ids);
+        
     }
 
     return (
         <div className="by-location-section">
-            <h1>{newLocation !== "" ? newLocation : "Choose a location"}</h1>
+
+            {/* <h1>{newLocation !== "" ? newLocation : "Choose a location"}</h1> */}
 
             {newLocation !== "" ? 
+               
                 <>
                     <div className="by-location">
                         <div className="by-location-plants">
 
-                            <table>
+                            <table className="watering-table">
 
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Last Watered</th>
-                                    <th>Watered Today</th>
+                            <thead className="watering-col-header">
+                                <tr className="watering-col-header">
+                                    <th className="watering-col-header">Name</th>
+                                    <th className="watering-col-header">Watering Rate</th>
+                                    <th className="watering-col-header">Last Watered</th>
+                                    <th className="watering-col-header">Last Duration</th>
+                                    <th className="watering-col-header">Previous Duration</th>
+                                    <th className="watering-col-header">Watered</th>
 
                                 </tr>
                             </thead>
 
 
-                            <tbody>
+                            <tbody className="watering-details">
 
-                            {plantsByLocation.map(plants => (
+                                {plants.map(plants => (
 
-                                <tr key={plants._id}  >
-                                    <th className="plant-table-row" id={plants._id} onClick={handleClick}>{plants.name}</th>
-                                    <th id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"} </th>
-                                    <th><input type="checkbox" name="today" id={plants._id} onChange={handleInputChange}/></th>
+                                    <tr key={plants._id} >
+                                        <th 
+                                            className="plant-table-row watering-details" 
+                                            id={plants._id} 
+                                            onClick={handleClick}>
+                                                {plants.name}
+                                        </th>
+                                        <th className="watering-details">{plants.waterPref}</th>
+                                        <th 
+                                            className="water-metrics watering-details" 
+                                            id={plants._id}>
+                                                {plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"} 
+                                        </th>
+                                        <th 
+                                            className="water-metrics watering-details" 
+                                            id={plants._id}>
+                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 2]).getTime())/ oneDay) - Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"} 
+                                        </th>
+                                        <th
+                                            className="water-metrics watering-details" 
+                                            id={plants._id}>
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 3]).getTime())/ oneDay) - Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"} 
+                                        </th>
+                                        <th className="watering-details">
+                                            <input 
+                                                type="checkbox" 
+                                                name="today"
+                                                id={plants._id} 
+                                                onChange={handleInputChange}/>
+                                        </th>
 
-                                </tr>))}
-
+                                    </tr>
+                                ))}
+                             
+                                           
+                              
                             </tbody>
                             </table>
+                            <div>
+                                <input
+                                    type="date"
+                                    name="lastWatered"
+                                    defaultValue={todaysDate}
+                                    className="plant-details-selected-date"
+                                    onChange={(e) => setSelectedDate(e.target.value)}/>
+                            </div>
                             <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
             
                         </div>
@@ -146,6 +179,7 @@ const ByLocation = (data) => {
                     </div>
             
             </>: <p>Plants will show here based on their location</p>
+       
             }
             
         </div>
