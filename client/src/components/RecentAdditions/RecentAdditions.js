@@ -101,7 +101,7 @@ const RecentAdditions = (data) => {
             </div> */}
 
             <div className="new-plant-section">
-                <h3 className="recent-plant-header">In</h3>
+                <h3 className="recent-plant-header">Indoor Plants</h3>
 
                 <div className="most-recent-indoor">
                     <>
@@ -141,7 +141,7 @@ const RecentAdditions = (data) => {
             </div>
 
             <div className="new-plant-section">
-                <h3 className="recent-plant-header">Out</h3>
+                <h3 className="recent-plant-header">Outdoor Plants</h3>
 
                 <div className="most-recent-outdoor">
                     <>
