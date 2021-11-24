@@ -3,6 +3,9 @@
     /* margin-top: 80px; */
     box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
     /* border-radius: 30px; */
+    display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: fit-content(1em);
 }
 
 .weather-icon {
@@ -14,11 +17,12 @@
     color: gray;
 }
 
-.forecast-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 150px);
-  grid-template-rows: fit-content(1em);
+.forecast-options, .forecast-options-today, .forecast-options-next {
 
+}
+
+.forecast-options-today {
+    font-size: 50px;
 }
 
 .forecast-weather {
@@ -32,5 +36,21 @@
 
 
 .outdoor-plants-number {
-    font-size: 25px;
+    font-size: 20px;
 }
+
+h3.forecast-hardiness-header {
+    display: flex;
+    color: whitesmoke;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+    background-color:  rgba(50, 50, 50, 0.8);
+    margin-bottom: 0px;
+    font-weight: 300;
+    justify-content: center;
+  }
+
+  .forecast-plants {
+      font-size: 12px;
+  }

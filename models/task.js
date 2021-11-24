@@ -15,10 +15,13 @@ const taskSchema = new Schema({
     dateDue: {
         type: Date,
     },
-    taskStatus: {
+    taskSeason: {
+        type: String
+    },
+    taskNotes: {
         type: String
     }
-},
+    },
     {
         timestamps: true
     })

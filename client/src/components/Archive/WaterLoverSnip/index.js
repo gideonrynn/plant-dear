@@ -4,19 +4,16 @@ import React, {useEffect, useState } from "react";
 import "./style.css";
 import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 // import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
-import PlantAPI from "../../utils/PlantsAPI"
-import HardinessAPI from "../../utils/HardinessAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
 // import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
-import ReviewPlant from "../ReviewPlant";
+import ReviewPlant from "../../ReviewPlant";
 
 
-function HardinessSnip(cw) {
-    console.log(cw)
-    const currentTemp = cw.weather.app_temp;
-    
-    const [plantsHardiness, setPlantsHardiness] = useState([])
+function WaterSnip() {
+
+    const [waterPlants, setWaterPlants] = useState([])
 
     const [onePlant, setOnePlant] = useState([])
     const [onePlantId, setOnePlantId] = useState([])
@@ -29,46 +26,30 @@ function HardinessSnip(cw) {
     
     useEffect(() => {
         
-        loadPlantsHardiness();
-        loadHardinessZones();
-        console.log(cw.weather.app_temp)
-        console.log("HardinessSnip render triggered")
+        loadPlants()
+        // console.log(cw.weather.temp)
+        console.log("WaterSnip render triggered")
     
-    }, [cw])
+    }, [])
 
-    function loadPlantsHardiness() {
+    function loadPlants() {
 
-                PlantAPI.getAllPlants()
+                PlantAPI.getCurrentPlants()
                     .then(res => {
-                        let incoming = currentTemp;
-                        let allPlants = res.data;
-                        // console.log(incoming)
-
-                        // setCurrentTemp(incoming)
-                        // console.log(currentTemp)
-
+                        let currentPlants = res.data;
+                        // let date = new Date()
                         // display all the plants with a hardiness less than or equal to the current weather
-                        let hardyPlants = allPlants.filter(allPlants => { 
-                            return allPlants.hardiness !== "" && incoming <= allPlants.hardiness && allPlants.location === "outdoor"
-                            // return allPlants.hardiness >= (currentWeatherL - 10) && allPlants.location === "outdoor"
+                        let waterPlants = currentPlants.filter(currentPlants => { 
+                            return currentPlants.waterPref === "moist" && currentPlants.location === "indoor"
                         });
-
-                        // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
-
-                        const plantsHardiness = hardyPlants;
                         
-                        setPlantsHardiness(plantsHardiness);
+                        setWaterPlants(waterPlants);
                    
 
                 })
             
     };
 
-    function loadHardinessZones() {
-        HardinessAPI.getHardinessZones()
-            .then(res => { console.log(res.data) })
-    }
-    
     function getPlant(id) {
 
         setOnePlantId(id)
@@ -95,17 +76,17 @@ function HardinessSnip(cw) {
 
                 <Card style={{ minWidth: '14rem'}}>
                     {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
+                    {/* #5FAE57 */}
                     <Card.Header style={{backgroundColor: '#78A4CF'}}>
-                        <Card.Title>Plant Hardiness Watch</Card.Title>
-                        <Card.Subtitle><i>Outdoor plants to watch with hardiness above current temperature</i></Card.Subtitle>
+                        <Card.Title>Love Water</Card.Title>
+                        <Card.Subtitle><i>Indoor plants with moist requirements</i></Card.Subtitle>
                     </Card.Header>
-                    {plantsHardiness.map(plantsHardiness => (
-                        <ListGroup className="list-group-flush" key={plantsHardiness.id} >
+                    {waterPlants.map(waterPlants => (
+                        <ListGroup className="list-group-flush" key={waterPlants.id}  >
                             <ListGroupItem 
-                                key={plantsHardiness.id} 
-                                onClick={() => getPlant(plantsHardiness.id)}>{plantsHardiness.name} ({plantsHardiness.hardiness}&#176;) </ListGroupItem>
+                                key={waterPlants.id} 
+                                onClick={() => getPlant(waterPlants.id)}>{waterPlants.name} </ListGroupItem>
                         </ListGroup>))}
-                        
                     <Card.Body>
                         <Card.Link href="/plants">See all plants</Card.Link>
                     </Card.Body>
@@ -132,4 +113,4 @@ function HardinessSnip(cw) {
 
 }
 
-export default HardinessSnip;
+export default WaterSnip;

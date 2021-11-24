@@ -3,6 +3,7 @@ import './style.css';
 import MorePlants from '../../img/deskplants.jpeg';
 import { FaExternalLinkAlt } from "react-icons/fa"
 import { useHistory } from 'react-router-dom';
+import Plantling from '../../img/plantling.jpg'
 
 const RecentAdditions = (data) => {
 
@@ -38,8 +39,8 @@ const RecentAdditions = (data) => {
     
     // console.log(uniquePlants);
     const mostRecent = plantsByDate.slice(0, 20);
-    const mostRecentIndoor = recentIndoor.slice(0, 10);
-    const mostRecentOutdoor = recentOutdoor.slice(0, 10);
+    const mostRecentIndoor = recentIndoor.slice(0, 15);
+    const mostRecentOutdoor = recentOutdoor.slice(0, 15);
     const nextRecentFive = plantsByDate.slice(1, 14);
     console.log(mostRecent, nextRecentFive);
     let currentDate = new Date();
@@ -48,6 +49,48 @@ const RecentAdditions = (data) => {
     const oneDay = 1000 * 60 * 60 * 24;
 
     // const d = new Date();
+
+
+    function waterDateParse(lastWatered) {
+
+        let newWaterDate = ""
+
+        if (lastWatered) {
+
+            //date format from the db is yyyy-mm-dd so we will want to parse this
+
+            let lastWateredArray = lastWatered.split("-");
+            let lastWateredYear = lastWatered.split("-")[0];
+            let lastWateredMonth = lastWatered.split("-")[1] - 1;
+            let lastWateredDay = lastWatered.split("-")[2];
+            console.log("split", lastWateredArray);
+            console.log(lastWateredYear, lastWateredMonth, lastWateredDay);
+    
+            newWaterDate = new Date(lastWateredYear, lastWateredMonth, lastWateredDay);
+            console.log("New water date formatted: ", newWaterDate);
+
+        }
+
+        return getDifference(newWaterDate);
+
+    }
+
+
+    function getDifference(waterDate) {
+
+        let differenceConverted = "";
+
+        if(currentDate && waterDate) {
+
+            let dateDifference = currentDate.getTime() - waterDate.getTime();
+            differenceConverted = Math.floor(dateDifference / oneDay);
+            console.log("differenceConverted is: ", differenceConverted);
+
+        }
+
+        return differenceConverted;
+
+    }
 
     return (
         <>
@@ -110,14 +153,14 @@ const RecentAdditions = (data) => {
                             
                             <div key={plants._id+1} className="plant-card-wrapper">
                                 <div key={plants._id+1} className="plant-card">
-                                    <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
+                                    <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
                                 <div key={plants._id} id={plants._id} className="plant-card-2" onClick={handleClick}>
                                     <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p id={plants._id}>{plants.name}</p>
                                     <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not watered yet"}</p>
+                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + waterDateParse(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
                                     <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                     {/* <button className="plant-card-2-btn">Open plant</button> */}
                                 </div>
@@ -126,7 +169,7 @@ const RecentAdditions = (data) => {
                         ))}
                         <div className="see-more">
                             <div className="plant-card-see-more">
-                                <p>See all new plant dears <span className="g-t">&gt;</span></p>
+                                <p>See all plant dears <span className="g-t">&gt;</span></p>
                             </div>
                             <div className="plant-card-see-more-2">
                                 <img src={MorePlants} alt="See all plants" className=""/>
@@ -149,14 +192,14 @@ const RecentAdditions = (data) => {
                             
                             <div key={plants._id} className="plant-card-wrapper">
                                 <div key={plants._id} className="plant-card">
-                                    <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
+                                    <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
                                 <div key={plants._id+1} id={plants._id} className="plant-card-2" onClick={handleClick}>
                                     <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p id={plants._id}>{plants.name}</p>
                                     <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not watered yet"}</p>
+                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + waterDateParse(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
                                     <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                     {/* <button className="plant-card-2-btn">Open plant</button> */}
                                 </div>
@@ -165,7 +208,7 @@ const RecentAdditions = (data) => {
                         ))}
                         <div className="see-more">
                             <div className="plant-card-see-more">
-                                <p>See all new plant dears <span className="g-t">&gt;</span></p>
+                                <p>See all plant dears <span className="g-t">&gt;</span></p>
                             </div>
                             <div className="plant-card-see-more-2">
                                 <img src={MorePlants} alt="See all plants" className=""/>

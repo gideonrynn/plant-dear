@@ -2,18 +2,18 @@
 import React, {useContext} from "react";
 import { Box, Grid, ResponsiveContext, Tabs, Tab, Grommet } from 'grommet';
 // import { deepMerge } from 'grommet/utils';
-import WatchlistSnip from "../../components/WatchlistSnip/index"
+// import WatchlistSnip from "../../components/WatchlistSnip/index"
 // import WeatherAPI from "../../utils/WeatherAPI"
 // import Progress from "../../components/ProgressBar/index"
 // import Hardiness from "../../components/Hardiness/index"
-import HardinessSnip from "../../components/HardinessSnip"
-import ReadinessSnip from "../../components/ReadinessSnip"
-import HumiditySnip from "../../components/HumiditySnip";
-import WaterLoverSnip from "../WaterLoverSnip";
-import WaterSnip from "../WaterSnip";
-import PropaSnip from "../../components/PropaSnip";
-import PurchaseSnip from "../../components/PurchaseSnip";
-import SliderSection from "../../components/SliderSection/SliderSection";
+// import HardinessSnip from "../../components/HardinessSnip"
+// import ReadinessSnip from "../../components/ReadinessSnip"
+// import HumiditySnip from "../../components/HumiditySnip";
+// import WaterLoverSnip from "../WaterLoverSnip";
+// import WaterSnip from "../WaterSnip";
+// import PropaSnip from "../../components/PropaSnip";
+// import PurchaseSnip from "../../components/PurchaseSnip";
+// import SliderSection from "../../components/SliderSection/SliderSection";
 // import StatsSection from "../../components/StatsSection/StatsSection"
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"

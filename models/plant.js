@@ -25,7 +25,7 @@ const plantSchema = new Schema({
         type: Array
     },
     lastWatered: {
-        type: [Date]
+        type: [String]
     },
     nextWater: {
         type: Date
@@ -94,6 +94,9 @@ const plantSchema = new Schema({
         type: String
     },
     watching: {
+        type: String
+    },
+    overwinter: {
         type: String
     },
     description: {

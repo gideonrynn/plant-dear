@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
 import { Table, Col, Container } from "react-bootstrap"
-import PlantAPI from "../../utils/PlantsAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 import "./style.css";
 import { Modal } from "react-bootstrap"
-import ReviewPlant from "../../components/ReviewPlant";
+import ReviewPlant from "../../ReviewPlant";
 
 function ModPlants() {
 

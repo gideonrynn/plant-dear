@@ -3,6 +3,7 @@ import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Mod
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../../components/ReviewPlant";
 import FormModal from "../../components/FormModal/FormModal"
+import Plantling from '../../img/plantling.jpg'
 import { useHistory } from 'react-router-dom';
 import './style.css';
 
@@ -82,7 +83,7 @@ const PlantBlock = (data) => {
                         <>
                         <div className="plant-block-wrapper">
                             <div key={plants._id} className="plant-block">
-                                <img src={`/img/${plants.imgURL}`} alt="plant dear" className="plant-img-block"  />
+                                <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="plant dear" className="plant-img-block"  />
                                 <p className="plant-title-img">{plants.name}</p>
                             </div>
                             <div key={plants._id+1} id={plants._id} className="plant-block-2" onClick={handleClick}>

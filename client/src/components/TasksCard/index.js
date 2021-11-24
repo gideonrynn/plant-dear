@@ -27,11 +27,12 @@ function TasksCard(t) {
                     
                     <h3>{tasks.taskName} <FaEdit className="fa-edit" onClick={makeEdits}/></h3>
                     <p>{tasks.taskDetail}</p>
+                    <p>TaskID: {tasks._id}</p>
                     <p>Status: {tasks.taskStatus || "not started"}</p>
                     <label htmlFor="due-date">Due Date: </label>
                     <input className="input-due-date" type="date" id="due-date" defaultValue={tasks.dateDue || ''}></input>
                     <span> {tasks.dateDue || 'No due date'}</span>
-                    
+                    <p> Season: {tasks.taskSeason || 'Not applicable'}</p>
                     <textarea defaultValue={tasks.taskDetail} className="input-task-detail" readOnly></textarea>
                     <p>{tasks.taskNotes}</p>
                     

@@ -22,19 +22,24 @@ function PlantDetails(p) {
     // const [show, setShow] = useState(false);
 
     
-
-    let currentDate = new Date();
+    let date = new Date();
+    // let dateTime = date.getTime();
+    // let testDate = new Date(2021, 9, 29)
+    let currentDate = date.toLocaleString("en-US", {timeZone: "America/Chicago"});
+    console.log("default date: " + date + " and currentDate : " + currentDate);
 
     // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
     let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    let today = weekday[currentDate.getDay()];
-    let yesterday = weekday[currentDate.getDay() - 1];
+    let today = weekday[date.getDay()];
+    let yesterday = weekday[date.getDay() - 1];
     console.log("today is " + today);
 
-    
+    // let todayLocal = weekday[currentDate.getDay()];
+    // let yesterdayLocal = weekday[currentDate.getDay() - 1];
+    // console.log("today is " + todayLocal);
 
     //mapping
     // if todays date = Monday then button 1 = Monday, button 2 = Sunday, button 3
@@ -52,7 +57,7 @@ function PlantDetails(p) {
             {arrayValue: 6, dayOfWeek: "Saturday", color: "purple"},
         ];
     
-    console.log(colorDate[0]);
+    // console.log(colorDate[0]);
 
 
 
@@ -127,6 +132,48 @@ function PlantDetails(p) {
         setConstructedDates(prepConstructedDates);
     };
 
+
+    function waterDateParse(dateToParse) {
+
+        let newWaterDate = ""
+
+        if (dateToParse) {
+
+            //date format from the db is yyyy-mm-dd so we will want to parse this
+
+            let dateToParseArray = dateToParse.split("-");
+            let dateToParseYear = dateToParse.split("-")[0];
+            let dateToParseMonth = dateToParse.split("-")[1] - 1;
+            let dateToParseDay = dateToParse.split("-")[2];
+            console.log("split", dateToParseArray);
+            console.log(dateToParseYear, dateToParseMonth, dateToParseDay);
+    
+            newWaterDate = new Date(dateToParseYear, dateToParseMonth, dateToParseDay);
+            console.log("New water date formatted: ", newWaterDate);
+
+        }
+
+        return getDifference(newWaterDate);
+
+    }
+
+
+    function getDifference(waterDate) {
+
+        let differenceConverted = "";
+
+        if(date && waterDate) {
+
+            let dateDifference = date.getTime() - waterDate.getTime();
+            differenceConverted = Math.floor(dateDifference / oneDay);
+            console.log("differenceConverted is: ", differenceConverted);
+
+        }
+
+        return differenceConverted;
+
+    }
+
     function handleInputChange(event) {
         // const { name, defaultValue } = event.target;
         let fieldName = event.target.name
@@ -153,6 +200,7 @@ function PlantDetails(p) {
             sunlight: modPlant.sunlight,
             plantType: modPlant.plantType,
             trouble: modPlant.trouble,
+            overwinter: modPlant.overwinter,
             needsCare: modPlant.needsCare,
             humidity: modPlant.humidity,
             tempLow: modPlant.tempLow,
@@ -218,9 +266,12 @@ function PlantDetails(p) {
 
     function updateWaterDate(id, days) {
         let date = new Date();
+        console.log(days)
         date.setDate(date.getDate() - days);
-        let newISODate = date.toISOString();
-        let newDate = newISODate.split('T')[0];
+        console.log(date)
+        let newLocaleDate = date.toLocaleDateString("en-CA");
+        console.log("newLocaleDate: ", newLocaleDate)
+        let newDate = newLocaleDate.split(',')[0];
         console.log(newDate);
         PlantAPI.updatePlantWaterDate(
             {
@@ -245,7 +296,7 @@ function PlantDetails(p) {
     //     // One day in milliseconds
     //     const oneDay = 1000 * 60 * 60 * 24;
     
-    //     // Calculating the time difference between two dates
+    //     // Calculating the time dateDifference between two dates
     //     const diffInTime = date2.getTime() - date1.getTime();
     
     //     // Calculating the no. of days between two dates
@@ -442,6 +493,17 @@ function PlantDetails(p) {
                                             className="plant-details"
                                             onChange={handleInputChange}>
                                                 <option>{thisPlant.trouble || "not indicated"}</option>
+                                                <option>Y</option>
+                                                <option>N</option>
+                                            </select>
+                                    </div>
+                                    <div className="plant-details-group">
+                                        <p className="plant-details-label">Overwinter?</p>
+                                            <select
+                                            name="overwinter"
+                                            className="plant-details"
+                                            onChange={handleInputChange}>
+                                                <option>{thisPlant.overwinter || "not indicated"}</option>
                                                 <option>Y</option>
                                                 <option>N</option>
                                             </select>
@@ -689,12 +751,14 @@ function PlantDetails(p) {
                                     </ul> */}
                                     <div className="button-section">
                                         <p className="button-section-header"><b>Watered</b></p>
-                                        <p className="plant-details-comment">Last Watered {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago on " : "not yet watered"} {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : null}</p>
+                                        <p className="plant-details-comment">
+                                            Last Watered {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? waterDateParse(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]) + " day(s) ago on " : "not yet watered"} 
+                                            {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : null}</p> {/*getting the length to get the most recent entry in the array */}
                                         <div>{constructedDates.length > 0 ? 
                                             constructedDates.map(dateDetails => (
                                                 <button 
                                                     className="water-button" 
-                                                    style={thisPlant.lastWatered && thisPlant.lastWatered.length > 0 && Math.round((currentDate.getTime() - new Date(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]).getTime())/ oneDay) === dateDetails.daysAgo ?
+                                                    style={thisPlant.lastWatered && thisPlant.lastWatered.length > 0 && waterDateParse(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]) === dateDetails.daysAgo ?
                                                         {backgroundColor: "lightgrey", fontStyle: "italic"} : {backgroundColor: dateDetails.color}} 
                                                     onClick={() => updateWaterDate(thisPlant._id, dateDetails.daysAgo)}
                                                     >

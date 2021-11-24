@@ -37,6 +37,7 @@ function AddTask() {
             taskNotes: newTask.taskNotes,
             dateDue: newTask.dateDue,
             taskStatus: newTask.taskStatus,
+            taskSeason: newTask.taskSeason,
             createdAt: newTask.createdAt,
             updateAt: newTask.updatedAt,
         })
@@ -62,6 +63,9 @@ function AddTask() {
 
                 <label htmlFor="dateDue" className="new-task-label">Date Due</label>
                     <input className="new-task-input" type="date" name="dateDue" value={newTask.dateDue} onChange={handleInputChange}/>
+
+                <label htmlFor="taskSeason" className="new-task-label">Season</label>
+                    <input className="new-task-input" type="text" name="taskSeason" value={newTask.taskSeason} onChange={handleInputChange}/>
 
                 <input type="submit" value="Submit"/>
 

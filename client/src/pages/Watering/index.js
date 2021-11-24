@@ -6,9 +6,13 @@ import { PlantContext } from "../../context/PlantContext"
 
 function Watering () {
 
+    /*Description
+        This component handles the location selection, and sends the plants by location to the By Location component for rendering
+        By default, all plants will display regardless of location
+    */
     /*Todo:
-        *add photo to array for Watering page
-        *set up dependency on lastWatered dates
+        *add header photo to array for Watering page
+        *set up dependency on lastWatered dates. may handle this in ByLocation component
     */
 
     const plant = useContext(PlantContext);
@@ -33,7 +37,7 @@ function Watering () {
         // loadPlants();
         console.log("Watering page render triggered")
 
-        if(locationSecondary === "" || locationSecondary === "none") {
+        if(locationSecondary === "" || locationSecondary === "all") {
 
             let plantsByName = activePlants.sort((a,b) => {
                 if (a.name < b.name) return -1;
@@ -84,7 +88,7 @@ function Watering () {
                     className="plant-details"
                     onChange={(e) => sendPlants(e.target.value)}
                     >
-                        <option>none</option>
+                        <option>all</option>
                         <option>bathroom</option>
                         <option>bedroom</option>
                         <option>dining room</option>

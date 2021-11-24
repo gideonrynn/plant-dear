@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
 import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 // import { Table, Col, Container, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
-import PlantAPI from "../../utils/PlantsAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 import "./style.css";
 import { Modal } from "react-bootstrap"
-import ReviewPlant from "../ReviewPlant";
+import ReviewPlant from "../../ReviewPlant";
 // import { Link } from 'react-router-dom'
 
 function WatchlistSnip() {

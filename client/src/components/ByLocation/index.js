@@ -28,13 +28,16 @@ const ByLocation = (data) => {
     date.setDate(date.getDate());
     let newISODate = date.toISOString();
     let todaysDate = newISODate.split('T')[0];
+    let localDate = date.toLocaleDateString("en-US", {timeZone: "America/Chicago"});
+    console.log("This is the local date", localDate);
     // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
     const [ids, setIds] = useState([]);
     const [selectedDate, setSelectedDate] = useState("");
-    const [newLocation, setNewLocation] = useState("none");
+    const [newLocation, setNewLocation] = useState("all");
     const [updated, setUpdated] = useState(false);
+    const [checkedVal, setCheckedVal] = useState();
 
     useEffect(() => {
         console.log("ByLocation component rendered");
@@ -63,11 +66,20 @@ const ByLocation = (data) => {
         
         if (fieldCheckedValue === true) {
             setIds([...ids, fielddefaultValue]);
+            // setCheckedVal(true)
             console.log(fieldName, fielddefaultValue)
         }
         
         console.log(ids);
+        // setCheckedVal(handleCheckedValue(fieldCheckedValue))
+
     };
+
+
+    // function handleCheckedValue(checkedValue) {
+
+    //     return !checkedValue;
+    // }
 
     function updateWaterDate() {
 
@@ -86,7 +98,7 @@ const ByLocation = (data) => {
                 ids: ids,
                 lastWatered: wateredDate,
             })
-            .then(setUpdated("true"))
+            .then(setIds([]), setSelectedDate(""), setPlants(data.plants))
             .catch(err => console.log(err))
 
         // console.log(newDate);
@@ -110,12 +122,13 @@ const ByLocation = (data) => {
 
                             <thead className="watering-col-header">
                                 <tr className="watering-col-header">
+                                    <th className="watering-col-header">Watered</th>
                                     <th className="watering-col-header">Name</th>
                                     <th className="watering-col-header">Watering Rate</th>
                                     <th className="watering-col-header">Last Watered</th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
-                                    <th className="watering-col-header">Watered</th>
+                                    
 
                                 </tr>
                             </thead>
@@ -126,8 +139,18 @@ const ByLocation = (data) => {
                                 {plants.map(plants => (
 
                                     <tr key={plants._id} >
+                                        <th className="watering-details">
+                                            <input 
+                                                type="checkbox" 
+                                                name="today"
+                                                id={plants._id} 
+                                                // defaultChecked={false}
+                                                // checked={checkedVal}
+                                                onChange={handleInputChange}/>
+                                        </th>
                                         <th 
-                                            className="plant-table-row watering-details" 
+                                            className="plant-table-row watering-details"
+                                            
                                             id={plants._id} 
                                             onClick={handleClick}>
                                                 {plants.name}
@@ -135,7 +158,7 @@ const ByLocation = (data) => {
                                         <th className="watering-details">{plants.waterPref}</th>
                                         <th 
                                             className="water-metrics watering-details" 
-                                            id={plants._id}>
+                                            id={plants._id}> 
                                                 {plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"} 
                                         </th>
                                         <th 
@@ -148,13 +171,7 @@ const ByLocation = (data) => {
                                             id={plants._id}>
                                                 {plants.lastWatered && plants.lastWatered.length > 2 ? (Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 3]).getTime())/ oneDay) - Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"} 
                                         </th>
-                                        <th className="watering-details">
-                                            <input 
-                                                type="checkbox" 
-                                                name="today"
-                                                id={plants._id} 
-                                                onChange={handleInputChange}/>
-                                        </th>
+                                        
 
                                     </tr>
                                 ))}
@@ -164,6 +181,8 @@ const ByLocation = (data) => {
                             </tbody>
                             </table>
                             <div>
+                            <span className="plant-details-label">Select Date </span>
+                            
                                 <input
                                     type="date"
                                     name="lastWatered"
