@@ -6,15 +6,16 @@ import { useHistory } from 'react-router-dom';
 
 const Stats = (data) => {
 
-    //want to add here what likes a lot of water, what surives the winter, etc
+    //want to add here what likes a lot of water, what survives the winter, etc
 
+    console.log("Stats component initialized");
     const plants = data.plants;
     const history = useHistory();
 
     function handleClick(event, id) {
-        console.log("clicked", event.target.id);
+        // console.log("clicked", event.target.id);
         
-        console.log(id);
+        // console.log(id);
         history.push({
             pathname: "plantonly",
             state: { detail: event.target.id }});
@@ -43,7 +44,7 @@ const Stats = (data) => {
     const mostRecentIndoor = recentIndoor.slice(0, 10);
     const mostRecentOutdoor = recentOutdoor.slice(0, 10);
     const nextRecentFive = plantsByDate.slice(1, 14);
-    console.log(mostRecent, nextRecentFive);
+    // console.log(mostRecent, nextRecentFive);
 
     // const d = new Date();
 

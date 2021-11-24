@@ -6,6 +6,8 @@ import "./style.css";
 
 function Tasks () {
 
+    console.log("Tasks page initialized, no context");
+
     const [tasks, setTasks] = useState([])
 
     // Load all plants and store them within setPlants
@@ -13,7 +15,7 @@ function Tasks () {
 
         loadTasks()
         // loadOne()
-        console.log("Tasks page render triggered")
+        console.log("Tasks page rerender triggered");
     
     }, [])
 
@@ -30,16 +32,16 @@ function Tasks () {
             .catch(err => console.log(err));
     };
 
-    const loadOne = () => {
-        console.log("Load one has been loaded")
+    // const loadOne = () => {
+    //     // console.log("Load one has been loaded");
 
-        TasksAPI.getOneTask()
-            .then(res => {
-                console.log("This is from the one to many relationship", res.data);
+    //     TasksAPI.getOneTask()
+    //         .then(res => {
+    //             // console.log("This is from the one to many relationship", res.data);
              
-            })
-            .catch(err => console.log(err));
-    };
+    //         })
+    //         .catch(err => console.log(err));
+    // };
 
 
     return (

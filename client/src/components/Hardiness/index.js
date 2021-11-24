@@ -8,6 +8,7 @@ import WeatherAPI from "../../utils/WeatherAPI"
 
 function HardinessComp(cw) {
 
+    console.log("HardinessComp component initialized");
     const [plantsHardiness, setPlantsHardiness] = useState([])
     // let [dangerZone, setdangerZone] = useState([])
     const [currentTemp, setCurrentTemp] = useState([]);
@@ -37,7 +38,7 @@ function HardinessComp(cw) {
                         
                         incoming = cw.weather.temp;
                         setCurrentTemp(incoming)
-                        console.log(currentTemp)
+                        // console.log(currentTemp)
 
                         // return allPlants.hardiness <= currentWeatherL && allPlants.hardiness < 0
 

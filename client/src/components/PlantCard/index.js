@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
-import { FaPlus } from "react-icons/fa"
+import { Modal } from "react-bootstrap"
+// import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
@@ -9,10 +9,11 @@ import './style.css'
 
 function PlantCard(p) {
 
-    const [thisPlant, setThisPlant] = useState([])
-    const [thisPlantInact, setThisPlantInact] = useState([])
-    const [onePlant, setOnePlant] = useState([])
-    const [onePlantId, setOnePlantId] = useState([])
+    console.log("PlantCard component initialized");
+    const [thisPlant, setThisPlant] = useState([]);
+    const [thisPlantInact, setThisPlantInact] = useState([]);
+    const [onePlant, setOnePlant] = useState([]);
+    const [onePlantId, setOnePlantId] = useState([]);
     
     // handle modal
     const [show, setShow] = useState(false);
@@ -20,9 +21,9 @@ function PlantCard(p) {
     useEffect(() => {
         // right now, none of the sorted 
         loadSortedPlants()
-        console.log("PlantCard render triggered")
+        console.log("PlantCard rerendered");
         
-    }, [p])
+    });
 
 
     function handleClose() {
@@ -34,7 +35,7 @@ function PlantCard(p) {
     }
 
     function loadSortedPlants() {
-        console.log(p)
+        // console.log(p)
         // sort plants in alphabetical order
         let activeSorted = p.plants.sort((a,b) => a.name > b.name ? 1: -1);
         setThisPlant(activeSorted);

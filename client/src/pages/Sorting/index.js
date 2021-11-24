@@ -7,12 +7,14 @@ import { PlantContext } from "../../context/PlantContext"
 
 function Sorting () {
 
+    console.log("Sorting page initialized, with context");
+
     const plant = useContext(PlantContext);
     const activePlants = plant.activePlants;
     const inactivePlants = plant.inactivePlants;
     const counter = plant.counter;
     const inactcounter = plant.inactcounter;
-    console.log("number of active plants returned", activePlants.length);
+    // console.log("number of active plants returned", activePlants.length);
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([])
@@ -20,12 +22,12 @@ function Sorting () {
 
     // for handling search bar and input
     //* consider whether or not this is needed rather than input param passed into function *//
-    const [searchTerm, setSearchTerm] = useState('');
+    // const [searchTerm, setSearchTerm] = useState('');
 
     // Load all plants and store them within setPlants
     useEffect(() => {
         loadPlants();
-        console.log("Sorting page render triggered")
+        console.log("Sorting page rerendered");
     
     })
 
@@ -36,27 +38,27 @@ function Sorting () {
     }
 
     // take text entered in the search and filter current list of plants
-    function sortPlants(input) {
+    // function sortPlants(input) {
 
-        if(input) {
-            const filtered = activePlants.filter(actPlants => {
-                return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-               })
+    //     if(input) {
+    //         const filtered = activePlants.filter(actPlants => {
+    //             return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+    //            })
     
-            const filteredInactive = inactivePlants.filter(inactPlants => {
-                return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-               })
+    //         const filteredInactive = inactivePlants.filter(inactPlants => {
+    //             return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+    //            })
             
-            setSearchTerm(input);
-            setUpdatedPlants(filtered);
-            setUpdatedInactivePlants(filteredInactive);
-        } else {
+    //         setSearchTerm(input);
+    //         setUpdatedPlants(filtered);
+    //         setUpdatedInactivePlants(filteredInactive);
+    //     } else {
 
-            loadPlants();
-        }
+    //         loadPlants();
+    //     }
         
 
-    }
+    // }
 
     return (
         <div className="plantsdiv">

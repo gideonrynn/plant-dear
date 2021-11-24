@@ -1,16 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
+// import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../ReviewPlant";
 import FormModal from "../FormModal/FormModal"
 import './style.css';
 
 const PlantBlockAll = (data) => {
-    const [onePlantId, setOnePlantId] = useState([])
-    const [onePlant, setOnePlant] = useState([])
+
+    console.log("PlantBlockAll component initialized");
+    const [onePlantId, setOnePlantId] = useState([]);
+    const [onePlant, setOnePlant] = useState([]);
     // handle modal
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    // const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     let currentDate = new Date();
@@ -20,12 +22,12 @@ const PlantBlockAll = (data) => {
 
     function getPlant(id) {
 
-        console.log("this was clicked")
+        // console.log("this was clicked")
         setOnePlantId(id)
                  PlantAPI.getOnePlant(id)
                      .then(res => {
-                         console.log(onePlant)
-                         setOnePlant(res.data)
+                         console.log(onePlant);
+                         setOnePlant(res.data);
                          
                          handleShow()
                              // .then(res => {

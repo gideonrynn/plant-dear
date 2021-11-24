@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
-import { useLocation, withRouter } from "react-router-dom";
-import PlantBlockAll from "../PlantBlockAll/PlantBlock"
+import { useLocation } from "react-router-dom";
+// import { useLocation, withRouter } from "react-router-dom";
+// import PlantBlockAll from "../PlantBlockAll/PlantBlock"
 import './style.css'
 // weather context
 // plant data
@@ -8,17 +9,16 @@ import './style.css'
 
 const ForecastPlantHardiness = (data) => {
     
+    console.log("ForecastPlantHardiness component initialized");
     const forecastWeather = data.weather;
     const plants = data.plants;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
     const dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    const d = new Date();
-
-    const forecastWeather2 = "";
+    // console.log(plants);
 
     useEffect(() => {
-        console.log("ForecastPlantHardiness component rendered");
+        console.log("ForecastPlantHardiness component rerendered");
     }, [])
 
     // let d = new Date(forecastWeather[0].valid_date);
@@ -30,14 +30,14 @@ const ForecastPlantHardiness = (data) => {
     let outdoorPlants = plants.filter(plants => { 
         return plants.hardiness !== "" && plants.location === "outdoor"
     });
-    let outdoorPlantsVol = outdoorPlants.length;
+    // let outdoorPlantsVol = outdoorPlants.length;
     // console.log("Outdoor plants", outdoorPlants)
 
     /*Winter safe qualifies as plants with a hardiness equal to or less than Chicago's (-20)
     Exclude records where the hardinessZoneMin does not exist*/
-    let outdoorWinterSafe = plants.filter(plants => { 
-        return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
-    });
+    // let outdoorWinterSafe = plants.filter(plants => { 
+    //     return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 5 || plants.hardiness <= -15) && plants.cycle === "perennial"
+    // });
     // console.log("Winter safe plants: ", outdoorWinterSafe);
     let outdoorWinterSafeMaybe = plants.filter(plants => { 
         return plants.hardinessZoneMin !== undefined && plants.location === "outdoor" && (plants.hardinessZoneMin <= 7 || plants.hardiness <= 0) && plants.cycle === "perennial"
@@ -54,7 +54,7 @@ const ForecastPlantHardiness = (data) => {
 
                     <div className="forecast-options-today">
                         {forecastWeather.slice(0, 1).map(weather => (
-                            <div key={weather.uv} className="forecast-weather">
+                            <div key={weather.ts} className="forecast-weather">
                                 <span>{dayOfWeek[new Date(weather.valid_date).getDay()]} </span>
                                 <span>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'}).slice(0,4)}</span> { }
                                 <br></br>
@@ -64,9 +64,9 @@ const ForecastPlantHardiness = (data) => {
                                 {/* <span>{weather.weather.description}</span> { } */}
 
                                 <div className="forecast-plants">
-                                    {outdoorPlants.map(plants => (
+                                    {outdoorPlants.map((plants, index) => (
                                         plants.hardiness > weather.low_temp ?
-                                        <div key={plants.id}>
+                                        <div key={index}>
                                             <span>{plants.name}</span> { }
                                             <span>({plants.hardiness}&#176;)</span> { }
                                             {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
@@ -80,7 +80,7 @@ const ForecastPlantHardiness = (data) => {
         
                     <div className="forecast-options-next">
                         {forecastWeather.slice(1, 5).map(weather => (
-                            <div key={weather.uv} className="forecast-weather">
+                            <div key={weather.ts} className="forecast-weather">
                                 <span>{dayOfWeek[new Date(weather.valid_date).getDay()]} </span>
                                 <span>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'}).slice(0,4)}</span> { }
                                 <p>H: {weather.high_temp}</p> { }
@@ -88,9 +88,9 @@ const ForecastPlantHardiness = (data) => {
                                 {/* <span>{weather.weather.description}</span> { } */}
                                 <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`} className="weather-icon"></img>
                                 <div className="forecast-plants">
-                                    {outdoorPlants.map(plants => (
+                                    {outdoorPlants.map((plants, index) => (
                                         plants.hardiness > weather.low_temp ?
-                                        <div key={plants.id}>
+                                        <div key={index}>
                                             <span>{plants.name}</span> { }
                                             <span>({plants.hardiness}&#176;)</span> { }
                                             {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}
@@ -120,7 +120,7 @@ const ForecastPlantHardiness = (data) => {
             </>: 
                             <div className="forecast-options">
                             {forecastWeather.map(weather => (
-                                <div key={weather.uv} className="forecast-weather">
+                                <div key={weather.ts} className="forecast-weather">
                                     <span>{dayOfWeek[new Date(weather.valid_date).getDay()]} </span>
                                     <span>{new Date(weather.valid_date).toLocaleDateString('en-US', {timeZone: 'UTC'}).slice(0,4)}</span> { }
                                     <p>H: {weather.high_temp}</p> { }
@@ -128,9 +128,9 @@ const ForecastPlantHardiness = (data) => {
                                     {/* <span>{weather.weather.description}</span> { } */}
                                     <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`} className="weather-icon"></img>
                                     <div className="forecast-plants">
-                                        {outdoorPlants.map(plants => (
+                                        {outdoorPlants.map((plants, index) => (
                                             plants.hardiness > weather.low_temp ?
-                                            <div key={plants.id}>
+                                            <div key={index}>
                                                 <span>{plants.name}</span> { }
                                                 <span>({plants.hardiness}&#176;)</span> { }
                                                 {/* <img alt="weather" src={`https://www.weatherbit.io/static/img/icons/ + {} + .png`}></img> */}

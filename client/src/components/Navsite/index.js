@@ -1,7 +1,6 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
-import grommet from 'grommet';
 import AddPlants from "../AddPlants";
 // import AddPlantsQuick from "../../components/AddPlantsQuick";
 import { WeatherContext } from "../../context/WeatherContext"

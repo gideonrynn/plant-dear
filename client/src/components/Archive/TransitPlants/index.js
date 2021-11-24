@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
 import { Table, Col } from "react-bootstrap"
-import PlantAPI from "../../utils/PlantsAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 // import "./style.css";
 
 function ModPlants() {
+
+    console.log("TransitPlants/ModPlants component initialized");
 
     // Setting our component's initial state
     const [modStatusPlant, setModStatusPlant] = useState([])
@@ -29,7 +31,7 @@ function ModPlants() {
     };
 
     function getPlant(id) {
-        console.log("This plant id is" + id)
+        // console.log("This plant id is" + id)
     }
 
     return (

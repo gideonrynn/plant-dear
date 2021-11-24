@@ -4,11 +4,11 @@ import React, {useEffect, useState } from "react";
 
 import { Col, Card, ListGroup, ListGroupItem } from "react-bootstrap"
 // import { Table, Col, Row, Card, ListGroup, ListGroupItem } from "react-bootstrap"
-import PlantAPI from "../../utils/PlantsAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
 // import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
-import ReviewPlant from "../ReviewPlant";
+import ReviewPlant from "../../ReviewPlant";
 import "./style.css";
 
 

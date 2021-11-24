@@ -1,21 +1,23 @@
-import React, {useEffect, useState, useContext } from "react";
+import React, {useEffect, useState } from "react";
 import "./style.css";
-import PlantCard from "../../components/PlantCard"
+// import PlantCard from "../../components/PlantCard"
 // import { WeatherContext } from "../../context/WeatherContext"
 import PlantAPI from "../../utils/PlantsAPI"
-import { PlantContext } from "../../context/PlantContext"
+// import { PlantContext } from "../../context/PlantContext"
 import PlantDetails from "../../components/PlantDetails";
 import { useLocation } from "react-router-dom";
 
 function PlantOnly_Render(hist) {
 
+    console.log("PlantOnly_Render page initialized, with context");
+
     const location = useLocation();
-    const plant = useContext(PlantContext);
-    let onePlantOnly = plant.activePlants[133];
-    console.log(location.state.detail);
+    // const plant = useContext(PlantContext);
+    // let onePlantOnly = plant.activePlants[133];
+    // console.log(location.state.detail);
 
     const [thisPlant, setThisPlant] = useState({});
-    const [thisPlantId, setThisPlantId] = useState({});
+    const [, setThisPlantId] = useState({});
 
     useEffect(() => {
         if(location.state.detail) {
@@ -35,7 +37,7 @@ function PlantOnly_Render(hist) {
             .catch(err => console.log(err))
      }
 
-    console.log(onePlantOnly);
+    // console.log(onePlantOnly);
     return (
         <div className="plants-only-div">
 

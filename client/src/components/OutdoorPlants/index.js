@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react'
-import { useLocation, withRouter } from "react-router-dom";
-import PlantBlockAll from "../PlantBlockAll/PlantBlock"
+import React, { useEffect } from 'react'
+// import { useLocation, withRouter } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+// import PlantBlockAll from "../PlantBlockAll/PlantBlock"
 import Outdoor from "../../img/outdoor-1.jpg"
 import './style.css'
 // weather context
@@ -9,21 +10,22 @@ import './style.css'
 
 const OutdoorPlants = (data) => {
     
-    const forecastWeather = data.weather;
+    console.log("OurdoorPlants component initialized");
+    // const forecastWeather = data.weather;
     const plants = data.plants;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
 
     useEffect(() => {
-        console.log("ForecastPlantHardiness component rendered");
+        console.log("ForecastPlantHardiness component rerendered");
     }, [])
 
     // get all the plants that are outdoors and have an existing hardiness
     let outdoorPlants = plants.filter(plants => { 
         return plants.hardiness !== "" && plants.location === "outdoor"
     });
-    let outdoorPlantsFirst = outdoorPlants[0];
-    let outdoorPlantsThumbs = outdoorPlants.slice(2, 5);
+    // let outdoorPlantsFirst = outdoorPlants[0];
+    // let outdoorPlantsThumbs = outdoorPlants.slice(2, 5);
     let outdoorPlantsVol = outdoorPlants.length;
     let outdoorRepot = plants.filter(plants => { 
         return plants.location === "outdoor" && (plants.lastPotted === null || plants.lastPotted === undefined || plants.lastPotted === "")

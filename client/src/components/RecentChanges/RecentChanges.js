@@ -9,11 +9,13 @@ const RecentlyUpdated = (data) => {
     // want this component to log when something on the plant has been updated
     // repot is a big one, watered may go in another place
 
+    console.log("RecentChanges/RecentlyUpdated component initialized");
+
     const plants = data.plants;
     const history = useHistory();
 
     function handleClick(event, id) {
-        console.log("clicked", event.target.id);
+        // console.log("clicked", event.target.id);
         
         console.log(id);
         history.push({
@@ -44,7 +46,7 @@ const RecentlyUpdated = (data) => {
     const mostRecentIndoor = recentIndoor.slice(0, 10);
     const mostRecentOutdoor = recentOutdoor.slice(0, 10);
     const nextRecentFive = plantsByDate.slice(1, 14);
-    console.log(mostRecent, nextRecentFive);
+    // console.log(mostRecent, nextRecentFive);
 
     // const d = new Date();
 

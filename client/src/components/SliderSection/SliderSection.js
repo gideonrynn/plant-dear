@@ -8,6 +8,7 @@ import './style.css'
 
 const SliderSection = (data) => {
 
+    console.log("SliderSection component initialized");
     const plants = data.plants;
 
     // console.log(plants[0].name);

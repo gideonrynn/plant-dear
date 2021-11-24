@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap"
-import AddPlantAPI from "../../utils/PlantsAPI"
+// import AddPlantAPI from "../../utils/PlantsAPI"
 import './FormModal.css'
 
 function FormModal(props) {
 
+    console.log("FormModal component initialized");
     const [show, setShow] = useState(false);
 
-    console.log(props.show);
+    // console.log(props.show);
 
     useEffect(() => {
 
@@ -16,13 +16,13 @@ function FormModal(props) {
         }
         // right now, none of the sorted 
         // loadSortedPlants()
-        console.log("Modal triggered")
+        // console.log("Modal triggered")
         
     }, [props])
 
 
     function handleClose() {
-        console.log("Modal close clicked")
+        // console.log("Modal close clicked")
         setShow(false);
     };
 

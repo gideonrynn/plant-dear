@@ -6,12 +6,14 @@ import { PlantContext } from "../../context/PlantContext"
 
 function Plants () {
 
+    console.log("Plants page initialized, with context");
+
     const plant = useContext(PlantContext);
     const activePlants = plant.activePlants;
     const inactivePlants = plant.inactivePlants;
     const counter = plant.counter;
     const inactcounter = plant.inactcounter;
-    console.log("number of active plants returned", activePlants.length);
+    // console.log("number of active plants returned", activePlants.length);
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([])
@@ -24,9 +26,9 @@ function Plants () {
     // Load all plants and store them within setPlants
     useEffect(() => {
         loadPlants();
-        console.log("Plants page render triggered")
+        console.log("Plants page rerendered");
     
-    }, [])
+    });
 
     function loadPlants() {
         // by default, show all plants returned from api

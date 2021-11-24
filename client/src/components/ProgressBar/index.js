@@ -9,6 +9,8 @@ import PlantLoad from "../../img/plant_loading.gif"
 
 function Progress() {
 
+    console.log("ProgressBar component initialized");
+
     return (
 
 

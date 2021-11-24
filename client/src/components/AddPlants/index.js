@@ -8,9 +8,9 @@ function AddPlants() {
     const [newPlant, setNewPlant] = useState({});
 
     // const [show, setShow] = useState(false);
-
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
+    console.log("AddPlants component initialized");
 
     useEffect(() => {}, []);
 

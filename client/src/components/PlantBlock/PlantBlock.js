@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import { Card, Button, Row, Col, ListGroup, ListGroupItem, Image, Container, Modal } from "react-bootstrap"
-import PlantAPI from "../../utils/PlantsAPI"
-import ReviewPlant from "../../components/ReviewPlant";
-import FormModal from "../../components/FormModal/FormModal"
+import React from 'react';
+// import PlantAPI from "../../utils/PlantsAPI"
 import Plantling from '../../img/plantling.jpg'
 import { useHistory } from 'react-router-dom';
 import './style.css';
 
 const PlantBlock = (data) => {
-    const [onePlantId, setOnePlantId] = useState([])
-    const [onePlant, setOnePlant] = useState([])
+
+    console.log("PlantBlock component initialized");
+    // const [onePlantId, setOnePlantId] = useState([]);
+    // const [onePlant, setOnePlant] = useState([]);
 
     const plants = data.plants;
     const history = useHistory();
@@ -20,9 +19,9 @@ const PlantBlock = (data) => {
     const oneDay = 1000 * 60 * 60 * 24;
 
     function handleClick(event, id) {
-        console.log("clicked", event.target.id);
+        // console.log("clicked", event.target.id);
         
-        console.log(id);
+        // console.log(id);
         history.push({
             pathname: "plantdetails",
             state: { detail: event.target.id }});
@@ -41,29 +40,29 @@ const PlantBlock = (data) => {
     })
 
     // handle modal
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const [setShow] = useState(false);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
-    function getPlant(id) {
+    // function getPlant(id) {
 
-        console.log("this was clicked")
-        setOnePlantId(id)
-                 PlantAPI.getOnePlant(id)
-                     .then(res => {
-                         console.log(onePlant)
-                         setOnePlant(res.data)
+    //     // console.log("this was clicked")
+    //     setOnePlantId(id)
+    //              PlantAPI.getOnePlant(id)
+    //                  .then(res => {
+    //                      console.log(onePlant)
+    //                      setOnePlant(res.data)
                          
-                         handleShow()
-                             // .then(res => {
-                             //     
-                             // })
+    //                      handleShow()
+    //                          // .then(res => {
+    //                          //     
+    //                          // })
                              
-                     // const plants = res.data;
-                     // setPlants(plants);
-                 })
-                 .catch(err => console.log(err))
-     }
+    //                  // const plants = res.data;
+    //                  // setPlants(plants);
+    //              })
+    //              .catch(err => console.log(err))
+    //  }
 
 
     

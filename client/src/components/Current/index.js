@@ -5,8 +5,11 @@ import "./style.css";
 
 function Current(cw) {
 
+    console.log("Current component initialized");
+    
     useEffect (() => {
         // console.log(cw);
+        
     })
    
 

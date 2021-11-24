@@ -4,17 +4,18 @@ import './style.css'
 
 function TasksCard(t) {
 
+    console.log("TasksCard component initialized");
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
         setTasks(t.tasks);
-        console.log("Tasks card render triggered")
+        console.log("Tasks card rerender triggered");
         
     }, [t])
 
     
     const makeEdits = () => {
-        console.log("this was clicked");
+        // console.log("this was clicked");
     }
         
     if(tasks.length === 0) return <p>Loading...</p>

@@ -1,21 +1,22 @@
-import React, {useEffect, useState, useContext } from "react";
+import React, {useEffect, useContext } from "react";
 import "./style.css";
-import WeatherAPI from "../../utils/WeatherAPI"
+// import WeatherAPI from "../../utils/WeatherAPI"
 import ForecastPlantHardiness from "../../components/ForecastPlantHardiness/"
 import {WeatherContext} from "../../context/WeatherContext"
 import {PlantContext} from "../../context/PlantContext"
 
 function Weather () {
 
+    console.log("Weather page initialized, with context");
     // Setting our component's initial state
     // const [forecastWeather, setForecastWeather] = useState([])
     // const date = new Date();
     const weather = useContext(WeatherContext)
-    const currentWeather = weather.currentWeather;
+    // const currentWeather = weather.currentWeather;
     const forecastWeather = weather.forecastWeather;
     const plant = useContext(PlantContext);
     const activePlants = plant.activePlants;
-    const inactivePlants = plant.inactivePlants;
+    // const inactivePlants = plant.inactivePlants;
 
     // Load all plants and store them within setPlants
     useEffect(() => {

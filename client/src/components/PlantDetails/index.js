@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import { FaPlus } from "react-icons/fa"
+// import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
-import HardinessAPI from "../../utils/HardinessAPI"
+// import HardinessAPI from "../../utils/HardinessAPI"
 import './style.css'
 
 function PlantDetails(p) {
     //in this component, we are only rendering one dedicated plant
     //passing in one plant with it's details, kind of like in review plant
+
+    console.log("PlantDetails component initialized");
 
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
@@ -25,17 +27,17 @@ function PlantDetails(p) {
     let date = new Date();
     // let dateTime = date.getTime();
     // let testDate = new Date(2021, 9, 29)
-    let currentDate = date.toLocaleString("en-US", {timeZone: "America/Chicago"});
-    console.log("default date: " + date + " and currentDate : " + currentDate);
+    // let currentDate = date.toLocaleString("en-US", {timeZone: "America/Chicago"});
+    // console.log("default date: " + date + " and currentDate : " + currentDate);
 
     // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
-    let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    // let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    let today = weekday[date.getDay()];
-    let yesterday = weekday[date.getDay() - 1];
-    console.log("today is " + today);
+    // let today = weekday[date.getDay()];
+    // let yesterday = weekday[date.getDay() - 1];
+    // console.log("today is " + today);
 
     // let todayLocal = weekday[currentDate.getDay()];
     // let yesterdayLocal = weekday[currentDate.getDay() - 1];
@@ -47,21 +49,21 @@ function PlantDetails(p) {
 
     
 
-    let colorDate = [
-            {arrayValue: 0, dayOfWeek: "Sunday", color: "pink"},
-            {arrayValue: 1, dayOfWeek: "Monday", color: "red"},
-            {arrayValue: 2, dayOfWeek: "Tuesday", color: "orange"},
-            {arrayValue: 3, dayOfWeek: "Wednesday", color: "yellow"},
-            {arrayValue: 4, dayOfWeek: "Thursday", color: "green"},
-            {arrayValue: 5, dayOfWeek: "Friday", color: "blue"},
-            {arrayValue: 6, dayOfWeek: "Saturday", color: "purple"},
-        ];
+    // let colorDate = [
+    //         {arrayValue: 0, dayOfWeek: "Sunday", color: "pink"},
+    //         {arrayValue: 1, dayOfWeek: "Monday", color: "red"},
+    //         {arrayValue: 2, dayOfWeek: "Tuesday", color: "orange"},
+    //         {arrayValue: 3, dayOfWeek: "Wednesday", color: "yellow"},
+    //         {arrayValue: 4, dayOfWeek: "Thursday", color: "green"},
+    //         {arrayValue: 5, dayOfWeek: "Friday", color: "blue"},
+    //         {arrayValue: 6, dayOfWeek: "Saturday", color: "purple"},
+    //     ];
     
     // console.log(colorDate[0]);
 
 
 
-    console.log(p.plant);
+    // console.log(p.plant);
 
     useEffect(() => {
         
@@ -69,7 +71,7 @@ function PlantDetails(p) {
             setThisPlant(p.plant);
             setThisPlantId(p.plant._id)
         }
-        console.log("Plant details render triggered")
+        console.log("PlantDetails rerenderred");
         createDateObjects();
         
     }, [p]);
@@ -79,7 +81,7 @@ function PlantDetails(p) {
         let prepConstructedDates = [];
         let dayOfWeek = "";
         let color = "";
-        let daysAgo = "";
+        // let daysAgo = "";
         
         for(let i = 0; i < numberInWeek; i++) {
             // console.log("this is the loop" + i);
@@ -89,13 +91,12 @@ function PlantDetails(p) {
             let date = new Date()
             date.setDate(date.getDate() - i);
             let day = date.getDay();
-            console.log("the date " + date + " and the day is " + day);
+            // console.log("the date " + date + " and the day is " + day);
 
             switch (day) {
                 case 0:
                   dayOfWeek = "Sunday";
                   color = "pink";
-                  daysAgo = 0;
                   break;
                 case 1:
                   dayOfWeek = "Monday";
@@ -128,7 +129,7 @@ function PlantDetails(p) {
             prepConstructedDates.push({"arrayValue": date.getDay(), "dayOfWeek": dayOfWeek, "color": color, "daysAgo": i});
             
         };
-        console.log(prepConstructedDates);
+        // console.log(prepConstructedDates);
         setConstructedDates(prepConstructedDates);
     };
 
@@ -141,15 +142,15 @@ function PlantDetails(p) {
 
             //date format from the db is yyyy-mm-dd so we will want to parse this
 
-            let dateToParseArray = dateToParse.split("-");
+            // let dateToParseArray = dateToParse.split("-");
             let dateToParseYear = dateToParse.split("-")[0];
             let dateToParseMonth = dateToParse.split("-")[1] - 1;
             let dateToParseDay = dateToParse.split("-")[2];
-            console.log("split", dateToParseArray);
-            console.log(dateToParseYear, dateToParseMonth, dateToParseDay);
+            // console.log("split", dateToParseArray);
+            // console.log(dateToParseYear, dateToParseMonth, dateToParseDay);
     
             newWaterDate = new Date(dateToParseYear, dateToParseMonth, dateToParseDay);
-            console.log("New water date formatted: ", newWaterDate);
+            // console.log("New water date formatted: ", newWaterDate);
 
         }
 
@@ -166,7 +167,7 @@ function PlantDetails(p) {
 
             let dateDifference = date.getTime() - waterDate.getTime();
             differenceConverted = Math.floor(dateDifference / oneDay);
-            console.log("differenceConverted is: ", differenceConverted);
+            // console.log("differenceConverted is: ", differenceConverted);
 
         }
 
@@ -179,13 +180,13 @@ function PlantDetails(p) {
         let fieldName = event.target.name
         let fielddefaultValue = event.target.value
         setModPlant({...modPlant, [fieldName]: fielddefaultValue})
-        console.log(fieldName, fielddefaultValue)
-        console.log(modPlant);
+        // console.log(fieldName, fielddefaultValue);
+        // console.log(modPlant);
     };
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(modPlant)
+        // console.log(modPlant);
         // console.log(thisPlantId)
         PlantAPI.updatePlant(
             thisPlantId,
@@ -221,7 +222,8 @@ function PlantDetails(p) {
             createdAt: modPlant.createdAt,
 
         })
-            .then(window.location.reload()
+            .then(console.log("submitted plant detail update")
+                // window.location.reload()
                 // setUpdated(true)
             )
             .catch(err => console.log(err))
@@ -266,19 +268,21 @@ function PlantDetails(p) {
 
     function updateWaterDate(id, days) {
         let date = new Date();
-        console.log(days)
+        // console.log(days);
         date.setDate(date.getDate() - days);
-        console.log(date)
+        // console.log(date);
         let newLocaleDate = date.toLocaleDateString("en-CA");
-        console.log("newLocaleDate: ", newLocaleDate)
+        // console.log("newLocaleDate: ", newLocaleDate);
         let newDate = newLocaleDate.split(',')[0];
-        console.log(newDate);
+        // console.log(newDate);
         PlantAPI.updatePlantWaterDate(
             {
                 ids: [id],
                 lastWatered: newDate,
             })
-            .then(window.location.reload())
+            .then(console.log("water date updated on plant details page")
+                // window.location.reload()
+            )
             .catch(err => console.log(err))
     }
 

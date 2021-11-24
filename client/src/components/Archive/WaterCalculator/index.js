@@ -1,10 +1,10 @@
 
 import React, {useEffect, useState } from "react";
 import "./style.css";
-import PlantAPI from "../../utils/PlantsAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
 // import { Link } from 'react-router-dom'
-import ReviewPlant from "../ReviewPlant";
+import ReviewPlant from "../../ReviewPlant";
 import {
     Box,
     CheckBoxGroup,

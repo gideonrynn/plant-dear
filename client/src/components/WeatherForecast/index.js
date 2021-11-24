@@ -3,11 +3,13 @@ import React from "react";
 import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
-import { Box, DataChart, Grommet } from 'grommet';
-import { grommet } from 'grommet/themes';
+import { Box, DataChart } from 'grommet';
+// import { grommet } from 'grommet/themes';
 
 
 function WeatherForecast(weather) {
+
+    console.log("WeatherForecast component with line chart initialized");
 
     const forecastWeather = weather.weather;
     // console.log("Forecast weather for WeatherForecast component", forecastWeather)

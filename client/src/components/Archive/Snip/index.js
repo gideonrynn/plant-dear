@@ -1,12 +1,14 @@
 import React, {useEffect, useState, useContext } from "react";
 import { Box, Button, Grommet, Heading, Layer, Select, Text } from 'grommet';
-import PlantAPI from "../../utils/PlantsAPI"
-import ReviewPlant from "../ReviewPlant";
-import {WeatherContext} from "../../context/WeatherContext"
+import PlantAPI from "../../../utils/PlantsAPI"
+import ReviewPlant from "../../ReviewPlant";
+import {WeatherContext} from "../../../context/WeatherContext"
 import "./style.css";
 
 
 const Snip = () => {
+
+    console.log("Snip component initialized");
 
     const weather = useContext(WeatherContext);
     const currentWeather = weather.currentWeather;
@@ -28,7 +30,7 @@ const Snip = () => {
         
         loadPlantsHardiness()
         // console.log(currentTemp);
-        console.log("Snip render triggered")
+        console.log("Snip rerender triggered");
     
     }, [])
 

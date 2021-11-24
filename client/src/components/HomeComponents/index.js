@@ -1,6 +1,6 @@
 
 import React, {useContext} from "react";
-import { Box, Grid, ResponsiveContext, Tabs, Tab, Grommet } from 'grommet';
+import { Box } from 'grommet';
 // import { deepMerge } from 'grommet/utils';
 // import WatchlistSnip from "../../components/WatchlistSnip/index"
 // import WeatherAPI from "../../utils/WeatherAPI"
@@ -18,23 +18,23 @@ import { Box, Grid, ResponsiveContext, Tabs, Tab, Grommet } from 'grommet';
 // import WaterCalculator from "../../components/WaterCalculator/"
 import WeatherForecast from "../../components/WeatherForecast/"
 import ForecastPlantHardiness from "../../components/ForecastPlantHardiness/"
-import OutdoorPlants from "../../components/OutdoorPlants/"
-import {WeatherContext} from "../../context/WeatherContext"
-import {PlantContext} from "../../context/PlantContext"
+// import OutdoorPlants from "../../components/OutdoorPlants/"
+import { WeatherContext } from "../../context/WeatherContext"
+import { PlantContext } from "../../context/PlantContext"
 import './index.css'
 import RecentAdditions from "../RecentAdditions/RecentAdditions";
-import ByLocation from "../ByLocation";
+// import ByLocation from "../ByLocation";
 
 
 
 function HomeComponents() {
 
         const weather = useContext(WeatherContext)
-        const currentWeather = weather.currentWeather;
+        // const currentWeather = weather.currentWeather;
         const forecastWeather = weather.forecastWeather;
         const plant = useContext(PlantContext);
         const activePlants = plant.activePlants;
-        const inactivePlants = plant.inactivePlants;
+        // const inactivePlants = plant.inactivePlants;
         // console.log(weather)
         // console.log("Home components weather", weather)
         // console.log(activePlants);

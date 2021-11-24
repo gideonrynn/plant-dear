@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { FaImages } from 'react-icons/fa';
-import { useLocation, withRouter } from "react-router-dom";
+// import { FaImages } from 'react-icons/fa';
+// import { useLocation, withRouter } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import window from '../../img/listwindowplants.jpg';
 import propagation from '../../img/propagating.jpg';
 import soil from '../../img/soily.jpg';
@@ -12,6 +13,7 @@ import './style.css'
 
 const HeaderAll = (data) => {
 
+  console.log("HeaderAll component initialized");
     // const plants = data.plants;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
@@ -19,7 +21,7 @@ const HeaderAll = (data) => {
     const [preferredBackground, setPreferredBackground] = useState(window);
 
     useEffect(() => {
-      console.log("Header rendered")
+      console.log("Header rerendered")
 
       if(pathname === null || pathname === "") {
 
@@ -33,7 +35,7 @@ const HeaderAll = (data) => {
         otherBackgrounds()
       }
 
-    },[preferredBackground, pathname])
+    });
 
     const changeImage = () => {
       if(preferredBackground === window) {

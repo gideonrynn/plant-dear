@@ -15,13 +15,14 @@ function Watering () {
         *set up dependency on lastWatered dates. may handle this in ByLocation component
     */
 
+    console.log("Weathering page initialized, with context");
     const plant = useContext(PlantContext);
     const activePlants = plant.activePlants;
     const inactivePlants = plant.inactivePlants;
     const counter = plant.counter;
     const inactcounter = plant.inactcounter;
-    console.log("number of active plants returned", activePlants.length);
-    console.log("activePlants drilldown", activePlants[0]);
+    // console.log("number of active plants returned", activePlants.length);
+    // console.log("activePlants drilldown", activePlants[0]);
 
     // Setting our component's initial state
     const [updatedPlants, setUpdatedPlants] = useState([activePlants]);
@@ -30,12 +31,12 @@ function Watering () {
 
     // for handling search bar and input
     //* consider whether or not this is needed rather than input param passed into function *//
-    const [searchTerm, setSearchTerm] = useState('');
+    // const [searchTerm, setSearchTerm] = useState('');
 
     // Load all plants and store them within setPlants
     useEffect(() => {
         // loadPlants();
-        console.log("Watering page render triggered")
+        console.log("Watering page rerender");
 
         if(locationSecondary === "" || locationSecondary === "all") {
 
@@ -48,7 +49,8 @@ function Watering () {
             setUpdatedInactivePlants(inactivePlants);
         }
     
-    }, [updatedPlants, plant])
+    }, [locationSecondary, activePlants, inactivePlants]);
+    // [updatedPlants, plant]
 
     function sendPlants(updatedLocation) {
         // console.log("show updatedLocation ", updatedLocation);

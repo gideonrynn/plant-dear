@@ -7,10 +7,12 @@ export const PlantContext = createContext();
 // holds data and passes it to the children
 export const PlantProvider = ({children}) => {
 
-    const [allPlants, setAllPlants] = useState([]);
+    console.log("Plant Context initialized");
 
-    const [updatedPlants, setUpdatedPlants] = useState([])
-    const [updatedInactivePlants, setUpdatedInactivePlants] = useState([])
+    // const [allPlants, setAllPlants] = useState([]);
+
+    const [,setUpdatedPlants] = useState([])
+    const [,setUpdatedInactivePlants] = useState([])
 
     // set states for sorting
     const [activePlants, setActivePlants] = useState([])

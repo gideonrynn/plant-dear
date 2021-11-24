@@ -7,6 +7,8 @@ export const WeatherContext = createContext();
 // holds data and passes it to the children
 export const WeatherProvider = ({children}) => {
 
+    console.log("Weather Context initialized");
+
     // add placeholders for testing
     const [currentWeather, setCurrentWeather] = useState(
         {
@@ -261,28 +263,34 @@ export const WeatherProvider = ({children}) => {
     ]);
 
     useEffect(() => {
-        console.log("Current weather usecontext useEffect with api is active");
+        
         WeatherAPI.getTodaysWeather()
             .then(res => {
                 const currentWeather = res.data;
-                console.log(currentWeather);
+                // console.log(currentWeather);
                 if (currentWeather.temp) {
                     setCurrentWeather(currentWeather);
-                };
+                    console.log("Current weather usecontext useEffect with api is active");
+                } else {
+                    console.log("Current weather api is not active; using default values");
+                }
             })
             .catch(err => console.log(err));
         
     }, []);
 
     useEffect(() => {
-        console.log("Forecast weather usecontext useEffect with api is active");
+        
         WeatherAPI.getForecastWeather()
             .then(res => {
                 const forecastWeather = res.data;
                 // console.log(forecastWeather);
                 if (forecastWeather) {
                     setForecastWeather(forecastWeather);
-                };
+                    console.log("Forecast weather usecontext useEffect with api is active");
+                } else {
+                    console.log("Forecast weather api is not active; using default values");
+                }
             })
             .catch(err => console.log(err));
         

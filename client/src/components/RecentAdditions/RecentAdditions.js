@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './style.css';
 import MorePlants from '../../img/deskplants.jpeg';
 import { FaExternalLinkAlt } from "react-icons/fa"
@@ -7,13 +7,15 @@ import Plantling from '../../img/plantling.jpg'
 
 const RecentAdditions = (data) => {
 
+    console.log("RecentAdditions component initialized");
+
     const plants = data.plants;
     const history = useHistory();
 
     function handleClick(event, id) {
-        console.log("clicked", event.target.id);
+        // console.log("clicked", event.target.id);
         
-        console.log(id);
+        // console.log(id);
         history.push({
             pathname: "plantdetails",
             state: { detail: event.target.id }});
@@ -38,11 +40,11 @@ const RecentAdditions = (data) => {
     // const uniquePlants = [...new Set(plantsByDate.map(data => data.name))]
     
     // console.log(uniquePlants);
-    const mostRecent = plantsByDate.slice(0, 20);
+    // const mostRecent = plantsByDate.slice(0, 20);
     const mostRecentIndoor = recentIndoor.slice(0, 15);
     const mostRecentOutdoor = recentOutdoor.slice(0, 15);
-    const nextRecentFive = plantsByDate.slice(1, 14);
-    console.log(mostRecent, nextRecentFive);
+    // const nextRecentFive = plantsByDate.slice(1, 14);
+    // console.log(mostRecent, nextRecentFive);
     let currentDate = new Date();
 
     // One day in milliseconds
@@ -59,15 +61,15 @@ const RecentAdditions = (data) => {
 
             //date format from the db is yyyy-mm-dd so we will want to parse this
 
-            let lastWateredArray = lastWatered.split("-");
+            // let lastWateredArray = lastWatered.split("-");
             let lastWateredYear = lastWatered.split("-")[0];
             let lastWateredMonth = lastWatered.split("-")[1] - 1;
             let lastWateredDay = lastWatered.split("-")[2];
-            console.log("split", lastWateredArray);
-            console.log(lastWateredYear, lastWateredMonth, lastWateredDay);
+            // console.log("split", lastWateredArray);
+            // console.log(lastWateredYear, lastWateredMonth, lastWateredDay);
     
             newWaterDate = new Date(lastWateredYear, lastWateredMonth, lastWateredDay);
-            console.log("New water date formatted: ", newWaterDate);
+            // console.log("New water date formatted: ", newWaterDate);
 
         }
 
@@ -84,7 +86,7 @@ const RecentAdditions = (data) => {
 
             let dateDifference = currentDate.getTime() - waterDate.getTime();
             differenceConverted = Math.floor(dateDifference / oneDay);
-            console.log("differenceConverted is: ", differenceConverted);
+            // console.log("differenceConverted is: ", differenceConverted);
 
         }
 

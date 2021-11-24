@@ -4,6 +4,8 @@ import PlantAPI from "../../utils/PlantsAPI"
 
 function ReviewPlant(props) {
 
+    console.log("ReviewPlant component initialized");
+
     const [modPlant, setModPlant] = useState({});
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
@@ -11,7 +13,7 @@ function ReviewPlant(props) {
     useEffect(() => {
         setThisPlant(props.onePlant)
         setThisPlantId(props.onePlant._id)
-        console.log("ReviewPlant render triggered")
+        console.log("ReviewPlant rerender triggered");
 
     }, [props.onePlant]);
 
@@ -20,12 +22,12 @@ function ReviewPlant(props) {
         let fieldName = event.target.name
         let fielddefaultValue = event.target.value
         setModPlant({...modPlant, [fieldName]: fielddefaultValue})
-        console.log(fieldName, fielddefaultValue)
+        // console.log(fieldName, fielddefaultValue);
     };
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(modPlant)
+        // console.log(modPlant);
         // console.log(thisPlantId)
         PlantAPI.updatePlant(
             thisPlantId,

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap"
 import AddTaskAPI from "../../utils/TasksAPI"
 import './style.css'
 
@@ -13,6 +12,7 @@ function AddTask() {
         taskStatus: "",
     });
 
+    console.log("AddTask component initialized");
     // const [show, setShow] = useState(false);
 
     // const handleClose = () => setShow(false);
@@ -25,12 +25,12 @@ function AddTask() {
         let fieldName = event.target.name
         let fieldValue = event.target.value
         setNewTask({...newTask, [fieldName]: fieldValue})
-        console.log(newTask)
+        // console.log(newTask)
     };
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(newTask)
+        // console.log(newTask)
         AddTaskAPI.addTask({
             taskName: newTask.taskName,
             taskDetail: newTask.taskDetail,

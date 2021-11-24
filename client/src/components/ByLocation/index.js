@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 // import PlantBlockAll from "../PlantBlockAll/PlantBlock"
 import PlantAPI from "../../utils/PlantsAPI"
 import { useHistory } from 'react-router-dom';
@@ -17,30 +17,32 @@ const ByLocation = (data) => {
         *may wrap this into "rooms" or sections of the apartment that have plants
     */
 
+    console.log("ByLocation component initialized");
+
     const [plants, setPlants] = useState([]);
 
-    let location = useLocation();
+    // let location = useLocation();
     const history = useHistory();
-    let pathname = location.pathname.slice(1);
+    // let pathname = location.pathname.slice(1);
 
     // set date variables
     let date = new Date();
     date.setDate(date.getDate());
     let newISODate = date.toISOString();
     let todaysDate = newISODate.split('T')[0];
-    let localDate = date.toLocaleDateString("en-US", {timeZone: "America/Chicago"});
-    console.log("This is the local date", localDate);
+    // let localDate = date.toLocaleDateString("en-US", {timeZone: "America/Chicago"});
+    // console.log("This is the local date", localDate);
     // One day in milliseconds
     const oneDay = 1000 * 60 * 60 * 24;
 
     const [ids, setIds] = useState([]);
     const [selectedDate, setSelectedDate] = useState("");
-    const [newLocation, setNewLocation] = useState("all");
-    const [updated, setUpdated] = useState(false);
-    const [checkedVal, setCheckedVal] = useState();
+    const [newLocation] = useState("all");
+    const [updated] = useState(false);
+    // const [checkedVal, setCheckedVal] = useState();
+    console.log(plants);
 
     useEffect(() => {
-        console.log("ByLocation component rendered");
 
         setPlants(data.plants);
         
@@ -48,9 +50,9 @@ const ByLocation = (data) => {
 
     
     function handleClick(event, id) {
-        console.log("clicked", event.target.id);
+        // console.log("clicked", event.target.id);
         
-        console.log(id);
+        // console.log(id);
         history.push({
             pathname: "plantdetails",
             state: { detail: event.target.id }});
@@ -58,19 +60,19 @@ const ByLocation = (data) => {
 
     function handleInputChange(event) {
         // const { name, defaultValue } = event.target;
-        let fieldName = event.target.name
+        // let fieldName = event.target.name
         let fielddefaultValue = event.target.id
         let fieldCheckedValue = event.target.checked
 
-        console.log("This is the info I need right now", event.target, "and this is the value", fieldCheckedValue);
+        // console.log("This is the info I need right now", event.target, "and this is the value", fieldCheckedValue);
         
         if (fieldCheckedValue === true) {
             setIds([...ids, fielddefaultValue]);
             // setCheckedVal(true)
-            console.log(fieldName, fielddefaultValue)
+            // console.log(fieldName, fielddefaultValue)
         }
         
-        console.log(ids);
+        // console.log(ids);
         // setCheckedVal(handleCheckedValue(fieldCheckedValue))
 
     };
@@ -88,7 +90,7 @@ const ByLocation = (data) => {
         if (selectedDate === null || selectedDate === "") {
             
             wateredDate = todaysDate;
-            console.log(wateredDate);
+            // console.log(wateredDate);
         } else {
             wateredDate = selectedDate;
         }
@@ -137,9 +139,8 @@ const ByLocation = (data) => {
                             <tbody className="watering-details">
 
                                 {plants.map(plants => (
-
-                                    <tr key={plants._id} >
-                                        <th className="watering-details">
+                                    <tr key={plants._id}>
+                                        <th  className="watering-details">
                                             <input 
                                                 type="checkbox" 
                                                 name="today"
