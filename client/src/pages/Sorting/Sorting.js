@@ -25,14 +25,14 @@ function Sorting () {
 
     // for handling search bar and input
     //* consider whether or not this is needed rather than input param passed into function *//
-    // const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
     // Load all plants and store them within setPlants
     useEffect(() => {
         loadPlants();
         console.log("Sorting page rerendered");
     
-    })
+    },[])
 
     function loadPlants() {
         // by default, show all plants returned from api
@@ -41,30 +41,42 @@ function Sorting () {
     }
 
     // take text entered in the search and filter current list of plants
-    // function sortPlants(input) {
+    function sortPlants(input) {
 
-    //     if(input) {
-    //         const filtered = activePlants.filter(actPlants => {
-    //             return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-    //            })
+        if(input) {
+            const filtered = activePlants.filter(actPlants => {
+                return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+               })
     
-    //         const filteredInactive = inactivePlants.filter(inactPlants => {
-    //             return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-    //            })
+            const filteredInactive = inactivePlants.filter(inactPlants => {
+                return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+               })
             
-    //         setSearchTerm(input);
-    //         setUpdatedPlants(filtered);
-    //         setUpdatedInactivePlants(filteredInactive);
-    //     } else {
+            setSearchTerm(input);
+            setUpdatedPlants(filtered);
+            setUpdatedInactivePlants(filteredInactive);
+        } else {
 
-    //         loadPlants();
-    //     }
+            loadPlants();
+        }
         
 
-    // }
+    }
 
     return (
         <div className="plantsdiv">
+
+            <input 
+                type="text"
+                style={
+                    {width:"350px",
+                    background:"#F2F1F9", 
+                    padding:"10px"}}
+                placeholder={"search plants"}
+                onChange={(event) => {
+                    sortPlants(event.target.value)
+                    }}
+            />
 
             <PlantBlock 
                 plants={updatedPlants} 

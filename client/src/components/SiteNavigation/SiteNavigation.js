@@ -34,11 +34,10 @@ function SiteNavigation() {
                     <Link className="nav-link" to="#">Wind: {currentWeather ? currentWeather.wind_spd : 0} mph&nbsp;&nbsp;&nbsp;</Link>
                     <Link className="nav-link" to="#">Hardiness Zone: 5 (-20 to -15) &nbsp;&nbsp;&nbsp;</Link>
                 
-             
                     <Link className="nav-link" to="/" >Home</Link>
                     <Link className="nav-link" to="#" onClick={handleShow}>Add New Plant</Link> 
-                    <Link className="nav-link" to="/plants">Plants</Link>
-                    <Link className="nav-link" to="/sorting">Sorting</Link>
+                    {/* <Link className="nav-link" to="/plants">Plants</Link> */}
+                    <Link className="nav-link" to="/sorting">Plants</Link>
                     <Link className="nav-link" to="/watering">Watering</Link>
                     {/* <Link className="nav-link" to="/plantonly">PlantOnly</Link> */}
                     <Link className="nav-link" to="/weather">Forecast</Link>
