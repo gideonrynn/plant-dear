@@ -7,7 +7,7 @@ import propagation from '../../img/propagating.jpg';
 import soil from '../../img/soily.jpg';
 import weat from '../../img/html-css-animated-weather-icons.gif';
 import deskplants from '../../img/deskplants.jpeg';
-import './style.css'
+import './HeaderAll.css'
 
 
 

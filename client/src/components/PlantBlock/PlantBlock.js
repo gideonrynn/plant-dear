@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
+import { useHistory } from "react-router-dom";
 // import PlantAPI from "../../utils/PlantsAPI"
-import Plantling from '../../img/plantling.jpg'
-import { useHistory } from 'react-router-dom';
-import './style.css';
+import Plantling from "../../img/plantling.jpg"
+
+import "./PlantBlock.css";
 
 const PlantBlock = (data) => {
 

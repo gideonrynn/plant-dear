@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import PlantAPI from "../../utils/PlantsAPI"
 import ReviewPlant from "../ReviewPlant";
 import FormModal from "../FormModal/FormModal"
-import './style.css';
+import './PlantBlockAll.css';
 
 const PlantBlockAll = (data) => {
+
+    /*
+    Status: currently not in use */
 
     console.log("PlantBlockAll component initialized");
     const [onePlantId, setOnePlantId] = useState([]);

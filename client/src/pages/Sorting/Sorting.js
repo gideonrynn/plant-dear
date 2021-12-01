@@ -1,0 +1,80 @@
+import React, { useEffect, useState, useContext } from "react";
+// import PlantCard from "../../components/PlantCard"
+import PlantBlock from "../../components/PlantBlock/PlantBlock"
+// import { WeatherContext } from "../../context/WeatherContext"
+import { PlantContext } from "../../context/PlantContext"
+import "./Sorting.css";
+
+function Sorting () {
+
+    /*Description: Sort plants by photo only. On hover will display limited details*/
+    /*Todo: determine whether or not search function will be applied here*/
+
+    console.log("Sorting page initialized, with context");
+
+    const plant = useContext(PlantContext);
+    const activePlants = plant.activePlants;
+    const inactivePlants = plant.inactivePlants;
+    const counter = plant.counter;
+    const inactcounter = plant.inactcounter;
+    // console.log("number of active plants returned", activePlants.length);
+
+    // Setting our component's initial state
+    const [updatedPlants, setUpdatedPlants] = useState([]);
+    const [updatedInactivePlants, setUpdatedInactivePlants] = useState([]);
+
+    // for handling search bar and input
+    //* consider whether or not this is needed rather than input param passed into function *//
+    // const [searchTerm, setSearchTerm] = useState('');
+
+    // Load all plants and store them within setPlants
+    useEffect(() => {
+        loadPlants();
+        console.log("Sorting page rerendered");
+    
+    })
+
+    function loadPlants() {
+        // by default, show all plants returned from api
+        setUpdatedPlants(activePlants);
+        setUpdatedInactivePlants(inactivePlants);
+    }
+
+    // take text entered in the search and filter current list of plants
+    // function sortPlants(input) {
+
+    //     if(input) {
+    //         const filtered = activePlants.filter(actPlants => {
+    //             return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+    //            })
+    
+    //         const filteredInactive = inactivePlants.filter(inactPlants => {
+    //             return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
+    //            })
+            
+    //         setSearchTerm(input);
+    //         setUpdatedPlants(filtered);
+    //         setUpdatedInactivePlants(filteredInactive);
+    //     } else {
+
+    //         loadPlants();
+    //     }
+        
+
+    // }
+
+    return (
+        <div className="plantsdiv">
+
+            <PlantBlock 
+                plants={updatedPlants} 
+                inactive={updatedInactivePlants} 
+                actcounter={counter}
+                inactcounter={inactcounter}
+            />
+
+        </div>
+    )
+}
+
+export default Sorting;

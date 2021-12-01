@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import PlantAPI from "../utils/PlantsAPI"
 
 // so it can be used in different components as needed
@@ -11,41 +11,45 @@ export const PlantProvider = ({children}) => {
 
     // const [allPlants, setAllPlants] = useState([]);
 
-    const [,setUpdatedPlants] = useState([])
-    const [,setUpdatedInactivePlants] = useState([])
+    const [update, setUpdate] = useState("not updated");
+    console.log(update);
+
+    const [,setUpdatedPlants] = useState([]);
+    const [,setUpdatedInactivePlants] = useState([]);
 
     // set states for sorting
-    const [activePlants, setActivePlants] = useState([])
-    const [inactivePlants, setInactivePlants] = useState([])
+    const [activePlants, setActivePlants] = useState([]);
+    const [inactivePlants, setInactivePlants] = useState([]);
 
-    const [counter, setCounter] = useState()
-    const [inactcounter, setInactCounter] = useState()
+    const [counter, setCounter] = useState();
+    const [inactcounter, setInactCounter] = useState();
     
     useEffect(() => {
-        // console.log("plant usecontext useEffect is active");
+        console.log("Plant Context useEffect rerendered");
         PlantAPI.getAllPlants()
             .then(res => {
                 // console.log(res.data)
                 const plants = res.data;
+                console.log(plants);
 
                 // filter to show active versus inactive plants
                 // set plant state to pass to Plant Card
 
-                let actPlants = plants.filter(actPlants => { 
-                    return actPlants.status !== "inactive"
+                let sortActivePlants = plants.filter(plants => { 
+                    return plants.status !== "inactive"
                 });
 
-                let inPlants = plants.filter(inactPlants => { 
-                    return inactPlants.status === "inactive"
+                let sortInactivePlants = plants.filter(plants => { 
+                    return plants.status === "inactive"
                 });
 
                 // set state for active and inactive plants to be filtered based on search bar
-                setActivePlants(actPlants);
-                setInactivePlants(inPlants);
+                setActivePlants(sortActivePlants);
+                setInactivePlants(sortInactivePlants);
 
                 // by default, show all plants returned from api
-                setUpdatedPlants(actPlants);
-                setUpdatedInactivePlants(inPlants);
+                setUpdatedPlants(sortActivePlants);
+                setUpdatedInactivePlants(sortInactivePlants);
 
 
                 // set counters at top of Active and Inactive sections
@@ -63,12 +67,21 @@ export const PlantProvider = ({children}) => {
             })
             .catch(err => console.log(err));
         
-    }, []);
+    }, [update]);
 
+    // useEffect(() => {
+    //   // console.log("plant usecontext useEffect is active");
+    //   console.log("Checking context change when activePlants should change", activePlants);
+    // }, [activePlants]);
 
   return(
-    <PlantContext.Provider value={{activePlants, inactivePlants, counter, inactcounter}}>
-      {children}
+    <PlantContext.Provider value={{ activePlants,
+                                  inactivePlants,
+                                  update,
+                                  setUpdate,
+                                  counter,
+                                  inactcounter }}>
+        { children }
     </PlantContext.Provider>
   );
 };

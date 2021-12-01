@@ -1,42 +1,44 @@
-import React from 'react';
-import './App.css';
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from './pages/Home/index.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Plants from './pages/Plants';
-import Sorting from './pages/Sorting';
-import Weather from './pages/Weather';
-import AddNewPlant from './pages/AddNewPlant'
-import Navsite from "./components/Navsite/index.js"
-import { WeatherProvider } from '../src/context/WeatherContext';
-import { PlantProvider } from '../src/context/PlantContext';
-import Tasks from './pages/Tasks';
-import HeaderAll from './components/HeaderAll/HeaderAll';
-import PlantOnly_Render from './pages/PlantOnly_Render';
-import Watering from './pages/Watering';
+import "./App.css";
+import AddNewPlant from "./pages/AddPlants/AddPlants.js"
+import HeaderAll from "./components/HeaderAll/HeaderAll.js";
+import Home from "./pages/Home/Home.js";
+import SiteNavigation from "./components/SiteNavigation/SiteNavigation.js"
+import Plants from "./pages/Plants/Plants.js";
+import PlantDetail from "./pages/PlantDetail/PlantDetail.js";
+import Sorting from "./pages/Sorting/Sorting.js";
+import Tasks from "./pages/Tasks/Tasks.js";
+import Watering from "./pages/Watering/Watering.js";
+import Weather from "./pages/Weather/Weather.js";
+import { WeatherProvider } from "../src/context/WeatherContext";
+import { PlantProvider } from "../src/context/PlantContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+/*ToDo: 
+*determine if HeaderAll should really be for all pages, or only for home. may do a subheader for subpages
+*/
 
 function App() {
   return (
     <Router>
       <div className="App" >
         <WeatherProvider>
-        <PlantProvider>
-        <Navsite/>
-        <HeaderAll/>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/plants" component={Plants}/>
-          <Route exact path="/sorting" component={Sorting}/>
-          <Route exact path="/watering" component={Watering}/>
-          <Route exact path="/plantdetails" component={PlantOnly_Render}/>
-          <Route exact path="/weather" component={Weather}/>
-          <Route exact path="/addnewplants" component={AddNewPlant}/>
-          <Route exact path="/tasks" component={Tasks}/>
-          {/* <Route exact path="/dashboard" component={Dashboard}/> */}
-        </Switch>
-        
-        </PlantProvider>
+          <PlantProvider>
+          <SiteNavigation/>
+          <HeaderAll/>
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/plants" component={Plants}/>
+            <Route exact path="/sorting" component={Sorting}/>
+            <Route exact path="/watering" component={Watering}/>
+            <Route exact path="/plantdetails" component={PlantDetail}/>
+            <Route exact path="/weather" component={Weather}/>
+            <Route exact path="/addnewplants" component={AddNewPlant}/>
+            <Route exact path="/tasks" component={Tasks}/>
+            {/* <Route exact path="/dashboard" component={Dashboard}/> */}
+          </Switch>
+          </PlantProvider>
         </WeatherProvider>
       </div>
     </Router>

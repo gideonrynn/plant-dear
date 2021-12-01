@@ -6,6 +6,9 @@ import PlantAPI from "../../../utils/PlantsAPI"
 
 function ModPlants() {
 
+    /*Description: Want this component to show all plants that are being worked on
+    Status: currently not in use */
+    
     console.log("TransitPlants/ModPlants component initialized");
 
     // Setting our component's initial state
