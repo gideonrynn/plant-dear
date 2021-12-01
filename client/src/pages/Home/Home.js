@@ -22,6 +22,8 @@ const Home = () => {
     // console.log("Home currentWeather: ", currentWeather);
     // console.log("Home page plant context", activePlants);
 
+    
+
     return (
         
         <div className="main-title">

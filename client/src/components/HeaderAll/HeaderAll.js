@@ -9,14 +9,13 @@ import weat from '../../img/html-css-animated-weather-icons.gif';
 import deskplants from '../../img/deskplants.jpeg';
 import './HeaderAll.css'
 
-
-
 const HeaderAll = (data) => {
 
   console.log("HeaderAll component initialized");
     // const plants = data.plants;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
+    // let plantname = location.state.name;
     // let images = [window, soil, propagation];
     const [preferredBackground, setPreferredBackground] = useState(window);
 
@@ -32,10 +31,17 @@ const HeaderAll = (data) => {
         return () => clearInterval(interval);
 
       } else {
+
         otherBackgrounds()
       }
 
-    });
+    }, [pathname]);
+
+    const getPlantName = () => {
+      if(location.state.name) {
+        return location.state.name
+      }
+    }
 
     const changeImage = () => {
       if(preferredBackground === window) {
@@ -60,18 +66,30 @@ const HeaderAll = (data) => {
         setPreferredBackground(deskplants)
       }
 
-      if(pathname === '') {
+      if(pathname !== 'plants' && pathname !== 'weather' && pathname !== 'tasks') {
         setPreferredBackground(window)
       }
 
     }
 
     return (
-       
-      <div className="header-thing"
-        style={{backgroundImage: `url(${preferredBackground})`}}>
-        <p className="page-header">{pathname}</p>
-      </div>
+      <>
+        {(pathname === null || pathname === "") &&
+          <div className="header-main"
+            style={{backgroundImage: `url(${preferredBackground})`}}>
+            <p className="page-header">{pathname}</p>
+        </div>}
+        {pathname.includes("plant/") && getPlantName() && <div className="header-sub"
+          style={{backgroundImage: `url(${preferredBackground})`}}>
+          <p className="page-header">{getPlantName()}</p>
+          </div>
+          }
+        {pathname !== null && pathname !== "" && !pathname.includes("plant/") &&
+          <div className="header-sub"
+          style={{backgroundImage: `url(${preferredBackground})`}}>
+          <p className="page-header">{pathname}</p>
+          </div> }
+      </>
      
     )
 }

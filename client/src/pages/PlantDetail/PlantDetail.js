@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // import PlantCard from "../../components/PlantCard"
 // import { WeatherContext } from "../../context/WeatherContext"
-import PlantAPI from "../../utils/PlantsAPI"
 // import { PlantContext } from "../../context/PlantContext"
-import PlantDetails from "../../components/PlantDetails";
-
+import PlantAPI from "../../utils/PlantsAPI"
+import PlantDetails from "../../components/PlantDetails/PlantDetails.js";
 import "./PlantDetail.css";
 
 function PlantDetail(hist) {
 
-    console.log("PlantDetail page initialized");
+    console.log("PlantDetail page initialized, with context");
 
     const location = useLocation();
     // const plant = useContext(PlantContext);
     // let onePlantOnly = plant.activePlants[133];
-    // console.log(location.state.detail);
+    console.log(location);
 
     const [thisPlant, setThisPlant] = useState({});
     const [, setThisPlantId] = useState({});

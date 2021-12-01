@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from "react-bootstrap"
-import FormModal from "../FormModal/FormModal"
+// import FormModal from "../FormModal/FormModal"
 import AddNewPlant from "../AddNewPlant/AddNewPlant.js";
 // import AddPlantsQuick from "../../components/AddPlantsQuick";
 import { WeatherContext } from "../../context/WeatherContext"

@@ -19,6 +19,7 @@ function HomeComponents() {
         const forecastWeather = weather.forecastWeather;
         const plant = useContext(PlantContext);
         const activePlants = plant.activePlants;
+        // console.log(plant);
         // const inactivePlants = plant.inactivePlants;
         // console.log(weather)
         // console.log("Home components weather", weather)
@@ -37,7 +38,7 @@ function HomeComponents() {
                                         <ByLocation plants={activePlants}/>
                                 </div> */}
                                 <div className="newplant-section">
-                                        <RecentAdditions plants={activePlants}/>
+                                        <RecentAdditions plants={ activePlants} setUpdate={ plant.setUpdate}/>
 
                                         {/* to keep an eye on */}
 

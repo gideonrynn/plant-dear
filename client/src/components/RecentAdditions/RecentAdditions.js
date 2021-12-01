@@ -1,9 +1,9 @@
-import React from 'react';
-import './style.css';
-import MorePlants from '../../img/deskplants.jpeg';
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { FaExternalLinkAlt } from "react-icons/fa"
-import { useHistory } from 'react-router-dom';
-import Plantling from '../../img/plantling.jpg'
+import Plantling from "../../img/plantling.jpg"
+import MorePlants from "../../img/deskplants.jpeg";
+import "./RecentAdditions.css";
 
 const RecentAdditions = (data) => {
 
@@ -12,13 +12,19 @@ const RecentAdditions = (data) => {
     const plants = data.plants;
     const history = useHistory();
 
-    function handleClick(event, id) {
+    function handleClick(event, name) {
+        event.preventDefault();
         // console.log("clicked", event.target.id);
+        // console.log(name);
+
+        let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
         
         // console.log(id);
         history.push({
-            pathname: "plantdetails",
-            state: { detail: event.target.id }});
+            // pathname: setPathname,
+            pathname: `plant/${setPathname}`,
+            state: { detail: event.target.id,
+                    name: name }});
     }
 
     const plantsByDate = plants.sort((a,b) => {
@@ -158,7 +164,7 @@ const RecentAdditions = (data) => {
                                     <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
-                                <div key={plants._id} id={plants._id} className="plant-card-2" onClick={handleClick}>
+                                <div key={plants._id} id={plants._id} className="plant-card-2" onClick={(e) => handleClick(e, plants.name)}>
                                     <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p id={plants._id}>{plants.name}</p>
                                     <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
@@ -197,7 +203,7 @@ const RecentAdditions = (data) => {
                                     <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
                                     {/* <p className="name-img">{plants.name}</p> */}
                                 </div>
-                                <div key={plants._id+1} id={plants._id} className="plant-card-2" onClick={handleClick}>
+                                <div key={plants._id+1} id={plants._id} className="plant-card-2" onClick={(e) => handleClick(e, plants.name)}>
                                     <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
                                     <p id={plants._id}>{plants.name}</p>
                                     <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>

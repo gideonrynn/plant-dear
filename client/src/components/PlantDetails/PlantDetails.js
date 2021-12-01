@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 // import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
 // import HardinessAPI from "../../utils/HardinessAPI"
-import './style.css'
+import './PlantDetails.css'
 
 function PlantDetails(p) {
     //in this component, we are only rendering one dedicated plant
     //passing in one plant with it's details, kind of like in review plant
 
-    console.log("PlantDetails component initialized");
+    console.log("PlantDetails component initialized", p);
 
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
@@ -71,7 +71,7 @@ function PlantDetails(p) {
             setThisPlant(p.plant);
             setThisPlantId(p.plant._id)
         }
-        console.log("PlantDetails rerenderred");
+        console.log("PlantDetails rerendered");
         createDateObjects();
         
     }, [p]);
@@ -222,7 +222,7 @@ function PlantDetails(p) {
             createdAt: modPlant.createdAt,
 
         })
-            .then(console.log("submitted plant detail update")
+            .then(console.log("submitted plant detail update"),
                 // window.location.reload()
                 // setUpdated(true)
             )
