@@ -32,7 +32,7 @@ function App() {
             <Route exact path="/plants" component={Plants}/>
             <Route exact path="/sorting" component={Sorting}/>
             <Route exact path="/watering" component={Watering}/>
-            <Route path="/plant" component={PlantDetail}/>
+            <Route path="/plantdetails" component={PlantDetail}/>
             {/* <Route path="/plantdetail" component={PlantDetail}/> */}
             <Route exact path="/weather" component={Weather}/>
             <Route exact path="/addnewplants" component={AddNewPlant}/>
