@@ -51,9 +51,7 @@ This project built using:
 
   - Node
   - [Express ^4.17.1](https://www.npmjs.com/package/express) --update version
-  - [MySQL ^2.18.1](https://www.npmjs.com/package/mysql)
-  - [Sequelize ^6.3.5](https://www.npmjs.com/package/sequelize)
-  - [Sequelize-CLI ^6.2.0](https://www.npmjs.com/package/sequelize-cli)
+  - [Mongoose ^6.0.7](https://www.npmjs.com/package/mongoose)
   - [WeatherBit](https://www.weatherbit.io/)
 
 
