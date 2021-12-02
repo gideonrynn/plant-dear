@@ -52,6 +52,8 @@ This project built using:
   - Node
   - [Express ^4.17.1](https://www.npmjs.com/package/express) --update version
   - [Mongoose ^6.0.7](https://www.npmjs.com/package/mongoose)
+  - [React ^16.13.1](https://www.npmjs.com/package/react)
+  - [React Router Dom ^5.1.12](https://www.npmjs.com/package/react-router-dom)
   - [WeatherBit](https://www.weatherbit.io/)
 
 
