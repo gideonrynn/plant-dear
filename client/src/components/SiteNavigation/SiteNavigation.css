@@ -19,6 +19,14 @@
     color: lightgray;
   }
 
+#basic-nav-dropdown {
+      padding-left: 20px;
+      padding-right: 20px;
+      
+  }
+#be {
+    text-align: right;
+}
 /* https://colorcodes.io/gray/heather-gray-color-codes/
 Heather grey
 #5E635C */

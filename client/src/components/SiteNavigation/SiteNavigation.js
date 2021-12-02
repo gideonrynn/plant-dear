@@ -20,10 +20,6 @@ function SiteNavigation() {
     return (
         <>
     
-                
-           
-
-
             <Navbar className="navbar-light" id="nav-highlight-pad" bg="" expand="md" role="navigation" style={{backgroundColor: '#5E635C'}}>
             <Container>
                 <Navbar.Brand className="navbar-brand" id="nav-highlight" href="/">PlantDear</Navbar.Brand>
@@ -31,8 +27,8 @@ function SiteNavigation() {
                     <Link className="nav-link" to="#">Wind: {currentWeather ? currentWeather.wind_spd : 0} mph&nbsp;&nbsp;&nbsp;</Link>
                     <Link className="nav-link" to="#">Hardiness Zone: 5 (-20 to -15) &nbsp;&nbsp;&nbsp;</Link>  */}
                 {/* <Navbar.Text className="justify-content-center" id="nav-temp-highlight"><br/></Navbar.Text> */}
-                <Dropdown id="basic-nav-dropdown">
-                    <Dropdown.Toggle variant="success" id="dropdown-basic" style={{backgroundColor: '#5E635C', border: '#5E635C'}}>
+                <Dropdown id="basic-nav-dropdown be">
+                    <Dropdown.Toggle className="justify-content-around" variant="success" id="dropdown-basic" style={{backgroundColor: '#5E635C', border: '#5E635C'}}>
                         Temp: {currentWeather ? currentWeather.app_temp : 0}&#176;
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
