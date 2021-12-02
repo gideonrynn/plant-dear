@@ -17,11 +17,13 @@ const RecentAdditions = (data) => {
         // console.log("clicked", event.target.id);
         // console.log(name);
 
-        let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
+        // let newTitle = "plant";
+        // let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
         
         // console.log(id);
         history.push({
-            pathname: "plant",
+            pathname: "plantdetails",
+            // pathname: `${newTitle}/${setPathname}`,
             // pathname: `plant/${setPathname}`,
             state: { detail: event.target.id,
                     name: name }});

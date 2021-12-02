@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useParams } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
