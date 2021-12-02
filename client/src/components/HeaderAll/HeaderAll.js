@@ -35,7 +35,7 @@ const HeaderAll = (data) => {
         otherBackgrounds()
       }
 
-    }, [pathname]);
+    });
 
     const getPlantName = () => {
       if(location.state.name) {
