@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // import PlantCard from "../../components/PlantCard"
 // import { WeatherContext } from "../../context/WeatherContext"
@@ -12,6 +12,7 @@ function PlantDetail(hist) {
     console.log("PlantDetail page initialized, with context");
 
     const location = useLocation();
+
     // const plant = useContext(PlantContext);
     // let onePlantOnly = plant.activePlants[133];
     console.log(location);

@@ -21,8 +21,8 @@ const RecentAdditions = (data) => {
         
         // console.log(id);
         history.push({
-            // pathname: setPathname,
-            pathname: `plant/${setPathname}`,
+            pathname: "plant",
+            // pathname: `plant/${setPathname}`,
             state: { detail: event.target.id,
                     name: name }});
     }

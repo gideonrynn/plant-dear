@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useParams } from 'react'
 // import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
@@ -11,7 +11,7 @@ function PlantDetails(p) {
     //passing in one plant with it's details, kind of like in review plant
 
     console.log("PlantDetails component initialized", p);
-
+    
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
     const [modPlant, setModPlant] = useState({});
@@ -186,8 +186,8 @@ function PlantDetails(p) {
 
     function handleFormSubmit(event) {
         event.preventDefault();
-        // console.log(modPlant);
-        // console.log(thisPlantId)
+        console.log(modPlant);
+        console.log(thisPlantId)
         PlantAPI.updatePlant(
             thisPlantId,
             {
@@ -222,7 +222,7 @@ function PlantDetails(p) {
             createdAt: modPlant.createdAt,
 
         })
-            .then(console.log("submitted plant detail update"),
+            .then(console.log("submitted plant detail update")
                 // window.location.reload()
                 // setUpdated(true)
             )

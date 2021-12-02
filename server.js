@@ -21,7 +21,8 @@ const dbConnect = async () => {
 
     // try to connect to the database and log connection
     try {
-      const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/plantdear", {
+      // process.env.MONGODB_URI || 
+      const conn = await mongoose.connect("mongodb://localhost/plantdear", {
               useNewUrlParser: true,
             //   useCreateIndex: true, -- no longer supported
               useUnifiedTopology: true
