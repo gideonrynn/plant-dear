@@ -1,11 +1,29 @@
 .navbar-brand {
     font-size: x-large;
+    
 }
 
-.nav-link {
+.nav-link, .nav-highlight {
     color: whitesmoke;
 }
+
+#nav-highlight, #nav-temp-highlight {
+    color: whitesmoke;
+}
+
+#nav-highlight, #nav-temp-highlight {
+    text-align: right;
+}
+
+#nav-highlight:hover {
+    color: lightgray;
+  }
 
 /* https://colorcodes.io/gray/heather-gray-color-codes/
 Heather grey
 #5E635C */
+
+#nav-highlight-pad {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
