@@ -79,12 +79,12 @@ const HeaderAll = (data) => {
             style={{backgroundImage: `url(${preferredBackground})`}}>
             <p className="page-header">{pathname}</p>
         </div>}
-        {pathname.includes("plant/") && getPlantName() && <div className="header-sub"
+        {pathname === "plant" && getPlantName() && <div className="header-sub"
           style={{backgroundImage: `url(${preferredBackground})`}}>
           <p className="page-header">{getPlantName()}</p>
           </div>
           }
-        {pathname !== null && pathname !== "" && !pathname.includes("plant/") &&
+        {pathname !== null && pathname !== "" && pathname !== "plant" &&
           <div className="header-sub"
           style={{backgroundImage: `url(${preferredBackground})`}}>
           <p className="page-header">{pathname}</p>

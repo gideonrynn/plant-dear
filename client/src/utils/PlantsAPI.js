@@ -22,7 +22,7 @@ export default {
       return axios.post("/api/plants/", newPlantData)
     },
     updatePlant: function (id, updatedPlantData) {
-      console.log(id)
+      console.log(id, updatedPlantData)
       return axios.put("api/plants/" + id, updatedPlantData)
     },
     updatePlantWaterDate: function (updatedData) {
