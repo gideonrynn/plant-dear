@@ -13,7 +13,7 @@ function AddPlants() {
     // const [show, setShow] = useState(false);
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-    console.log("AddPlants component initialized");
+    console.log("AddPlants component initialized", plant);
 
     useEffect(() => {}, []);
 

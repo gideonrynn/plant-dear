@@ -56,9 +56,17 @@ function Watering () {
         // console.log("show updatedLocation ", updatedLocation);
         setLocationSecondary(updatedLocation);
 
-        let plantsByLocation = activePlants.filter(plantsAll => { 
-            return plantsAll.locationSec !== "" && plantsAll.locationSec === updatedLocation;
-        });
+        let plantsByLocation = "";
+
+        if (updatedLocation !== "" || updatedLocation !== null) {
+            plantsByLocation = activePlants.filter(plantsAll => { 
+                return plantsAll.locationSec !== "" && plantsAll.locationSec === updatedLocation;
+            });
+        } else {
+            plantsByLocation = activePlants.filter(plantsAll => { 
+                return plantsAll.locationSec === "" || plantsAll.locationSec == null || plantsAll.location === "";
+            });
+        }
 
         let plantsByName = plantsByLocation.sort((a,b) => {
             if (a.name < b.name) return -1;
@@ -91,6 +99,7 @@ function Watering () {
                     onChange={(e) => sendPlants(e.target.value)}
                     >
                         <option>all</option>
+                        <option>none</option>
                         <option>bathroom</option>
                         <option>bedroom</option>
                         <option>dining room</option>

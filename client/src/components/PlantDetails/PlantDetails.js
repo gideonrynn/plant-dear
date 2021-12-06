@@ -11,11 +11,15 @@ function PlantDetails(p) {
     //passing in one plant with it's details, kind of like in review plant
 
     console.log("PlantDetails component initialized", p);
+
+    let currentDate = new Date();
     
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
     const [modPlant, setModPlant] = useState({});
     const [constructedDates, setConstructedDates] = useState([]);
+    const [buttonColor, setButtonColor] = useState('button-not-submitted');
+    const [updatedMessage, setUpdatedMessage] = useState();
     // const [updated, setUpdated] = useState(false);
     // const [onePlant, setOnePlant] = useState([])
     // const [onePlantId, setOnePlantId] = useState([])
@@ -70,11 +74,11 @@ function PlantDetails(p) {
         if(p.plant) {
             setThisPlant(p.plant);
             setThisPlantId(p.plant._id)
-        }
+        } 
         console.log("PlantDetails rerendered");
         createDateObjects();
         
-    }, [p]);
+    }, [p, updatedMessage]);
 
     function createDateObjects() {
         let numberInWeek = 7;
@@ -187,7 +191,10 @@ function PlantDetails(p) {
     function handleFormSubmit(event) {
         event.preventDefault();
         console.log(modPlant);
-        console.log(thisPlantId)
+        console.log(thisPlantId);
+
+        setButtonColor('button-submitted');
+
         PlantAPI.updatePlant(
             thisPlantId,
             {
@@ -222,8 +229,13 @@ function PlantDetails(p) {
             createdAt: modPlant.createdAt,
 
         })
-            .then(console.log("submitted plant detail update")
-                // window.location.reload()
+            .then(
+                console.log("submitted plant detail update"),
+                p.setUpdate("DB updated at: " + currentDate),
+                setUpdatedMessage(" Details saved! "),
+                    setTimeout(function(){ 
+                        window.location.reload(); }, 2000)
+                    // p.setUpdate("DB updated at: " + currentDate);
                 // setUpdated(true)
             )
             .catch(err => console.log(err))
@@ -280,8 +292,11 @@ function PlantDetails(p) {
                 ids: [id],
                 lastWatered: newDate,
             })
-            .then(console.log("water date updated on plant details page")
-                // window.location.reload()
+            .then(console.log("water date updated on plant details page"),
+                 setUpdatedMessage(`Last watered date for ${thisPlant.name} updated to ${newDate}`),
+                 setTimeout(function(){ 
+                    window.location.reload(); }, 2000)
+                // p.setUpdate("DB updated at: " + currentDate)
             )
             .catch(err => console.log(err))
     }
@@ -289,8 +304,11 @@ function PlantDetails(p) {
     function deletePlant(id) {
     
         // console.log(id)
-        PlantAPI.deletePlant(id)
-
+        PlantAPI.deletePlant(id);
+        setUpdatedMessage('  Plant has been deleted. ');
+        setTimeout(function(){ 
+        window.location.reload(); }, 2000);
+        // p.setUpdate("DB updated at: " + currentDate);
     }
 
     // function getNumberOfDays(start, end) {
@@ -802,7 +820,8 @@ function PlantDetails(p) {
                                     </div>
                                
                             </div>
-                            <button type="submit" onClick={handleFormSubmit}>Save</button><span className="last-submitted"></span>
+                            <button type="submit" className={buttonColor} onClick={handleFormSubmit}>Save</button><span className="last-submitted"></span>
+                            <p>{updatedMessage}</p>
                           
                         </div>
 
