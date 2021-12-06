@@ -100,7 +100,7 @@ const WaterByLocation = (data) => {
                 ids: ids,
                 lastWatered: wateredDate,
             })
-            .then(setIds([]), setSelectedDate(""), setPlants(data.plants))
+            .then(setIds([]), setSelectedDate(""), setPlants(data.plants), window.location.reload())
             .catch(err => console.log(err))
 
         // console.log(newDate);

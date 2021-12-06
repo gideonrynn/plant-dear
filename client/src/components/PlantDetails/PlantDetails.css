@@ -176,3 +176,11 @@ select.plant-details {
     margin-left: 20px;
     text-align: left;
 }
+
+.button-submitted {
+    background-color: green;
+}
+
+.button-not-submitted {
+    background-color: #3A6C8F;
+}
