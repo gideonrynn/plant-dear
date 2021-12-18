@@ -29,8 +29,8 @@ function App() {
           <HeaderAll/>
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/plants" component={Plants}/>
-            <Route exact path="/sorting" component={Sorting}/>
+            <Route exact path="/archive" component={Plants}/>
+            <Route exact path="/plants" component={Sorting}/>
             <Route exact path="/watering" component={Watering}/>
             <Route path="/plantdetails" component={PlantDetail}/>
             {/* <Route path="/plantdetail" component={PlantDetail}/> */}

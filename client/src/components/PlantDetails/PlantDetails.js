@@ -229,15 +229,15 @@ function PlantDetails(p) {
             createdAt: modPlant.createdAt,
 
         })
-            .then(
-                console.log("submitted plant detail update"),
-                p.setUpdate("DB updated at: " + currentDate),
-                setUpdatedMessage(" Details saved! "),
-                    setTimeout(function(){ 
-                        window.location.reload(); }, 2000)
+            .then(res => {
+                console.log("submitted plant detail update", res)
+                p.setUpdate("DB updated at: " + currentDate)
+                setUpdatedMessage(" Details saved! " + currentDate)
+                    // setTimeout(function(){ 
+                    //     window.location.reload(); }, 2000)
                     // p.setUpdate("DB updated at: " + currentDate);
                 // setUpdated(true)
-            )
+            })
             .catch(err => console.log(err))
 
         
@@ -294,8 +294,8 @@ function PlantDetails(p) {
             })
             .then(console.log("water date updated on plant details page"),
                  setUpdatedMessage(`Last watered date for ${thisPlant.name} updated to ${newDate}`),
-                 setTimeout(function(){ 
-                    window.location.reload(); }, 2000)
+                //  setTimeout(function(){ 
+                //     window.location.reload(); }, 2000)
                 // p.setUpdate("DB updated at: " + currentDate)
             )
             .catch(err => console.log(err))
