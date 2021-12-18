@@ -51,11 +51,11 @@ function SiteNavigation() {
                     <Nav className="">
                         <Link className="nav-link" id="nav-highlight" to="/">Home</Link>
                         <Link className="nav-link" id="nav-highlight" to="#" onClick={handleShow}>Add New Plant</Link>
-                        <Link className="nav-link" id="nav-highlight" to="/sorting">Plants</Link>
+                        <Link className="nav-link" id="nav-highlight" to="/plants">Plants</Link>
                         <Link className="nav-link" id="nav-highlight" to="/watering">Watering</Link>
                         <Link className="nav-link" id="nav-highlight" to="/weather">Forecast</Link>
                         <Link className="nav-link" id="nav-highlight" to="/tasks">Tasks</Link>
-                        {/* <Link className="nav-link" to="/plants">Plants</Link> */}
+                        <Link className="nav-link" id="nav-highlight" to="/archive">Archive</Link>
                         {/* <Link className="nav-link" to="/plantonly">PlantOnly</Link> */}
                         {/* <Nav.Link href="#link">Link</Nav.Link> */}
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
