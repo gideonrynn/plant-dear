@@ -184,3 +184,7 @@ select.plant-details {
 .button-not-submitted {
     background-color: #3A6C8F;
 }
+
+.lastWatered {
+    width: 300px;
+}
