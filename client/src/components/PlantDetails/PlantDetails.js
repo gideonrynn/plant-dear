@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 // import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
@@ -20,6 +20,8 @@ function PlantDetails(p) {
     const [constructedDates, setConstructedDates] = useState([]);
     const [buttonColor, setButtonColor] = useState('button-not-submitted');
     const [updatedMessage, setUpdatedMessage] = useState();
+    const [updatedDates, setUpdatedDates] = useState([]);
+    const nameForm = useRef(null);
     // const [updated, setUpdated] = useState(false);
     // const [onePlant, setOnePlant] = useState([])
     // const [onePlantId, setOnePlantId] = useState([])
@@ -311,6 +313,27 @@ function PlantDetails(p) {
         // p.setUpdate("DB updated at: " + currentDate);
     }
 
+    function handleDateUpdate(event) {
+        // const { name, defaultValue } = event.target;
+        // let fieldName = event.target.name
+        console.log("is this firing", event.target
+        )
+        let fielddefaultValue = event.target
+        let fieldCheckedValue = event.target.checked
+
+        // console.log("This is the info I need right now", event.target, "and this is the value", fieldCheckedValue);
+        
+        if (fieldCheckedValue === true) {
+            setUpdatedDates([...updatedDates, fielddefaultValue]);
+            // setCheckedVal(true)
+            console.log("Fieldcheckedvalue and fielddefaultvalue is: ", fieldCheckedValue, fielddefaultValue)
+        }
+        
+        // console.log(ids);
+        // setCheckedVal(handleCheckedValue(fieldCheckedValue))
+
+    };
+
     // function getNumberOfDays(start, end) {
     //     const date1 = new Date(start);
     //     const date2 = new Date(end);
@@ -326,6 +349,34 @@ function PlantDetails(p) {
     
     //     return diffInDays;
     // }
+
+
+    function handleDateUpdateSubmit(event) {
+        event.preventDefault();
+        console.log(updatedDates);
+        console.log(thisPlantId);
+
+        // setButtonColor('button-submitted');
+
+        PlantAPI.updatePlant(
+            thisPlantId,
+            {
+            lastWatered: updatedDates,
+        })
+            .then(res => {
+                console.log("submitted plant detail update", res)
+                p.setUpdate("DB updated at: " + currentDate)
+                setUpdatedMessage(" Details saved! " + currentDate)
+                    // setTimeout(function(){ 
+                    //     window.location.reload(); }, 2000)
+                    // p.setUpdate("DB updated at: " + currentDate);
+                // setUpdated(true)
+            })
+            .catch(err => console.log(err))
+
+        
+
+    }
 
     return (
         <>
@@ -798,6 +849,29 @@ function PlantDetails(p) {
                                                 className="plant-details"
                                                 onChange={handleInputChange}/>
                                         </div>
+                                        <p><b>All watering dates</b></p>
+                                            <div className="plant-details-group lastWatered" ref={nameForm}>
+                                            {/* <p className="plant-details-label">Last Watered</p> */}
+                                                {thisPlant.lastWatered ? thisPlant.lastWatered.map(waterDates =>
+                                                    <>
+                                                        {/* <input 
+                                                            type="checkbox" 
+                                                            name="waterInput"
+                                                            defaultValue={waterDates} 
+                                                            // defaultChecked={true}
+                                                            // checked={checkedVal}
+                                                            onChange={handleDateUpdate}/> */}
+                                                        <input
+                                                        type="date"
+                                                        name="lastWatered"
+                                                        className="plant-details"
+                                                        defaultValue={waterDates}
+                                                        onChange={handleDateUpdate}/>
+                                                        <br></br>
+                                                    </>
+                                                ) : <p>No last watered date</p>}
+                                            </div>
+                                            <button onClick={handleDateUpdateSubmit}>Update Water Dates</button>
                                     </div>
                                     
                                 </div>
