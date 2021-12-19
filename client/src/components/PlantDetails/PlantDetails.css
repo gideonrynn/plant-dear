@@ -185,6 +185,21 @@ select.plant-details {
     background-color: #3A6C8F;
 }
 
-.lastWatered {
+div.lastWatered {
     width: 300px;
+}
+
+input.plant-details-specific {
+    width: 200px;
+    border: none;
+}
+
+input.wdbc {
+    border: none;
+}
+
+input.plant-details-watering {
+    border:none;
+    margin: 5px;
+    width: 140px;
 }

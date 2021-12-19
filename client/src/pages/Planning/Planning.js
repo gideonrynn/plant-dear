@@ -25,6 +25,7 @@ function Planning () {
     // const [outdoorPlants, setOutdoorPlants] = useState([]);
     const [readyPlants, setReadyPlants] = useState([]);
     const [upcomingPlants, setUpcomingPlants] = useState([]);
+    const [otherPlants, setOtherPlants] = useState([]);
     const [comparison, setComparison] = useState(false);
 
     //date variables
@@ -117,6 +118,10 @@ function Planning () {
 
     }
 
+    function sortPlants2(input2) {
+
+    };
+
       
     function handleClick(event, id) {
         // console.log("clicked", event.target.id);
@@ -191,6 +196,7 @@ function Planning () {
 
         let ready = [];
         let upcoming = [];
+        let other = [];
 
         indoor.forEach(plant => {
 
@@ -219,12 +225,16 @@ function Planning () {
 
                 if (durationDifference < 0) {
                     upcoming.push(plant);
-                } else if (durationDifference >= 0) {
+                } else {
+                    //  else if (durationDifference >= 0) {
                     ready.push(plant);
                 }
 
 
                 console.log(plant.name + " difference between last watered and duration is: " + durationDifference);
+
+            } else {
+                other.push(plant);
             }
             
         })
@@ -233,6 +243,7 @@ function Planning () {
         console.log("runComparison has completed it's run");
         setUpcomingPlants(upcoming);
         setReadyPlants(ready);
+        setOtherPlants(other);
         setComparison(true);
 
         //if the last watered is greater than the last duration, display that in the last as past due
@@ -382,6 +393,12 @@ function Planning () {
                 <PlantBlock 
                     plants={upcomingPlants} 
                 /> 
+
+                <h1>TBD</h1>
+                <PlantBlock 
+                    plants={otherPlants} 
+                />
+
                 </>
             :
                 <p>Loading plants...</p>

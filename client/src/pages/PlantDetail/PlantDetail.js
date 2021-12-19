@@ -16,12 +16,15 @@ function PlantDetail(hist) {
     const { activePlants, setUpdate } = useContext(PlantContext);
     // let onePlantOnly = plant.activePlants[133];
     console.log(activePlants);
+    console.log(setUpdate);
     console.log(location);
     
     
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({id});
     const [plantContext, ] = useState(activePlants);
+    const newSetUpdate = setUpdate;
+    console.log(newSetUpdate)
     // const [updateComponent, setUpdateComponent] = useState(false);
     // console.log(plantContext);
 
@@ -42,7 +45,7 @@ function PlantDetail(hist) {
             getPlant(id);
         }
         // console.log(plantContext);
-     }, [location, activePlants]);
+     }, [location, plantContext]);
 
     function getPlant(id) {
 
@@ -69,7 +72,7 @@ function PlantDetail(hist) {
 
             <PlantDetails
                 plant={thisPlant}
-                setUpdate={setUpdate}
+                setUpdate={newSetUpdate}
                 id={thisPlantId}
             />
 
