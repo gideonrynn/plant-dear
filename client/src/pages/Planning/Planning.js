@@ -118,7 +118,42 @@ function Planning () {
 
     }
 
-    function sortPlants2(input2) {
+    function sortColumn(input) {
+        // console.log(input.target.title);
+        let columnTitle = input.target.title;
+        let sortedReadyPlants = "";
+        // console.log(readyPlants);
+        if(columnTitle === "name") {
+            sortedReadyPlants = readyPlants.sort((a,b) => {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+            })
+        }
+        if(columnTitle === "location") {
+            sortedReadyPlants = readyPlants.sort((a,b) => {
+                if (a.locationSec < b.locationSec) return -1;
+                if (a.locationSec > b.locationSec) return 1;
+                return 0;
+            })
+        }
+        if(columnTitle === "difference") {
+            sortedReadyPlants = readyPlants.sort((a,b) => {
+                if (a.difference < b.difference) return -1;
+                if (a.difference > b.difference) return 1;
+                return 0;
+            })
+        }
+        if(columnTitle === "daysago") {
+            sortedReadyPlants = readyPlants.sort((a,b) => {
+                if (a.daysAgo < b.daysAgo) return -1;
+                if (a.daysAgo > b.daysAgo) return 1;
+                return 0;
+            })
+        }
+        // console.log(sortedReadyPlants);
+
+        setReadyPlants([...sortedReadyPlants]);
 
     };
 
@@ -197,6 +232,7 @@ function Planning () {
         let ready = [];
         let upcoming = [];
         let other = [];
+        let sortedReady = [];
 
         indoor.forEach(plant => {
 
@@ -205,6 +241,7 @@ function Planning () {
                 //get the number of days since it was lastWatered
                 let daysAgo = waterDateParse(plant.lastWatered[plant.lastWatered.length - 1]);
                 console.log("Watered this number of days ago: ", daysAgo);
+                plant["daysAgo"] = daysAgo;
                 // let daysAgoComparison = ;
                 // console.log("Watered this number of days ago COMPARISON conversion: ", daysAgoComparison)
                 //get the previous duration of watering the plant
@@ -217,10 +254,13 @@ function Planning () {
                 //Math.round((date.getTime() - new Date(plant.lastWatered[plant.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"
                 let lastDuration = waterDateParse(plant.lastWatered[plant.lastWatered.length - 2]) - waterDateParse(plant.lastWatered[plant.lastWatered.length - 1]);
                 console.log("Last Duration between waterings: ", lastDuration);
+                plant["duration"] = lastDuration;
 
                 //get the absolute date, as if doesn't matter if the difference is positive or negative
                 // let durationDifference = Math.abs(daysAgo - lastDuration);
                 let durationDifference = daysAgo - lastDuration;
+                console.log(plant);
+                plant["difference"] = durationDifference;
                 console.log(plant);
 
                 if (durationDifference < 0) {
@@ -236,13 +276,17 @@ function Planning () {
             } else {
                 other.push(plant);
             }
-            
+            sortedReady = ready.sort((a,b) => {
+                if (a.difference > b.difference) return -1;
+                if (a.difference < b.difference) return 1;
+                return 0;
+            })
         })
 
 
         console.log("runComparison has completed it's run");
         setUpcomingPlants(upcoming);
-        setReadyPlants(ready);
+        setReadyPlants(sortedReady);
         setOtherPlants(other);
         setComparison(true);
 
@@ -314,10 +358,11 @@ function Planning () {
                             <thead className="watering-col-header">
                                 <tr className="watering-col-header">
                                     <th className="watering-col-header">Watered</th>
-                                    <th className="watering-col-header">Name</th>
-                                    <th className="watering-col-header">Location</th>
+                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortColumn}>Name<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortColumn}>Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Watering Rate</th>
-                                    <th className="watering-col-header">Last Watered</th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Difference<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
                                     
@@ -348,6 +393,7 @@ function Planning () {
                                         </th>
                                         <th className="watering-details">{plants.locationSec}</th>
                                         <th className="watering-details">{plants.waterPref}</th>
+                                        <th className="watering-details">{plants.difference}</th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}> 
