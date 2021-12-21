@@ -97,7 +97,7 @@ const PlantBlock = (data) => {
                             <div key={plants._id+1} id={plants._id} className="plant-block-2" onClick={(e) => handleClick(e, plants.name)}>
                                 <p id={plants._id}>{plants.name}</p>
                                 <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"}</p>
+                                <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? Math.floor((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"}</p>
                                 <p id={plants._id}>{plants.waterPref} watering conditions</p>
                                 {/* <button className="plant-card-2-btn">Open plant</button> */}
                             </div>

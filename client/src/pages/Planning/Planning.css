@@ -3,3 +3,12 @@
     padding: 40px;
     background-color: whitesmoke;
 }
+
+.planning-sort-option {
+    cursor: pointer;
+}
+
+.ustyle {
+    margin-left: 10px;
+    font-size:small;
+}

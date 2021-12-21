@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect} from 'react'
 // import { FaPlus } from "react-icons/fa"
 // import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
@@ -9,6 +9,9 @@ import './PlantDetails.css'
 function PlantDetails(p) {
     //in this component, we are only rendering one dedicated plant
     //passing in one plant with it's details, kind of like in review plant
+    /*Successfully triggering re-rendering when certain items update, but the current structure
+    of the code is just reapply unchanged values, and the new ones get overwritten
+    In addition, the parent page is not getting the updated context that contains the new date value */
 
     console.log("PlantDetails component initialized", p);
 
@@ -20,8 +23,10 @@ function PlantDetails(p) {
     const [constructedDates, setConstructedDates] = useState([]);
     const [buttonColor, setButtonColor] = useState('button-not-submitted');
     const [updatedMessage, setUpdatedMessage] = useState();
+
+    //will set state for updateDates from load of this plant
+    //will try using remove and update
     const [updatedDates, setUpdatedDates] = useState([]);
-    const nameForm = useRef(null);
     // const [updated, setUpdated] = useState(false);
     // const [onePlant, setOnePlant] = useState([])
     // const [onePlantId, setOnePlantId] = useState([])
@@ -72,15 +77,16 @@ function PlantDetails(p) {
     // console.log(p.plant);
 
     useEffect(() => {
-        
-        if(p.plant) {
+        console.log("This plant", thisPlant.length);
+        if(typeof thisPlant.length === "undefined" && p.plant) {
             setThisPlant(p.plant);
             setThisPlantId(p.plant._id)
-        } 
+            setUpdatedDates(p.plant.lastWatered)
+        }
         console.log("PlantDetails rerendered");
         createDateObjects();
         
-    }, [p, updatedMessage]);
+    }, [p, updatedMessage, updatedDates]);
 
     function createDateObjects() {
         let numberInWeek = 7;
@@ -232,6 +238,11 @@ function PlantDetails(p) {
 
         })
             .then(res => {
+                setUpdatedDates([...updatedDates])
+                setThisPlant({...thisPlant, modPlant});
+                setThisPlantId(thisPlantId);
+                setButtonColor('button-not-submitted');
+                // setUpdatedDates(p.plant.lastWatered)
                 console.log("submitted plant detail update", res)
                 p.setUpdate("DB updated at: " + currentDate)
                 setUpdatedMessage(" Details saved! " + currentDate)
@@ -294,12 +305,16 @@ function PlantDetails(p) {
                 ids: [id],
                 lastWatered: newDate,
             })
-            .then(console.log("water date updated on plant details page"),
-                 setUpdatedMessage(`Last watered date for ${thisPlant.name} updated to ${newDate}`),
+            .then(res => {
+                console.log("water date updated on plant details page", res)
+                setUpdatedMessage(`Last watered date for ${thisPlant.name} updated to ${newDate}`)
+                
+                // console.log(thisPlant.lastWatered);
+                setUpdatedDates([...updatedDates, newDate])
                 //  setTimeout(function(){ 
                 //     window.location.reload(); }, 2000)
                 // p.setUpdate("DB updated at: " + currentDate)
-            )
+        })
             .catch(err => console.log(err))
     }
 
@@ -374,8 +389,42 @@ function PlantDetails(p) {
             })
             .catch(err => console.log(err))
 
-        
+    }
 
+    function handleWateringDate(event) {
+        event.preventDefault();
+
+        let updatedList = updatedDates;
+        console.log(event.target, event.target.value, event.target.name, event.target.id);
+        let fieldName = event.target.name;
+        let newFieldValue = event.target.value;
+        let fieldIndex = event.target.id;
+
+        if(fieldName === "remove") {
+            console.log("Remove the date from this index in the list");
+            updatedList.splice(fieldIndex, 1);
+            console.log(updatedList);
+        }
+        if(fieldName === "lastWateredDate" && fieldIndex !== "") {
+            console.log("Update" + updatedDates[fieldIndex] + "to this date: ", newFieldValue);
+            updatedList[fieldIndex] = newFieldValue;
+        }
+
+        if(fieldName === "newLastWateredDate" && fieldIndex === "") {
+            console.log("This does not yet have an index value, push to array");
+            updatedList.push(newFieldValue);
+        }
+
+        let updatedSortedList = updatedList.sort((a,b) => {
+            if (a < b) return -1;
+            if (a > b) return 1;
+            return 0;
+        })
+        // console.log(updatedSortedList);
+        setUpdatedDates(updatedSortedList);
+        // console.log(updatedDates);
+        //setting with spread operator prompts a rerender that shows the change, like removal, right away on click
+        setUpdatedDates([...updatedDates]);
     }
 
     return (
@@ -846,31 +895,49 @@ function PlantDetails(p) {
                                             <input
                                                 type="date"
                                                 name="lastWatered"
-                                                className="plant-details"
+                                                className="plant-details-specific"
                                                 onChange={handleInputChange}/>
                                         </div>
                                         <p><b>All watering dates</b></p>
-                                            <div className="plant-details-group lastWatered" ref={nameForm}>
+                                            <div className="">
                                             {/* <p className="plant-details-label">Last Watered</p> */}
-                                                {thisPlant.lastWatered ? thisPlant.lastWatered.map(waterDates =>
+                                                {updatedDates ? updatedDates.map((waterDates, index) =>
                                                     <>
                                                         {/* <input 
                                                             type="checkbox" 
-                                                            name="waterInput"
+                                                            name="waterDateCheckbox"
+                                                            className="wdcb"
                                                             defaultValue={waterDates} 
                                                             // defaultChecked={true}
                                                             // checked={checkedVal}
                                                             onChange={handleDateUpdate}/> */}
+                                                        <span>Day of Week</span>
                                                         <input
                                                         type="date"
-                                                        name="lastWatered"
-                                                        className="plant-details"
-                                                        defaultValue={waterDates}
-                                                        onChange={handleDateUpdate}/>
+                                                        name="lastWateredDate"
+                                                        className="plant-details-watering"
+                                                        id={index}
+                                                        // defaultValue={waterDates}
+                                                        value={waterDates}
+                                                        onChange={handleWateringDate}/>
+                                                        {/* <button name="update" id={index} onClick={handleWateringDate}>Save</button> */}
+                                                        <button name="remove" id={index} onClick={handleWateringDate}>Remove</button>
+                                                        
                                                         <br></br>
+                                                        
                                                     </>
                                                 ) : <p>No last watered date</p>}
                                             </div>
+                                            <span>Add New Date</span>
+                                                <input
+                                                type="date"
+                                                name="newLastWateredDate"
+                                                className="plant-details-watering"
+                                                // id={index}
+                                                // defaultValue=""
+                                                value=""
+                                                onChange={handleWateringDate}/>
+                                            <br></br>
                                             <button onClick={handleDateUpdateSubmit}>Update Water Dates</button>
                                     </div>
                                     
