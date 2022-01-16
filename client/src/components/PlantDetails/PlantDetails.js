@@ -630,6 +630,14 @@ function PlantDetails(p) {
                                                 <option>N</option>
                                             </select>
                                     </div>
+                                    <div className="plant-details-group">
+                                        <p className="plant-details-label">Check Rate</p>
+                                            <input 
+                                                name="checkRate"
+                                                className="plant-details"
+                                                defaultValue={thisPlant.checkRate || "not indicated"}
+                                                onChange={handleInputChange}/>
+                                    </div>
                                 </div>
                                 <div className="column plant-details-right">
                                     <div className="plant-details-group">

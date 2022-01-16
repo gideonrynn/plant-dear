@@ -37,6 +37,7 @@ function HomeComponents() {
                                         <p>By Location</p>
                                         <ByLocation plants={activePlants}/>
                                 </div> */}
+                                <h1 >{activePlants.length}</h1>
                                 <div className="newplant-section">
                                         <RecentAdditions plants={ activePlants} setUpdate={ plant.setUpdate}/>
 

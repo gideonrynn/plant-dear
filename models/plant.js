@@ -30,6 +30,9 @@ const plantSchema = new Schema({
     nextWater: {
         type: Date
     },
+    checkRate: {
+        type: Number
+    },
     waterRate: {
         type: Number
     },
