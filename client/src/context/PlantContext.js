@@ -5,7 +5,7 @@ import PlantAPI from "../utils/PlantsAPI"
 export const PlantContext = createContext();
 
 // holds data and passes it to the children
-export const PlantProvider = ({children}) => {
+export const PlantProvider = (props) => {
 
     console.log("Plant Context initialized");
 
@@ -81,7 +81,7 @@ export const PlantProvider = ({children}) => {
                                   setUpdate,
                                   counter,
                                   inactcounter }}>
-        { children }
+        { props.children }
     </PlantContext.Provider>
   );
 };

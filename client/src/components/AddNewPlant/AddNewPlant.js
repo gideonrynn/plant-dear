@@ -7,13 +7,13 @@ import './AddNewPlant.css'
 function AddPlants() {
 
     const [newPlant, setNewPlant] = useState({});
-    const plant = useContext(PlantContext);
+    const { activePlants, update, setUpdate } = useContext(PlantContext);
     let currentDate = new Date();
 
     // const [show, setShow] = useState(false);
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-    console.log("AddPlants component initialized", plant);
+    console.log("AddPlants component initialized", activePlants);
 
     useEffect(() => {}, []);
 
@@ -54,7 +54,7 @@ function AddPlants() {
         })
             .then(
                 console.log("New plant added to db using AddPlants modal"),
-                plant.setUpdate("DB updated at: " + currentDate)
+                setUpdate(currentDate)
                 // window.location.reload(true)
                 )
             .catch(err => console.log(err))
