@@ -59,7 +59,7 @@ img.plant-details-imgurl {
 .water-button {
     border-radius: 4px; 
     padding: 5px;
-    width: 135px;
+    min-width: 135px;
     height: 40px;
 }
 

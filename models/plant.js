@@ -36,6 +36,9 @@ const plantSchema = new Schema({
     waterRate: {
         type: Number
     },
+    waterAdHoc: {
+        type: String
+    },
     sunlight: {
         type: Array
     },
