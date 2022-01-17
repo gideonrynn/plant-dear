@@ -20,7 +20,7 @@ const WaterByLocation = (data) => {
     console.log("ByLocation component initialized");
 
     const [plants, setPlants] = useState([]);
-
+    // const [readyLocationPlants, setReadyLocationPlants] = useState([]);
     // let location = useLocation();
     const history = useHistory();
     // let pathname = location.pathname.slice(1);
@@ -100,7 +100,14 @@ const WaterByLocation = (data) => {
                 ids: ids,
                 lastWatered: wateredDate,
             })
-            .then(setIds([]), setSelectedDate(""), setPlants(data.plants), window.location.reload())
+            .then((ids) => {
+                // let newReadyLocationPlants = plants;
+                setIds([]);
+                setSelectedDate("");
+                setPlants(data.plants); 
+                data.setUpdate(date);
+                window.location.reload()
+            })
             .catch(err => console.log(err))
 
         // console.log(newDate);
@@ -108,6 +115,16 @@ const WaterByLocation = (data) => {
         // console.log(ids);
         
     }
+
+    // need function that will add lastwatered to object within the page
+    // when navigating to another page, the context will update, because this change updates the db
+    // function updateReadyLocationPlants() {
+
+    //     let newReadyLocationPlants = readyLocationPlants.filter(i => !ids.includes(i._id));
+    //     // console.log(newReadyPlants);
+    //     setReadyLocationPlants(newReadyLocationPlants);
+
+    // }
 
     return (
         <div className="by-location-section">
