@@ -24,6 +24,8 @@ function PlantDetails(p) {
     const [buttonColor, setButtonColor] = useState('button-not-submitted');
     const [updatedMessage, setUpdatedMessage] = useState();
 
+    const allDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
     //will set state for updateDates from load of this plant
     //will try using remove and update
     const [updatedDates, setUpdatedDates] = useState([]);
@@ -424,6 +426,14 @@ function PlantDetails(p) {
         setTempDates([...updatedSortedList]);
         // console.log(updatedDates);
         // setUpdatedDates(updatedSortedList);
+    }
+
+    function getWaterDay(day) {
+        console.log("Day is " + day)
+        console.log("New date constructor says" + new Date(day).getDay())
+        console.log("day of the week is: " + allDays[new Date(day.replace(/-/g, '/')).getDay()])
+        let dayOfWeek = allDays[new Date(day.replace(/-/g, '/')).getDay()]
+        return dayOfWeek;
     }
 
     return (
@@ -882,7 +892,7 @@ function PlantDetails(p) {
                                         <p className="button-section-header"><b>Watered</b></p>
                                         <p className="plant-details-comment">
                                             Last Watered {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? waterDateParse(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]) + " day(s) ago on " : "not yet watered"} 
-                                            {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1].split('T')[0] : null}</p> {/*getting the length to get the most recent entry in the array */}
+                                            {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? getWaterDay(thisPlant.lastWatered[thisPlant.lastWatered.length - 1]) : null} {thisPlant.lastWatered && thisPlant.lastWatered.length > 0 ? thisPlant.lastWatered[thisPlant.lastWatered.length - 1] : null}</p> {/*getting the length to get the most recent entry in the array */}
                                         <div>{constructedDates.length > 0 ? 
                                             constructedDates.map(dateDetails => (
                                                 <button 
@@ -908,7 +918,7 @@ function PlantDetails(p) {
                                         <p><b>All watering dates</b></p>
                                             <div className="">
                                             {/* <p className="plant-details-label">Last Watered</p> */}
-                                                {tempDates ? tempDates.map((waterDates, index) =>
+                                                {tempDates ? tempDates.map((waterDate, index) =>
                                                     <>
                                                         {/* <input 
                                                             type="checkbox" 
@@ -918,14 +928,14 @@ function PlantDetails(p) {
                                                             // defaultChecked={true}
                                                             // checked={checkedVal}
                                                             onChange={handleDateUpdate}/> */}
-                                                        <span>Day of Week</span>
+                                                        <span>{getWaterDay(waterDate)}</span>
                                                         <input
                                                         type="date"
                                                         name="lastWateredDate"
                                                         className="plant-details-watering"
                                                         id={index}
                                                         // defaultValue={waterDates}
-                                                        value={waterDates}
+                                                        value={waterDate}
                                                         onChange={handleWateringDate}/>
                                                         {/* <button name="update" id={index} onClick={handleWateringDate}>Save</button> */}
                                                         <button name="remove" id={index} onClick={handleWateringDate}>Remove</button>
