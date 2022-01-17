@@ -27,6 +27,7 @@ function PlantDetails(p) {
     //will set state for updateDates from load of this plant
     //will try using remove and update
     const [updatedDates, setUpdatedDates] = useState([]);
+    const [tempDates, setTempDates] = useState([]);
     // const [updated, setUpdated] = useState(false);
     // const [onePlant, setOnePlant] = useState([])
     // const [onePlantId, setOnePlantId] = useState([])
@@ -79,14 +80,26 @@ function PlantDetails(p) {
     useEffect(() => {
         console.log("This plant", thisPlant.length);
         if(typeof thisPlant.length === "undefined" && p.plant) {
-            setThisPlant(p.plant);
-            setThisPlantId(p.plant._id)
-            setUpdatedDates(p.plant.lastWatered)
+            
+            setThisPlantId(p.plant._id);
+
+            //only want these values to update from p if there are actual changes in tempDates
+            let lastWateredList = "";
+            if(tempDates && tempDates.length > 0) {
+                console.log("Temp dates chosen for re-rendering")
+                lastWateredList = tempDates;
+            } else {
+                setThisPlant(p.plant);
+                lastWateredList = p.plant.lastWatered;
+            }
+            // console.log("The last watered dates for this plant are", lastWateredList);
+            setUpdatedDates(lastWateredList);
+            setTempDates(lastWateredList);
         }
         console.log("PlantDetails rerendered");
         createDateObjects();
         
-    }, [p, updatedMessage, updatedDates]);
+    }, [p, updatedMessage]);
 
     function createDateObjects() {
         let numberInWeek = 7;
@@ -108,35 +121,35 @@ function PlantDetails(p) {
             switch (day) {
                 case 0:
                   dayOfWeek = "Sunday";
-                  color = "pink";
+                  color = "#D565D5"; //pink
                   break;
                 case 1:
                   dayOfWeek = "Monday";
-                  color = "red";
+                  color = "#AA3939"; //red
                   break;
                 case 2:
                    dayOfWeek = "Tuesday";
-                   color = "orange";
+                   color = "#E3963E"; //orange
                   break;
                 case 3:
                   dayOfWeek = "Wednesday";
-                  color = "yellow";
+                  color = "#F1DB68"; //yellow
                   break;
                 case 4:
                   dayOfWeek = "Thursday";
-                  color = "green";
+                  color = "#639F49"; //green
                   break;
                 case 5:
                   dayOfWeek = "Friday";
-                  color = "blue";
+                  color = "#49689F"; //blue
                   break;
                 case 6:
                   dayOfWeek = "Saturday";
-                  color = "purple";
+                  color = "#8A4E9E"; //purple
                   break;
                 default:
                     dayOfWeek = "Saturday";
-                    color = "purple";
+                    color = "#8A4E9E"; //purple
               }
             prepConstructedDates.push({"arrayValue": date.getDay(), "dayOfWeek": dayOfWeek, "color": color, "daysAgo": i});
             
@@ -244,7 +257,7 @@ function PlantDetails(p) {
                 setButtonColor('button-not-submitted');
                 // setUpdatedDates(p.plant.lastWatered)
                 console.log("submitted plant detail update", res)
-                p.setUpdate("DB updated at: " + currentDate)
+                p.setUpdate(currentDate);
                 setUpdatedMessage(" Details saved! " + currentDate)
                     // setTimeout(function(){ 
                     //     window.location.reload(); }, 2000)
@@ -299,6 +312,8 @@ function PlantDetails(p) {
         let newLocaleDate = date.toLocaleDateString("en-CA");
         // console.log("newLocaleDate: ", newLocaleDate);
         let newDate = newLocaleDate.split(',')[0];
+        let allNewDates = [...tempDates, newDate];
+        console.log(allNewDates);
         // console.log(newDate);
         PlantAPI.updatePlantWaterDate(
             {
@@ -308,9 +323,10 @@ function PlantDetails(p) {
             .then(res => {
                 console.log("water date updated on plant details page", res)
                 setUpdatedMessage(`Last watered date for ${thisPlant.name} updated to ${newDate}`)
-                
-                // console.log(thisPlant.lastWatered);
+                p.setUpdate(currentDate);
                 setUpdatedDates([...updatedDates, newDate])
+                setTempDates([...tempDates, newDate])
+                setThisPlant({...thisPlant, lastWatered: allNewDates})
                 //  setTimeout(function(){ 
                 //     window.location.reload(); }, 2000)
                 // p.setUpdate("DB updated at: " + currentDate)
@@ -327,27 +343,6 @@ function PlantDetails(p) {
         window.location.reload(); }, 2000);
         // p.setUpdate("DB updated at: " + currentDate);
     }
-
-    function handleDateUpdate(event) {
-        // const { name, defaultValue } = event.target;
-        // let fieldName = event.target.name
-        console.log("is this firing", event.target
-        )
-        let fielddefaultValue = event.target
-        let fieldCheckedValue = event.target.checked
-
-        // console.log("This is the info I need right now", event.target, "and this is the value", fieldCheckedValue);
-        
-        if (fieldCheckedValue === true) {
-            setUpdatedDates([...updatedDates, fielddefaultValue]);
-            // setCheckedVal(true)
-            console.log("Fieldcheckedvalue and fielddefaultvalue is: ", fieldCheckedValue, fielddefaultValue)
-        }
-        
-        // console.log(ids);
-        // setCheckedVal(handleCheckedValue(fieldCheckedValue))
-
-    };
 
     // function getNumberOfDays(start, end) {
     //     const date1 = new Date(start);
@@ -368,20 +363,24 @@ function PlantDetails(p) {
 
     function handleDateUpdateSubmit(event) {
         event.preventDefault();
-        console.log(updatedDates);
-        console.log(thisPlantId);
+
+        // console.log(updatedDates);
+        console.log(thisPlant);
 
         // setButtonColor('button-submitted');
+        console.log("Check updated dates before submitting to updatedDates", tempDates);
 
         PlantAPI.updatePlant(
             thisPlantId,
             {
-            lastWatered: updatedDates,
+            lastWatered: tempDates,
         })
             .then(res => {
                 console.log("submitted plant detail update", res)
                 p.setUpdate("DB updated at: " + currentDate)
                 setUpdatedMessage(" Details saved! " + currentDate)
+                setUpdatedDates([...tempDates]);
+                setThisPlant({...thisPlant, lastWatered: tempDates})
                     // setTimeout(function(){ 
                     //     window.location.reload(); }, 2000)
                     // p.setUpdate("DB updated at: " + currentDate);
@@ -394,7 +393,7 @@ function PlantDetails(p) {
     function handleWateringDate(event) {
         event.preventDefault();
 
-        let updatedList = updatedDates;
+        let updatedList = [...tempDates];
         console.log(event.target, event.target.value, event.target.name, event.target.id);
         let fieldName = event.target.name;
         let newFieldValue = event.target.value;
@@ -421,10 +420,10 @@ function PlantDetails(p) {
             return 0;
         })
         // console.log(updatedSortedList);
-        setUpdatedDates(updatedSortedList);
-        // console.log(updatedDates);
         //setting with spread operator prompts a rerender that shows the change, like removal, right away on click
-        setUpdatedDates([...updatedDates]);
+        setTempDates([...updatedSortedList]);
+        // console.log(updatedDates);
+        // setUpdatedDates(updatedSortedList);
     }
 
     return (
@@ -909,7 +908,7 @@ function PlantDetails(p) {
                                         <p><b>All watering dates</b></p>
                                             <div className="">
                                             {/* <p className="plant-details-label">Last Watered</p> */}
-                                                {updatedDates ? updatedDates.map((waterDates, index) =>
+                                                {tempDates ? tempDates.map((waterDates, index) =>
                                                     <>
                                                         {/* <input 
                                                             type="checkbox" 
