@@ -10,6 +10,11 @@ const Spotlight = (data) => {
     console.log("Spotlight component initialized");
 
     const plants = data.plants;
+    //specify indoor plants for now, as it is winter. 
+    //once all outdoor plant data has been updated in terms of active or inactive, will change how this filters out only inactive plants
+    const indoorSpotlightPlants = plants.filter(indoor => { 
+        return indoor.location === "indoor" && indoor.status !== 'inactive'
+    });
     const history = useHistory();
 
     function handleClick(event, name) {
@@ -35,7 +40,7 @@ const Spotlight = (data) => {
         return 0;
     })
 
-    let randomPlant = plants[Math.floor(Math.random()*plants.length)];
+    let randomPlant = indoorSpotlightPlants[Math.floor(Math.random()*indoorSpotlightPlants.length)];
     console.log("Today's random plant", randomPlant);
 
     // outdoor plants
@@ -135,7 +140,7 @@ const Spotlight = (data) => {
                         <div className="see-more">
                             <div className="plant-card-spotlight-text">
                                 <p id={randomPlant._id}>{randomPlant.name}</p>
-                                <p id={randomPlant._id}>{randomPlant.notes && randomPlant.notes.length > 0 ? randomPlant.notes.substr(0,300) + "..." : null}<span className="g-t"> <FaExternalLinkAlt className="fa-exl" id={randomPlant._id}/></span></p>
+                                <p id={randomPlant._id}>{randomPlant.description && randomPlant.description.length > 0 ? randomPlant.description.substr(0,300) + "..." : null}<span className="g-t"> <FaExternalLinkAlt className="fa-exl" id={randomPlant._id}/></span></p>
                                 <p id={randomPlant._id}>Prefers {randomPlant.sunlight ? randomPlant.sunlight + " light" : ""} and {randomPlant.waterPref.length > 0 ?randomPlant.waterPref + " watering conditions": null} </p>
                                 <p id={randomPlant._id}>{randomPlant.lastWatered && randomPlant.lastWatered.length > 0 ? "Last watered " + waterDateParse(randomPlant.lastWatered[randomPlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
                                 
