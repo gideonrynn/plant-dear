@@ -10,6 +10,7 @@ export const WeatherProvider = ({children}) => {
     console.log("Weather Context initialized");
 
     // add placeholders for testing
+    // if weather api does not render data, this will render across the application
     const [currentWeather, setCurrentWeather] = useState(
         {
             id: 1,

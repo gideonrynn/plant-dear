@@ -955,14 +955,20 @@ function PlantDetails(p) {
                                                 value=""
                                                 onChange={handleWateringDate}/>
                                             <br></br>
-                                            <button onClick={handleDateUpdateSubmit}>Update Water Dates</button>
+                                            <button className="water-button" onClick={handleDateUpdateSubmit}>Update Water Dates</button>
                                     </div>
                                     
                                 </div>
                             
                             </div>
-
+                                                            <br></br>
+                                                            <br></br>
                             <div className="row button-section">
+                                    <div className="column">
+                                        <ul>
+                                            <button type="submit" className={"water-button " + buttonColor} onClick={handleFormSubmit}>Save</button>
+                                        </ul>
+                                    </div>
                                 
                                     <div className="column">
                                         <ul>
@@ -978,7 +984,7 @@ function PlantDetails(p) {
                                     </div>
                                
                             </div>
-                            <button type="submit" className={buttonColor} onClick={handleFormSubmit}>Save</button><span className="last-submitted"></span>
+                            <span className="last-submitted"></span>
                             <p>{updatedMessage}</p>
                           
                         </div>

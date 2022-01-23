@@ -7,6 +7,7 @@ import PlantForecastHardiness from "../PlantForecastHardiness/PlantForecastHardi
 import { WeatherContext } from "../../context/WeatherContext"
 import { PlantContext } from "../../context/PlantContext"
 import RecentAdditions from "../RecentAdditions/RecentAdditions";
+import Spotlight from "../Spotlight/Spotlight";
 // import ByLocation from "../ByLocation";
 import "./HomeComponents.css"
 
@@ -37,6 +38,12 @@ function HomeComponents() {
                                         <p>By Location</p>
                                         <ByLocation plants={activePlants}/>
                                 </div> */}
+                                <div className="newplant-section">
+                                        <Spotlight plants={activePlants} setUpdate={ plant.setUpdate}/>
+
+                                        {/* to keep an eye on */}
+
+                                </div>
 
                                 <div className="newplant-section">
                                         <RecentAdditions plants={ activePlants} setUpdate={ plant.setUpdate}/>

@@ -29,7 +29,7 @@ function SiteNavigation() {
                 {/* <Navbar.Text className="justify-content-center" id="nav-temp-highlight"><br/></Navbar.Text> */}
                 <Dropdown id="basic-nav-dropdown be">
                     <Dropdown.Toggle className="justify-content-around" variant="success" id="dropdown-basic" style={{backgroundColor: '#5E635C', border: '#5E635C'}}>
-                        Temp: {currentWeather ? currentWeather.app_temp : 0}&#176;
+                        Temp: {currentWeather ? currentWeather.temp : 0}&#176;
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item href="#/action-1">Wind: {currentWeather ? currentWeather.wind_spd : 0} mph</Dropdown.Item>
