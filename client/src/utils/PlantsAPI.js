@@ -29,6 +29,10 @@ export default {
       console.log(updatedData)
       return axios.post("api/plants/watering/", updatedData)
     },
+    // updateManyPlants: function(updatedPlantData) {
+    //   console.log(updatedPlantData)
+    //   return axios.put("api/plants/editall", updatedPlantData)
+    // },
     //original
     // updatePlantWaterDate: function (id, updatedPlantData) {
     //   console.log(id)

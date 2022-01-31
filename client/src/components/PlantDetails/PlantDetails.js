@@ -20,7 +20,7 @@ function PlantDetails(p) {
     const [thisPlant, setThisPlant] = useState({});
     const [thisPlantId, setThisPlantId] = useState({});
     const [modPlant, setModPlant] = useState({});
-    const [constructedDates, setConstructedDates] = useState([]);
+    const [constructedDates, setConstructedDates] = useState([]);;
     const [buttonColor, setButtonColor] = useState('button-not-submitted');
     const [updatedMessage, setUpdatedMessage] = useState();
 
@@ -207,8 +207,8 @@ function PlantDetails(p) {
         let fieldName = event.target.name
         let fielddefaultValue = event.target.value
         setModPlant({...modPlant, [fieldName]: fielddefaultValue})
-        // console.log(fieldName, fielddefaultValue);
-        // console.log(modPlant);
+        console.log(fieldName, fielddefaultValue);
+        console.log(modPlant);
     };
 
     function handleFormSubmit(event) {

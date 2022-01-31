@@ -65,6 +65,36 @@ router.put("/plants/:id", (req, res) => {
   });
 })
 
+//use loop to update multiple entries in db
+// router.put("/plants/editall", (req, res) => {
+//   console.log(req.body);
+
+//   let allEntries = req.body;
+//   console.log(allEntries);
+
+//   let updateEntries = [];
+
+//   allEntries.forEach((item, index) => {
+//       updateEntries.push({
+//         updateOne:{
+//           filter: {
+//             _id: item.id
+//           },
+//           update: item.body
+//         }
+//       })
+//   });
+
+//   db.Plant.collection.bulkWrite(updateEntries)
+//     .then(data => {
+//       console.log(data.result.nUpserted);
+//     })
+//     .catch(err => {
+//       res.status(404).json(err);
+//     });
+
+// })
+
 //use id to update entry in db
 router.post("/plants/watering", (req, res) => {
   // console.log(req.params.id)
