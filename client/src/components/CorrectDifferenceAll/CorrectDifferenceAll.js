@@ -4,14 +4,14 @@ import { PlantContext } from "../../context/PlantContext"
 import PlantAPI from "../../utils/PlantsAPI"
 import Plantling from "../../img/plantling.jpg"
 
-import "./PlantPlanningBlock.css";
+import "./CorrectDifferenceAll.css";
 
-const PlantPlanningBlock = (data) => {
+const CorrectDifferenceAll = (data) => {
 
-    console.log("PlantPlanningBlock component initialized, with context");
+    console.log("PlantEditingBlock component initialized, with context");
 
 
-    console.log("Planning block initialized, with context");
+    console.log("Planning editing block initialized, with context");
 
     const { activePlants, update, setUpdate } = useContext(PlantContext);
     const history = useHistory();
@@ -28,6 +28,10 @@ const PlantPlanningBlock = (data) => {
     const [upcomingPlants, setUpcomingPlants] = useState([]);
     const [otherPlants, setOtherPlants] = useState([]);
     const [comparison, setComparison] = useState(false);
+    const [thisPlant, setThisPlant] = useState({});
+    const [thisPlantId, setThisPlantId] = useState({});
+    const [modPlant, setModPlant] = useState({});
+    const [buttonColor, setButtonColor] = useState('button-not-submitted');
     console.log("This is the value of update", update, activePlants);
 
     //date variables
@@ -42,7 +46,7 @@ const PlantPlanningBlock = (data) => {
     const [selectedDate, setSelectedDate] = useState("");
 
     console.log("Ready plants", readyPlants);
-    console.log("Plant context on planning block", plantContext)
+    console.log("Plant context on planning editing block", plantContext)
 
 
     // Load all plants and store them within setPlants
@@ -50,81 +54,64 @@ const PlantPlanningBlock = (data) => {
 
         if(plantContext.length > 0) {
             console.log("plant context length is greater than zero")
-            sortPlants(plantContext);
+            sortColumn();
         } else {
             console.log("plant context length is not greater than zero yet")
         }
 
         // loadPlants();
         setNewUpdate(firstUpdate);
-        console.log("Planning page rerendered, pulling last update from" + newUpdate);
+        console.log("Editing page rerendered, pulling last update from" + newUpdate);
     
     },[])
 
 
-    // set indoor plants when useEffect hook triggers and trigger run comparison to get watering duration rate difference values
-    function sortPlants(input) {
-
-        if(input) {
-            // const filtered = activePlants.filter(actPlants => {
-            //     return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-            //    })
-    
-            // const filteredInactive = inactivePlants.filter(inactPlants => {
-            //     return inactPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
-            //    })
-            
-            // setSearchTerm(input);
-            // setUpdatedPlants(filtered);
-            // setUpdatedInactivePlants(filteredInactive);
-        
-            // indoor plants
-            let indoor = plantContext.filter(indoor => { 
-                return indoor.location === "indoor"
-            });
-
-            setIndoorPlants(indoor);
-            console.log(indoor)
-
-            runComparison(indoor);
-        }
-
-    }
 
     // sort plants onclick of selected column
     function sortColumn(input) {
         // console.log(input.target.title);
-        let columnTitle = input.target.title;
         let sortedReadyPlants = "";
-        // console.log(readyPlants);
-        if(columnTitle === "name") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
+
+        if(!input) {
+            sortedReadyPlants = plantContext.sort((a,b) => {
                 if (a.name < b.name) return -1;
                 if (a.name > b.name) return 1;
                 return 0;
             })
+        } else {
+            let columnTitle = input.target.title;
+            
+            // console.log(readyPlants);
+            if(columnTitle === "name") {
+                sortedReadyPlants = plantContext.sort((a,b) => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                })
+            }
+            if(columnTitle === "location") {
+                sortedReadyPlants = plantContext.sort((a,b) => {
+                    if (a.locationSec < b.locationSec) return -1;
+                    if (a.locationSec > b.locationSec) return 1;
+                    return 0;
+                })
+            }
+            if(columnTitle === "difference") {
+                sortedReadyPlants = plantContext.sort((a,b) => {
+                    if (a.difference < b.difference) return -1;
+                    if (a.difference > b.difference) return 1;
+                    return 0;
+                })
+            }
+            if(columnTitle === "daysago") {
+                sortedReadyPlants = plantContext.sort((a,b) => {
+                    if (a.daysAgo < b.daysAgo) return -1;
+                    if (a.daysAgo > b.daysAgo) return 1;
+                    return 0;
+                })
+            }
         }
-        if(columnTitle === "location") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.locationSec < b.locationSec) return -1;
-                if (a.locationSec > b.locationSec) return 1;
-                return 0;
-            })
-        }
-        if(columnTitle === "difference") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.difference < b.difference) return -1;
-                if (a.difference > b.difference) return 1;
-                return 0;
-            })
-        }
-        if(columnTitle === "daysago") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.daysAgo < b.daysAgo) return -1;
-                if (a.daysAgo > b.daysAgo) return 1;
-                return 0;
-            })
-        }
+        
         // console.log(sortedReadyPlants);
 
         setReadyPlants([...sortedReadyPlants]);
@@ -217,7 +204,6 @@ const PlantPlanningBlock = (data) => {
 
                 //get the number of days since it was lastWatered
                 let daysAgo = waterDateParse(plant.lastWatered[plant.lastWatered.length - 1]);
-                let waterRate = plant.waterRate;
                 console.log("Watered this number of days ago: ", daysAgo);
                 plant["daysAgo"] = daysAgo;
                 // let daysAgoComparison = ;
@@ -236,9 +222,9 @@ const PlantPlanningBlock = (data) => {
 
                 //get the absolute date, as if doesn't matter if the difference is positive or negative
                 // let durationDifference = Math.abs(daysAgo - lastDuration);
-                let durationDifference = daysAgo - waterRate;
+                let durationDifference = daysAgo - lastDuration;
                 console.log(plant);
-                plant["difference"] = durationDifference
+                plant["difference"] = durationDifference;
                 console.log(plant);
 
                 if (durationDifference < 0) {
@@ -324,6 +310,76 @@ const PlantPlanningBlock = (data) => {
 
     }
 
+    function handleInputChange(event) {
+        // const { name, defaultValue } = event.target;
+        let fieldName = event.target.name
+        let fielddefaultValue = event.target.value
+        setModPlant({...modPlant, [fieldName]: fielddefaultValue})
+        // console.log(fieldName, fielddefaultValue);
+        // console.log(modPlant);
+    };
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        console.log(modPlant);
+        console.log(thisPlantId);
+
+        setButtonColor('button-submitted');
+
+        PlantAPI.updatePlant(
+            thisPlantId,
+            {
+            name: modPlant.name,
+            botanicalName: modPlant.botanicalName,
+            status: modPlant.status,
+            location: modPlant.location,
+            locationSec: modPlant.locationSec,
+            locationPreferred: modPlant.locationPreferred,
+            waterPref: modPlant.waterPref,
+            sunlight: modPlant.sunlight,
+            plantType: modPlant.plantType,
+            trouble: modPlant.trouble,
+            overwinter: modPlant.overwinter,
+            needsCare: modPlant.needsCare,
+            humidity: modPlant.humidity,
+            tempLow: modPlant.tempLow,
+            tempHigh: modPlant.tempHigh,
+            hardiness: modPlant.hardiness,
+            pH: modPlant.pH,
+            soilContent: modPlant.soilContent,
+            cycle: modPlant.cycle,
+            hardinessZoneMin: modPlant.hardinessZoneMin,
+            hardinessZoneMax: modPlant.hardinessZoneMax,
+            lastPotted: modPlant.lastPotted,
+            lastWatered: modPlant.lastWatered,
+            propogating: modPlant.propogating,
+            imgURL: modPlant.imgURL,
+            links: modPlant.links,
+            notes: modPlant.notes,
+            description: modPlant.description,
+            createdAt: modPlant.createdAt,
+
+        })
+            .then(res => {
+                // setUpdatedDates([...updatedDates])
+                setThisPlant({...thisPlant, modPlant});
+                setThisPlantId(thisPlantId);
+                setButtonColor('button-not-submitted');
+                // setUpdatedDates(p.plant.lastWatered)
+                console.log("submitted plant detail update", res)
+                // p.setUpdate(currentDate);
+                // setUpdatedMessage(" Details saved! " + currentDate);
+                    // setTimeout(function(){ 
+                    //     window.location.reload(); }, 2000)
+                    // p.setUpdate("DB updated at: " + currentDate);
+                // setUpdated(true)
+            })
+            .catch(err => console.log(err))
+
+        
+
+    }
+
     
 
     return (
@@ -342,9 +398,9 @@ const PlantPlanningBlock = (data) => {
                     }}
             /> */}
 
-            <h1>Ready for Watering</h1>
+            <h1>Editing</h1>
 
-            {comparison ?
+            {readyPlants ?
             <>
                 {/* <PlantBlock 
                     plants={readyPlants}
@@ -361,9 +417,8 @@ const PlantPlanningBlock = (data) => {
                                     <th className="watering-col-header">Watered</th>
                                     <th className="watering-col-header planning-sort-option" title="name" onClick={sortColumn}>Name<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header planning-sort-option" title="location" onClick={sortColumn}>Location<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header">Preferred Water</th>
+                                    <th className="watering-col-header">Watering Rate</th>
                                     <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Water Rate</th>
                                     <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
@@ -396,7 +451,6 @@ const PlantPlanningBlock = (data) => {
                                         <th className="watering-details">{plants.locationSec}</th>
                                         <th className="watering-details">{plants.waterPref}</th>
                                         <th className="watering-details">{plants.difference}</th>
-                                        <th className="watering-details">{plants.waterRate}</th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}> 
@@ -448,9 +502,7 @@ const PlantPlanningBlock = (data) => {
                     plants={otherPlants} 
                 /> */}
 
-                </>
-            :
-                <p>Loading plants...</p>
+                </>: <p>Loading...</p>
             }
             
 
@@ -459,4 +511,4 @@ const PlantPlanningBlock = (data) => {
     )
 };
 
-export default PlantPlanningBlock;
+export default CorrectDifferenceAll;

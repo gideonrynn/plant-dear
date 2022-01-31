@@ -1,0 +1,108 @@
+.by-location-section {
+  background-color: lightgrey;
+  /* margin-top: 80px; */
+  box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+  font-weight: 300;
+  font-size: 17px;
+  /* border-radius: 30px; */
+}
+
+.weather-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.low-temp {
+  color: gray;
+}
+
+.forecast-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  grid-template-rows: fit-content(1em);
+
+}
+
+.forecast-weather {
+  margin: 10px;
+}
+
+.forecast-alloutdoor {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.outdoor-plants-number {
+  font-size: 25px;
+}
+
+.plant-table-row {
+  cursor: pointer;
+  color: blue;
+  font-weight: 600;
+}
+
+.plant-table-row:hover {
+  text-decoration: underline;
+}
+
+/* .water-metrics {
+  border: 1mm black;
+  box-shadow: 6px 8px rgba(0, 0, 0, 0.4);
+} */
+
+tbody.water-metrics {
+  outline: thin solid black;
+}
+
+
+table.watering-table {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  overflow-x:scroll;
+}
+
+th.watering-col-header {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 21px;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-left:2px solid rgba(0, 0, 0, 0.2);
+}
+
+th.editing-details {
+  font-weight: 350;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-left:2px solid rgba(0, 0, 0, 0.2);
+}
+
+.plant-details-selected-date {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.water-button-all {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.button-submitted {
+  background-color: green;
+}
+
+.button-not-submitted {
+  background-color: #3A6C8F;
+}
+
+.button-pending {
+  background-color: orchid;
+}
+.editing-details {
+  border: none;
+  outline: none;
+}

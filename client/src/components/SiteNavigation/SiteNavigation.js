@@ -57,6 +57,7 @@ function SiteNavigation() {
                         <Link className="nav-link" id="nav-highlight" to="/tasks">Tasks</Link>
                         <Link className="nav-link" id="nav-highlight" to="/archive">Archive</Link>
                         <Link className="nav-link" id="nav-highlight" to="/planning">Planning</Link>
+                        <Link className="nav-link" id="nav-highlight" to="/editing">Editing</Link>
                         {/* <Link className="nav-link" to="/plantonly">PlantOnly</Link> */}
                         {/* <Nav.Link href="#link">Link</Nav.Link> */}
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
