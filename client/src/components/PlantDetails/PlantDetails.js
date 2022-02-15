@@ -244,6 +244,8 @@ function PlantDetails(p) {
             hardinessZoneMax: modPlant.hardinessZoneMax,
             lastPotted: modPlant.lastPotted,
             lastWatered: modPlant.lastWatered,
+            waterRate: modPlant.waterRate,
+            checkRate: modPlant.checkRate,
             propogating: modPlant.propogating,
             imgURL: modPlant.imgURL,
             links: modPlant.links,
@@ -645,6 +647,14 @@ function PlantDetails(p) {
                                                 name="checkRate"
                                                 className="plant-details"
                                                 defaultValue={thisPlant.checkRate || "not indicated"}
+                                                onChange={handleInputChange}/>
+                                    </div>
+                                    <div className="plant-details-group">
+                                        <p className="plant-details-label">Water Rate</p>
+                                            <input 
+                                                name="waterRate"
+                                                className="plant-details"
+                                                defaultValue={thisPlant.waterRate || "not indicated"}
                                                 onChange={handleInputChange}/>
                                     </div>
                                 </div>
