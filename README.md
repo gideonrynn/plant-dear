@@ -50,10 +50,9 @@ WeatherBit includes forecast data so that a user may plan ahead for maintaining 
 This project built using:
 
   - Node
-  - [Dotenv ^16.0.0](https://www.npmjs.com/package/dotenv): Loads environment variables from a .env file into process.env
-  - [Express ^4.17.3](https://www.npmjs.com/package/express)
+  - [Express ^4.17.1](https://www.npmjs.com/package/express) --update version
   - [Mongoose ^6.0.7](https://www.npmjs.com/package/mongoose)
-  - [React ^17.0.0](https://www.npmjs.com/package/react)
+  - [React ^16.13.1](https://www.npmjs.com/package/react)
   - [React Router Dom ^5.1.12](https://www.npmjs.com/package/react-router-dom)
   - [WeatherBit](https://www.weatherbit.io/)
 
