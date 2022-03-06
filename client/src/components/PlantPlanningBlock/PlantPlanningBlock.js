@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PlantContext } from "../../context/PlantContext"
 import PlantAPI from "../../utils/PlantsAPI"
 import Plantling from "../../img/plantling.jpg"
@@ -14,7 +14,7 @@ const PlantPlanningBlock = (data) => {
     console.log("Planning block initialized, with context");
 
     const { activePlants, update, setUpdate } = useContext(PlantContext);
-    const history = useHistory();
+    const navigate = useNavigate();
     // const newUpdate = update;
     // console.log("number of active plants returned", activePlants.length);
 
@@ -136,9 +136,8 @@ const PlantPlanningBlock = (data) => {
         // console.log("clicked", event.target.id);
         
         // console.log(id);
-        history.push({
-            pathname: "plantdetails",
-            state: { detail: event.target.id }});
+        navigate("/plantdetails",
+            { state: { detail: event.target.id }});
     }
 
     function handleInputChange(event) {

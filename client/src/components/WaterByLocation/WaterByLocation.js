@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 // import { useLocation } from "react-router-dom";
 // import PlantBlockAll from "../PlantBlockAll/PlantBlock"
 import PlantAPI from "../../utils/PlantsAPI"
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './WaterByLocation.css'
 // import { set } from 'mongoose';
 
@@ -22,7 +22,7 @@ const WaterByLocation = (data) => {
     const [plants, setPlants] = useState([]);
     // const [readyLocationPlants, setReadyLocationPlants] = useState([]);
     // let location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     // let pathname = location.pathname.slice(1);
 
     // set date variables
@@ -53,9 +53,8 @@ const WaterByLocation = (data) => {
         // console.log("clicked", event.target.id);
         
         // console.log(id);
-        history.push({
-            pathname: "plantdetails",
-            state: { detail: event.target.id }});
+        navigate("/plantdetails",
+        { state: { detail: event.target.id }});
     }
 
     function handleInputChange(event) {

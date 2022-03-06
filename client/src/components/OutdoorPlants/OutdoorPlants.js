@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // import PlantBlockAll from "../PlantBlockAll/PlantBlock"
 import Outdoor from "../../img/outdoor-1.jpg"
 import './OutdoorPlants.css'
@@ -24,7 +24,7 @@ const OutdoorPlants = (data) => {
     const hardiness = data.hardiness;
     let location = useLocation();
     let pathname = location.pathname.slice(1);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("OutdoorPlants component rerendered");
@@ -67,11 +67,9 @@ const OutdoorPlants = (data) => {
 
     function handleClick(event, id) {
         // console.log("clicked", event.target.id);
-        
         // console.log(id);
-        history.push({
-            pathname: "plantdetails",
-            state: { detail: event.target.id }});
+        navigate("/plantdetails",
+        { state: { detail: event.target.id }});
     }
 
     // console.log("First", outdoorPlantsFirst)
