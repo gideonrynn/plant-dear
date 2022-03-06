@@ -10,10 +10,12 @@ function Outdoor() {
 
     /*Description: This is a page meant to aggregate basic information for outdoor plants. 
         Management of this page for the time being will focus on viewing data on outdoor plants in different ways
-        Not quite watering and modifying them yet*/
+        Not quite modifying them yet*/
     /*Todo: 
     - add Hardiness Zone Component
     - add to context, this data doesn't really change, it get run against other data
+    - hardiness zone: show only a segment of the hardiness zone, allow toggle. Maybe show 
+    - pull some of the ToDos from the OutdoorPlants section
      */
 
     console.log("Outdoor page initialized, with context");

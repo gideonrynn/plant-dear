@@ -6,10 +6,14 @@ import './OutdoorPlants.css'
 
 
 /*ToDo:
-- add winter safe to model? or use calculation for that?
-- once date and watering function utils have been completed, add different and last watered here (assuming I haven't handled this elsewhere)
+- add winter safe data point to model? or use calculation for that?
+- once date and watering function utils have been completed, add difference and last watered here (assuming I haven't handled this elsewhere)
 - add check for hardiness versus current temp
 - collapse the sections for tables here into the Outdoor page component. can pass data into this component to render what I want to be looking at instead of having separate tables here
+- have the plants here display always in the same sort order
+- for outdoor plants that are currently indoors, only display that section if there are plants indoors, collapse if not
+- allow toggle on inactive plants that are typically outdoors
+
 */
 const OutdoorPlants = (data) => {
     
