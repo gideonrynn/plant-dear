@@ -24,7 +24,7 @@ const RecentAdditions = (data) => {
         navigate("/plantdetails",
             // pathname: `${newTitle}/${setPathname}`,
             // pathname: `plant/${setPathname}`,
-            {state: { detail: event.target.id,
+            { state: { detail: event.target.id,
                     name: name }});
     }
 

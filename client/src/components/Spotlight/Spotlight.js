@@ -27,7 +27,7 @@ const Spotlight = (data) => {
         
         // console.log(id);
         navigate("/plantdetails",
-            { 
+        { 
             // pathname: `${newTitle}/${setPathname}`,
             // pathname: `plant/${setPathname}`,
             state: { detail: event.target.id,
@@ -147,7 +147,7 @@ const Spotlight = (data) => {
                             </div>
                             <div className="plant-card-spotlight">
                                 <div key={randomPlant._id} id={randomPlant._id} className="plant-card-spotlight" onClick={(e) => handleClick(e, randomPlant.name)}>
-                                    <p>Go to plant details<span className="g-t"> <FaExternalLinkAlt className="fa-exl" id={randomPlant._id}/></span></p>
+                                    <p id={randomPlant._id} onClick={(e) => handleClick(e, randomPlant.name)}>Go to plant details<span className="g-t" onClick={(e) => handleClick(e, randomPlant.name)}> <FaExternalLinkAlt className="fa-exl" id={randomPlant._id}/></span></p>
                                 </div>
                             </div>
 
