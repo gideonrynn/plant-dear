@@ -12,6 +12,7 @@ import PlantDetail from "./pages/PlantDetail/PlantDetail.js";
 import Sorting from "./pages/Sorting/Sorting.js";
 import Tasks from "./pages/Tasks/Tasks.js";
 import Watering from "./pages/Watering/Watering.js";
+import Outdoor from "./pages/Outdoor/Outdoor.js";
 import Weather from "./pages/Weather/Weather.js";
 import { WeatherProvider } from "../src/context/WeatherContext";
 import { PlantProvider } from "../src/context/PlantContext";
@@ -34,6 +35,7 @@ function App() {
             <Route exact path="/archive" component={Plants}/>
             <Route exact path="/plants" component={Sorting}/>
             <Route exact path="/watering" component={Watering}/>
+            <Route exact path="/outdoor" component={Outdoor}/>
             <Route path="/plantdetails" component={PlantDetail}/>
             {/* <Route path="/plantdetail" component={PlantDetail}/> */}
             <Route exact path="/weather" component={Weather}/>
