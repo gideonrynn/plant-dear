@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AddNewPlant from "./pages/AddPlants/AddPlants.js"
 import HeaderAll from "./components/HeaderAll/HeaderAll.js";
@@ -12,6 +12,7 @@ import PlantDetail from "./pages/PlantDetail/PlantDetail.js";
 import Sorting from "./pages/Sorting/Sorting.js";
 import Tasks from "./pages/Tasks/Tasks.js";
 import Watering from "./pages/Watering/Watering.js";
+import Outdoor from "./pages/Outdoor/Outdoor.js";
 import Weather from "./pages/Weather/Weather.js";
 import { WeatherProvider } from "../src/context/WeatherContext";
 import { PlantProvider } from "../src/context/PlantContext";
@@ -29,20 +30,21 @@ function App() {
           <PlantProvider>
           <SiteNavigation/>
           <HeaderAll/>
-          <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/archive" component={Plants}/>
-            <Route exact path="/plants" component={Sorting}/>
-            <Route exact path="/watering" component={Watering}/>
-            <Route path="/plantdetails" component={PlantDetail}/>
-            {/* <Route path="/plantdetail" component={PlantDetail}/> */}
-            <Route exact path="/weather" component={Weather}/>
-            <Route exact path="/addnewplants" component={AddNewPlant}/>
-            <Route exact path="/tasks" component={Tasks}/>
-            <Route exact path="/planning" component={Planning}/>
-            <Route exact path="/editing" component={Editing}/>
-            {/* <Route exact path="/dashboard" component={Dashboard}/> */}
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/archive" element={<Plants/>}/>
+            <Route path="/plants" element={<Sorting/>}/>
+            <Route path="/watering" element={<Watering/>}/>
+            <Route path="/outdoor" element={<Outdoor/>}/>
+            <Route path="/plantdetails" element={<PlantDetail/>}/>
+            {/* <Route path="/plantdetail" element={PlantDetail}/> */}
+            <Route path="/weather" element={<Weather/>}/>
+            <Route path="/addnewplants" element={<AddNewPlant/>}/>
+            <Route path="/tasks" element={<Tasks/>}/>
+            <Route path="/planning" element={<Planning/>}/>
+            <Route path="/editing" element={<Editing/>}/>
+            {/* <Route exact path="/dashboard" element={Dashboard}/> */}
+          </Routes>
           </PlantProvider>
         </WeatherProvider>
       </div>

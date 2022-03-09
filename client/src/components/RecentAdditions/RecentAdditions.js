@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaExternalLinkAlt } from "react-icons/fa"
 import Plantling from "../../img/plantling.jpg"
 import MorePlants from "../../img/deskplants.jpeg";
@@ -10,7 +10,7 @@ const RecentAdditions = (data) => {
     console.log("RecentAdditions component initialized");
 
     const plants = data.plants;
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function handleClick(event, name) {
         event.preventDefault();
@@ -21,11 +21,10 @@ const RecentAdditions = (data) => {
         // let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
         
         // console.log(id);
-        history.push({
-            pathname: "plantdetails",
+        navigate("/plantdetails",
             // pathname: `${newTitle}/${setPathname}`,
             // pathname: `plant/${setPathname}`,
-            state: { detail: event.target.id,
+            { state: { detail: event.target.id,
                     name: name }});
     }
 

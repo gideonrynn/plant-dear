@@ -53,6 +53,7 @@ function SiteNavigation() {
                         <Link className="nav-link" id="nav-highlight" to="#" onClick={handleShow}>Add New Plant</Link>
                         <Link className="nav-link" id="nav-highlight" to="/plants">Plants</Link>
                         <Link className="nav-link" id="nav-highlight" to="/watering">Watering</Link>
+                        <Link className="nav-link" id="nav-highlight" to="/outdoor">Outdoor</Link>
                         <Link className="nav-link" id="nav-highlight" to="/weather">Forecast</Link>
                         <Link className="nav-link" id="nav-highlight" to="/tasks">Tasks</Link>
                         <Link className="nav-link" id="nav-highlight" to="/archive">Archive</Link>

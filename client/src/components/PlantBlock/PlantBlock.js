@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import PlantAPI from "../../utils/PlantsAPI"
 import Plantling from "../../img/plantling.jpg"
 
@@ -12,7 +12,7 @@ const PlantBlock = (data) => {
     // const [onePlant, setOnePlant] = useState([]);
 
     const plants = data.plants;
-    const history = useHistory();
+    const navigate = useNavigate();
 
     let currentDate = new Date();
 
@@ -28,11 +28,10 @@ const PlantBlock = (data) => {
         // let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
         
         // console.log(id);
-        history.push({
-            pathname: "plantdetails",
+        navigate("/plantdetails",
             // pathname: `${newTitle}/${setPathname}`,
             // pathname: `plant/${setPathname}`,
-            state: { detail: event.target.id,
+            {state: { detail: event.target.id,
                     name: name }});
     }
 
