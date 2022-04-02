@@ -138,6 +138,7 @@ const OutdoorPlants = (data) => {
                                     <th className="watering-col-header planning-sort-option" title="name" >Name<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header planning-sort-option" title="location" >Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Preferred Water</th>
+                                    <th className="watering-col-header">Light Preference</th>
                                     {/* <th className="watering-col-header planning-sort-option" title="difference" >Difference<span className="ustyle">&#9650;</span></th> */}
                                     <th className="watering-col-header planning-sort-option" title="difference" >Water Rate</th>
                                     <th className="watering-col-header">Hardiness Low</th>
@@ -174,6 +175,7 @@ const OutdoorPlants = (data) => {
                                         </th>
                                         <th className="watering-details">{plants.locationSec}</th>
                                         <th className="watering-details">{plants.waterPref}</th>
+                                        <th className="watering-details">{plants.sunlight ? plants.sunlight : ""}</th>
                                         {/* <th className="watering-details">{plants.difference}</th> */}
                                         <th className="watering-details">{plants.waterRate}</th>
                                         <th className="watering-details">{plants.hardinessZoneMin}</th>
@@ -215,6 +217,7 @@ const OutdoorPlants = (data) => {
                                     <th className="watering-col-header planning-sort-option" title="name" >Name<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header planning-sort-option" title="location" >Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Preferred Water</th>
+                                    <th className="watering-col-header">Light Preference</th>
                                     {/* <th className="watering-col-header planning-sort-option" title="difference" >Difference<span className="ustyle">&#9650;</span></th> */}
                                     <th className="watering-col-header planning-sort-option" title="difference" >Water Rate</th>
                                     <th className="watering-col-header planning-sort-option" title="difference" >Hardiness</th>
@@ -252,6 +255,7 @@ const OutdoorPlants = (data) => {
                                         </th>
                                         <th className="watering-details">{plants.locationSec}</th>
                                         <th className="watering-details">{plants.waterPref}</th>
+                                        <th className="watering-details">{plants.sunlight ? plants.sunlight : ""}</th>
                                         {/* <th className="watering-details">{plants.difference}</th> */}
                                         <th className="watering-details">{plants.waterRate}</th>
                                         <th className="watering-details">{plants.hardinessZoneMin || "not indicated"} - {plants.hardinessZoneMax || "not indicated"}</th>
@@ -295,9 +299,8 @@ const OutdoorPlants = (data) => {
                                     <th className="watering-col-header planning-sort-option" title="location" >Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Preferred Water</th>
                                     {/* <th className="watering-col-header planning-sort-option" title="difference" >Difference<span className="ustyle">&#9650;</span></th> */}
-                                    <th className="watering-col-header planning-sort-option" title="difference" >Water Rate</th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" >Hardiness</th>
-                                    <th className="watering-col-header">Hardiness</th>
+                                    <th className="watering-col-header planning-sort-option">Water Rate</th>
+                                    <th className="watering-col-header planning-sort-option">Hardiness</th>
                                     {/* <th className="watering-col-header planning-sort-option" title="daysago" >Last Watered<span className="ustyle">&#9650;</span></th> */}
                                     {/* <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th> */}
