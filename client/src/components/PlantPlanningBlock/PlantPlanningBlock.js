@@ -255,13 +255,17 @@ const PlantPlanningBlock = (data) => {
                 other.push(plant);
             }
             sortedReady = ready.sort((a,b) => {
-                if (a.difference > b.difference) return -1;
-                if (a.difference < b.difference) return 1;
-                return 0;
+                if (a.difference > b.difference) return -1; //b before a
+                if (a.difference < b.difference) return 1; //a before b
+                if (a.locationSec < b.locationSec) return -1; 
+                if (a.locationSec > b.locationSec) return 1; 
+                return 0; //leave unchanged
             })
             sortedUpcoming = upcoming.sort((a,b) => {
                 if (a.difference > b.difference) return -1;
                 if (a.difference < b.difference) return 1;
+                if (a.locationSec < b.locationSec) return -1; 
+                if (a.locationSec > b.locationSec) return 1; 
                 return 0;
             })
         })
