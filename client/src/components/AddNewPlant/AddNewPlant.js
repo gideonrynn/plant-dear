@@ -35,6 +35,7 @@ function AddPlants() {
             locationSec: newPlant.locationSec,
             locationPreferred: newPlant.locationPreferred,
             waterPref: newPlant.waterPref,
+            waterRate: newPlant.waterRate,
             sunlight: newPlant.sunlight,
             plantType: newPlant.plantType,
             humidity: newPlant.humidity,
@@ -142,6 +143,10 @@ function AddPlants() {
                         <option>moderate</option>
                         <option>moist</option>
                     </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="formWaterRate" >
+                    <Form.Label>Water Rate</Form.Label>
+                    <Form.Control type="text" name="waterRate" onChange={handleInputChange}/>
                 </Form.Group>
                 <Form.Group controlId="formSunlight" >
                     <Form.Label>Sunlight</Form.Label>
