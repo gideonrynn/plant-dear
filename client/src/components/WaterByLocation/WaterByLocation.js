@@ -27,6 +27,7 @@ const WaterByLocation = (data) => {
 
     // set date variables
     let date = new Date();
+    date.setUTCHours(date.getUTCHours() - 5); //daylight savings 5, else 6
     date.setDate(date.getDate());
     let newISODate = date.toISOString();
     let todaysDate = newISODate.split('T')[0];
