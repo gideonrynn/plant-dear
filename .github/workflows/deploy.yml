@@ -4,7 +4,7 @@ name: Deploy to Heroku
 on:
   # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    branches: [ development, main ]
+    branches: [ development, main, gha-to-deploy, gha-deploy-heroku ]
 
   workflow_dispatch:
     inputs:
@@ -62,6 +62,11 @@ jobs:
             echo "::set-output name=set-env::false"
             echo "::set-output name=deploy-ok::true"
             ;;
+          gha-to-deploy) 
+          echo "Setting environment to gha-deploy-heroku"
+          echo "::set-output name=set-env::gha-deploy-heroku"
+          echo "::set-output name=deploy-ok::true"
+          ;;
           *) echo "Branch does not match any existing environments"
              echo "::set-output name=deploy-ok::false"
              ;;
@@ -91,8 +96,15 @@ jobs:
           echo "The name of the event that triggered the workflow: $GITHUB_EVENT_NAME"
      
       # Runs a single command using the runners shell
-      - name: Give me the input if it exists
-        run: echo ${{ github.event.inputs.location }}
+      #- name: Give me the input if it exists
+       # run: echo ${{ github.event.inputs.location }}
         
-      - name: Give me the environment 
-        run: echo "Environment is ${{ needs.set-environment.outputs.environment }}"
+      #- name: Give me the environment 
+      #  run: echo "Environment is ${{ needs.set-environment.outputs.environment }}"
+
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          procfile: "web:node server.js"
