@@ -1,0 +1,98 @@
+name: Deploy to Heroku
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ development, main ]
+
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - update
+        - note
+      branch:
+        description: 'Branch'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+        - main
+        - development
+
+# Set up jobs that can run sequentially or in parallel
+jobs:
+
+  # set environment since the only one that should trigger a deployment is main with secret
+  set-environment:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.set-env.outputs.set-env }}
+      initiate-deploy: ${{ steps.set-env.outputs.deploy-ok }}
+      
+    steps:
+      # use bash (default) script to check branch that triggered wf and set environment for secrets access
+      # alternatively also use github-script action: https://github.com/marketplace/actions/github-script
+      # https://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php#nested
+      # https://phoenixnap.com/kb/bash-if-statement#:~:text=What%20is%20the%20Bash%20if%20Statement%3F&text=Bash%20scripts%20help%20automate%20tasks,making%20process%20during%20a%20program.
+      - name: Set environment on branch
+        id: set-env
+        run: |
+          echo "Branch that triggered the workflow run: $GITHUB_REF_NAME"
+          echo "Event that triggered the workflow run: $GITHUB_EVENT_NAME"
+          
+          case "$GITHUB_REF_NAME" in
+          develop) 
+            echo "Setting environment to develop"
+            echo "::set-output name=set-env::develop"
+            echo "::set-output name=deploy-ok::false"
+            ;;
+          main) 
+            echo "Setting environment to main"
+            echo "::set-output name=set-env::main"
+            echo "::set-output name=deploy-ok::true"
+            ;;
+          production) 
+            echo "Setting environment to production"
+            echo "::set-output name=set-env::false"
+            echo "::set-output name=deploy-ok::true"
+            ;;
+          *) echo "Branch does not match any existing environments"
+             echo "::set-output name=deploy-ok::false"
+             ;;
+           esac
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: set-environment
+
+    # more on environments: https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment
+    if: needs.set-environment.outputs.initiate-deploy == 'true'
+    environment: ${{ needs.set-environment.outputs.environment }}
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a set of commands using the runners shell
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables
+      # https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
+      - name: Tell me what triggered this workflow run
+        run: |
+          echo "The branch or tag name that triggered the workflow run: $GITHUB_REF"
+          echo "The branch or tag name that triggered the workflow run: $GITHUB_REF_NAME"
+          echo "Other was to access branch name is ${{ github.ref_name}}"
+          echo "The name of the event that triggered the workflow: $GITHUB_EVENT_NAME"
+     
+      # Runs a single command using the runners shell
+      - name: Give me the input if it exists
+        run: echo ${{ github.event.inputs.location }}
+        
+      - name: Give me the environment 
+        run: echo "Environment is ${{ needs.set-environment.outputs.environment }}"
