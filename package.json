@@ -19,12 +19,12 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "if-env": "^1.0.4",
-    "moment": "^2.29.2",
-    "mongoose": "^6.2.9"
+    "moment": "^2.29.3",
+    "mongoose": "^6.4.2"
   },
   "devDependencies": {
     "concurrently": "^7.1.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.18"
   },
   "repository": {
     "type": "git",
