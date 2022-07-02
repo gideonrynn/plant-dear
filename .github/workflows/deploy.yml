@@ -2,9 +2,8 @@ name: Deploy to Heroku
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    branches: [ development, main ]
+    branches: [ main ]
 
   workflow_dispatch:
     inputs:
@@ -47,19 +46,14 @@ jobs:
           echo "Event that triggered the workflow run: $GITHUB_EVENT_NAME"
           
           case "$GITHUB_REF_NAME" in
-          develop) 
-            echo "Setting environment to develop"
-            echo "::set-output name=set-env::develop"
+          development) 
+            echo "Setting environment to development"
+            echo "::set-output name=set-env::development"
             echo "::set-output name=deploy-ok::false"
             ;;
           main) 
             echo "Setting environment to main"
             echo "::set-output name=set-env::main"
-            echo "::set-output name=deploy-ok::true"
-            ;;
-          production) 
-            echo "Setting environment to production"
-            echo "::set-output name=set-env::false"
             echo "::set-output name=deploy-ok::true"
             ;;
           *) echo "Branch does not match any existing environments"
@@ -89,10 +83,10 @@ jobs:
           echo "The branch or tag name that triggered the workflow run: $GITHUB_REF_NAME"
           echo "Other was to access branch name is ${{ github.ref_name}}"
           echo "The name of the event that triggered the workflow: $GITHUB_EVENT_NAME"
-     
-      # Runs a single command using the runners shell
-      - name: Give me the input if it exists
-        run: echo ${{ github.event.inputs.location }}
-        
-      - name: Give me the environment 
-        run: echo "Environment is ${{ needs.set-environment.outputs.environment }}"
+
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          procfile: "web:node server.js"
