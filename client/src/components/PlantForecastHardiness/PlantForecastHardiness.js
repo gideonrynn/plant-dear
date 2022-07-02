@@ -104,7 +104,7 @@ const PlantForecastHardiness = (data) => {
                         
                     </div>
 
-                <header className="forecast-wintersafe-header"><h2>Maybe Winter Safe</h2></header>
+                <header className="forecast-wintersafe-header"><h2>Winter Safe</h2></header>
                 <div className="winter-safe-maybe">
                     {outdoorWinterSafeMaybe.map(plants => (
                             <div key={plants._id}>
