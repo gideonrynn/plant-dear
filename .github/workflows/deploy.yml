@@ -48,7 +48,7 @@ jobs:
           case "$GITHUB_REF_NAME" in
           development) 
             echo "Setting environment to development"
-            echo "::set-output name=set-env::develop"
+            echo "::set-output name=set-env::development"
             echo "::set-output name=deploy-ok::false"
             ;;
           main) 
