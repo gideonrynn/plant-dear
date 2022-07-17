@@ -32,7 +32,7 @@ export function getDifference(waterDate, comparisonDate = date) {
     let differenceInDays = "";
 
     if(comparisonDate && waterDate) {
-        console.log(comparisonDate);
+        // console.log(comparisonDate);
         let dateDifference = comparisonDate.getTime() - parseWaterDate(waterDate).getTime();
         differenceInDays = Math.floor(dateDifference / oneDay);
         // console.log("differenceInDays is: ", differenceInDays);
@@ -58,6 +58,7 @@ export function getLocalDate(date) {
     if (date.getTimezoneOffset > 0 && isDST(date)) {
         date.setUTCHours(date.getUTCHours() - 5);
         date.setDate(date.getDate());
+        
     } else if (date.getTimezoneOffset > 0 && !isDST(date)) {
         date.setUTCHours(date.getUTCHours() - 6);
         date.setDate(date.getDate());
@@ -66,3 +67,36 @@ export function getLocalDate(date) {
     return date;
 
 } 
+
+
+export function getDayOfTheWeek(dayAsNumber) {
+
+    let yourDayofWeek = "";
+
+    switch (dayAsNumber) {
+        case 0:
+            yourDayofWeek = "Sunday";
+            break;
+        case 1:
+            yourDayofWeek = "Monday";
+            break;
+        case 2:
+            yourDayofWeek = "Tuesday";
+            break;
+        case 3:
+            yourDayofWeek = "Wednesday";
+            break;
+        case 4:
+            yourDayofWeek = "Thursday";
+            break;
+        case 5:
+            yourDayofWeek = "Friday";
+            break;
+        case 6:
+            yourDayofWeek = "Saturday";
+            break;
+        default:
+            yourDayofWeek = "None";
+        }
+        return yourDayofWeek;
+}
