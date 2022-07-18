@@ -154,32 +154,23 @@ const PlantPlanningBlock = (data) => {
 
         indoor.forEach(plant => {
 
-            if(plant.lastWatered && plant.lastWatered.length > 1) {
+            if(plant.waterAdHoc || (plant.lastWatered && plant.lastWatered.length > 1)) {
 
                 //get the number of days since it was lastWatered
                 let daysAgo = getDifference(plant.lastWatered[plant.lastWatered.length - 1]);
                 let waterRate = plant.waterRate;
-                console.log("Watered this number of days ago: ", daysAgo);
+                console.log(plant.name + " watered this number of days ago: ", daysAgo);
                 plant["daysAgo"] = daysAgo;
-                // let daysAgoComparison = ;
-                // console.log("Watered this number of days ago COMPARISON conversion: ", daysAgoComparison)
-                //get the previous duration of watering the plant
-                //this will need to be updated to the last good duration for having watered the plant
-                //convert the lastWatered date you want to look at 
-                //
-                // plants.lastWatered && plants.lastWatered.length > 1 ? 
-                //() 
-                //- 
-                //Math.round((date.getTime() - new Date(plant.lastWatered[plant.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"
+
                 let lastDuration = getDifference(plant.lastWatered[plant.lastWatered.length - 2]) - getDifference(plant.lastWatered[plant.lastWatered.length - 1]);
                 console.log("Last Duration between waterings: ", lastDuration);
                 plant["duration"] = lastDuration;
 
-                //get the absolute date, as if doesn't matter if the difference is positive or negative
-                // let durationDifference = Math.abs(daysAgo - lastDuration);
-                let durationDifference = daysAgo - waterRate;
+                // if the waterAdHoc date exists to represent a skip date, use that to get the difference, otherwise, calculate between water rate and the last time it was watered
+                let durationDifference = plant.waterAdHoc ? getDifference(plant.waterAdHoc.split('T')[0]) : (daysAgo - waterRate);
+                
                 console.log(plant);
-                plant["difference"] = durationDifference
+                plant["difference"] = durationDifference;
                 console.log(plant);
 
                 if (durationDifference < 0) {
