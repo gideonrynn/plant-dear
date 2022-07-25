@@ -7,6 +7,7 @@ let date = getLocalDate(new Date());
 let oneDay = 1000 * 60 * 60 * 24;
 
 //split the given date into day, month, and year, and output as new date object in string representation of the current date and time
+//Ex/Fri May 27 2022 00:00:00 GMT-0500 (Central Daylight Time)
 export function parseWaterDate(dateToParse) {
 
     let newWaterDate = ""
@@ -25,14 +26,31 @@ export function parseWaterDate(dateToParse) {
 
 }
 
+export function parseToYYYYMMDD(dateToParse) {
+
+    let newDate = "";
+
+    if (dateToParse) {
+
+        let dateToParseYear = dateToParse.getFullYear();
+        let dateToParseMonth = dateToParse.getMonth() + 1;
+        let dateToParseDay = dateToParse.getDate();
+
+        newDate = dateToParseYear + "-" + dateToParseMonth.toString().padStart(2, '0') + "-" + dateToParseDay.toString().padStart(2, '0');
+
+    }
+
+    return newDate;
+}
+
 //get number of milliseconds since epoch (getTime) to compare days in the same format, and determine difference in days
 //default comparison date to current day considering UTC, but can pass in other dates
-export function getDifference(waterDate, comparisonDate = date) {
+export function getDifferenceInDays(waterDate, comparisonDate = date) {
 
     let differenceInDays = "";
 
     if(comparisonDate && waterDate) {
-        console.log(comparisonDate);
+        // console.log(comparisonDate);
         let dateDifference = comparisonDate.getTime() - parseWaterDate(waterDate).getTime();
         differenceInDays = Math.floor(dateDifference / oneDay);
         // console.log("differenceInDays is: ", differenceInDays);
@@ -58,6 +76,7 @@ export function getLocalDate(date) {
     if (date.getTimezoneOffset > 0 && isDST(date)) {
         date.setUTCHours(date.getUTCHours() - 5);
         date.setDate(date.getDate());
+        
     } else if (date.getTimezoneOffset > 0 && !isDST(date)) {
         date.setUTCHours(date.getUTCHours() - 6);
         date.setDate(date.getDate());
@@ -66,3 +85,72 @@ export function getLocalDate(date) {
     return date;
 
 } 
+
+
+export function getLongDayOfTheWeek(dayAsNumber) {
+
+    let yourDayofWeek = "";
+
+    switch (dayAsNumber) {
+        case 0:
+            yourDayofWeek = "Sunday";
+            break;
+        case 1:
+            yourDayofWeek = "Monday";
+            break;
+        case 2:
+            yourDayofWeek = "Tuesday";
+            break;
+        case 3:
+            yourDayofWeek = "Wednesday";
+            break;
+        case 4:
+            yourDayofWeek = "Thursday";
+            break;
+        case 5:
+            yourDayofWeek = "Friday";
+            break;
+        case 6:
+            yourDayofWeek = "Saturday";
+            break;
+        case 7:
+            yourDayofWeek = "Sunday";
+            break;
+        default:
+            yourDayofWeek = "None";
+        }
+        return yourDayofWeek;
+}
+
+
+export function getNumberDayOfWeek(dayAsLongString) {
+
+    let yourDayofWeek = "";
+
+    switch (dayAsLongString) {
+        case "Sunday":
+            yourDayofWeek = 0;
+            break;
+        case "Monday":
+            yourDayofWeek = 1;
+            break;
+        case "Tuesday":
+            yourDayofWeek = 2;
+            break;
+        case "Wednesday":
+            yourDayofWeek = 3;
+            break;
+        case "Thursday":
+            yourDayofWeek = 4;
+            break;
+        case "Friday":
+            yourDayofWeek = 5;
+            break;
+        case "Saturday":
+            yourDayofWeek = 6;
+            break;
+        default:
+            yourDayofWeek = null;
+        }
+        return yourDayofWeek;
+}
