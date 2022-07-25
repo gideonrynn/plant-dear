@@ -324,6 +324,7 @@ function PlantDetails(p) {
             {
                 ids: [id],
                 lastWatered: newDate,
+                waterAdHoc: ""
             })
             .then(res => {
                 console.log("water date updated on plant details page", res)

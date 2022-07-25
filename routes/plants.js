@@ -109,7 +109,8 @@ router.post("/plants/watering", (req, res) => {
         }
       }, 
         {
-          $addToSet: { "lastWatered": req.body.lastWatered}
+          $addToSet: { "lastWatered": req.body.lastWatered},
+          $set: { waterAdHoc: req.body.waterAdHoc }
         }
     )
   .then(updated => {

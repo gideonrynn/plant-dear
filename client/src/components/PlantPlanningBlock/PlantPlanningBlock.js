@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PlantContext } from "../../context/PlantContext"
 import PlantAPI from "../../utils/PlantsAPI"
 // import Plantling from "../../img/plantling.jpg"
-import { getDifference, getLocalDate, getDayOfTheWeek } from "../../utils/DateUtils"
+import { getDifferenceInDays, getLocalDate, getLongDayOfTheWeek, getNumberDayOfWeek, parseToYYYYMMDD } from "../../utils/DateUtils"
 
 import "./PlantPlanningBlock.css";
 
@@ -26,23 +26,32 @@ const PlantPlanningBlock = (data) => {
     const [readyPlants, setReadyPlants] = useState([]);
     const [upcomingPlants, setUpcomingPlants] = useState([]);
     const [laterPlants, setLaterPlants] = useState([]);
+    const [otherPlants, setOtherPlants] = useState([]);
     const [comparison, setComparison] = useState(false);
 
     const [closestScheduleDate, setClosestScheduleDate] = useState([]);
     const [nextScheduleDate, setNextScheduleDate] = useState([]);
+    
+    let sortPairings = {
+        name: "name",
+        location: "locationSec",
+        difference: "difference",
+        daysago: "daysAgo"
+    };
 
     //date variables
     let date = getLocalDate(new Date());
+
     // let newISODate = date.toISOString();
     let todaysDate = date.toISOString().split('T')[0];
-    console.log("This is todays date", todaysDate);
+    let todaysDateParsed = parseToYYYYMMDD(date);
 
 
     const [ids, setIds] = useState([]);
     const [selectedDate, setSelectedDate] = useState("");
 
     console.log("Ready plants", readyPlants);
-    console.log("Plant context on planning block", plantContext)
+    // console.log("Plant context on planning block", plantContext)
 
 
     // Load all plants and store them within setPlants
@@ -59,7 +68,7 @@ const PlantPlanningBlock = (data) => {
         setNewUpdate(firstUpdate);
         console.log("Planning page rerendered, pulling last update from" + newUpdate);
     
-    },[]);
+    },[comparison, readyPlants, closestScheduleDate]);
 
 
     // set indoor plants when useEffect hook triggers and trigger run comparison to get watering duration rate difference values
@@ -67,6 +76,8 @@ const PlantPlanningBlock = (data) => {
 
         if(input) {
         
+            setScheduleDates();
+
             // indoor plants
             let indoor = plantContext.filter(indoor => { 
                 return indoor.location === "indoor"
@@ -75,57 +86,46 @@ const PlantPlanningBlock = (data) => {
             setIndoorPlants(indoor);
             console.log(indoor)
 
-            runComparison(indoor);
-            setScheduleDates();
+            sortAndLoadPlants(indoor);
+            
         }
 
     }
 
-    // sort plants onclick of selected column
-    function sortColumn(input) {
-        // console.log(input.target.title);
+    // sort plants onclick of selected column, check sort settings to get value that should be sorted on
+    function sortByColumn(input) {
+    
         let columnTitle = input.target.title;
+        let sortValue = sortPairings[columnTitle];
         let sortedReadyPlants = "";
-        // console.log(readyPlants);
-        if(columnTitle === "name") {
+
+        if(columnTitle in sortPairings) {
             sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.name < b.name) return -1;
-                if (a.name > b.name) return 1;
+                if (a[sortValue] < b[sortValue]) return -1;
+                if (a[sortValue] > b[sortValue]) return 1;
                 return 0;
             })
         }
-        if(columnTitle === "location") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.locationSec < b.locationSec) return -1;
-                if (a.locationSec > b.locationSec) return 1;
-                return 0;
-            })
-        }
-        if(columnTitle === "difference") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.difference < b.difference) return -1;
-                if (a.difference > b.difference) return 1;
-                return 0;
-            })
-        }
-        if(columnTitle === "daysago") {
-            sortedReadyPlants = readyPlants.sort((a,b) => {
-                if (a.daysAgo < b.daysAgo) return -1;
-                if (a.daysAgo > b.daysAgo) return 1;
-                return 0;
-            })
-        }
-        // console.log(sortedReadyPlants);
 
         setReadyPlants([...sortedReadyPlants]);
 
     };
 
+    function sortedPlants(area) {
+   
+        return area.sort((a,b) => {
+             if (a.locationSec < b.locationSec) return -1; 
+             if (a.locationSec > b.locationSec) return 1; 
+             if (a.difference > b.difference) return -1; //b before a
+             if (a.difference < b.difference) return 1; //a before b
+             
+             return 0; //or leave unchanged
+         })
+     }
+
       
     function handleClick(event, id) {
-        // console.log("clicked", event.target.id);
-        
-        // console.log(id);
+   
         navigate("/plantdetails",
             { state: { detail: event.target.id }});
     }
@@ -155,96 +155,76 @@ const PlantPlanningBlock = (data) => {
         //right now this is assuming that there are only two schedule days for water
         let nextScheduleDate = scheduleDays.find(element => element !== closestScheduleDate);
  
-        setClosestScheduleDate(getDayOfTheWeek(closestScheduleDate));
-        setNextScheduleDate(getDayOfTheWeek(nextScheduleDate));
+        setClosestScheduleDate(getLongDayOfTheWeek(closestScheduleDate));
+        setNextScheduleDate(getLongDayOfTheWeek(nextScheduleDate));
     }
 
 
-    // get difference between time last watered, and duration since previous water date
-    // set resulting plants to ready for watering, upcoming, or other
-    // other is important because it is capturing plants that do not have a duration to compare yet
-    function runComparison(indoor) {
-        //need to do a date comparison to get an understanding of what needs to be watered
-        //get the value of the last watered (ex/5 days) - later we want to get this where we've signed off the duration is OK
-        //will need a loop to go through the plants by date
-        console.log("runComparison function is running");
+    /* get difference between time last watered, and duration since previous water date
+        set each plant to ready for watering, upcoming, later or other
+        other is important because it is capturing plants that do not have a duration to compare yet, so they fall off the schedule */
+
+    function sortAndLoadPlants(indoor) {
 
         let ready = [];
         let upcoming = [];
         let later = [];
-        let sortedReady = [];
-        let sortedUpcoming = [];
-        let sortedLater = [];
+        let other = [];
 
         indoor.forEach(plant => {
 
+            // as we need to sort by the watering date, confirm a date of some kind exists
             if(plant.waterAdHoc || (plant.lastWatered && plant.lastWatered.length > 1)) {
 
-                //get the number of days since it was lastWatered
-                let daysAgo = getDifference(plant.lastWatered[plant.lastWatered.length - 1]);
-                let waterRate = plant.waterRate;
-                console.log(plant.name + " watered this number of days ago: ", daysAgo);
-                plant["daysAgo"] = daysAgo;
+                // get the number of days since it was lastWatered   
+                plant["daysAgo"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
+      
+                // get number of days between the lastWatered date and the previous lastWatered date
+                plant["duration"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 2]) - getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
 
-                let lastDuration = getDifference(plant.lastWatered[plant.lastWatered.length - 2]) - getDifference(plant.lastWatered[plant.lastWatered.length - 1]);
-                console.log("Last Duration between waterings: ", lastDuration);
-                plant["duration"] = lastDuration;
+                // if the waterAdHoc date exists to represent a "skip to" date, use that to get the difference, otherwise, calculate between water rate and the last time it was watered
+                plant["difference"] = plant.waterAdHoc ? getDifferenceInDays(plant.waterAdHoc.split('T')[0]) : (plant.daysAgo - plant.waterRate);
 
-                // if the waterAdHoc date exists to represent a skip date, use that to get the difference, otherwise, calculate between water rate and the last time it was watered
-                let durationDifference = plant.waterAdHoc ? getDifference(plant.waterAdHoc.split('T')[0]) : (daysAgo - waterRate);
-                
-                console.log(plant);
-                plant["difference"] = durationDifference;
-                console.log(plant);
+                let durationDifference = plant.difference;
 
+                if(closestScheduleDate && nextScheduleDate) {
+                    //get the difference between today and the next scheduled date
 
-                if (durationDifference >= -2 ) {
-                    ready.push(plant);
-                } else if (durationDifference < -2 && durationDifference > -7) {
-                    upcoming.push(plant);
-                } else if (durationDifference < -7 && durationDifference !== "") {
-                    later.push(plant);
+                    let todaysDayAsNumber = date.getDay();
+                    console.log("Todays day as number", todaysDayAsNumber)
+                    let closestDayAsNumber = getNumberDayOfWeek(closestScheduleDate);
+                    let nextDayAsNumber = getNumberDayOfWeek(nextScheduleDate);
+
+                    //get the next day of the week that is one day before the next scheduled date
+                    let dayBeforeScheduled = todaysDayAsNumber !== closestDayAsNumber ? (closestDayAsNumber - 1) : (nextDayAsNumber - 1);
+                    let differenceUntilPreSchedule = todaysDayAsNumber - dayBeforeScheduled;
+
+                    //calculate number of days until watering and push plants
+                    //using 7 as cap because with regular schedule, 7 generally fits as timeframe following next watering date
+                    if (durationDifference >= differenceUntilPreSchedule ) {
+                        ready.push(plant);
+                    } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -7) {
+                        upcoming.push(plant);
+                    } else if (durationDifference < -7 && durationDifference !== "") {
+                        later.push(plant);
+                    }
+
                 }
-
-
-                console.log(plant.name + " difference between last watered and duration is: " + durationDifference);
+                
 
             } else {
-                later.push(plant);
+
+                other.push(plant);
+
             }
-            sortedReady = ready.sort((a,b) => {
-                if (a.locationSec < b.locationSec) return -1; 
-                if (a.locationSec > b.locationSec) return 1; 
-                if (a.difference > b.difference) return -1; //b before a
-                if (a.difference < b.difference) return 1; //a before b
-                
-                return 0; //leave unchanged
-            })
-            sortedUpcoming = upcoming.sort((a,b) => {
-                if (a.locationSec < b.locationSec) return -1; 
-                if (a.locationSec > b.locationSec) return 1; 
-                if (a.difference > b.difference) return -1;
-                if (a.difference < b.difference) return 1;
-                return 0;
-            })
-            sortedLater = later.sort((a,b) => {
-                if (a.difference > b.difference) return -1;
-                if (a.difference < b.difference) return 1;
-                if (a.locationSec < b.locationSec) return -1; 
-                if (a.locationSec > b.locationSec) return 1; 
-                return 0;
-            })
+            
         })
-
-
-        console.log("runComparison has completed it's run");
-        setUpcomingPlants(sortedUpcoming);
-        setReadyPlants(sortedReady);
-        setLaterPlants(sortedLater);
+        
+        setReadyPlants(sortedPlants(ready));
+        setUpcomingPlants(sortedPlants(upcoming));
+        setLaterPlants(sortedPlants(later));
+        setOtherPlants(sortedPlants(other));
         setComparison(true);
-
-        //if the last watered is greater than the last duration, display that in the last as past due
-        //if the last watered hasn't passed yet, display that in the upcoming section
 
     }
 
@@ -274,6 +254,7 @@ const PlantPlanningBlock = (data) => {
             {
                 ids: ids,
                 lastWatered: wateredDate,
+                waterAdHoc: ""
             })
             .then((ids) => {
 
@@ -289,15 +270,10 @@ const PlantPlanningBlock = (data) => {
                 updateReadyPlants();
             })
             .catch(err => console.log(err))
-
-        // console.log(newDate);
-        // console.log(selectedDate);
-        // console.log(ids);
         
     }
 
-    // need function that will add lastwatered to object within the page
-    // when navigating to another page, the context will update, because this change updates the db
+
     function updateReadyPlants() {
 
         let newReadyPlants = readyPlants.filter(i => !ids.includes(i._id));
@@ -310,19 +286,6 @@ const PlantPlanningBlock = (data) => {
 
     return (
         <div className="">
-            
-
-            {/* <input 
-                type="text"
-                style={
-                    {width:"350px",
-                    background:"#F2F1F9", 
-                    padding:"10px"}}
-                placeholder={"search plants"}
-                onChange={(event) => {
-                    sortPlants(event.target.value)
-                    }}
-            /> */}
 
             <h1>Ready for Watering</h1>
             <h2>Last Updated {date.toString().split('G')[0].trim()} </h2>
@@ -332,7 +295,7 @@ const PlantPlanningBlock = (data) => {
                     plants={readyPlants}
                 /> */}
 
-                <h3>As of Today: {readyPlants.length}</h3>
+                <h3>As of Today for Watering by {closestScheduleDate.toLocaleString('default', {weekday: 'long'})}: {readyPlants.length}</h3>
 
                     <div className="by-duration">
                         <div className="by-duration-plants">
@@ -342,12 +305,12 @@ const PlantPlanningBlock = (data) => {
                             <thead className="watering-col-header">
                                 <tr className="watering-col-header">
                                     <th className="watering-col-header">Watered</th>
-                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortColumn}>Name<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortColumn}>Location<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Preferred Water</th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Water Rate</th>
-                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
+                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
                                     
@@ -360,7 +323,7 @@ const PlantPlanningBlock = (data) => {
 
                                 {readyPlants.map(plants => (
                                     <tr key={plants._id}>
-                                        <th  className="watering-details">
+                                        <th className="watering-details">
                                             <input 
                                                 type="checkbox" 
                                                 name="today"
@@ -383,17 +346,17 @@ const PlantPlanningBlock = (data) => {
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}> 
-                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifference(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
                                         </th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifference(plants.lastWatered[plants.lastWatered.length - 2]) - getDifference(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         <th
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifference(plants.lastWatered[plants.lastWatered.length - 3]) - getDifference(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         
 
@@ -410,7 +373,7 @@ const PlantPlanningBlock = (data) => {
                                 <input
                                     type="date"
                                     name="lastWatered"
-                                    defaultValue={todaysDate}
+                                    defaultValue={todaysDateParsed}
                                     className="plant-details-selected-date"
                                     onChange={(e) => setSelectedDate(e.target.value)}/>
                             </div>
@@ -427,12 +390,12 @@ const PlantPlanningBlock = (data) => {
                             <thead className="watering-col-header">
                                 <tr className="watering-col-header">
                                     <th className="watering-col-header">Watered</th>
-                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortColumn}>Name<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortColumn}>Location<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Preferred Water</th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Water Rate</th>
-                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
+                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
                                     
@@ -468,17 +431,17 @@ const PlantPlanningBlock = (data) => {
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}> 
-                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifference(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
                                         </th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifference(plants.lastWatered[plants.lastWatered.length - 2]) - getDifference(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         <th
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifference(plants.lastWatered[plants.lastWatered.length - 3]) - getDifference(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         
 
@@ -495,7 +458,7 @@ const PlantPlanningBlock = (data) => {
                                 <input
                                     type="date"
                                     name="lastWatered"
-                                    defaultValue={todaysDate}
+                                    defaultValue={todaysDateParsed}
                                     className="plant-details-selected-date"
                                     onChange={(e) => setSelectedDate(e.target.value)}/>
                             </div>
@@ -512,12 +475,12 @@ const PlantPlanningBlock = (data) => {
                             <thead className="watering-col-header">
                                 <tr className="watering-col-header">
                                     <th className="watering-col-header">Watered</th>
-                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortColumn}>Name<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortColumn}>Location<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Preferred Water</th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortColumn}>Water Rate</th>
-                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
+                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
+                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
                                     
@@ -553,17 +516,17 @@ const PlantPlanningBlock = (data) => {
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}> 
-                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifference(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
                                         </th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifference(plants.lastWatered[plants.lastWatered.length - 2]) - getDifference(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         <th
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifference(plants.lastWatered[plants.lastWatered.length - 3]) - getDifference(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         
 
@@ -580,7 +543,7 @@ const PlantPlanningBlock = (data) => {
                                 <input
                                     type="date"
                                     name="lastWatered"
-                                    defaultValue={todaysDate}
+                                    defaultValue={todaysDateParsed}
                                     className="plant-details-selected-date"
                                     onChange={(e) => setSelectedDate(e.target.value)}/>
                             </div>
@@ -588,6 +551,93 @@ const PlantPlanningBlock = (data) => {
             
                         </div>
                     </div>
+
+                    
+                    <h1>Other</h1>
+       
+                <div className="by-duration-plants">
+
+                    <table className="watering-table">
+
+                    <thead className="watering-col-header">
+                        <tr className="watering-col-header">
+                            <th className="watering-col-header">Watered</th>
+                            <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
+                            <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
+                            <th className="watering-col-header">Preferred Water</th>
+                            <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
+                            <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
+                            <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
+                            <th className="watering-col-header">Last Duration</th>
+                            <th className="watering-col-header">Previous Duration</th>
+                            
+
+                        </tr>
+                    </thead>
+
+
+                    <tbody className="watering-details">
+
+                        {otherPlants.map(plants => (
+                            <tr key={plants._id}>
+                                <th  className="watering-details">
+                                    <input 
+                                        type="checkbox" 
+                                        name="today"
+                                        id={plants._id} 
+                                        // defaultChecked={false}
+                                        // checked={checkedVal}
+                                        onChange={handleInputChange}/>
+                                </th>
+                                <th 
+                                    className="plant-table-row watering-details"
+                                    
+                                    id={plants._id} 
+                                    onClick={handleClick}>
+                                        {plants.name}
+                                </th>
+                                <th className="watering-details">{plants.locationSec}</th>
+                                <th className="watering-details">{plants.waterPref}</th>
+                                <th className="watering-details">{plants.difference}</th>
+                                <th className="watering-details">{plants.waterRate}</th>
+                                <th 
+                                    className="water-metrics watering-details" 
+                                    id={plants._id}> 
+                                        {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
+                                </th>
+                                <th 
+                                    className="water-metrics watering-details" 
+                                    id={plants._id}>
+                                        {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                </th>
+                                <th
+                                    className="water-metrics watering-details" 
+                                    id={plants._id}>
+                                        {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                </th>
+                                
+
+                            </tr>
+                        ))}
+                        
+                                    
+                        
+                    </tbody>
+                    </table>
+                    <div>
+                    <span className="plant-details-label">Select Date </span>
+                    
+                        <input
+                            type="date"
+                            name="lastWatered"
+                            defaultValue={todaysDateParsed}
+                            className="plant-details-selected-date"
+                            onChange={(e) => setSelectedDate(e.target.value)}/>
+                    </div>
+                    <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
+
+                </div>
+            
 
             {/* <h1>Upcoming</h1>
                 <PlantBlock 
