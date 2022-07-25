@@ -244,6 +244,7 @@ function PlantDetails(p) {
             hardinessZoneMax: modPlant.hardinessZoneMax,
             lastPotted: modPlant.lastPotted,
             lastWatered: modPlant.lastWatered,
+            waterAdHoc: modPlant.waterAdHoc,
             waterRate: modPlant.waterRate,
             checkRate: modPlant.checkRate,
             propogating: modPlant.propogating,
@@ -323,6 +324,7 @@ function PlantDetails(p) {
             {
                 ids: [id],
                 lastWatered: newDate,
+                waterAdHoc: ""
             })
             .then(res => {
                 console.log("water date updated on plant details page", res)
@@ -924,6 +926,16 @@ function PlantDetails(p) {
                                                 name="lastWatered"
                                                 className="plant-details-specific"
                                                 onChange={handleInputChange}/>
+                                        </div>
+                                        <div className="plant-details-group">
+                                            <p className="plant-details-comment">Next Water Date</p>
+                                            <input 
+                                                type="date"
+                                                name="waterAdHoc"
+                                                className="plant-details-specific"
+                                                defaultValue={thisPlant.waterAdHoc ? thisPlant.waterAdHoc.split('T')[0] : null}
+                                                onChange={handleInputChange}
+                                            />
                                         </div>
                                         <p><b>All watering dates</b></p>
                                             <div className="">
