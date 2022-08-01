@@ -8,7 +8,7 @@
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.2.1",
     "axios": "^0.27.2",
-    "bootstrap": "^5.1.3",
+    "bootstrap": "^5.2.0",
     "grommet": "^2.25.0",
     "grommet-icons": "^4.7.0",
     "react": "^17.0.2",
