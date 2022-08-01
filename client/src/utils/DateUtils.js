@@ -26,6 +26,7 @@ export function parseWaterDate(dateToParse) {
 
 }
 
+//possibly modify to take in an order type and the date to parse
 export function parseToYYYYMMDD(dateToParse) {
 
     let newDate = "";
