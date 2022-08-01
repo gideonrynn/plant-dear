@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { PlantContext } from "../../context/PlantContext"
 import PlantAPI from "../../utils/PlantsAPI"
 // import Plantling from "../../img/plantling.jpg"
-import { getDifferenceInDays, getLocalDate, getLongDayOfTheWeek, getNumberDayOfWeek, parseToYYYYMMDD } from "../../utils/DateUtils"
+import { 
+        // date, 
+        getDifferenceInDays, 
+        getLocalDate, 
+        getLongDayOfTheWeek, 
+        getNumberDayOfWeek, 
+        parseToYYYYMMDD } from "../../utils/DateUtils"
 
 import "./PlantPlanningBlock.css";
 
@@ -29,9 +35,10 @@ const PlantPlanningBlock = (data) => {
     const [otherPlants, setOtherPlants] = useState([]);
     const [comparison, setComparison] = useState(false);
 
-    const [closestScheduleDate, setClosestScheduleDate] = useState([]);
-    const [nextScheduleDate, setNextScheduleDate] = useState([]);
-    
+    const [closestScheduleDay, setClosestScheduleDay] = useState("");
+    const [nextScheduleDay, setNextScheduleDay] = useState("");
+    const [differenceUntilPreSchedule, setDifferenceUntilPreSchedule] = useState("");
+
     let sortPairings = {
         name: "name",
         location: "locationSec",
@@ -57,7 +64,9 @@ const PlantPlanningBlock = (data) => {
     // Load all plants and store them within setPlants
     useEffect(() => {
 
-        if(plantContext.length > 0) {
+        setScheduleDates();
+
+        if(plantContext.length > 0 && closestScheduleDay >= 0 & nextScheduleDay >= 0) {
             console.log("plant context length is greater than zero")
             sortPlants(plantContext);
         } else {
@@ -68,17 +77,15 @@ const PlantPlanningBlock = (data) => {
         setNewUpdate(firstUpdate);
         console.log("Planning page rerendered, pulling last update from" + newUpdate);
     
-    },[comparison, readyPlants, closestScheduleDate]);
+    },[closestScheduleDay, nextScheduleDay]);
 
 
     // set indoor plants when useEffect hook triggers and trigger run comparison to get watering duration rate difference values
     function sortPlants(input) {
 
         if(input) {
-        
-            setScheduleDates();
 
-            // indoor plants
+            // indoor plants for now, need to allow planning by outdoor
             let indoor = plantContext.filter(indoor => { 
                 return indoor.location === "indoor"
             });
@@ -92,6 +99,7 @@ const PlantPlanningBlock = (data) => {
 
     }
 
+    // reuseable
     // sort plants onclick of selected column, check sort settings to get value that should be sorted on
     function sortByColumn(input) {
     
@@ -107,10 +115,12 @@ const PlantPlanningBlock = (data) => {
             })
         }
 
-        setReadyPlants([...sortedReadyPlants]);
+        //I was previously spreading the sortedReadyPlants, think of why
+        setReadyPlants(sortedReadyPlants);
 
     };
 
+    //reuseable if can pass in field, which I did in sortByColumn. combine into sort function with sort by column
     function sortedPlants(area) {
    
         return area.sort((a,b) => {
@@ -123,17 +133,18 @@ const PlantPlanningBlock = (data) => {
          })
      }
 
-      
+    //reuseable
     function handleClick(event, id) {
    
         navigate("/plantdetails",
             { state: { detail: event.target.id }});
     }
 
+    //reuseable
     function handleInputChange(event) {
 
-        let fielddefaultValue = event.target.id
-        let fieldCheckedValue = event.target.checked
+        let fielddefaultValue = event.target.id;
+        let fieldCheckedValue = event.target.checked;
         
         if (fieldCheckedValue === true) {
             setIds([...ids, fielddefaultValue]);
@@ -141,22 +152,53 @@ const PlantPlanningBlock = (data) => {
 
     };
 
+    //specific to planning
     function setScheduleDates() {
         //get closest watering date
+        //at some point will want to take the schedule dates and ensure they are sorted in order
         //Sunday (0), Wednesday (3)
         let scheduleDays = [0, 3];
+        let tempArray = [];
+        let nextTwoWeeks = [];
         let dayOfWeek = date.getDay();
-        let thisDay = "";
-        //https://thewebdev.info/2021/04/18/how-to-get-the-closest-number-to-a-number-out-of-a-javascript-array/#site-header
-        let closestScheduleDate = scheduleDays.reduce((prev, curr) => {
-            return (Math.abs(curr - dayOfWeek) < Math.abs(prev - dayOfWeek) ? curr : prev);
-            });
+        let closestScheduleDay = "";
+        let nextScheduleDay = "";
+
+        for (let i = 0; i < 14; i++) {
+            let tempDate = getLocalDate(new Date());
+            let updatedTempDate = tempDate.setDate(tempDate.getDate() + parseInt([i]));
+            tempArray.push(updatedTempDate);
+
+            //convert back to date object so the day of the week as a number can be obtained
+            let potentialScheduleDate = new Date(updatedTempDate).getDay();
+            if (closestScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
+                closestScheduleDay = potentialScheduleDate;
+                //go to the next iteration once this value has been retrieved
+                continue;
+            }
+            if (closestScheduleDay !== "" && nextScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
+                nextScheduleDay = potentialScheduleDate;
+                console.log(nextScheduleDay, "assigned as it's in the schedule days array");
+                //don't break the loop yet, down the road want to do more with the dates in this array
+            }
+        }
+
+        console.log("The next two weeks from today", tempArray);
         
-        //right now this is assuming that there are only two schedule days for water
-        let nextScheduleDate = scheduleDays.find(element => element !== closestScheduleDate);
+
+        //I want to see what plants will be scheduled on the next watering dates
+        //to do that, I need to calculate the day BEFORE the SECOND watering date
+        let dayBeforeScheduled = nextScheduleDay === 0 ? 6 : nextScheduleDay - 1;
+        let differenceUntilPreSchedule = (dayOfWeek - dayBeforeScheduled);
+        console.log("Difference until schedule = ", differenceUntilPreSchedule);
  
-        setClosestScheduleDate(getLongDayOfTheWeek(closestScheduleDate));
-        setNextScheduleDate(getLongDayOfTheWeek(nextScheduleDate));
+        setClosestScheduleDay(closestScheduleDay);
+        setNextScheduleDay(nextScheduleDay);
+        setDifferenceUntilPreSchedule(differenceUntilPreSchedule);
+
+        console.log("The closest schedule date and the nextScheduleDate in sequence", closestScheduleDay, nextScheduleDay);
+
+        return closestScheduleDay !== "" && nextScheduleDay !== "" ? true : false;
     }
 
 
@@ -171,54 +213,44 @@ const PlantPlanningBlock = (data) => {
         let later = [];
         let other = [];
 
-        indoor.forEach(plant => {
+            indoor.forEach(plant => {
 
-            // as we need to sort by the watering date, confirm a date of some kind exists
-            if(plant.waterAdHoc || (plant.lastWatered && plant.lastWatered.length > 1)) {
+                // as we need to sort by the watering date, confirm a date of some kind exists
+                if((plant.waterAdHoc || (plant.lastWatered && plant.lastWatered.length > 1))) {
 
-                // get the number of days since it was lastWatered   
-                plant["daysAgo"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
-      
-                // get number of days between the lastWatered date and the previous lastWatered date
-                plant["duration"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 2]) - getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
+                    // get the number of days since it was lastWatered   
+                    plant["daysAgo"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
+        
+                    // get number of days between the lastWatered date and the previous lastWatered date
+                    plant["duration"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 2]) - getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
 
-                // if the waterAdHoc date exists to represent a "skip to" date, use that to get the difference, otherwise, calculate between water rate and the last time it was watered
-                plant["difference"] = plant.waterAdHoc ? getDifferenceInDays(plant.waterAdHoc.split('T')[0]) : (plant.daysAgo - plant.waterRate);
+                    // if the waterAdHoc date exists to represent a "skip to" date, use that to get the difference, otherwise, calculate between water rate and the last time it was watered
+                    plant["difference"] = plant.waterAdHoc ? getDifferenceInDays(plant.waterAdHoc.split('T')[0]) : (plant.daysAgo - plant.waterRate);
 
-                let durationDifference = plant.difference;
+                    let durationDifference = plant.difference;
+                        
 
-                if(closestScheduleDate && nextScheduleDate) {
-                    //get the difference between today and the next scheduled date
-
-                    let todaysDayAsNumber = date.getDay();
-                    console.log("Todays day as number", todaysDayAsNumber)
-                    let closestDayAsNumber = getNumberDayOfWeek(closestScheduleDate);
-                    let nextDayAsNumber = getNumberDayOfWeek(nextScheduleDate);
-
-                    //get the next day of the week that is one day before the next scheduled date
-                    let dayBeforeScheduled = todaysDayAsNumber !== closestDayAsNumber ? (closestDayAsNumber - 1) : (nextDayAsNumber - 1);
-                    let differenceUntilPreSchedule = todaysDayAsNumber - dayBeforeScheduled;
+                    console.log("The closest schedule date and the nextScheduleDate in sequence Three", closestScheduleDay, nextScheduleDay);
+                    //get the next day AS A NUMBER of the week that is one day before the next scheduled date
 
                     //calculate number of days until watering and push plants
-                    //using 7 as cap because with regular schedule, 7 generally fits as timeframe following next watering date
+                    //using 7 as cap because with regular schedule, 7 generally fits as timeframe following next watering date. but will need to update this after I begin tracking more than closest and next dates, as this would need the next schedule date after that
                     if (durationDifference >= differenceUntilPreSchedule ) {
                         ready.push(plant);
-                    } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -7) {
+                    } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -9) {
                         upcoming.push(plant);
                     } else if (durationDifference < -7 && durationDifference !== "") {
                         later.push(plant);
                     }
+                    
+
+                } else {
+
+                    other.push(plant);
 
                 }
                 
-
-            } else {
-
-                other.push(plant);
-
-            }
-            
-        })
+            })
         
         setReadyPlants(sortedPlants(ready));
         setUpcomingPlants(sortedPlants(upcoming));
@@ -236,6 +268,7 @@ const PlantPlanningBlock = (data) => {
     }
 
 
+    //reuseable
     function updateWaterDate() {
 
         let wateredDate = "";
@@ -283,19 +316,19 @@ const PlantPlanningBlock = (data) => {
     }
 
     
-
+    //boil down to one component, reuseable
     return (
         <div className="">
 
             <h1>Ready for Watering</h1>
             <h2>Last Updated {date.toString().split('G')[0].trim()} </h2>
-            {comparison ?
+            {comparison && closestScheduleDay >= 0 && nextScheduleDay >= 0 ?
             <>
                 {/* <PlantBlock 
                     plants={readyPlants}
                 /> */}
 
-                <h3>As of Today for Watering by {closestScheduleDate.toLocaleString('default', {weekday: 'long'})}: {readyPlants.length}</h3>
+                <h3>As of Today for Watering by {getLongDayOfTheWeek(closestScheduleDay)}: {readyPlants.length}</h3>
 
                     <div className="by-duration">
                         <div className="by-duration-plants">
@@ -381,7 +414,7 @@ const PlantPlanningBlock = (data) => {
             
                         </div>
 
-                        <h1>{nextScheduleDate.toLocaleString('default', {weekday: 'long'})}: {upcomingPlants.length}</h1>
+                        <h1>{getLongDayOfTheWeek(nextScheduleDay)}: {upcomingPlants.length}</h1>
        
                         <div className="by-duration-plants">
 
