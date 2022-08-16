@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { PlantContext } from "../../context/PlantContext"
-import PlantAPI from "../../utils/PlantsAPI"
+import { PlantContext } from "../../../context/PlantContext"
+import PlantAPI from "../../../utils/PlantsAPI"
 import Plantling from "../../img/plantling.jpg"
 
 import "./CorrectDifferenceAll.css";

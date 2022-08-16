@@ -1,8 +1,8 @@
 // import React, { useState, useEffect} from 'react';
 import React, { useState } from 'react';
-import PlantAPI from "../../utils/PlantsAPI"
+import PlantAPI from "../../../utils/PlantsAPI"
 import ReviewPlant from "../ReviewPlant";
-import FormModal from "../FormModal/FormModal"
+import FormModal from "../../FormModal/FormModal"
 import './PlantBlockAll.css';
 
 const PlantBlockAll = (data) => {
