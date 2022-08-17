@@ -1,20 +1,20 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Plantling from "../../img/plantling.jpg"
+import { useNavigate } from "react-router-dom";
 import { getDifferenceInDays } from "../../utils/DateUtils"
 import { FaExternalLinkAlt } from "react-icons/fa"
 import "./PlantCard.css";
 
 /* Description: individual plant that data is passed into. 
-* Used with: Recent Additions. In the future, also Plant page.
+* Used with: Recent Additions and plant sorting page.
 * ToDo: determine if class needs to be added for plant block structure, verify if wrapper takes care of it
 */
 
-const PlantCard = (data) => {
+const PlantCard = (props) => {
 
-    console.log("PlantBlock component initialized");
+    console.log("PlantCard component initialized");
 
-    const recentPlant = data.plant;
+    const onePlant = props.plant;
 
     const navigate = useNavigate();
 
@@ -37,16 +37,16 @@ const PlantCard = (data) => {
 
     return (
         <>
-            <div key={recentPlant._id} className="plant-card-wrapper">
+            <div key={onePlant._id} className="plant-card-wrapper">
                 <div className="plant-card-img">
-                    <img src={recentPlant.imgURL ? `/img/${recentPlant.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
+                    <img src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
                 </div>
-                <div id={recentPlant._id} className="plant-card-img-overlay" onClick={(e) => handleClick(e, recentPlant.name)}>
-                    <FaExternalLinkAlt className="fa-exl" id={recentPlant._id}/>
-                    <p id={recentPlant._id}>{recentPlant.name}</p>
-                    <p id={recentPlant._id}>{recentPlant.sunlight ? recentPlant.sunlight + " light" : ""}</p>
-                    <p id={recentPlant._id}>{recentPlant.lastWatered && recentPlant.lastWatered.length > 0 ? "last watered " + getDifferenceInDays(recentPlant.lastWatered[recentPlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
-                    <p id={recentPlant._id}>{recentPlant.waterPref} watering conditions</p>
+                <div id={onePlant._id} className="plant-card-img-overlay" onClick={(e) => handleClick(e, onePlant.name)}>
+                    <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/>
+                    <p id={onePlant._id}>{onePlant.name}</p>
+                    <p id={onePlant._id}>{onePlant.sunlight ? onePlant.sunlight + " light" : ""}</p>
+                    <p id={onePlant._id}>{onePlant.lastWatered && onePlant.lastWatered.length > 0 ? "last watered " + getDifferenceInDays(onePlant.lastWatered[onePlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
+                    <p id={onePlant._id}>{onePlant.waterPref} watering conditions</p>
                 </div>
             </div>
 
