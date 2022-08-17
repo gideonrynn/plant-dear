@@ -14,40 +14,18 @@
   grid-template-rows: fit-content(1em);
   grid-template-areas:
     "header header header"
-    /* "mostrecent mostrecent mostrecent" */
-    "mostrecentindoor mostrecentindoor mostrecentindoor"
-    "mostrecentoutdoor mostrecentoutdoor mostrecentoutdoor";
+    "mostrecent mostrecent mostrecent";
   align-content: center;
   overflow: hidden;
 }
 
-.recent-plant-header {
-  grid-area: header;
-  color: whitesmoke;
-  text-align: left;
-}
-
-.most-recent-plants {
+.most-recent {
   grid-area: mostrecent;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-  position: relative;
-}
-
-.most-recent-indoor {
-  grid-area: mostrecentindoor;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
   position: relative;
   padding-top: 0px;
   margin-top: 0px;
-}
-
-.most-recent-outdoor {
-  grid-area: mostrecentoutdoor;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-  position: relative;
 }
 
 .plant-card-wrapper {

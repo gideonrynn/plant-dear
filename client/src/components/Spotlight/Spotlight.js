@@ -5,6 +5,14 @@ import Plantling from "../../img/plantling.jpg"
 import MorePlants from "../../img/deskplants.jpeg";
 import "./Spotlight.css";
 
+
+/* Description: display one random plant
+Future State: will be able to choose whether to show one per day or one per week
+ToDo: 
+* create settings document which will pass to this component whether to show one per day or per week
+* fix css, which is largely copied from Recent Additions. need to untangle it and keep it specific.
+* update plant card to display what needs to be shown here. it has a lot of the same logic.
+*/
 const Spotlight = (data) => {
 
     console.log("Spotlight component initialized");
@@ -117,7 +125,7 @@ const Spotlight = (data) => {
             <div className="new-plant-section">
                 <h3 className="recent-plant-header">Spotlight</h3>
 
-                <div className="most-recent-indoor">
+                <div className="most-recent">
                     <>                 
                         {mostRecentIndoor.map(plants => (
                             

@@ -1,234 +1,84 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { FaExternalLinkAlt } from "react-icons/fa"
-import Plantling from "../../img/plantling.jpg"
 import MorePlants from "../../img/deskplants.jpeg";
 import "./RecentAdditions.css";
+import PlantCard from "../PlantCard/PlantCard.js"
 
+/* Description: takes in plant context data passed in as prop from the home component to display by created date. Currently only plants with a status of active are represented here. On click of a plant, details for that individual plant pushed to another component, Plant Details.
+* Further detail: I kept using non-state variables here because useContext seemed to futz with them getting updated when something changed. Don't really need to handle state here, just showing the most recent.
+ToDos: 
+    * Though the plant context update function is being passed in, I don't currently see any places where it is getting called, thus this can likely be removed in the home component 
+    * One plant card is updated, use it here. Can map the individual cards, or keep that as a section. - done
+    * Move handleClick to plant card - done
+    * Keep in mind that spotlight was replicated from recent additions and share css. So if something is not working correctly, check out Spotlight and maybe PlantBlock until that gets cleaned up
+    * consider creating see more plants card, since it will need to be set up with ability to navigate
+*/
 const RecentAdditions = (data) => {
 
     console.log("RecentAdditions component initialized");
 
     const plants = data.plants;
-    const navigate = useNavigate();
-
-    function handleClick(event, name) {
-        event.preventDefault();
-        // console.log("clicked", event.target.id);
-        // console.log(name);
-
-        // let newTitle = "plant";
-        // let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
-        
-        // console.log(id);
-        navigate("/plantdetails",
-            // pathname: `${newTitle}/${setPathname}`,
-            // pathname: `plant/${setPathname}`,
-            { state: { detail: event.target.id,
-                    name: name }});
-    }
-
+    
     const plantsByDate = plants.sort((a,b) => {
         if (a.createdAt > b.createdAt) return -1;
         if (a.createdAt < b.createdAt) return 1;
         return 0;
     })
 
-    // outdoor plants
     let recentOutdoor = plantsByDate.filter(outdoor => { 
         return outdoor.location === "outdoor"
     });
 
-    // indoor plants
     let recentIndoor = plantsByDate.filter(indoor => { 
         return indoor.location === "indoor"
     });
 
-    // const uniquePlants = [...new Set(plantsByDate.map(data => data.name))]
-    
-    // console.log(uniquePlants);
-    // const mostRecent = plantsByDate.slice(0, 20);
+    // specify how many plants to display
     const mostRecentIndoor = recentIndoor.slice(0, 15);
     const mostRecentOutdoor = recentOutdoor.slice(0, 15);
-    // const nextRecentFive = plantsByDate.slice(1, 14);
-    // console.log(mostRecent, nextRecentFive);
-    let currentDate = new Date();
 
-    // One day in milliseconds
-    const oneDay = 1000 * 60 * 60 * 24;
-
-    // const d = new Date();
-
-
-    function waterDateParse(lastWatered) {
-
-        let newWaterDate = ""
-
-        if (lastWatered) {
-
-            //date format from the db is yyyy-mm-dd so we will want to parse this
-
-            // let lastWateredArray = lastWatered.split("-");
-            let lastWateredYear = lastWatered.split("-")[0];
-            let lastWateredMonth = lastWatered.split("-")[1] - 1;
-            let lastWateredDay = lastWatered.split("-")[2];
-            // console.log("split", lastWateredArray);
-            // console.log(lastWateredYear, lastWateredMonth, lastWateredDay);
-    
-            newWaterDate = new Date(lastWateredYear, lastWateredMonth, lastWateredDay);
-            // console.log("New water date formatted: ", newWaterDate);
-
+    const recentToRender = [
+        {
+            title: "Indoor Plants",
+            plants: mostRecentIndoor
+        },
+        {
+            title: "Outdoor Plants",
+            plants: mostRecentOutdoor
         }
-
-        return getDifference(newWaterDate);
-
-    }
-
-
-    function getDifference(waterDate) {
-
-        let differenceConverted = "";
-
-        if(currentDate && waterDate) {
-
-            let dateDifference = currentDate.getTime() - waterDate.getTime();
-            differenceConverted = Math.floor(dateDifference / oneDay);
-            // console.log("differenceConverted is: ", differenceConverted);
-
-        }
-
-        return differenceConverted;
-
-    }
-
+    ];
+        
     return (
         <>
-        {/* <h1>Newest plant dears</h1> */}
-            {/* commenting out to get a feel for having indoor and outdoor separated. during the winter this won't matter as much */}
-            {/* <div className="new-plant-section"> */}
-                {/* <h3 className="recent-plant-header">Recent additions</h3> */}
-
-                {/* <div className="most-recent-plants">
-                    <>
-                        {mostRecent.map(plants => (
-                            
-                            <div className="plant-card-wrapper">
-                                <div key={plants._id} className="plant-card">
-                                    <img src={`/img/${plants.imgURL}`} alt="Most recent plant" className="recent-image"/>
-                                </div>
-                                <div key={plants._id+1} className="plant-card-2">
-                                    <p>{plants.name}</p>
-                                    <p>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p>{plants.lastWatered.length > 0 ? "last watered on " + plants.lastWatered[plants.lastWatered.length - 1].split('T')[0] : "not watered yet"}</p>
-                                    <p>{plants.waterPref} watering conditions</p> */}
-                                    {/* <button className="plant-card-2-btn">Open plant</button> */}
-                                {/* </div>
-                            </div>
-                            
-                        ))}
-                        <div className="see-more">
-                            <div className="plant-card-see-more">
-                                <p>See all new plant dears <span className="g-t">&gt;</span></p>
-                            </div>
-                            <div className="plant-card-see-more-2">
-                                <img src={MorePlants} alt="See all plants" className=""/>
-                            </div>
-
-                        </div>
-
-                    </>
-                </div> */}
-
-                
-                {/* <div className="next-recent-plants">
-                    {nextRecentFive.map(plants => (
-                        <div key={plants._id}>
-                            <span>{plants.name}</span> { } */}
-                            {/* <span>({plants.hardiness}&#176;)</span> { } */}
-                        {/* </div>
-                    ))}
+            {
+                recentToRender.map((sections, index) => (
+                    <div key={index} className="new-plant-section">
                     
-                </div> */}
-{/*                 
-            </div> */}
+                        <h3 className="recent-plant-header">{sections.title}</h3>
 
-            <div className="new-plant-section">
-                <h3 className="recent-plant-header">Indoor Plants</h3>
+                        <div className="most-recent">
+                           
+                            {sections.plants.map(plants => (
+                                
+                                <PlantCard plant={plants}/>
+                                
+                            ))}
+                            <div className="more-plants-card">
+                                <div className="more-plant-card more-plant-card-text">
+                                    <p>See all plant dears <span className="g-t">&gt;</span></p>
+                                </div>
+                                <div className="more-plant-card more-plant-card-img">
+                                    <img src={MorePlants} alt="See all plants" className=""/>
+                                </div>
 
-                <div className="most-recent-indoor">
-                    <>
+                            </div>
+                          
+                        </div>
                     
-                        {mostRecentIndoor.map(plants => (
-                            
-                            <div key={plants._id+1} className="plant-card-wrapper">
-                                <div key={plants._id+1} className="plant-card">
-                                    <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
-                                    {/* <p className="name-img">{plants.name}</p> */}
-                                </div>
-                                <div key={plants._id} id={plants._id} className="plant-card-2" onClick={(e) => handleClick(e, plants.name)}>
-                                    <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
-                                    <p id={plants._id}>{plants.name}</p>
-                                    <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + waterDateParse(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
-                                    <p id={plants._id}>{plants.waterPref} watering conditions</p>
-                                    {/* <button className="plant-card-2-btn">Open plant</button> */}
-                                </div>
-                            </div>
-                            
-                        ))}
-                        <div className="see-more">
-                            <div className="plant-card-see-more">
-                                <p>See all plant dears <span className="g-t">&gt;</span></p>
-                            </div>
-                            <div className="plant-card-see-more-2">
-                                <img src={MorePlants} alt="See all plants" className=""/>
-                            </div>
-
-                        </div>
-
-                    </>
-                </div>
-
+                    </div>
+                ))
                 
-            </div>
-
-            <div className="new-plant-section">
-                <h3 className="recent-plant-header">Outdoor Plants</h3>
-
-                <div className="most-recent-outdoor">
-                    <>
-                        {mostRecentOutdoor.map(plants => (
-                            
-                            <div key={plants._id} className="plant-card-wrapper">
-                                <div key={plants._id} className="plant-card">
-                                    <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
-                                    {/* <p className="name-img">{plants.name}</p> */}
-                                </div>
-                                <div key={plants._id+1} id={plants._id} className="plant-card-2" onClick={(e) => handleClick(e, plants.name)}>
-                                    <FaExternalLinkAlt className="fa-exl" id={plants._id}/>
-                                    <p id={plants._id}>{plants.name}</p>
-                                    <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
-                                    <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? "last watered " + waterDateParse(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
-                                    <p id={plants._id}>{plants.waterPref} watering conditions</p>
-                                    {/* <button className="plant-card-2-btn">Open plant</button> */}
-                                </div>
-                            </div>
-                            
-                        ))}
-                        <div className="see-more">
-                            <div className="plant-card-see-more">
-                                <p>See all plant dears <span className="g-t">&gt;</span></p>
-                            </div>
-                            <div className="plant-card-see-more-2">
-                                <img src={MorePlants} alt="See all plants" className=""/>
-                            </div>
-
-                        </div>
-
-                    </>
-                </div>
-                
-            </div>
+            }
+       
         </>
     )
 };

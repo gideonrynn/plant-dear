@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import PlantCard from "../../components/PlantCard/PlantCard"
+import PlantSection from "../../components/PlantSection/PlantSection"
 // import { WeatherContext } from "../../context/WeatherContext"
 import { PlantContext } from "../../context/PlantContext"
 import "./Plants.css";
@@ -77,7 +77,7 @@ function Plants() {
             <br/>
             <br/>
 
-            <PlantCard 
+            <PlantSection 
                 plants={updatedPlants} 
                 inactive={updatedInactivePlants} 
                 actcounter={counter}

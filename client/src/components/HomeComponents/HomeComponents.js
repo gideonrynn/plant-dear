@@ -45,12 +45,8 @@ function HomeComponents() {
 
                                 </div>
 
-                                <div className="newplant-section">
-                                        <RecentAdditions plants={ activePlants} setUpdate={ plant.setUpdate}/>
+                                <RecentAdditions plants={ activePlants } setUpdate={ plant.setUpdate}/>
 
-                                        {/* to keep an eye on */}
-
-                                </div>
                                 <div  className="forecastplants-section">
 
                                         {/* <OutdoorPlants weather={forecastWeather} plants={activePlants}/> */}
