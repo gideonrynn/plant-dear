@@ -83,18 +83,15 @@ function Sorting () {
                         }}
                 />
 
-                <div className="plant-card-section">
+                <div className="plant-card-sorting-section">
 
-                    <div className="plant-card-plant">
-                        {updatedPlants.map((plants, index) => (
-                            <div key={index}>
-                                <PlantCard 
-                                    plant={plants}
-                                />
-                            </div>
-                        ))}
-                    
-                    </div>
+                    {updatedPlants.map((plants, index) => (
+                        <div key={index}>
+                            <PlantCard 
+                                plant={plants}
+                            />
+                        </div>
+                    ))}
                     
                 </div>
 

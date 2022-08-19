@@ -3,3 +3,11 @@
     padding: 40px;
     background-color: whitesmoke;
 }
+
+.plant-card-sorting-section {
+    grid-area: mostrecent;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+    margin-top: 50px;
+    margin-bottom: 50px;
+}

@@ -6,7 +6,7 @@ import { FaExternalLinkAlt } from "react-icons/fa"
 import "./PlantCard.css";
 
 /* Description: individual plant that data is passed into. 
-* Used with: Recent Additions and plant sorting page.
+* Used with: Recent Additions, Spotlight, Plant Sorting Page
 * ToDo: determine if class needs to be added for plant block structure, verify if wrapper takes care of it
 */
 
@@ -38,30 +38,7 @@ const PlantCard = (props) => {
 
     return (
         <>
-           {dataSource === "RecentAdditions" ? 
-                <div 
-                    key={onePlant._id} 
-                    className="plant-card-wrapper"
-                >
-                    <div className="plant-card-img">
-                        <img 
-                            className="recent-image"
-                            src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant"
-                        />
-                    </div>
-                    <div 
-                        className="plant-card-text-overlay" 
-                        id={onePlant._id} 
-                        onClick={(e) => handleClick(e, onePlant.name)}
-                    >
-                        <p id={onePlant._id}>{onePlant.name}</p>
-                        <p id={onePlant._id}>{onePlant.sunlight ? onePlant.sunlight + " light" : ""}</p>
-                        <p id={onePlant._id}>{onePlant.lastWatered && onePlant.lastWatered.length > 0 ? "last watered " + getDifferenceInDays(onePlant.lastWatered[onePlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
-                        <p id={onePlant._id}>{onePlant.waterPref} watering conditions</p>
-                        <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/>
-                    </div>
-                </div>
-           : dataSource === "Spotlight" ?
+           { dataSource === "Spotlight" ?
                 <>
                     <div className="plant-card-wrapper">
                         <div className="plant-card-spotlight-img">
@@ -84,7 +61,31 @@ const PlantCard = (props) => {
                     </div> 
                 </> 
             :
-                null }
+
+                <div 
+                    key={onePlant._id} 
+                    className="plant-card-wrapper"
+                >
+                    <div className="plant-card-img">
+                        <img 
+                            className="recent-image"
+                            src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant"
+                        />
+                    </div>
+                    <div 
+                        className="plant-card-text-overlay" 
+                        id={onePlant._id} 
+                        onClick={(e) => handleClick(e, onePlant.name)}
+                    >
+                        <p id={onePlant._id}>{onePlant.name}</p>
+                        <p id={onePlant._id}>{onePlant.sunlight ? onePlant.sunlight + " light" : ""}</p>
+                        <p id={onePlant._id}>{onePlant.lastWatered && onePlant.lastWatered.length > 0 ? "last watered " + getDifferenceInDays(onePlant.lastWatered[onePlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
+                        <p id={onePlant._id}>{onePlant.waterPref} watering conditions</p>
+                        <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/>
+                    </div>
+                </div>
+
+            }
         </>
     )
 };

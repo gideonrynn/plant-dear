@@ -19,48 +19,20 @@ const Spotlight = (data) => {
     console.log("Spotlight component initialized");
 
     const plants = data.plants;
+    const sectionHeader = "Spotlight";
     const dataSource = "Spotlight";
     const randomSpotlightPlant = plants[Math.floor(Math.random()*plants.length)];
-    // console.log("randomSpotlightPlant", randomSpotlightPlant);
-
-
-    //specify indoor plants for now, as it is winter. 
-    //once all outdoor plant data has been updated in terms of active or inactive, will change how this filters out only inactive plants
-    // const indoorSpotlightPlants = plants.filter(indoor => { 
-    //     return indoor.location === "indoor" && indoor.status !== 'inactive'
-    // });
-
-
-
-    // const plantsByDate = plants.sort((a,b) => {
-    //     if (a.createdAt > b.createdAt) return -1;
-    //     if (a.createdAt < b.createdAt) return 1;
-    //     return 0;
-    // })
-
-    // let randomPlant = indoorSpotlightPlants[Math.floor(Math.random()*indoorSpotlightPlants.length)];
-    // console.log("Today's random plant", randomPlant);
-
-    // // outdoor plants
-    // let recentOutdoor = plantsByDate.filter(outdoor => { 
-    //     return outdoor.location === "outdoor"
-    // });
-
-    // // indoor plants
-    // let recentIndoor = plantsByDate.filter(indoor => { 
-    //     return indoor.location === "indoor"
-    // });
-
+    // console.log("Today's randomSpotlightPlant", randomSpotlightPlant);
 
     return (
         <>
 
             {randomSpotlightPlant ? 
 
-                <div className="new-plant-section">
-                    <h3 className="recent-plant-header">Spotlight</h3>
+                <div className="home-section">
+                    <h3 className="home-section-header">{sectionHeader}</h3>
 
-                    <div className="most-recent">
+                    <div className="plant-card-section">
                                 
                         <PlantCard 
                             plant={randomSpotlightPlant}

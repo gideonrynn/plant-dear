@@ -1,42 +1,4 @@
 
-.plant-card-section {
-  /* background-color: #000e21; */
-  padding: 8px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-
-  min-height: 500px;
-  /* border: 3px solid grey; */
-  /* box-shadow: 6px 8px rgba(0, 0, 0, 0.4); */
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: fit-content(1em);
-  grid-template-areas:
-    "header header header"
-    "mostrecent mostrecent mostrecent";
-  align-content: center;
-  overflow: hidden;
-}
-
-.recent-card-header {
-  grid-area: header;
-}
-/* this is being used on the plants page, leave this temporarily until you add the card there */
-.plant-card-plant {
-  grid-area: mostrecent;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-}
-
-.most-recent {
-  grid-area: mostrecent;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
-  position: relative;
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
 .plant-card-wrapper {
   position: relative;
 }

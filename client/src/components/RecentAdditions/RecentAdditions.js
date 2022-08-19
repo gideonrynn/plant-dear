@@ -16,35 +16,49 @@ const RecentAdditions = (data) => {
 
     console.log("RecentAdditions component initialized");
 
+    let dataSource = "RecentAdditions";
+    let numberOfPlantsToDisplay = 15;
+
     const plants = data.plants;
-    const dataSource = "RecentAdditions";
-    
+
     const plantsByDate = plants.sort((a,b) => {
         if (a.createdAt > b.createdAt) return -1;
         if (a.createdAt < b.createdAt) return 1;
         return 0;
     })
 
-    let recentOutdoor = plantsByDate.filter(outdoor => { 
-        return outdoor.location === "outdoor"
-    });
+    const recentPlantsToDisplay = (sortOrder = plantsByDate, location, number) => {
 
-    let recentIndoor = plantsByDate.filter(indoor => { 
-        return indoor.location === "indoor"
-    });
+        if (location === "indoor") {
 
-    // specify how many plants to display
-    const mostRecentIndoor = recentIndoor.slice(0, 15);
-    const mostRecentOutdoor = recentOutdoor.slice(0, 15);
+            let recentIndoor = sortOrder.filter(indoor => { 
+                return indoor.location === "indoor"
+            });
+
+            return recentIndoor.slice(0, number)
+
+        } else if (location === "outdoor") {
+            
+            let recentOutdoor = sortOrder.filter(outdoor => { 
+                return outdoor.location === "outdoor"
+            });
+
+            return recentOutdoor.slice(0, number);
+
+        } else {
+            return "No location entered for plants.";
+        }
+
+    }
 
     const recentToRender = [
         {
             title: "Indoor Plants",
-            plants: mostRecentIndoor
+            plants: recentPlantsToDisplay(plantsByDate, "indoor", numberOfPlantsToDisplay)
         },
         {
             title: "Outdoor Plants",
-            plants: mostRecentOutdoor
+            plants: recentPlantsToDisplay(plantsByDate, "outdoor", numberOfPlantsToDisplay)
         }
     ];
         
@@ -52,11 +66,11 @@ const RecentAdditions = (data) => {
         <>
             {
                 recentToRender.map((sections, index) => (
-                    <div key={index} className="new-plant-section">
+                    <div className="home-section" key={index} >
                     
-                        <h3 className="recent-plant-header">{sections.title}</h3>
+                        <h3 className="home-section-header">{sections.title}</h3>
 
-                        <div className="most-recent">
+                        <div className="plant-card-section">
                            
                             {sections.plants.map(plants => (
                                 
@@ -65,7 +79,7 @@ const RecentAdditions = (data) => {
                                     dataSource={dataSource}/>
                                 
                             ))}
-                            <div className="more-plants-card">
+                            <div className="plant-card-wrapper">
                                 <div className="more-plant-card more-plant-card-text">
                                     <p>See all plant dears <span className="g-t">&gt;</span></p>
                                 </div>
