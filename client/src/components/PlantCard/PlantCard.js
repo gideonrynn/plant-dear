@@ -40,12 +40,12 @@ const PlantCard = (props) => {
         <>
            { dataSource === "Spotlight" ?
                 <>
-                    <div className="plant-card-wrapper">
-                        <div className="plant-card-spotlight-img">
-                            <img className="plant-card-spotlight-img-direct" src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant" />
+                    <div className="plant-card-container">
+                        <div className="plant-card-spotlight-img-wrapper">
+                            <img className="plant-card-img" src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant" />
                         </div>
                     </div>
-                    <div className="plant-card-wrapper">
+                    <div className="plant-card-container">
                         <div className="plant-card-spotlight-text">
                             <p>{onePlant.name}</p>
                             <p>{onePlant.description && onePlant.description.length > 0 ? onePlant.description.substr(0,300) + "..." : null}<span className="g-t"> <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/></span></p>
@@ -64,11 +64,11 @@ const PlantCard = (props) => {
 
                 <div 
                     key={onePlant._id} 
-                    className="plant-card-wrapper"
+                    className="plant-card-container"
                 >
-                    <div className="plant-card-img">
+                    <div className="plant-card-img-wrapper">
                         <img 
-                            className="recent-image"
+                            className="plant-card-img"
                             src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant"
                         />
                     </div>

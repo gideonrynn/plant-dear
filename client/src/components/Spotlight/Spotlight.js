@@ -1,17 +1,13 @@
 import React from "react";
 import PlantCard from "../PlantCard/PlantCard.js"
-import "./Spotlight.css";
+// import "./Spotlight.css";
 
 
 /* Description: display one random plant
 Future State: will be able to choose whether to show one per day or one per week
 ToDo: 
 * create settings document which will pass to this component whether to show one per day or per week
-* fix css, which is largely copied from Recent Additions. need to untangle it and keep it specific.
-* update plant card to display what needs to be shown here. it has a lot of the same logic.
-* utilize shared functions from date utils
 * pass in whether I want indoor or outdoor plants or both. This is another good item for settings
-* remove inactive plant status, only active is being passed in from the context on the home component - done
 */
 
 const Spotlight = (data) => {

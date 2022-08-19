@@ -41,13 +41,13 @@ span.image-gallery-description {
     grid-template-rows: fit-content(1em);
     grid-template-areas:
         "header header header"
-        "mostrecent mostrecent mostrecent";
+        "plant-card-section plant-card-section plant-card-section";
     align-content: center;
     overflow: hidden;
 }
   
 .plant-card-section {
-    grid-area: mostrecent;
+    grid-area: plant-card-section;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
     position: relative;
