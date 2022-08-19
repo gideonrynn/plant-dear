@@ -7,6 +7,11 @@ import { PlantContext } from "../../context/PlantContext"
 import PlantDetails from "../../components/PlantDetails/PlantDetails.js";
 import "./PlantDetail.css";
 
+/* Description: display specific details of individual plant
+* Used with: Direct from Plant Card
+* ToDo: align sections by type of info. this will be particularly useful when app is set up to handle instances versus plant details
+
+*/
 function PlantDetail(hist) {
 
     console.log("PlantDetail page initialized, with context");

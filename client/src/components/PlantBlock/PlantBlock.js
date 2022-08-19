@@ -2,9 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 // import PlantAPI from "../../utils/PlantsAPI"
 import Plantling from "../../img/plantling.jpg"
-
 import "./PlantBlock.css";
 
+/* Description: Currently a group of plants mapped in a certain template. In use by the sorting page that contains all of the active plants.
+Proposed future state: individual plant that data is passed into
+*/
 const PlantBlock = (data) => {
 
     console.log("PlantBlock component initialized");
@@ -83,17 +85,17 @@ const PlantBlock = (data) => {
 
     return (
         <>
-            <div className="plant-block-section">
+            <div className="plant-card-section">
 
-                <div className="plant-block-plant">
+                <div className="plant-card-plant">
                     {plantsByName.map(plants => (
                         <>
-                        <div className="plant-block-wrapper">
-                            <div key={plants._id} className="plant-block">
+                        <div className="plant-card-wrapper">
+                            <div key={plants._id} className="plant-card-img">
                                 <img src={plants.imgURL ? `/img/${plants.imgURL}` : Plantling} alt="plant dear" className="plant-img-block"  />
                                 <p className="plant-title-img">{plants.name}</p>
                             </div>
-                            <div key={plants._id+1} id={plants._id} className="plant-block-2" onClick={(e) => handleClick(e, plants.name)}>
+                            <div key={plants._id+1} id={plants._id} className="plant-card-img-overlay" onClick={(e) => handleClick(e, plants.name)}>
                                 <p id={plants._id}>{plants.name}</p>
                                 <p id={plants._id}>{plants.sunlight ? plants.sunlight + " light" : ""}</p>
                                 <p id={plants._id}>{plants.lastWatered && plants.lastWatered.length > 0 ? Math.floor((currentDate.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"}</p>

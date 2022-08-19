@@ -1,22 +1,25 @@
 import React, { useEffect, useState, useContext } from "react";
-// import PlantCard from "../../components/PlantCard"
-import PlantBlock from "../../components/PlantBlock/PlantBlock"
-// import { WeatherContext } from "../../context/WeatherContext"
+import PlantCard from "../../components/PlantCard/PlantCard";
 import { PlantContext } from "../../context/PlantContext"
 import "./Sorting.css";
 
-function Sorting () {
+/*Description: Sort plants by photo only. On hover will display some details
+* Todo: determine whether or not search function will be applied here
+    * updated to search for active and inactive plants or create another page to access those. if separate, will be able to remove all the inactive plant references here which are not being used
+*/
 
-    /*Description: Sort plants by photo only. On hover will display limited details*/
-    /*Todo: determine whether or not search function will be applied here*/
+function Sorting () {
 
     console.log("Sorting page initialized, with context");
 
     const plant = useContext(PlantContext);
-    const activePlants = plant.activePlants;
+    const activePlants = plant.activePlants.sort((a,b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+    })
     const inactivePlants = plant.inactivePlants;
-    const counter = plant.counter;
-    const inactcounter = plant.inactcounter;
+ 
     // console.log("number of active plants returned", activePlants.length);
 
     // Setting our component's initial state
@@ -44,6 +47,7 @@ function Sorting () {
     function sortPlants(input) {
 
         if(input) {
+
             const filtered = activePlants.filter(actPlants => {
                 return actPlants.name.toLowerCase().includes(searchTerm.toLowerCase())
                })
@@ -64,28 +68,35 @@ function Sorting () {
     }
 
     return (
-        <div className="plantsdiv">
+        <>
+            <div className="plantsdiv">
 
-            <input 
-                type="text"
-                style={
-                    {width:"350px",
-                    background:"#F2F1F9", 
-                    padding:"10px"}}
-                placeholder={"search plants"}
-                onChange={(event) => {
-                    sortPlants(event.target.value)
-                    }}
-            />
+                <input 
+                    type="text"
+                    style={
+                        {width:"350px",
+                        background:"#F2F1F9", 
+                        padding:"10px"}}
+                    placeholder={"search plants"}
+                    onChange={(event) => {
+                        sortPlants(event.target.value)
+                        }}
+                />
 
-            <PlantBlock 
-                plants={updatedPlants} 
-                inactive={updatedInactivePlants} 
-                actcounter={counter}
-                inactcounter={inactcounter}
-            />
+                <div className="plant-card-sorting-section">
 
-        </div>
+                    {updatedPlants.map((plants, index) => (
+                        <div key={index}>
+                            <PlantCard 
+                                plant={plants}
+                            />
+                        </div>
+                    ))}
+                    
+                </div>
+
+            </div>
+        </>
     )
 }
 
