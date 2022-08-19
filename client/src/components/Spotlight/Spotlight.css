@@ -28,14 +28,15 @@
   margin-top: 0px;
 }
 
-.plant-card-wrapper {
+/* .plant-card-wrapper {
   position: relative;
-}
+} */
 
+/* this is for the container surrounding the image */
+/* plant card and spotlight card use some values except height, combine */
 .plant-card-spotlight-img {
   border-radius: 2px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  display: grid;
   height: 600px;
   overflow: hidden;
   opacity: 1;
@@ -43,11 +44,11 @@
   position: relative;
 }
 
+/* this is for the image itself */
 .plant-card-spotlight-img-direct {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  /* height: 800px; */
 }
 
 /* .plant-card:hover {
@@ -58,7 +59,7 @@
   /* position: relative;
 } */
 
-.plant-card-spotlight {
+.plant-card-spotlight-overlay {
   background-color: rgba(1, 1, 1, 0.5);
   top: 0;
   right:0;
@@ -78,27 +79,11 @@
 }
 
 
-.plant-card-spotlight:hover {
+.plant-card-spotlight-overlay:hover {
   opacity: 1;
   z-index: 5;
   color: whitesmoke;
   justify-content: center;
-}
-
-.plant-caption {
-  background-color: whitesmoke;
-  /* width:25vw; */
-}
-
-.name-img {
-  position: absolute;
-  background-color: cadetblue;
-  padding: 5px;
-  z-index: 10;
-}
-
-.see-more {
-  position: relative;
 }
 
 .plant-card-spotlight-text {

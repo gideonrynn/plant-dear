@@ -27,103 +27,22 @@ function HomeComponents() {
         // console.log(activePlants);
 
         return (
-                                /* <Box gridArea="temp"
-                                        background="#FFFFFF"
-                                        fill
-                                        >
-                                      <p> The current temperature is: <span>{currentWeather.app_temp} </span></p>
-                                </div> */
-                        <div>
-                                {/* <div>
-                                        <p>By Location</p>
-                                        <ByLocation plants={activePlants}/>
-                                </div> */}
-                                <div className="newplant-section">
-                                        <Spotlight plants={activePlants} setUpdate={ plant.setUpdate}/>
+                        
+                <div>
+                                
+                        <Spotlight plants={activePlants} setUpdate={ plant.setUpdate}/>
 
-                                        {/* to keep an eye on */}
+                        <RecentAdditions plants={ activePlants } setUpdate={ plant.setUpdate}/>
 
-                                </div>
+                        <div  className="forecastplants-section">
 
-                                <RecentAdditions plants={ activePlants } setUpdate={ plant.setUpdate}/>
+                                {/* <OutdoorPlants weather={forecastWeather} plants={activePlants}/> */}
 
-                                <div  className="forecastplants-section">
+                                <PlantForecastHardiness weather={forecastWeather} plants={activePlants}/>
 
-                                        {/* <OutdoorPlants weather={forecastWeather} plants={activePlants}/> */}
-
-                                        <PlantForecastHardiness weather={forecastWeather} plants={activePlants}/>
-
-                                        
-                                </div>
-                                {/* <div className="watersnip-section"> */}
-                                        {/* <WaterLoverSnip plants={activePlants}/> */}
-                                        {/* <WaterSnip plants={activePlants}/> */}
-                                {/* </div> */}
-                                {/* <Box gridArea="stats" className="stats">
-                                        <StatsSection/>  
-                                </Box> */}
-                                {/* <Box 
-                                        gridArea="snips"
-                                        height="large"
-                                        // background="dark-3"
-                                        textColor="dark-3"
-                                        pad="medium"
-                                        background="#FFFFFF">
-
-                                <Tabs>
-                                        <Tab title="Watchlist" className="tabTitle">
-                                                <Box pad="medium">
-                                                        <WatchlistSnip/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Hardiness">
-                                                <Box pad="medium">
-                                                        <HardinessSnip weather={currentWeather}/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Readiness">
-                                                <Box pad="medium">
-                                                        <ReadinessSnip weather={currentWeather} forecastWeather={forecastWeather}/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Humidity Lovers">
-                                                <Box pad="medium">
-                                                        <HumiditySnip/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Water Lovers">
-                                                <Box pad="medium">
-                                                        <WaterLoverSnip/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Need A Drink">
-                                                <Box pad="medium">
-                                                        <WaterSnip/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Propagating">
-                                                <Box pad="medium">
-                                                        <PropaSnip/>
-                                                </Box>
-                                        </Tab>
-                                        <Tab title="Purchase">
-                                                <Box pad="medium">
-                                                        <PurchaseSnip weather={currentWeather}/>
-                                                </Box>
-                                        </Tab>
-                                </Tabs>
-                       
-                        </Box>  */}
-
-                        {/* <Box gridArea="watercalc"
-                                        height="large"
-                                        // background="dark-3"
-                                        pad="medium"
-                                        background="#FFFFFF">
-
-
-                                <WaterCalculator/>
-                        </Box>  */}
+                                
+                        </div>
+                              
 
                         <Box gridArea="weatherforecast"
                                         // height="large"

@@ -15,6 +15,7 @@ const PlantCard = (props) => {
     console.log("PlantCard component initialized");
 
     const onePlant = props.plant;
+    const dataSource = props.dataSource;
 
     const navigate = useNavigate();
 
@@ -37,19 +38,53 @@ const PlantCard = (props) => {
 
     return (
         <>
-            <div key={onePlant._id} className="plant-card-wrapper">
-                <div className="plant-card-img">
-                    <img src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant" className="recent-image"/>
+           {dataSource === "RecentAdditions" ? 
+                <div 
+                    key={onePlant._id} 
+                    className="plant-card-wrapper"
+                >
+                    <div className="plant-card-img">
+                        <img 
+                            className="recent-image"
+                            src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant"
+                        />
+                    </div>
+                    <div 
+                        className="plant-card-text-overlay" 
+                        id={onePlant._id} 
+                        onClick={(e) => handleClick(e, onePlant.name)}
+                    >
+                        <p id={onePlant._id}>{onePlant.name}</p>
+                        <p id={onePlant._id}>{onePlant.sunlight ? onePlant.sunlight + " light" : ""}</p>
+                        <p id={onePlant._id}>{onePlant.lastWatered && onePlant.lastWatered.length > 0 ? "last watered " + getDifferenceInDays(onePlant.lastWatered[onePlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
+                        <p id={onePlant._id}>{onePlant.waterPref} watering conditions</p>
+                        <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/>
+                    </div>
                 </div>
-                <div id={onePlant._id} className="plant-card-img-overlay" onClick={(e) => handleClick(e, onePlant.name)}>
-                    <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/>
-                    <p id={onePlant._id}>{onePlant.name}</p>
-                    <p id={onePlant._id}>{onePlant.sunlight ? onePlant.sunlight + " light" : ""}</p>
-                    <p id={onePlant._id}>{onePlant.lastWatered && onePlant.lastWatered.length > 0 ? "last watered " + getDifferenceInDays(onePlant.lastWatered[onePlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
-                    <p id={onePlant._id}>{onePlant.waterPref} watering conditions</p>
-                </div>
-            </div>
-
+           : dataSource === "Spotlight" ?
+                <>
+                    <div className="plant-card-wrapper">
+                        <div className="plant-card-spotlight-img">
+                            <img className="plant-card-spotlight-img-direct" src={onePlant.imgURL ? `/img/${onePlant.imgURL}` : Plantling} alt="Most recent plant" />
+                        </div>
+                    </div>
+                    <div className="plant-card-wrapper">
+                        <div className="plant-card-spotlight-text">
+                            <p>{onePlant.name}</p>
+                            <p>{onePlant.description && onePlant.description.length > 0 ? onePlant.description.substr(0,300) + "..." : null}<span className="g-t"> <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/></span></p>
+                            <p>Prefers {onePlant.sunlight ? onePlant.sunlight + " light" : ""} and {onePlant.waterPref.length > 0 ? onePlant.waterPref + " watering conditions": null} </p>
+                            <p>{onePlant.lastWatered && onePlant.lastWatered.length > 0 ? "Last watered " + getDifferenceInDays(onePlant.lastWatered[onePlant.lastWatered.length - 1]) + " day(s) ago" : "not watered yet"}</p>
+                            
+                        </div>
+                        <div className="plant-card-spotlight-overlay">
+                            <div id={onePlant._id} className="plant-card-spotlight-overlay" onClick={(e) => handleClick(e, onePlant.name)}>
+                                <p id={onePlant._id} onClick={(e) => handleClick(e, onePlant.name)}>Go to plant details<span className="g-t" onClick={(e) => handleClick(e, onePlant.name)}> <FaExternalLinkAlt className="fa-exl" id={onePlant._id}/></span></p>
+                            </div>
+                        </div>
+                    </div> 
+                </> 
+            :
+                null }
         </>
     )
 };

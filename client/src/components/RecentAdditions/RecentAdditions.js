@@ -17,6 +17,7 @@ const RecentAdditions = (data) => {
     console.log("RecentAdditions component initialized");
 
     const plants = data.plants;
+    const dataSource = "RecentAdditions";
     
     const plantsByDate = plants.sort((a,b) => {
         if (a.createdAt > b.createdAt) return -1;
@@ -59,7 +60,9 @@ const RecentAdditions = (data) => {
                            
                             {sections.plants.map(plants => (
                                 
-                                <PlantCard plant={plants}/>
+                                <PlantCard 
+                                    plant={plants}
+                                    dataSource={dataSource}/>
                                 
                             ))}
                             <div className="more-plants-card">
