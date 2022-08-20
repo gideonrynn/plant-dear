@@ -36,7 +36,7 @@ function App() {
             <Route path="/plants" element={<Sorting/>}/>
             <Route path="/watering" element={<Watering/>}/>
             <Route path="/outdoor" element={<Outdoor/>}/>
-            <Route path="/plantdetails" element={<PlantDetail/>}/>
+            <Route path="/plants/:plantname" element={<PlantDetail/>}/>
             {/* <Route path="/plantdetail" element={PlantDetail}/> */}
             <Route path="/weather" element={<Weather/>}/>
             <Route path="/addnewplants" element={<AddNewPlant/>}/>

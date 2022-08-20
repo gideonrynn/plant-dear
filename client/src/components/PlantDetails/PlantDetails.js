@@ -1,15 +1,13 @@
 import React, { useState, useEffect} from 'react'
 // import { FaPlus } from "react-icons/fa"
-// import Plants from '../../pages/Plants'
 import Plantling from '../../img/plantling.jpg'
 import PlantAPI from "../../utils/PlantsAPI"
-// import HardinessAPI from "../../utils/HardinessAPI"
 import './PlantDetails.css'
 
 function PlantDetails(p) {
-    //in this component, we are only rendering one dedicated plant
-    //passing in one plant with it's details, kind of like in review plant
-    /*Successfully triggering re-rendering when certain items update, but the current structure
+    /*Description: rendering one dedicated plant passed in from the Plant Detail parent Page
+    * passing in one plant with it's details, kind of like in review plant
+    * Successfully triggering re-rendering when certain items update, but the current structure
     of the code is just reapply unchanged values, and the new ones get overwritten
     In addition, the parent page is not getting the updated context that contains the new date value */
 
@@ -80,7 +78,7 @@ function PlantDetails(p) {
     // console.log(p.plant);
 
     useEffect(() => {
-        console.log("This plant", thisPlant.length);
+        // console.log("This plant", thisPlant.length);
         if(typeof thisPlant.length === "undefined" && p.plant) {
             
             setThisPlantId(p.plant._id);
@@ -318,7 +316,7 @@ function PlantDetails(p) {
         // console.log("newLocaleDate: ", newLocaleDate);
         let newDate = newLocaleDate.split(',')[0];
         let allNewDates = [...tempDates, newDate];
-        console.log(allNewDates);
+        // console.log(allNewDates);
         // console.log(newDate);
         PlantAPI.updatePlantWaterDate(
             {
@@ -400,7 +398,7 @@ function PlantDetails(p) {
         event.preventDefault();
 
         let updatedList = [...tempDates];
-        console.log(event.target, event.target.value, event.target.name, event.target.id);
+        // console.log(event.target, event.target.value, event.target.name, event.target.id);
         let fieldName = event.target.name;
         let newFieldValue = event.target.value;
         let fieldIndex = event.target.id;
@@ -408,10 +406,10 @@ function PlantDetails(p) {
         if(fieldName === "remove") {
             console.log("Remove the date from this index in the list");
             updatedList.splice(fieldIndex, 1);
-            console.log(updatedList);
+            // console.log(updatedList);
         }
         if(fieldName === "lastWateredDate" && fieldIndex !== "") {
-            console.log("Update" + updatedDates[fieldIndex] + "to this date: ", newFieldValue);
+            // console.log("Update" + updatedDates[fieldIndex] + "to this date: ", newFieldValue);
             updatedList[fieldIndex] = newFieldValue;
         }
 
@@ -433,9 +431,9 @@ function PlantDetails(p) {
     }
 
     function getWaterDay(day) {
-        console.log("Day is " + day)
-        console.log("New date constructor says" + new Date(day).getDay())
-        console.log("day of the week is: " + allDays[new Date(day.replace(/-/g, '/')).getDay()])
+        // console.log("Day is " + day)
+        // console.log("New date constructor says" + new Date(day).getDay())
+        // console.log("day of the week is: " + allDays[new Date(day.replace(/-/g, '/')).getDay()])
         let dayOfWeek = allDays[new Date(day.replace(/-/g, '/')).getDay()]
         return dayOfWeek;
     }

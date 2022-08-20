@@ -13,16 +13,17 @@ const HeaderAll = (data) => {
 
   console.log("HeaderAll component initialized");
     // const plants = data.plants;
-    let location = useLocation();
-    let pathname = location.pathname.slice(1);
-    // let plantname = location.state.name;
-    // let images = [window, soil, propagation];
+    let { pathname, state } = useLocation();
+    let pathName = pathname.slice(1);
+    let name = state ? state.name : null;
     const [preferredBackground, setPreferredBackground] = useState(window);
+
+    console.log("Path names on the header page", pathname, "pathName", pathName)
 
     useEffect(() => {
       console.log("Header rerendered")
 
-      if(pathname === null || pathname === "") {
+      if(pathName === null || pathName === "") {
 
         const interval = setInterval(() => {
           changeImage()
@@ -38,8 +39,8 @@ const HeaderAll = (data) => {
     });
 
     const getPlantName = () => {
-      if(location.state.name) {
-        return location.state.name
+      if(name) {
+        return name
       }
     }
 
@@ -54,19 +55,19 @@ const HeaderAll = (data) => {
     }
 
     const otherBackgrounds = () => {
-      if(pathname === 'plants') {
+      if(pathName === 'plants') {
         setPreferredBackground(propagation)
       }
 
-      if(pathname === 'weather') {
+      if(pathName === 'weather') {
         setPreferredBackground(weat)
       }
 
-      if(pathname === 'tasks') {
+      if(pathName === 'tasks') {
         setPreferredBackground(deskplants)
       }
 
-      if(pathname !== 'plants' && pathname !== 'weather' && pathname !== 'tasks') {
+      if(pathName !== 'plants' && pathName !== 'weather' && pathName !== 'tasks') {
         setPreferredBackground(window)
       }
 
@@ -74,21 +75,27 @@ const HeaderAll = (data) => {
 
     return (
       <>
-        {(pathname === null || pathname === "") &&
-          <div className="header-main"
-            style={{backgroundImage: `url(${preferredBackground})`}}>
-            <p className="page-header">{pathname}</p>
-        </div>}
-        {pathname === "plantdetails" && getPlantName() && <div className="header-sub"
-          style={{backgroundImage: `url(${preferredBackground})`}}>
-          <p className="page-header">{getPlantName()}</p>
-          </div>
-          }
-        {pathname !== null && pathname !== "" && pathname !== "plantdetails" &&
-          <div className="header-sub"
-          style={{backgroundImage: `url(${preferredBackground})`}}>
-          <p className="page-header">{pathname}</p>
-          </div> }
+        {pathName === null || pathName === "" ?
+            <div 
+              className="header-main"
+              style={{backgroundImage: `url(${preferredBackground})`}}
+            >
+              <p className="page-header">{pathName}</p>
+            </div>
+        : pathName.includes("plants") && getPlantName() ? 
+            <div 
+              className="header-sub"
+              style={{backgroundImage: `url(${preferredBackground})`}}
+            >
+                <p className="page-header">{getPlantName()}</p>
+            </div>
+        : pathName !== null && pathName !== "" && pathName !== "plantdetails" ?
+            <div 
+              className="header-sub"
+              style={{backgroundImage: `url(${preferredBackground})`}}>
+                <p className="page-header">{pathName}</p>
+            </div> 
+        : null }
       </>
      
     )

@@ -26,10 +26,10 @@ const PlantCard = (props) => {
         // console.log(name);
 
         // let newTitle = "plant";
-        // let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
+        let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
         
         // console.log(id);
-        navigate("/plantdetails",
+        navigate(`/plants/${setPathname}`,
             // pathname: `${newTitle}/${setPathname}`,
             // pathname: `plant/${setPathname}`,
             {state: { detail: event.target.id,
