@@ -17,6 +17,7 @@ const HeaderAll = (data) => {
     let pathName = pathname.slice(1);
     let name = state ? state.name : null;
     const [preferredBackground, setPreferredBackground] = useState(window);
+    let allPaths = ['plants', 'addnewplants', 'archive', 'editing', 'outdoor', 'planning', 'tasks', 'watering', 'weather']
 
     console.log("Path names on the header page", pathname, "pathName", pathName)
 
@@ -82,7 +83,7 @@ const HeaderAll = (data) => {
             >
               <p className="page-header">{pathName}</p>
             </div>
-        : pathName.includes("plants") && getPlantName() ? 
+        : !allPaths.includes(pathName) && getPlantName() ? 
             <div 
               className="header-sub"
               style={{backgroundImage: `url(${preferredBackground})`}}

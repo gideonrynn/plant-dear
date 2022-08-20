@@ -134,10 +134,15 @@ const PlantPlanningBlock = (data) => {
      }
 
     //reuseable
-    function handleClick(event, id) {
+    function handleClick(event, name) {
+        event.preventDefault();
+
+        let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
+
+        navigate(`/plants/${setPathname}`,
    
-        navigate("/plantdetails",
-            { state: { detail: event.target.id }});
+            {state: { detail: event.target.id,
+                    name: name }});
     }
 
     //reuseable
@@ -281,7 +286,7 @@ const PlantPlanningBlock = (data) => {
             wateredDate = selectedDate;
         }
 
-        
+        console.log("updateWaterDate function: ids, wateredDate", ids, wateredDate);
 
         PlantAPI.updatePlantWaterDate(
             {
@@ -369,7 +374,7 @@ const PlantPlanningBlock = (data) => {
                                             className="plant-table-row watering-details"
                                             
                                             id={plants._id} 
-                                            onClick={handleClick}>
+                                            onClick={(e) => handleClick(e, plants.name)}>
                                                 {plants.name}
                                         </th>
                                         <th className="watering-details">{plants.locationSec}</th>
@@ -454,7 +459,7 @@ const PlantPlanningBlock = (data) => {
                                             className="plant-table-row watering-details"
                                             
                                             id={plants._id} 
-                                            onClick={handleClick}>
+                                            onClick={(e) => handleClick(e, plants.name)}>
                                                 {plants.name}
                                         </th>
                                         <th className="watering-details">{plants.locationSec}</th>
@@ -539,7 +544,7 @@ const PlantPlanningBlock = (data) => {
                                             className="plant-table-row watering-details"
                                             
                                             id={plants._id} 
-                                            onClick={handleClick}>
+                                            onClick={(e) => handleClick(e, plants.name)}>
                                                 {plants.name}
                                         </th>
                                         <th className="watering-details">{plants.locationSec}</th>
@@ -626,7 +631,7 @@ const PlantPlanningBlock = (data) => {
                                     className="plant-table-row watering-details"
                                     
                                     id={plants._id} 
-                                    onClick={handleClick}>
+                                    onClick={(e) => handleClick(e, plants.name)}>
                                         {plants.name}
                                 </th>
                                 <th className="watering-details">{plants.locationSec}</th>

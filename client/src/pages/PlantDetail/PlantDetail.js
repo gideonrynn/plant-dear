@@ -17,9 +17,9 @@ function PlantDetail(hist) {
     console.log("PlantDetail parent page initialized, with context");
 
     const { state } = useLocation();
-    console.log("This is the state from the location object", state);
-    const id = state.detail;
     const { activePlants, setUpdate } = useContext(PlantContext);
+    // console.log("This is the state from the location object", state);
+    const id = state.detail;
     
     const [thisPlant, setThisPlant] = useState();
     const [thisPlantId, setThisPlantId] = useState();

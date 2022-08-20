@@ -32,18 +32,16 @@ function App() {
           <HeaderAll/>
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/archive" element={<Plants/>}/>
-            <Route path="/plants" element={<Sorting/>}/>
-            <Route path="/watering" element={<Watering/>}/>
-            <Route path="/outdoor" element={<Outdoor/>}/>
-            <Route path="/plants/:plantname" element={<PlantDetail/>}/>
-            {/* <Route path="/plantdetail" element={PlantDetail}/> */}
-            <Route path="/weather" element={<Weather/>}/>
+            <Route path="/:plantname" element={<PlantDetail/>}/>
             <Route path="/addnewplants" element={<AddNewPlant/>}/>
-            <Route path="/tasks" element={<Tasks/>}/>
-            <Route path="/planning" element={<Planning/>}/>
+            <Route path="/archive" element={<Plants/>}/>
             <Route path="/editing" element={<Editing/>}/>
-            {/* <Route exact path="/dashboard" element={Dashboard}/> */}
+            <Route path="/outdoor" element={<Outdoor/>}/>
+            <Route path="/plants" element={<Sorting/>}/>
+            <Route path="/planning" element={<Planning/>}/>
+            <Route path="/tasks" element={<Tasks/>}/>
+            <Route path="/watering" element={<Watering/>}/>
+            <Route path="/weather" element={<Weather/>}/>           
           </Routes>
           </PlantProvider>
         </WeatherProvider>

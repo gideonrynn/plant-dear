@@ -88,42 +88,6 @@ export function getLocalDate(date) {
 } 
 
 
-export function getLongDayOfTheWeek(dayAsNumber) {
-
-    let yourDayofWeek = "";
-
-    switch (dayAsNumber) {
-        case 0:
-            yourDayofWeek = "Sunday";
-            break;
-        case 1:
-            yourDayofWeek = "Monday";
-            break;
-        case 2:
-            yourDayofWeek = "Tuesday";
-            break;
-        case 3:
-            yourDayofWeek = "Wednesday";
-            break;
-        case 4:
-            yourDayofWeek = "Thursday";
-            break;
-        case 5:
-            yourDayofWeek = "Friday";
-            break;
-        case 6:
-            yourDayofWeek = "Saturday";
-            break;
-        case 7:
-            yourDayofWeek = "Sunday";
-            break;
-        default:
-            yourDayofWeek = "None";
-        }
-        return yourDayofWeek;
-}
-
-
 export function getNumberDayOfWeek(dayAsLongString) {
 
     let yourDayofWeek = "";
@@ -154,4 +118,94 @@ export function getNumberDayOfWeek(dayAsLongString) {
             yourDayofWeek = null;
         }
         return yourDayofWeek;
+}
+
+export function getLongDayOfTheWeek(dayAsNumber) {
+
+    let yourDayofWeek = "";
+    let color = "";
+
+    switch (dayAsNumber) {
+        case 0:
+            yourDayofWeek = "Sunday";
+            color = "#D565D5"; //pink
+            break;
+        case 1:
+            yourDayofWeek = "Monday";
+            color = "#AA3939"; //red
+            break;
+        case 2:
+            yourDayofWeek = "Tuesday";
+            color = "#E3963E"; //orange
+            break;
+        case 3:
+            yourDayofWeek = "Wednesday";
+            color = "#F1DB68"; //yellow
+            break;
+        case 4:
+            yourDayofWeek = "Thursday";
+            color = "#639F49"; //green
+            break;
+        case 5:
+            yourDayofWeek = "Friday";
+            color = "#49689F"; //blue
+            break;
+        case 6:
+            yourDayofWeek = "Saturday";
+            color = "#8A4E9E"; //purple
+            break;
+        case 7:
+            yourDayofWeek = "Sunday";
+            color = "#D565D5"; //pink
+            break;
+        default:
+            yourDayofWeek = "None";
+            color = "#FFFFFF"; //white
+        }
+        return yourDayofWeek;
+}
+
+export function getLongDayOfTheWeekAndColor(dayAsNumber) {
+
+    let yourDayofWeek = "";
+    let color = "";
+
+    switch (dayAsNumber) {
+        case 0:
+            yourDayofWeek = "Sunday";
+            color = "#D565D5"; //pink
+            break;
+        case 1:
+            yourDayofWeek = "Monday";
+            color = "#AA3939"; //red
+            break;
+        case 2:
+            yourDayofWeek = "Tuesday";
+            color = "#E3963E"; //orange
+            break;
+        case 3:
+            yourDayofWeek = "Wednesday";
+            color = "#F1DB68"; //yellow
+            break;
+        case 4:
+            yourDayofWeek = "Thursday";
+            color = "#639F49"; //green
+            break;
+        case 5:
+            yourDayofWeek = "Friday";
+            color = "#49689F"; //blue
+            break;
+        case 6:
+            yourDayofWeek = "Saturday";
+            color = "#8A4E9E"; //purple
+            break;
+        case 7:
+            yourDayofWeek = "Sunday";
+            color = "#D565D5"; //pink
+            break;
+        default:
+            yourDayofWeek = "None";
+            color = "#FFFFFF"; //white
+        }
+        return { yourDayofWeek, color };
 }

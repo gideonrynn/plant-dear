@@ -20,20 +20,22 @@ const PlantCard = (props) => {
     const navigate = useNavigate();
 
     //uses path identified in App router section to push a specific plant's details to another component for additional review
+    //this navigate should be in a util somewhere to make it more centrally available
     function handleClick(event, name) {
         event.preventDefault();
-        // console.log("clicked", event.target.id);
-        // console.log(name);
 
-        // let newTitle = "plant";
-        let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
         
-        // console.log(id);
-        navigate(`/plants/${setPathname}`,
-            // pathname: `${newTitle}/${setPathname}`,
-            // pathname: `plant/${setPathname}`,
-            {state: { detail: event.target.id,
-                    name: name }});
+        //replace whitespace with dash and single ", ', (, or ) with an empty string
+        let setPathname = name
+                            .toLowerCase()
+                            .replace(/\s/g, "-")
+                            .replace(/["'`‘’()]/g, "")
+        
+        navigate(`/${setPathname}`,
+            {state: 
+                { detail: event.target.id,
+                    name: name }
+            });
     }
 
     return (
