@@ -190,7 +190,7 @@ const PlantPlanningBlock = (data) => {
         //to do that, I need to calculate the day BEFORE the SECOND watering date
         let dayBeforeScheduled = nextScheduleDay === 0 ? 6 : nextScheduleDay - 1;
         let differenceUntilPreSchedule = (dayOfWeek - dayBeforeScheduled);
-        console.log("Difference until schedule = ", differenceUntilPreSchedule);
+        console.log("Difference until next schedule = ", differenceUntilPreSchedule);
  
         setClosestScheduleDay(closestScheduleDay);
         setNextScheduleDay(nextScheduleDay);
@@ -225,6 +225,7 @@ const PlantPlanningBlock = (data) => {
                     plant["duration"] = getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 2]) - getDifferenceInDays(plant.lastWatered[plant.lastWatered.length - 1]);
 
                     // if the waterAdHoc date exists to represent a "skip to" date, use that to get the difference, otherwise, calculate between water rate and the last time it was watered
+                    //difference represents how many days until it needs to be watered
                     plant["difference"] = plant.waterAdHoc ? getDifferenceInDays(plant.waterAdHoc.split('T')[0]) : (plant.daysAgo - plant.waterRate);
 
                     let durationDifference = plant.difference;
@@ -235,6 +236,11 @@ const PlantPlanningBlock = (data) => {
 
                     //calculate number of days until watering and push plants
                     //using 7 as cap because with regular schedule, 7 generally fits as timeframe following next watering date. but will need to update this after I begin tracking more than closest and next dates, as this would need the next schedule date after that
+
+                    console.log("durationDifference before push", durationDifference);
+                    console.log("differenceUntilPreschedule before push", differenceUntilPreSchedule);
+                    console.log("is the number of days we have left until the plant needs to be watered greater than the next schedule date: ", durationDifference >= differenceUntilPreSchedule);
+                    //setting differenceUntilPreschedule to a negative solves it for today
                     if (durationDifference >= differenceUntilPreSchedule ) {
                         ready.push(plant);
                     } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -9) {
@@ -389,7 +395,7 @@ const PlantPlanningBlock = (data) => {
                                         <th
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2])) + " days" : "n/a"} 
                                         </th>
                                         
 
@@ -474,7 +480,7 @@ const PlantPlanningBlock = (data) => {
                                         <th
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2])) + " days" : "n/a"} 
                                         </th>
                                         
 
