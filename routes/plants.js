@@ -45,6 +45,7 @@ router.post("/plants", ({body}, res) => {
     })
     .catch(err => {
       res.status(404).json(err);
+      console.log(err);
     });
 
 });
@@ -118,6 +119,7 @@ router.post("/plants/watering", (req, res) => {
   })
   .catch(err => {
     res.status(404).json(err);
+    console.log(err);
   });
 })
 

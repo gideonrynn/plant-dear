@@ -17,7 +17,7 @@ export default {
     getOnePlant: function(id) {
       return axios.get("/api/plantsbyid/" + id);
     },
-
+    // render has an issue with this
     addPlant: function(newPlantData) {
       return axios.post("/api/plants/", newPlantData)
     },
@@ -25,6 +25,7 @@ export default {
       console.log(id, updatedPlantData)
       return axios.put("api/plants/" + id, updatedPlantData)
     },
+    // render has an issue with this
     updatePlantWaterDate: function (updatedData) {
       console.log(updatedData)
       return axios.post("api/plants/watering/", updatedData)
