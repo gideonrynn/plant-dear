@@ -19,7 +19,8 @@ export default {
     },
     // render has an issue with this
     addPlant: function(newPlantData) {
-      return axios.post("/api/plants/", newPlantData)
+      console.log("This is the data getting passed to the api", newPlantData)
+      return axios.post("/api/plants/", newPlantData);
     },
     updatePlant: function (id, updatedPlantData) {
       console.log(id, updatedPlantData)
@@ -27,8 +28,8 @@ export default {
     },
     // render has an issue with this
     updatePlantWaterDate: function (updatedData) {
-      console.log(updatedData)
-      return axios.post("api/plants/watering/", updatedData)
+      console.log("This is the data getting passed to the api", updatedData);
+      return axios.post("api/plants/watering/", updatedData);
     },
     // updateManyPlants: function(updatedPlantData) {
     //   console.log(updatedPlantData)

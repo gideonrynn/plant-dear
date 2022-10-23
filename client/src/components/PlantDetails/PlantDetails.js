@@ -320,6 +320,7 @@ function PlantDetails(p) {
         let allNewDates = [...tempDates, newDate];
         console.log(allNewDates);
         // console.log(newDate);
+        console.log("Submitting data to updatePlantWaterDate api", allNewDates);
         PlantAPI.updatePlantWaterDate(
             {
                 ids: [id],

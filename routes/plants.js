@@ -38,6 +38,7 @@ router.get('/plantsinprogress', (req, res) => {
 
 // use body received from browser to create new plant entry in db
 router.post("/plants", ({body}, res) => {
+  console.log("This should log that data is making it to the server", body);
 
   db.Plant.create(body)
     .then(newplant => {
@@ -102,7 +103,7 @@ router.post("/plants/watering", (req, res) => {
   
   // let id = req.params.id
   // console.log("id",id)
-  console.log(req.body);
+  console.log("This should log that data is getting to the server", req.body);
   db.Plant.updateMany(
       {_id: 
         {

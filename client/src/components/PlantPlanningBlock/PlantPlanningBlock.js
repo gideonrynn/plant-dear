@@ -282,6 +282,7 @@ const PlantPlanningBlock = (data) => {
         }
 
         
+        console.log("Submitting data to updatePlantWaterDate api", ids, wateredDate);
 
         PlantAPI.updatePlantWaterDate(
             {
