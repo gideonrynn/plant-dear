@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const routes = require("./routes");
 const path = require("path");
+const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 
 //required dotenv to enable environmental variables
@@ -11,6 +12,7 @@ require('dotenv').config({path:'.env'})
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // Serve up static assets (for example on Heroku)
 if (process.env.NODE_ENV === "production") {
