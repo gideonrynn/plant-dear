@@ -265,35 +265,35 @@ export const WeatherProvider = ({children}) => {
 
     useEffect(() => {
         
-        WeatherAPI.getTodaysWeather()
-            .then(res => {
-                const currentWeather = res.data;
-                // console.log(currentWeather);
-                if (currentWeather.temp) {
-                    setCurrentWeather(currentWeather);
-                    console.log("Current weather usecontext useEffect with api is active");
-                } else {
-                    console.log("Current weather api is not active; using default values");
-                }
-            })
-            .catch(err => console.log(err));
+        // WeatherAPI.getTodaysWeather()
+        //     .then(res => {
+        //         const currentWeather = res.data;
+        //         // console.log(currentWeather);
+        //         if (currentWeather.temp) {
+        //             setCurrentWeather(currentWeather);
+        //             console.log("Current weather usecontext useEffect with api is active");
+        //         } else {
+        //             console.log("Current weather api is not active; using default values");
+        //         }
+        //     })
+        //     .catch(err => console.log(err));
         
     }, []);
 
     useEffect(() => {
         
-        WeatherAPI.getForecastWeather()
-            .then(res => {
-                const forecastWeather = res.data;
-                // console.log(forecastWeather);
-                if (forecastWeather) {
-                    setForecastWeather(forecastWeather);
-                    console.log("Forecast weather usecontext useEffect with api is active");
-                } else {
-                    console.log("Forecast weather api is not active; using default values");
-                }
-            })
-            .catch(err => console.log(err));
+        // WeatherAPI.getForecastWeather()
+        //     .then(res => {
+        //         const forecastWeather = res.data;
+        //         // console.log(forecastWeather);
+        //         if (forecastWeather) {
+        //             setForecastWeather(forecastWeather);
+        //             console.log("Forecast weather usecontext useEffect with api is active");
+        //         } else {
+        //             console.log("Forecast weather api is not active; using default values");
+        //         }
+        //     })
+        //     .catch(err => console.log(err));
         
     }, []);
 
