@@ -4,8 +4,6 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^14.3.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "grommet": "^2.25.1",
@@ -38,8 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "is-svg": "^4.3.2"
   }
 }
