@@ -3,7 +3,7 @@ import React from "react";
 import "./style.css";
 // import PlantAPI from "../../utils/PlantsAPI"
 // import WeatherAPI from "../../utils/WeatherAPI"
-import { Box, DataChart } from 'grommet';
+// import { Box, DataChart } from 'grommet';
 // import { grommet } from 'grommet/themes';
 
 
@@ -28,10 +28,9 @@ function WeatherForecast(weather) {
     return (
        
         <>
-            <Box  
+            {/* <Box  
                 // width={{ min: 'small', max: 'large' }} 
                 className="weather-forecast-section2">
-                {/* <h1>Forecast</h1> */}
             <DataChart
                 data={data}
                 series={['date', 'temp']}
@@ -59,7 +58,7 @@ function WeatherForecast(weather) {
                 detail
                 legend={true}
             />
-            </Box>
+            </Box> */}
         </>
 
     );

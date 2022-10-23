@@ -38,6 +38,8 @@ const PlantPlanningBlock = (data) => {
     const [closestScheduleDay, setClosestScheduleDay] = useState("");
     const [nextScheduleDay, setNextScheduleDay] = useState("");
     const [differenceUntilPreSchedule, setDifferenceUntilPreSchedule] = useState("");
+    const [nextWaterPlant, setNextWaterPlant] = useState({});
+    const [nextWaterId, setNextWaterId] = useState({});
 
     let sortPairings = {
         name: "name",
@@ -139,7 +141,7 @@ const PlantPlanningBlock = (data) => {
 
         let setPathname = name.toLowerCase().replace(/\s/g, "-").replace(/['()]/g, "");
 
-        navigate(`/plants/${setPathname}`,
+        navigate(`/${setPathname}`,
    
             {state: { detail: event.target.id,
                     name: name }});
@@ -155,6 +157,21 @@ const PlantPlanningBlock = (data) => {
             setIds([...ids, fielddefaultValue]);
         }
 
+    };
+
+    // used for capturing changes into nextWaterPlant state variable that are later submitted to db when handleformsubmit runs
+    function handleNextWaterChange(event) {
+        // const { name, defaultValue } = event.target;
+        let fieldId = event.target.id;
+        let fieldName = event.target.name;
+        let fielddefaultValue = event.target.value;
+        setNextWaterPlant({...nextWaterPlant, [fieldName]: fielddefaultValue});
+        setNextWaterId(fieldId);
+        // console.log(fieldName, fielddefaultValue);
+        console.log("Next water input logging");
+        console.log(nextWaterPlant);
+        console.log(fieldId);
+        console.log(nextWaterId);
     };
 
     //specific to planning
@@ -320,6 +337,26 @@ const PlantPlanningBlock = (data) => {
 
     }
 
+     // submits updates collected in modplants to the db
+     function handleNextWaterSubmit(event) {
+        event.preventDefault();
+        console.log(nextWaterPlant);
+        console.log("Id of the plant being submitted", nextWaterId);
+
+        // setButtonColor('button-submitted');
+
+        PlantAPI.updatePlant(
+            nextWaterId,
+            {
+            waterAdHoc: nextWaterPlant.waterAdHoc,
+        })
+            .then(res => {
+                console.log("submitted plant detail update", res)
+            })
+            .catch(err => console.log(err))
+
+    }
+
     
     //boil down to one component, reuseable
     return (
@@ -338,6 +375,18 @@ const PlantPlanningBlock = (data) => {
                     <div className="by-duration">
                         <div className="by-duration-plants">
 
+                        <div>
+                            <span className="plant-details-label">Select Date </span>
+                            
+                                <input
+                                    type="date"
+                                    name="lastWatered"
+                                    defaultValue={todaysDateParsed}
+                                    className="plant-details-selected-date"
+                                    onChange={(e) => setSelectedDate(e.target.value)}/>
+                            </div>
+                            <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
+
                             <table className="watering-table">
 
                             <thead className="watering-col-header">
@@ -351,6 +400,7 @@ const PlantPlanningBlock = (data) => {
                                     <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
+                                    <th className="watering-col-header">Next Water Date</th>
                                     
 
                                 </tr>
@@ -396,7 +446,19 @@ const PlantPlanningBlock = (data) => {
                                             id={plants._id}>
                                                 {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
-                                        
+                                        <th
+                                            className="water-metrics watering-details" 
+                                            id={plants._id}>
+                                                <input 
+                                                id={plants._id}
+                                                type="date"
+                                                name="waterAdHoc"
+                                                className="plant-details-specific"
+                                                defaultValue={plants.waterAdHoc ? plants.waterAdHoc.split('T')[0] : null}
+                                                onChange={handleNextWaterChange}
+                                            />
+                                            <button type="submit" className="water-metrics" onClick={handleNextWaterSubmit}>Save</button> 
+                                        </th>
 
                                     </tr>
                                 ))}
@@ -405,7 +467,14 @@ const PlantPlanningBlock = (data) => {
                               
                             </tbody>
                             </table>
-                            <div>
+                            
+            
+                        </div>
+
+                        <h1>{getLongDayOfTheWeek(nextScheduleDay)}: {upcomingPlants.length}</h1>
+       
+                        <div className="by-duration-plants">
+                        <div>
                             <span className="plant-details-label">Select Date </span>
                             
                                 <input
@@ -416,12 +485,6 @@ const PlantPlanningBlock = (data) => {
                                     onChange={(e) => setSelectedDate(e.target.value)}/>
                             </div>
                             <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
-            
-                        </div>
-
-                        <h1>{getLongDayOfTheWeek(nextScheduleDay)}: {upcomingPlants.length}</h1>
-       
-                        <div className="by-duration-plants">
 
                             <table className="watering-table">
 
@@ -436,6 +499,7 @@ const PlantPlanningBlock = (data) => {
                                     <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
                                     <th className="watering-col-header">Last Duration</th>
                                     <th className="watering-col-header">Previous Duration</th>
+                                    <th className="watering-col-header">Next Water Date</th>
                                     
 
                                 </tr>
@@ -480,6 +544,18 @@ const PlantPlanningBlock = (data) => {
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
                                                 {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
+                                        </th>
+                                        <th
+                                            className="water-metrics watering-details" 
+                                            id={plants._id}>
+                                                <input 
+                                                type="date"
+                                                name="waterAdHoc"
+                                                className="plant-details-specific"
+                                                defaultValue={plants.waterAdHoc ? plants.waterAdHoc.split('T')[0] : null}
+                                                onChange={handleNextWaterChange}
+                                            />
+                                            <button type="submit" className="water-metrics" onClick={handleNextWaterSubmit}>Save</button> 
                                         </th>
                                         
 

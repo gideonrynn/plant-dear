@@ -25,7 +25,7 @@ function PlantDetails(p) {
 
     let date = getLocalDate(new Date());
 
-    console.log("PlantDetails component initialized", p);
+    console.log("PlantDetails component initialized");
 
     const navigate = useNavigate();
 
@@ -321,7 +321,9 @@ function PlantDetails(p) {
                             </div>
                                     
                         </div>
-                            
+                        
+                        
+                        {/* Plant specific data */}
                         <div className="plant-specific-data">
                             <div className="heading-section">
                                     <h1 className="plant-details-section-header">Overview</h1>
@@ -331,6 +333,18 @@ function PlantDetails(p) {
                             </div>
                          
                             <hr></hr>
+                            <div className="plant-details-group">
+                                            <p className="plant-details-comment">Next Water Date</p>
+                                            <input 
+                                                type="date"
+                                                name="waterAdHoc"
+                                                className="plant-details-specific"
+                                                defaultValue={thisPlant.waterAdHoc ? thisPlant.waterAdHoc.split('T')[0] : null}
+                                                onChange={handleInputChange}
+                                            />
+                                            <p><button type="submit" className={"water-button " + buttonColor} onClick={handleFormSubmit}>Save</button></p>
+                                            <p>{updatedMessage}</p>
+                                        </div>
                             <div className="plant-details-group">
                                 <p className="plant-details-label">Description</p>
                                 <p 
@@ -579,7 +593,7 @@ function PlantDetails(p) {
                             </div>
                         </div>
 
-
+                        {/* Instance specific data */}
                         <div className="instance-specific-data">
                             <h1 className="plant-details-section-header">This Plant Dear</h1>
                             <hr></hr>
@@ -667,7 +681,7 @@ function PlantDetails(p) {
                                     <input 
                                         name="waterRate"
                                         className="plant-details"
-                                        defaultValue={thisPlant.waterRate || "not indicated"}
+                                        defaultValue={thisPlant.waterRate}
                                         onChange={handleInputChange}/>
                             </div>
                             <div className="plant-details-group">
@@ -726,10 +740,12 @@ function PlantDetails(p) {
                             <div className="plant-details-group"> 
                                 <p className="plant-details-label">CreatedAt</p>
                                     <input 
+                                        name="createdAt"
                                         className="plant-details"
                                         defaultValue={thisPlant.createdAt ? thisPlant.createdAt.split('T')[0] : thisPlant.createdAt}
-                                        // onChange={handleInputChange}
-                                        readOnly/>
+                                        onChange={handleInputChange}
+                                        //readOnly
+                                        />
                             </div>
                             <div className="plant-details-group"> 
                                 <p className="plant-details-label">UpdatedAt</p>
@@ -797,6 +813,8 @@ function PlantDetails(p) {
                                                 defaultValue={thisPlant.waterAdHoc ? thisPlant.waterAdHoc.split('T')[0] : null}
                                                 onChange={handleInputChange}
                                             />
+                                            <p><button type="submit" className={"water-button " + buttonColor} onClick={handleFormSubmit}>Save</button></p>
+                                            <p>{updatedMessage}</p>
                                         </div>
                                         <div className="plant-details-group">
                                             <p><b>All watering dates</b></p>

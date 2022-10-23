@@ -1,6 +1,6 @@
 
 import React, {useContext} from "react";
-import { Box } from "grommet";
+// import { Box } from "grommet";
 import WeatherForecast from "../WeatherForecast"
 import PlantForecastHardiness from "../PlantForecastHardiness/PlantForecastHardiness.js"
 // import OutdoorPlants from "../../components/OutdoorPlants/"
@@ -44,7 +44,7 @@ function HomeComponents() {
                         </div>
                               
 
-                        <Box gridArea="weatherforecast"
+                        {/* <Box gridArea="weatherforecast"
                                         // height="large"
                                         // background="dark-3"
                                         // pad="medium"
@@ -53,7 +53,7 @@ function HomeComponents() {
 
 
                                 <WeatherForecast weather={forecastWeather}/>
-                        </Box>
+                        </Box> */}
                 </div>
                  
         );

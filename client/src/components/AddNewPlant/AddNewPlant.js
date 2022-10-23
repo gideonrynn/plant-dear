@@ -13,7 +13,7 @@ function AddPlants() {
     // const [show, setShow] = useState(false);
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-    console.log("AddPlants component initialized", activePlants);
+    console.log("AddPlants component initialized");
 
     useEffect(() => {}, []);
 
@@ -51,6 +51,7 @@ function AddPlants() {
             imgURL: newPlant.imgurl,
             links: newPlant.links,
             notes: newPlant.notes,
+            createdAt: newPlant.createdAt,
             description: newPlant.description
         })
             .then(
@@ -83,6 +84,10 @@ function AddPlants() {
                         <option>moist</option>
                     </Form.Control>
                 </Form.Group> */}
+                <Form.Group controlId="formDescription" >
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control as="textarea" placeholder="" name="description" rows="3" onChange={handleInputChange}/>
+                </Form.Group>
                 <Form.Group controlId="formStatus" >
                     <Form.Label>Status</Form.Label>
                     <Form.Control as="select" placeholder="" name="status" onChange={handleInputChange}>
@@ -234,6 +239,13 @@ function AddPlants() {
                         YYYY-MM-DD.
                         </Form.Text>
                 </Form.Group>
+                <Form.Group controlId="formCreatedAt" >
+                    <Form.Label>CreatedAt</Form.Label>
+                    <Form.Control type="text" placeholder="" name="createdAt" onChange={handleInputChange}/>
+                        <Form.Text className="text-muted">
+                        YYYY-MM-DD.
+                        </Form.Text>
+                </Form.Group>
                 <Form.Group controlId="formImgUrl" >
                     <Form.Label>Image URL</Form.Label>
                     <Form.Control type="text" placeholder="" name="imgurl" onChange={handleInputChange}/>
@@ -242,10 +254,7 @@ function AddPlants() {
                     <Form.Label>Links</Form.Label>
                     <Form.Control type="text" placeholder="" name="links" onChange={handleInputChange}/>
                 </Form.Group>
-                <Form.Group controlId="formDescription" >
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control as="textarea" placeholder="" name="description" rows="3" onChange={handleInputChange}/>
-                </Form.Group>
+                
                 <Form.Group controlId="formNotes" >
                     <Form.Label>Notes</Form.Label>
                     <Form.Control as="textarea" placeholder="" name="notes" rows="3" onChange={handleInputChange}/>
