@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaExternalLinkAlt } from "react-icons/fa"
 import Plantling from "../../img/plantling.jpg"
-import MorePlants from "../../img/deskplants.jpeg";
+// import MorePlants from "../../img/deskplants.jpeg";
 import "./Spotlight.css";
 
 const Spotlight = (data) => {

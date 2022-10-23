@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
 // import PlantBlockAll from "../PlantBlockAll/PlantBlock"
-import Outdoor from "../../img/outdoor-1.jpg"
+// import Outdoor from "../../img/outdoor-1.jpg"
 import './OutdoorPlants.css'
 
 
@@ -118,7 +118,7 @@ const OutdoorPlants = (data) => {
                     <div className="outdoor-main">
                         {
                             // outdoorPlantsFirst ? <img src={`/img/${outdoorPlantsFirst.imgURL}`} alt="Outdoor plant" className="outdoor-img-main"/> : ""
-                            <img src={Outdoor} alt="Outdoor plant" className="outdoor-img-main"/>
+                            // <img src={Outdoor} alt="Outdoor plant" className="outdoor-img-main"/>
 
                         }
                     </div>

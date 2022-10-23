@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaExternalLinkAlt } from "react-icons/fa"
 import Plantling from "../../img/plantling.jpg"
-import MorePlants from "../../img/deskplants.jpeg";
+// import MorePlants from "../../img/deskplants.jpeg";
 import "./RecentAdditions.css";
 
 const RecentAdditions = (data) => {
@@ -181,7 +181,7 @@ const RecentAdditions = (data) => {
                                 <p>See all plant dears <span className="g-t">&gt;</span></p>
                             </div>
                             <div className="plant-card-see-more-2">
-                                <img src={MorePlants} alt="See all plants" className=""/>
+                                {/* <img src={MorePlants} alt="See all plants" className=""/> */}
                             </div>
 
                         </div>
@@ -220,7 +220,7 @@ const RecentAdditions = (data) => {
                                 <p>See all plant dears <span className="g-t">&gt;</span></p>
                             </div>
                             <div className="plant-card-see-more-2">
-                                <img src={MorePlants} alt="See all plants" className=""/>
+                                {/* <img src={MorePlants} alt="See all plants" className=""/> */}
                             </div>
 
                         </div>

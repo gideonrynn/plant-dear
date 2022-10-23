@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 // import { FaImages } from 'react-icons/fa';
 // import { useLocation, withRouter } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import window from '../../img/listwindowplants.jpg';
-import propagation from '../../img/propagating.jpg';
+// import window from '../../img/listwindowplants.jpg';
+// import propagation from '../../img/propagating.jpg';
 import soil from '../../img/soily.jpg';
-import weat from '../../img/html-css-animated-weather-icons.gif';
-import deskplants from '../../img/deskplants.jpeg';
+// import weat from '../../img/html-css-animated-weather-icons.gif';
+// import deskplants from '../../img/deskplants.jpeg';
+// import seigaiha from '../../img/seigaiha.png';
 import './HeaderAll.css'
 
 const HeaderAll = (data) => {
@@ -17,7 +18,7 @@ const HeaderAll = (data) => {
     let pathname = location.pathname.slice(1);
     // let plantname = location.state.name;
     // let images = [window, soil, propagation];
-    const [preferredBackground, setPreferredBackground] = useState(window);
+    const [preferredBackground, setPreferredBackground] = useState(soil);
 
     useEffect(() => {
       console.log("Header rerendered")
@@ -45,8 +46,8 @@ const HeaderAll = (data) => {
 
     const changeImage = () => {
       if(preferredBackground === window) {
-        setPreferredBackground(propagation);
-      } else if(preferredBackground === propagation) {
+        setPreferredBackground(soil);
+      } else if(preferredBackground === soil) {
         setPreferredBackground(soil)
       } else {
         setPreferredBackground(window)
@@ -55,19 +56,19 @@ const HeaderAll = (data) => {
 
     const otherBackgrounds = () => {
       if(pathname === 'plants') {
-        setPreferredBackground(propagation)
+        setPreferredBackground(soil)
       }
 
       if(pathname === 'weather') {
-        setPreferredBackground(weat)
+        setPreferredBackground(soil)
       }
 
       if(pathname === 'tasks') {
-        setPreferredBackground(deskplants)
+        setPreferredBackground(soil)
       }
 
       if(pathname !== 'plants' && pathname !== 'weather' && pathname !== 'tasks') {
-        setPreferredBackground(window)
+        setPreferredBackground(soil)
       }
 
     }
