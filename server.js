@@ -13,6 +13,10 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+     next();
+});
 
 // Serve up static assets (for example on Heroku)
 if (process.env.NODE_ENV === "production") {
