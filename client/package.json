@@ -10,7 +10,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "grommet": "^2.25.1",
-    "grommet-icons": "^4.7.0",
+    "grommet-icons": "^4.9.0",
     "react": "^17.0.2",
     "react-awesome-slider": "^4.1.0",
     "react-bootstrap": "^2.4.0",
