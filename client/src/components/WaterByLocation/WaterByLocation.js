@@ -5,6 +5,15 @@ import PlantAPI from "../../utils/PlantsAPI"
 import { useNavigate } from 'react-router-dom';
 import './WaterByLocation.css'
 // import { set } from 'mongoose';
+import { 
+    // date, 
+    getDifferenceInDays, 
+    getLocalDate, 
+    // getLongDayOfTheWeek,
+    getLongDayOfTheWeekAndColor,
+    // getNumberDayOfWeek, 
+    // parseToYYYYMMDD 
+    } from "../../utils/DateUtils"
 
 
 const WaterByLocation = (data) => {
@@ -143,6 +152,8 @@ const WaterByLocation = (data) => {
                                 <tr className="watering-col-header">
                                     <th className="watering-col-header">Watered</th>
                                     <th className="watering-col-header">Name</th>
+                                    <th className="watering-col-header">Watering Pref</th>
+                                    <th className="watering-col-header">Difference</th>
                                     <th className="watering-col-header">Watering Rate</th>
                                     <th className="watering-col-header">Last Watered</th>
                                     <th className="watering-col-header">Last Duration</th>
@@ -156,8 +167,9 @@ const WaterByLocation = (data) => {
                             <tbody className="watering-details">
 
                                 {plants.map(plants => (
-                                    <tr key={plants._id}>
-                                        <th  className="watering-details">
+                                    <tr key={plants._id} style={{ backgroundColor: plants.waterAdHoc ? getDifferenceInDays(plants.waterAdHoc.split('T')[0]) : ((getDifferenceInDays((plants.lastWatered && plants.lastWatered.length > 1 ? plants.lastWatered[plants.lastWatered.length - 1] : 0))) - plants.waterRate) >= 0 ? '#8ac8db' : plants.waterAdHoc ? getDifferenceInDays(plants.waterAdHoc.split('T')[0]) : ((getDifferenceInDays((plants.lastWatered && plants.lastWatered.length > 1 ? plants.lastWatered[plants.lastWatered.length - 1] : 0))) - plants.waterRate) >= -2 ? '#69af67' : plants.waterAdHoc ? getDifferenceInDays(plants.waterAdHoc.split('T')[0]) : ((getDifferenceInDays((plants.lastWatered && plants.lastWatered.length > 1 ? plants.lastWatered[plants.lastWatered.length - 1] : 0))) - plants.waterRate) >= -3 ? '#ede3d0' : ''}}>
+                                        
+                                        <th  className="watering-details" >
                                             <input 
                                                 type="checkbox" 
                                                 name="today"
@@ -174,20 +186,22 @@ const WaterByLocation = (data) => {
                                                 {plants.name}
                                         </th>
                                         <th className="watering-details">{plants.waterPref}</th>
+                                        <th className="watering-details" >{plants.waterAdHoc ? getDifferenceInDays(plants.waterAdHoc.split('T')[0]) : ((getDifferenceInDays((plants.lastWatered && plants.lastWatered.length > 1 ? plants.lastWatered[plants.lastWatered.length - 1] : 0))) - plants.waterRate)}</th>
+                                        <th className="watering-details">{plants.waterRate}</th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}> 
-                                                {plants.lastWatered && plants.lastWatered.length > 0 ? Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay) + " day(s) ago" : "not yet watered"} 
+                                                 {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
                                         </th>
                                         <th 
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 2]).getTime())/ oneDay) - Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"}
                                         </th>
                                         <th
                                             className="water-metrics watering-details" 
                                             id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 3]).getTime())/ oneDay) - Math.round((date.getTime() - new Date(plants.lastWatered[plants.lastWatered.length - 1]).getTime())/ oneDay)) + " days" : "n/a"} 
+                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
                                         </th>
                                         
 
