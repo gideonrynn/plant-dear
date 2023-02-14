@@ -15,6 +15,7 @@ import "./PlantPlanningBlock.css";
 
 const PlantPlanningBlock = (data) => {
     //This component displays water rate alongside duration data for the purpose of watering multiple plants at the same time.
+    //This component is also meant to capture all planned tasks, not just watering
     console.log("PlantPlanningBlock component initialized, with context");
 
 
