@@ -184,13 +184,14 @@ const PlantPlanningBlock = (data) => {
         //at some point will want to take the schedule dates and ensure they are sorted in order
         //Sunday (0), Wednesday (3)
         let scheduleDays = [0, 3];
-        let tempArray = [];
+        let tempArray = []; //setting but not using this yet
         let nextTwoWeeks = [];
         let dayOfWeek = date.getDay();
         let closestScheduleDay = "";
         let nextScheduleDay = "";
 
         for (let i = 0; i < 14; i++) {
+            //this will look like the default date object format Fri Feb 17 2023 01:00:00 GMT-0500
             let tempDate = getLocalDate(new Date());
             //use this when testing a specific date
             // let tempDate = getLocalDate(new Date('Fri Feb 17 2023 01:00:00 GMT-0500'));
@@ -216,7 +217,7 @@ const PlantPlanningBlock = (data) => {
             console.log('Next schedule day', nextScheduleDay);
         }
 
-        console.log("The next two weeks from today", tempArray);
+        // console.log("The next two weeks from today", tempArray);
         
 
         //this is designed to push plants based on whether or not day is a schedule day
@@ -341,8 +342,8 @@ const PlantPlanningBlock = (data) => {
             })
             .then((ids) => {
 
-                let newReadyPlants = readyPlants;
-                console.log("New ready plants!", newReadyPlants);
+                // let newReadyPlants = readyPlants;
+                // console.log("New ready plants!", newReadyPlants);
                 console.log("response from db", ids);             
                 setIds([]);
                 setSelectedDate("");
@@ -351,6 +352,7 @@ const PlantPlanningBlock = (data) => {
             })
             .then((result) => {
                 updateReadyPlants();
+                updateUpcomingPlants();
             })
             .catch(err => console.log(err))
         
@@ -362,6 +364,14 @@ const PlantPlanningBlock = (data) => {
         let newReadyPlants = readyPlants.filter(i => !ids.includes(i._id));
         // console.log(newReadyPlants);
         setReadyPlants(newReadyPlants);
+
+    }
+
+    function updateUpcomingPlants() {
+
+        let newUpcomingPlants = upcomingPlants.filter(i => !ids.includes(i._id));
+        // console.log(newReadyPlants);
+        setUpcomingPlants(newUpcomingPlants);
 
     }
 
