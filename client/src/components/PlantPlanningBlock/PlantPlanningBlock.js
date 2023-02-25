@@ -197,19 +197,20 @@ const PlantPlanningBlock = (data) => {
             let updatedTempDate = tempDate.setDate(tempDate.getDate() + parseInt([i]));
             tempArray.push(updatedTempDate);
             console.log('tempDate', tempDate);
-            console.log('updatedtempDate', updatedTempDate);
+            console.log('updatedtempDate', new Date(updatedTempDate));
 
             //convert back to date object so the day of the week as a number can be obtained
             let potentialScheduleDate = new Date(updatedTempDate).getDay();
             console.log('potentialScheduleDate', potentialScheduleDate);
             if (closestScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
                 closestScheduleDay = potentialScheduleDate;
+                console.log("Closest schedule day has been set", closestScheduleDay);
                 //go to the next iteration once this value has been retrieved
                 continue;
             }
             if (closestScheduleDay !== "" && nextScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
                 nextScheduleDay = potentialScheduleDate;
-                console.log(nextScheduleDay, "assigned as it's in the schedule days array");
+                console.log("Next schedule day assigned as it's in the schedule days array", nextScheduleDay);
                 //don't break the loop yet, down the road want to do more with the dates in this array
             }
             console.log('Next schedule day', nextScheduleDay);
@@ -218,9 +219,19 @@ const PlantPlanningBlock = (data) => {
         console.log("The next two weeks from today", tempArray);
         
 
+        //this is designed to push plants based on whether or not day is a schedule day
+        //if you don't do this, it does weird things with the sorting
+        let dayToUse = "";
+        if(scheduleDays.includes(dayOfWeek)) {
+            dayToUse = nextScheduleDay;
+            console.log("Today is a schedule day, so sort by nextScheduleDay", dayToUse);
+        } else {
+            dayToUse = closestScheduleDay;
+            console.log("Today is not a schedule day, so sort by closestScheduleDay", dayToUse);
+        }
         //I want to see what plants will be scheduled on the next watering dates
         //to do that, I need to calculate the day BEFORE the SECOND watering date
-        let dayBeforeScheduled = nextScheduleDay === 0 ? 6 : nextScheduleDay - 1;
+        let dayBeforeScheduled = dayToUse === 0 ? 6 : dayToUse - 1;
         console.log("Next schedule day", nextScheduleDay);
         console.log("Day before the next scheduled date as a number", dayBeforeScheduled);
         console.log("Day of week as a number", dayOfWeek);
@@ -265,7 +276,7 @@ const PlantPlanningBlock = (data) => {
                     let durationDifference = plant.difference;
                         
 
-                    console.log("The closest schedule date and the nextScheduleDate in sequence Three", closestScheduleDay, nextScheduleDay);
+                    console.log("The closest schedule date and the nextScheduleDate in sequence", closestScheduleDay, nextScheduleDay);
                     //get the next day AS A NUMBER of the week that is one day before the next scheduled date
 
                     //calculate number of days until watering and push plants
@@ -274,9 +285,9 @@ const PlantPlanningBlock = (data) => {
                         console.log("send to ready because duration difference is greater than or equal to differenceUntilpreSchedule");
                         ready.push(plant);
                     } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -9) {
-                        console.log("send to upcoming because duration difference is less than differenceUntilpreSchedule but greater than -9");
-                        console.log("durationDifference", durationDifference);
-                        console.log("differenceUntilPreSchedule", differenceUntilPreSchedule);
+                        console.log("send plant to upcoming because duration difference is less than differenceUntilpreSchedule but greater than -9", plant.name);
+                        console.log("durationDifference", durationDifference, plant.name);
+                        console.log("differenceUntilPreSchedule", differenceUntilPreSchedule, plant.name);
                         upcoming.push(plant);
                     } else if (durationDifference < -7 && durationDifference !== "") {
                         later.push(plant);
