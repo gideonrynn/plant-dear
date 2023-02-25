@@ -10,7 +10,7 @@ import {
         // getLongDayOfTheWeek,
         getLongDayOfTheWeekAndColor,
         // getNumberDayOfWeek, 
-        // parseToYYYYMMDD 
+        parseToYYYYMMDD
         } from "../../utils/DateUtils"
 import './PlantDetails.css'
 
@@ -180,15 +180,14 @@ function PlantDetails(p) {
 
         //this is a lot of date handling. can I simplify this somewhere?
         let date = getLocalDate(new Date());
-        console.log(days);
+        // console.log("plant details days passed in by clicking water button", days);
         date.setDate(date.getDate() - days);
-        console.log(date);
-        let newLocaleDate = date.toLocaleDateString("en-CA");
-        console.log("newLocaleDate: ", newLocaleDate);
-        let newDate = newLocaleDate.split(',')[0];
+        // console.log("Date created from subtracting passed in days", date);
+        let newDate = parseToYYYYMMDD(date);
+
         let allNewDates = [...tempDates, newDate];
-        console.log(allNewDates);
-        console.log(newDate);
+        // console.log("Plant details all new dates", allNewDates);
+        // console.log("Plant details new date", newDate);
         PlantAPI.updatePlantWaterDate(
             {
                 ids: [id],

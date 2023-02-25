@@ -9,7 +9,10 @@ import {
         getLocalDate, 
         getLongDayOfTheWeek, 
         getNumberDayOfWeek, 
-        parseToYYYYMMDD } from "../../utils/DateUtils"
+        parseToYYYYMMDD,
+        isDST,
+        isUTC 
+    } from "../../utils/DateUtils"
 
 import "./PlantPlanningBlock.css";
 
@@ -189,11 +192,16 @@ const PlantPlanningBlock = (data) => {
 
         for (let i = 0; i < 14; i++) {
             let tempDate = getLocalDate(new Date());
+            //use this when testing a specific date
+            // let tempDate = getLocalDate(new Date('Fri Feb 17 2023 01:00:00 GMT-0500'));
             let updatedTempDate = tempDate.setDate(tempDate.getDate() + parseInt([i]));
             tempArray.push(updatedTempDate);
+            console.log('tempDate', tempDate);
+            console.log('updatedtempDate', updatedTempDate);
 
             //convert back to date object so the day of the week as a number can be obtained
             let potentialScheduleDate = new Date(updatedTempDate).getDay();
+            console.log('potentialScheduleDate', potentialScheduleDate);
             if (closestScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
                 closestScheduleDay = potentialScheduleDate;
                 //go to the next iteration once this value has been retrieved
@@ -204,6 +212,7 @@ const PlantPlanningBlock = (data) => {
                 console.log(nextScheduleDay, "assigned as it's in the schedule days array");
                 //don't break the loop yet, down the road want to do more with the dates in this array
             }
+            console.log('Next schedule day', nextScheduleDay);
         }
 
         console.log("The next two weeks from today", tempArray);
@@ -212,6 +221,9 @@ const PlantPlanningBlock = (data) => {
         //I want to see what plants will be scheduled on the next watering dates
         //to do that, I need to calculate the day BEFORE the SECOND watering date
         let dayBeforeScheduled = nextScheduleDay === 0 ? 6 : nextScheduleDay - 1;
+        console.log("Next schedule day", nextScheduleDay);
+        console.log("Day before the next scheduled date as a number", dayBeforeScheduled);
+        console.log("Day of week as a number", dayOfWeek);
         let differenceUntilPreSchedule = (dayOfWeek - dayBeforeScheduled);
         console.log("Difference until schedule = ", differenceUntilPreSchedule);
  
@@ -259,8 +271,12 @@ const PlantPlanningBlock = (data) => {
                     //calculate number of days until watering and push plants
                     //using 7 as cap because with regular schedule, 7 generally fits as timeframe following next watering date. but will need to update this after I begin tracking more than closest and next dates, as this would need the next schedule date after that
                     if (durationDifference >= differenceUntilPreSchedule ) {
+                        console.log("send to ready because duration difference is greater than or equal to differenceUntilpreSchedule");
                         ready.push(plant);
                     } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -9) {
+                        console.log("send to upcoming because duration difference is less than differenceUntilpreSchedule but greater than -9");
+                        console.log("durationDifference", durationDifference);
+                        console.log("differenceUntilPreSchedule", differenceUntilPreSchedule);
                         upcoming.push(plant);
                     } else if (durationDifference < -7 && durationDifference !== "") {
                         later.push(plant);
@@ -365,6 +381,10 @@ const PlantPlanningBlock = (data) => {
 
             <h1>Ready for Watering</h1>
             <h2>Last Updated {date.toString().split('G')[0].trim()} </h2>
+            {/* <h2>Get Local Date {getLocalDate(new Date()).toString()} </h2> */}
+            <h2>DST Status {isDST().dstStatus.toString()} </h2>
+            <h2>Offset to use {isDST().offsetFromUTC} </h2>
+            <h2>UTC time or not: {isUTC().toString()} </h2>
             {comparison && closestScheduleDay >= 0 && nextScheduleDay >= 0 ?
             <>
                 {/* <PlantBlock 

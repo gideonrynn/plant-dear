@@ -26,6 +26,8 @@ export function parseWaterDate(dateToParse) {
 
 }
 
+//takes in date object ex/Sat Feb 25 2023 09:21:30 GMT-0600 (Central Standard Time)
+//returned yyyy-mm-dd format is the one we need for submitting to the db
 //possibly modify to take in an order type and the date to parse
 export function parseToYYYYMMDD(dateToParse) {
 
@@ -62,28 +64,100 @@ export function getDifferenceInDays(waterDate, comparisonDate = date) {
 
 }
 
-//checks the offset from UTC (ex/ 300min/5hrs 360min/6hrs) to determine if Daylight Savings Time is in effect, returns true or false
-//UTC is typically 5 or 6 hours ahead of CST depending on DST
-export function isDST(date = new Date()) {
-    let january = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
-    let july = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
+//check difference between this time and utc in minutes ex/300
+//if no timezone offset, is a utc date, returns true, otherwise false
+//utc means some conversions need to be done on the server when date handling
+export function isUTC(date = new Date()) {
+    return date.getTimezoneOffset() <= 0;
+};
 
-    return Math.max(january, july) !== date.getTimezoneOffset();
+//checks the minutes from UTC time increment to determine if Daylight Savings Time is in effect
+//for CST, if offset is 5 hours/300 min, DST is in effect, else 6 hours/360 minutes not in effect
+//DST only matters if date is not UTC
+export function isDST(date = new Date()) {
+
+    //return true or false with current offset to use
+    let timeSchedule = {
+        dstStatus: "",
+        offsetFromUTC: 0
+    };
+
+    //set the offset increment that we care about
+    //get increment from date that is not during DST (january), which is higher
+    let january = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
+    //get increment from date is during DST (july), which is lower
+    let july = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
+    console.log("january, not during dst", january);
+    console.log("july, during dst", july);
+
+    timeSchedule.dstStatus = Math.min(january, july) === date.getTimezoneOffset();
+    timeSchedule.offsetFromUTC = date.getTimezoneOffset()/60;
+    //testing
+    // return true;
+    // return false;
+
+    // console.log("DST results", dateThing);
+    return timeSchedule;
 }
 
-//check for offset. if there is none, is in local environment, return as is. adjust hours per UTC, accounting for DST
+
+//check for offset, which is the difference between UTC and the local time
+
+//adjust hours per UTC, accounting for DST
+//when DST is true, offset will be 300
+//when DST is false, offset with be 360
+//return as regular date object ex/Sat Feb 25 2023 09:21:30 GMT-0600 (Central Standard Time)
 export function getLocalDate(date) {
 
-    if (date.getTimezoneOffset > 0 && isDST(date)) {
-        date.setUTCHours(date.getUTCHours() - 5);
-        date.setDate(date.getDate());
+    console.log("getLocalDate running with date with offset:", date.getTimezoneOffset());
+
+    let passedInDate = date;
+    let updatedDate = "";
+    let returnedDate = "";
+
+    //ensure that when we are local, only return the date as is
+    //check the date as passed in
+    //if it is not UTC, turn into UTC so you can give back the 
+    //this matters because locally, this is easy to account, for, but it needs to be handled when the server evaluates to UTC
+
+    //if it isn't UTC, local time auto accounts for DST
+    if(isUTC()) {
+        console.log("UTC true, will need to get localdate details with the appropriate offset and subtract it");
+        console.log("This is the time", date.toString());
+        //set the utc hour so it matches what we would expect if it were local instead
+        updatedDate = new Date(passedInDate.setHours(passedInDate.getHours() - isDST().offset));
+        console.log("Updated date", updatedDate);
+
+    } 
+
+    //setting UTC hours is valid if you're trying to figure out what it will look like on the server
+    // if (date.getTimezoneOffset() > 0 && isDST(date)) {
+    //     date.setUTCHours(date.getUTCHours() - 5);
+    //     // console.log("set the utc hours", date.setUTCHours(date.getUTCHours() - 5));
+    //     date.setDate(date.getDate());
+    //     // console.log("give me the date", date.setDate(date.getDate()));
+    //     console.log("DST true", date);
         
-    } else if (date.getTimezoneOffset > 0 && !isDST(date)) {
-        date.setUTCHours(date.getUTCHours() - 6);
-        date.setDate(date.getDate());
+    // } else if (date.getTimezoneOffset() > 0 && !isDST(date)) {
+    //     console.log("set to utc string, local plus 6 hours", date.toUTCString());
+    //     console.log("getUTCHours", date.getUTCHours());
+    //     date.setUTCHours(date.getUTCHours() - 6);
+        
+    //     date.setDate(date.getDate());
+    //     console.log("give me the date", date.setDate(date.getDate()));
+    //     console.log("DST false", date);
+    // }
+
+    // console.log("getLocalDate is now", date);
+
+    if(updatedDate === "") {
+        returnedDate = passedInDate;
+    } else {
+        returnedDate = updatedDate;
     }
 
-    return date;
+    //return as 
+    return returnedDate;
 
 } 
 
