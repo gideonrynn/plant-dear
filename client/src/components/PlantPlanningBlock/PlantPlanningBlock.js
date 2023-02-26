@@ -9,12 +9,16 @@ import {
         getLocalDate, 
         getLongDayOfTheWeek, 
         getNumberDayOfWeek, 
-        parseToYYYYMMDD } from "../../utils/DateUtils"
+        parseToYYYYMMDD,
+        isDST,
+        isUTC 
+    } from "../../utils/DateUtils"
 
 import "./PlantPlanningBlock.css";
 
 const PlantPlanningBlock = (data) => {
     //This component displays water rate alongside duration data for the purpose of watering multiple plants at the same time.
+    //This component is also meant to capture all planned tasks, not just watering
     console.log("PlantPlanningBlock component initialized, with context");
 
 
@@ -180,37 +184,58 @@ const PlantPlanningBlock = (data) => {
         //at some point will want to take the schedule dates and ensure they are sorted in order
         //Sunday (0), Wednesday (3)
         let scheduleDays = [0, 3];
-        let tempArray = [];
+        let tempArray = []; //setting but not using this yet
         let nextTwoWeeks = [];
         let dayOfWeek = date.getDay();
         let closestScheduleDay = "";
         let nextScheduleDay = "";
 
         for (let i = 0; i < 14; i++) {
+            //this will look like the default date object format Fri Feb 17 2023 01:00:00 GMT-0500
             let tempDate = getLocalDate(new Date());
+            //use this when testing a specific date
+            // let tempDate = getLocalDate(new Date('Fri Feb 17 2023 01:00:00 GMT-0500'));
             let updatedTempDate = tempDate.setDate(tempDate.getDate() + parseInt([i]));
             tempArray.push(updatedTempDate);
+            console.log('tempDate', tempDate);
+            console.log('updatedtempDate', new Date(updatedTempDate));
 
             //convert back to date object so the day of the week as a number can be obtained
             let potentialScheduleDate = new Date(updatedTempDate).getDay();
+            console.log('potentialScheduleDate', potentialScheduleDate);
             if (closestScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
                 closestScheduleDay = potentialScheduleDate;
+                console.log("Closest schedule day has been set", closestScheduleDay);
                 //go to the next iteration once this value has been retrieved
                 continue;
             }
             if (closestScheduleDay !== "" && nextScheduleDay === "" && scheduleDays.includes(potentialScheduleDate)) {
                 nextScheduleDay = potentialScheduleDate;
-                console.log(nextScheduleDay, "assigned as it's in the schedule days array");
+                console.log("Next schedule day assigned as it's in the schedule days array", nextScheduleDay);
                 //don't break the loop yet, down the road want to do more with the dates in this array
             }
+            console.log('Next schedule day', nextScheduleDay);
         }
 
-        console.log("The next two weeks from today", tempArray);
+        // console.log("The next two weeks from today", tempArray);
         
 
+        //this is designed to push plants based on whether or not day is a schedule day
+        //if you don't do this, it does weird things with the sorting
+        let dayToUse = "";
+        if(scheduleDays.includes(dayOfWeek)) {
+            dayToUse = nextScheduleDay;
+            console.log("Today is a schedule day, so sort by nextScheduleDay", dayToUse);
+        } else {
+            dayToUse = closestScheduleDay;
+            console.log("Today is not a schedule day, so sort by closestScheduleDay", dayToUse);
+        }
         //I want to see what plants will be scheduled on the next watering dates
         //to do that, I need to calculate the day BEFORE the SECOND watering date
-        let dayBeforeScheduled = nextScheduleDay === 0 ? 6 : nextScheduleDay - 1;
+        let dayBeforeScheduled = dayToUse === 0 ? 6 : dayToUse - 1;
+        console.log("Next schedule day", nextScheduleDay);
+        console.log("Day before the next scheduled date as a number", dayBeforeScheduled);
+        console.log("Day of week as a number", dayOfWeek);
         let differenceUntilPreSchedule = (dayOfWeek - dayBeforeScheduled);
         console.log("Difference until schedule = ", differenceUntilPreSchedule);
  
@@ -252,14 +277,18 @@ const PlantPlanningBlock = (data) => {
                     let durationDifference = plant.difference;
                         
 
-                    console.log("The closest schedule date and the nextScheduleDate in sequence Three", closestScheduleDay, nextScheduleDay);
+                    console.log("The closest schedule date and the nextScheduleDate in sequence", closestScheduleDay, nextScheduleDay);
                     //get the next day AS A NUMBER of the week that is one day before the next scheduled date
 
                     //calculate number of days until watering and push plants
                     //using 7 as cap because with regular schedule, 7 generally fits as timeframe following next watering date. but will need to update this after I begin tracking more than closest and next dates, as this would need the next schedule date after that
                     if (durationDifference >= differenceUntilPreSchedule ) {
+                        console.log("send to ready because duration difference is greater than or equal to differenceUntilpreSchedule");
                         ready.push(plant);
                     } else if (durationDifference < differenceUntilPreSchedule && durationDifference > -9) {
+                        console.log("send plant to upcoming because duration difference is less than differenceUntilpreSchedule but greater than -9", plant.name);
+                        console.log("durationDifference", durationDifference, plant.name);
+                        console.log("differenceUntilPreSchedule", differenceUntilPreSchedule, plant.name);
                         upcoming.push(plant);
                     } else if (durationDifference < -7 && durationDifference !== "") {
                         later.push(plant);
@@ -313,8 +342,8 @@ const PlantPlanningBlock = (data) => {
             })
             .then((ids) => {
 
-                let newReadyPlants = readyPlants;
-                console.log("New ready plants!", newReadyPlants);
+                // let newReadyPlants = readyPlants;
+                // console.log("New ready plants!", newReadyPlants);
                 console.log("response from db", ids);             
                 setIds([]);
                 setSelectedDate("");
@@ -323,6 +352,7 @@ const PlantPlanningBlock = (data) => {
             })
             .then((result) => {
                 updateReadyPlants();
+                updateUpcomingPlants();
             })
             .catch(err => console.log(err))
         
@@ -334,6 +364,14 @@ const PlantPlanningBlock = (data) => {
         let newReadyPlants = readyPlants.filter(i => !ids.includes(i._id));
         // console.log(newReadyPlants);
         setReadyPlants(newReadyPlants);
+
+    }
+
+    function updateUpcomingPlants() {
+
+        let newUpcomingPlants = upcomingPlants.filter(i => !ids.includes(i._id));
+        // console.log(newReadyPlants);
+        setUpcomingPlants(newUpcomingPlants);
 
     }
 
@@ -364,6 +402,10 @@ const PlantPlanningBlock = (data) => {
 
             <h1>Ready for Watering</h1>
             <h2>Last Updated {date.toString().split('G')[0].trim()} </h2>
+            {/* <h2>Get Local Date {getLocalDate(new Date()).toString()} </h2> */}
+            <h2>DST Status {isDST().dstStatus.toString()} </h2>
+            <h2>Offset to use {isDST().offsetFromUTC} </h2>
+            <h2>UTC time or not: {isUTC().toString()} </h2>
             {comparison && closestScheduleDay >= 0 && nextScheduleDay >= 0 ?
             <>
                 {/* <PlantBlock 
