@@ -543,19 +543,24 @@ const PlantEditingBlock = (data) => {
                                                     <option>none</option>
                                                     <option>bathroom</option>
                                                     <option>bedroom</option>
+                                                    <option>bedroom window</option>
                                                     <option>dining room</option>
                                                     <option>dining room east case</option>
                                                     <option>dining room south case</option>
+                                                    <option>dining room window</option>
                                                     <option>dining room windowsill</option>
                                                     <option>terrarium large</option>
                                                     <option>kitchen</option>
+                                                    <option>kitchen window</option>
                                                     <option>kitchen windowsill</option>
                                                     <option>living room</option>
                                                     <option>living room aquarium shelf</option>
                                                     <option>living room east case</option>
                                                     <option>living room east case short</option>
                                                     <option>living room north case</option>
+                                                    <option>living room south case</option>
                                                     <option>living room west case</option>
+                                                    <option>living room window</option>
                                                     <option>living room windowsill</option>
                                                 </select>
                                         </th>
