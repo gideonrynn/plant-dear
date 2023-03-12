@@ -61,11 +61,9 @@ export const PlantProvider = (props) => {
                 }
 
                 setCounter(actcounter);
-                setInactCounter(inactcounter);
-
-                                
+                setInactCounter(inactcounter);       
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log("There was an issue loading plant data from the db", err));
         
     }, [update]);
 
