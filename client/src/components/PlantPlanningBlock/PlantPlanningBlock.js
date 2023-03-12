@@ -431,9 +431,9 @@ const PlantPlanningBlock = (data) => {
             <h1>Ready for Watering</h1>
             <h2>Last Updated {date.toString().split('G')[0].trim()} </h2>
             {/* <h2>Get Local Date {getLocalDate(new Date()).toString()} </h2> */}
-            <h2>DST Status {isDST().dstStatus.toString()} </h2>
-            <h2>Offset to use {isDST().offsetFromUTC} </h2>
-            <h2>UTC time or not: {isUTC().toString()} </h2>
+            {/* <h2>DST Status {isDST().dstStatus.toString()} </h2> */}
+            {/* <h2>Offset to use {isDST().offsetFromUTC} </h2> */}
+            {/* <h2>UTC time or not: {isUTC().toString()} </h2> */}
             {comparison && closestScheduleDay >= 0 && nextScheduleDay >= 0 ?
             <>
                 {/* <PlantBlock 
