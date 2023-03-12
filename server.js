@@ -17,7 +17,11 @@ app.use(cors());
 // Serve up static assets (for example on Heroku)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
+} else {
+  process.env.NODE_ENV = "development";
 }
+
+console.log(`Currently running in the ${process.env.NODE_ENV} environment`);
 
 const dbConnect = async () => {
 

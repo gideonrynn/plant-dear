@@ -54,6 +54,9 @@ const PlantPlanningBlock = (data) => {
 
     //date variables
     let date = getLocalDate(new Date());
+
+    // let newISODate = date.toISOString();
+    let todaysDate = date.toISOString().split('T')[0];
     let todaysDateParsed = parseToYYYYMMDD(date);
 
 
@@ -323,11 +326,12 @@ const PlantPlanningBlock = (data) => {
 
         if (selectedDate === null || selectedDate === "") {
             
-            wateredDate = todaysDateParsed;
+            wateredDate = todaysDate;
             // console.log(wateredDate);
         } else {
             wateredDate = selectedDate;
         }
+
         // console.log("updateWaterDate function: ids, wateredDate", ids, wateredDate);
 
         PlantAPI.updatePlantWaterDate(
@@ -425,6 +429,7 @@ const PlantPlanningBlock = (data) => {
 
     
     //boil down to one component, reuseable
+    //must receive plant arrays for mapping properly, keep in mind when passing into this component
     return (
         <div className="">
 
@@ -441,6 +446,7 @@ const PlantPlanningBlock = (data) => {
                 /> */}
 
                 <h3>As of Today for Watering by {getLongDayOfTheWeek(closestScheduleDay)}: {readyPlants.length}</h3>
+                {/* <h1>{getLongDayOfTheWeek(nextScheduleDay)}: {upcomingPlants.length}</h1> */}
 
                     <div className="by-duration">
                         <div className="by-duration-plants">
@@ -547,290 +553,9 @@ const PlantPlanningBlock = (data) => {
             
                         </div>
 
-                        <h1>{getLongDayOfTheWeek(nextScheduleDay)}: {upcomingPlants.length}</h1>
-       
-                        <div className="by-duration-plants">
-                        <div>
-                            <span className="plant-details-label">Select Date </span>
-                            
-                                <input
-                                    type="date"
-                                    name="lastWatered"
-                                    defaultValue={todaysDateParsed}
-                                    className="plant-details-selected-date"
-                                    onChange={(e) => setSelectedDate(e.target.value)}/>
-                            </div>
-                            <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
-
-                            <table className="watering-table">
-
-                            <thead className="watering-col-header">
-                                <tr className="watering-col-header">
-                                    <th className="watering-col-header">Watered</th>
-                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header">Preferred Water</th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
-                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header">Last Duration</th>
-                                    <th className="watering-col-header">Previous Duration</th>
-                                    <th className="watering-col-header">Next Water Date</th>
-                                    {/* <th className="watering-col-header">Water</th> */}
-                                    
-
-                                </tr>
-                            </thead>
-
-
-                            <tbody className="watering-details">
-
-                                {upcomingPlants.map(plants => (
-                                    <tr key={plants._id}>
-                                        <th  className="watering-details">
-                                            <input 
-                                                type="checkbox" 
-                                                name="today"
-                                                id={plants._id} 
-                                                // defaultChecked={false}
-                                                // checked={checkedVal}
-                                                onChange={handleInputChange}/>
-                                        </th>
-                                        <th 
-                                            className="plant-table-row watering-details"
-                                            
-                                            id={plants._id} 
-                                            onClick={(e) => handleClick(e, plants.name)}>
-                                                {plants.name}
-                                        </th>
-                                        <th className="watering-details">{plants.locationSec}</th>
-                                        <th className="watering-details">{plants.waterPref}</th>
-                                        <th className="watering-details">{plants.difference}</th>
-                                        <th className="watering-details">{plants.waterRate}</th>
-                                        <th 
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}> 
-                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
-                                        </th>
-                                        <th 
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
-                                        </th>
-                                        <th
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
-                                        </th>
-                                        <th
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}>
-                                                <input 
-                                                type="date"
-                                                name="waterAdHoc"
-                                                className="plant-details-specific"
-                                                defaultValue={plants.waterAdHoc ? plants.waterAdHoc.split('T')[0] : null}
-                                                onChange={handleNextWaterChange}
-                                            />
-                                            <button type="submit" className="water-metrics" onClick={handleNextWaterSubmit}>Save</button> 
-                                        </th>
-                                        {/* <th
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}>
-                                                <button className="water-metrics" onClick={() => updatePlantWaterDate(plants._id)}>Today</button> 
-                                        </th> */}
-
-                                    </tr>
-                                ))}
-                             
-                                           
-                              
-                            </tbody>
-                            </table>
-                            <div>
-                            <span className="plant-details-label">Select Date </span>
-                            
-                                <input
-                                    type="date"
-                                    name="lastWatered"
-                                    defaultValue={todaysDateParsed}
-                                    className="plant-details-selected-date"
-                                    onChange={(e) => setSelectedDate(e.target.value)}/>
-                            </div>
-                            <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
-            
-                        </div>
-
-                        <h1>Later</h1>
-       
-                        <div className="by-duration-plants">
-
-                            <table className="watering-table">
-
-                            <thead className="watering-col-header">
-                                <tr className="watering-col-header">
-                                    <th className="watering-col-header">Watered</th>
-                                    <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header">Preferred Water</th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
-                                    <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
-                                    <th className="watering-col-header">Last Duration</th>
-                                    <th className="watering-col-header">Previous Duration</th>
-                                    
-
-                                </tr>
-                            </thead>
-
-
-                            <tbody className="watering-details">
-
-                                {laterPlants.map(plants => (
-                                    <tr key={plants._id}>
-                                        <th  className="watering-details">
-                                            <input 
-                                                type="checkbox" 
-                                                name="today"
-                                                id={plants._id} 
-                                                // defaultChecked={false}
-                                                // checked={checkedVal}
-                                                onChange={handleInputChange}/>
-                                        </th>
-                                        <th 
-                                            className="plant-table-row watering-details"
-                                            
-                                            id={plants._id} 
-                                            onClick={(e) => handleClick(e, plants.name)}>
-                                                {plants.name}
-                                        </th>
-                                        <th className="watering-details">{plants.locationSec}</th>
-                                        <th className="watering-details">{plants.waterPref}</th>
-                                        <th className="watering-details">{plants.difference}</th>
-                                        <th className="watering-details">{plants.waterRate}</th>
-                                        <th 
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}> 
-                                                {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
-                                        </th>
-                                        <th 
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
-                                        </th>
-                                        <th
-                                            className="water-metrics watering-details" 
-                                            id={plants._id}>
-                                                {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
-                                        </th>
-                                        
-
-                                    </tr>
-                                ))}
-                             
-                                           
-                              
-                            </tbody>
-                            </table>
-                            <div>
-                            <span className="plant-details-label">Select Date </span>
-                            
-                                <input
-                                    type="date"
-                                    name="lastWatered"
-                                    defaultValue={todaysDateParsed}
-                                    className="plant-details-selected-date"
-                                    onChange={(e) => setSelectedDate(e.target.value)}/>
-                            </div>
-                            <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
-            
-                        </div>
-                    </div>
-
-                    
-                    <h1>Other</h1>
-       
-                <div className="by-duration-plants">
-
-                    <table className="watering-table">
-
-                    <thead className="watering-col-header">
-                        <tr className="watering-col-header">
-                            <th className="watering-col-header">Watered</th>
-                            <th className="watering-col-header planning-sort-option" title="name" onClick={sortByColumn}>Name<span className="ustyle">&#9650;</span></th>
-                            <th className="watering-col-header planning-sort-option" title="location" onClick={sortByColumn}>Location<span className="ustyle">&#9650;</span></th>
-                            <th className="watering-col-header">Preferred Water</th>
-                            <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Difference<span className="ustyle">&#9650;</span></th>
-                            <th className="watering-col-header planning-sort-option" title="difference" onClick={sortByColumn}>Water Rate</th>
-                            <th className="watering-col-header planning-sort-option" title="daysago" onClick={sortByColumn}>Last Watered<span className="ustyle">&#9650;</span></th>
-                            <th className="watering-col-header">Last Duration</th>
-                            <th className="watering-col-header">Previous Duration</th>
-                            
-
-                        </tr>
-                    </thead>
-
-
-                    <tbody className="watering-details">
-
-                        {otherPlants.map(plants => (
-                            <tr key={plants._id}>
-                                <th  className="watering-details">
-                                    <input 
-                                        type="checkbox" 
-                                        name="today"
-                                        id={plants._id} 
-                                        // defaultChecked={false}
-                                        // checked={checkedVal}
-                                        onChange={handleInputChange}/>
-                                </th>
-                                <th 
-                                    className="plant-table-row watering-details"
-                                    
-                                    id={plants._id} 
-                                    onClick={(e) => handleClick(e, plants.name)}>
-                                        {plants.name}
-                                </th>
-                                <th className="watering-details">{plants.locationSec}</th>
-                                <th className="watering-details">{plants.waterPref}</th>
-                                <th className="watering-details">{plants.difference}</th>
-                                <th className="watering-details">{plants.waterRate}</th>
-                                <th 
-                                    className="water-metrics watering-details" 
-                                    id={plants._id}> 
-                                        {plants.lastWatered && plants.lastWatered.length > 0 ? getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1]) + " day(s) ago" : "not yet watered"} 
-                                </th>
-                                <th 
-                                    className="water-metrics watering-details" 
-                                    id={plants._id}>
-                                        {plants.lastWatered && plants.lastWatered.length > 1 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 2]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
-                                </th>
-                                <th
-                                    className="water-metrics watering-details" 
-                                    id={plants._id}>
-                                        {plants.lastWatered && plants.lastWatered.length > 2 ? (getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 3]) - getDifferenceInDays(plants.lastWatered[plants.lastWatered.length - 1])) + " days" : "n/a"} 
-                                </th>
-                                
-
-                            </tr>
-                        ))}
                         
-                                    
-                        
-                    </tbody>
-                    </table>
-                    <div>
-                    <span className="plant-details-label">Select Date </span>
-                    
-                        <input
-                            type="date"
-                            name="lastWatered"
-                            defaultValue={todaysDateParsed}
-                            className="plant-details-selected-date"
-                            onChange={(e) => setSelectedDate(e.target.value)}/>
-                    </div>
-                    <button style={{backgroundColor: '#78A4CF'}} onClick={() => updateWaterDate(0)} className="water-button-all">Submit</button>
-
+       
+                      
                 </div>
             
 

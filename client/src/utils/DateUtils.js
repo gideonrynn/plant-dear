@@ -3,7 +3,7 @@
 //get date accounting for UTC and offset if it exists
 let date = getLocalDate(new Date());
 
-//one day in milliseconds
+// One day in milliseconds, 1000 milliseconds in each second, 60 seconds for each minute, 60 minutes for each hour, 24 hours for each day
 let oneDay = 1000 * 60 * 60 * 24;
 
 //split the given date into day, month, and year, and output as new date object in string representation of the current date and time

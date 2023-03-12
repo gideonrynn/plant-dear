@@ -42,7 +42,7 @@ const WaterByLocation = (data) => {
     let todaysDate = newISODate.split('T')[0];
     // let localDate = date.toLocaleDateString("en-US", {timeZone: "America/Chicago"});
     // console.log("This is the local date", localDate);
-    // One day in milliseconds
+    // One day in milliseconds, 1000 milliseconds in each seconds, 60 seconds for each minute, 60 minutes for each hour, 24 hours for each day
     const oneDay = 1000 * 60 * 60 * 24;
 
     const [ids, setIds] = useState([]);
